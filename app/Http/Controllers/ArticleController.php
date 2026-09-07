@@ -23,8 +23,6 @@ class ArticleController extends Controller
             ->limit(3)
             ->get();
 
-        $viewName = view()->exists('articles.show') ? 'articles.show' : 'article-show';
-
-        return view($viewName, compact('article', 'relatedArticles'));
+        return view('article-show', compact('article', 'relatedArticles'));
     }
 }

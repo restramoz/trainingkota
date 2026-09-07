@@ -53,7 +53,7 @@ class CityLandingController extends Controller
         // ── FAQ Items per kategori (digunakan juga untuk JSON-LD FAQPage schema)
         $faqItems = $this->getFaqItems($category, $city->name);
 
-        return view('landing.city', compact(
+        return view('city-landing', compact(
             'category',
             'categoryName',
             'city',

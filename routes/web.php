@@ -10,11 +10,18 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\SitemapController;
 
+use App\Http\Controllers\AuthController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes - TRAININGKOTA.MY.ID (Local Environment)
 |--------------------------------------------------------------------------
 */
+
+// 0. Authentication Routes
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // 1. Dynamic Sitemap.xml
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
@@ -22,8 +29,8 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 // 2. Homepage: 3 Pilar Layanan & Widget 212 Kota
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// 3. CMS Admin Dashboard & CRUD
-Route::prefix('admin')->name('admin.')->group(function () {
+// 3. CMS Admin Dashboard & CRUD (Protected by admin.auth)
+Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
     
     // CRUD Layanan

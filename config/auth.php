@@ -18,6 +18,11 @@ return [
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
     ],
 
+    'admin' => [
+        'username' => env('ADMIN_USERNAME', 'admin'),
+        'password' => env('ADMIN_PASSWORD', 'SuksesJaya2026'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards

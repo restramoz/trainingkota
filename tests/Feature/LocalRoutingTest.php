@@ -39,12 +39,57 @@ class LocalRoutingTest extends TestCase
         $response->assertSee('JADWAL KHUSUS REGIONAL');
     }
 
-    public function test_admin_dashboard_is_accessible(): void
+    public function test_unauthenticated_user_is_redirected_to_login(): void
     {
         $response = $this->get('/admin');
+        $response->assertRedirect(route('login'));
+    }
+
+    public function test_login_page_is_accessible(): void
+    {
+        $response = $this->get('/login');
+        $response->assertStatus(200);
+        $response->assertSee('System Authentication');
+        $response->assertSee('Autentikasi Sistem');
+    }
+
+    public function test_login_fails_with_invalid_credentials(): void
+    {
+        $response = $this->post('/login', [
+            'username' => 'wrong_user',
+            'password' => 'wrong_pass',
+        ]);
+        $response->assertRedirect('/login');
+        $response->assertSessionHasErrors();
+        $this->assertFalse(session()->has('is_admin_authenticated'));
+    }
+
+    public function test_login_succeeds_with_valid_credentials(): void
+    {
+        $response = $this->post('/login', [
+            'username' => 'admin',
+            'password' => 'SuksesJaya2026',
+        ]);
+        $response->assertRedirect('/admin');
+        $this->assertTrue(session()->get('is_admin_authenticated'));
+    }
+
+    public function test_logout_clears_admin_session(): void
+    {
+        $response = $this->withSession(['is_admin_authenticated' => true, 'admin_logged_in' => true])
+            ->post('/logout');
+        $response->assertRedirect(route('login'));
+        $this->assertFalse(session()->has('is_admin_authenticated'));
+    }
+
+    public function test_admin_dashboard_is_accessible_when_authenticated(): void
+    {
+        $response = $this->withSession(['is_admin_authenticated' => true, 'admin_logged_in' => true])
+            ->get('/admin');
         $response->assertStatus(200);
         $response->assertSee('PORTAL CMS NASIONAL');
         $response->assertSee('Katalog Master Layanan K3');
+        $response->assertSee('Live SERP Preview');
     }
 
     public function test_city_landing_page_includes_seo_article_and_schema(): void
@@ -92,6 +137,8 @@ class LocalRoutingTest extends TestCase
 
     public function test_admin_crud_operations_work(): void
     {
+        $sessionData = ['is_admin_authenticated' => true, 'admin_logged_in' => true];
+
         // 1. Create a service
         $postData = [
             'name' => 'Pelatihan Uji Emisi Udara K3',
@@ -103,7 +150,7 @@ class LocalRoutingTest extends TestCase
             'description' => 'Pelatihan teknis monitoring emisi cerobong industri.',
             'status' => 'published',
         ];
-        $createResponse = $this->post('/admin/services', $postData);
+        $createResponse = $this->withSession($sessionData)->post('/admin/services', $postData);
         $createResponse->assertRedirect('/admin?tab=services');
         $this->assertDatabaseHas('services', ['slug' => 'pelatihan-uji-emisi-udara-k3']);
 
@@ -111,7 +158,7 @@ class LocalRoutingTest extends TestCase
         $this->assertNotNull($service);
 
         // 2. Update service
-        $updateResponse = $this->put("/admin/services/{$service->id}", array_merge($postData, [
+        $updateResponse = $this->withSession($sessionData)->put("/admin/services/{$service->id}", array_merge($postData, [
             'name' => 'Pelatihan Uji Emisi Udara K3 Updated',
         ]));
         $updateResponse->assertRedirect('/admin?tab=services');
@@ -120,7 +167,7 @@ class LocalRoutingTest extends TestCase
         // 3. Update city address
         $city = \App\Models\City::where('slug', 'malang')->first();
         $this->assertNotNull($city);
-        $cityUpdate = $this->put("/admin/cities/{$city->id}", [
+        $cityUpdate = $this->withSession($sessionData)->put("/admin/cities/{$city->id}", [
             'sentra_praktik' => 'Sentra K3 Malang Raya',
             'address' => 'Kawasan Industri Karanglo',
             'province' => $city->province,
@@ -136,7 +183,7 @@ class LocalRoutingTest extends TestCase
         ]);
 
         // 4. Create Regional Content Override
-        $overrideResponse = $this->post('/admin/city-service-contents', [
+        $overrideResponse = $this->withSession($sessionData)->post('/admin/city-service-contents', [
             'city_id' => $city->id,
             'service_id' => $service->id,
             'category' => 'pelatihan',
@@ -153,7 +200,7 @@ class LocalRoutingTest extends TestCase
         ]);
 
         // Clean up created service
-        $deleteResponse = $this->delete("/admin/services/{$service->id}");
+        $deleteResponse = $this->withSession($sessionData)->delete("/admin/services/{$service->id}");
         $deleteResponse->assertRedirect('/admin?tab=services');
         $this->assertDatabaseMissing('services', ['id' => $service->id]);
     }
