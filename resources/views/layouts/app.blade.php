@@ -33,15 +33,10 @@
                     <span class="w-2 h-2 bg-[#10B981] inline-block mr-2 animate-pulse"></span>
                     SISTEM OPERASIONAL K3 NASIONAL
                 </span>
-                <span class="text-[#1E324E]">|</span>
-                <span class="text-[#94A3B8]">62 PROGRAM LAYANAN &bull; 212 KOTA/KABUPATEN</span>
+                <span class="hidden sm:inline text-[#1E324E]">|</span>
+                <span class="hidden sm:inline text-[#94A3B8]">62 PROGRAM &bull; 212 KOTA</span>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="{{ route('admin.dashboard') }}" class="text-[#38BDF8] hover:underline flex items-center gap-1 font-semibold">
-                    <span class="w-1.5 h-1.5 bg-[#38BDF8] inline-block"></span>
-                    CMS ADMIN DASHBOARD
-                </a>
-                <span class="text-[#1E324E]">|</span>
                 <a href="https://wa.me/6281234567890" target="_blank" class="text-[#25D366] hover:underline flex items-center gap-1 font-semibold">
                     <span class="w-1.5 h-1.5 bg-[#25D366] inline-block"></span>
                     HOTLINE: +62 812-3456-7890
@@ -50,11 +45,11 @@
         </div>
     </div>
 
-    <!-- Main Navigation Header -->
-    <header class="bg-[#0F2038] border-b border-[#1E324E] sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8 h-18 flex items-center justify-between">
+    <!-- Main Navigation Header (Alpine.js for hamburger) -->
+    <header class="bg-[#0F2038] border-b border-[#1E324E] sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-3 flex items-center justify-between">
             <!-- Brand Logo -->
-            <a href="{{ route('home') }}" class="flex items-center space-x-3 py-3">
+            <a href="{{ route('home') }}" class="flex items-center space-x-3 shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" fill="none" class="h-9 w-auto">
                     <g transform="translate(4, 5)">
                         <rect x="0" y="2" width="36" height="36" fill="#0B1526" stroke="#1E324E" stroke-width="1.5"/>
@@ -67,7 +62,7 @@
                 </svg>
             </a>
 
-            <!-- Navigation Links (3 Master Categories + Cities + Admin) -->
+            <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-1 font-space text-xs uppercase tracking-wider">
                 <a href="{{ route('category.show', 'pelatihan') }}" class="px-3 py-2 {{ request()->is('pelatihan*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
                     Pelatihan K3 (53)
@@ -81,20 +76,66 @@
                 <a href="{{ route('home') }}#widget-kota" class="px-3 py-2 text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E] transition-colors">
                     212 Kota/Kab
                 </a>
-                <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 text-[#38BDF8] hover:bg-[#142338] border border-transparent hover:border-[#1E324E] transition-colors">
-                    CMS Admin
-                </a>
             </nav>
 
-            <!-- Action Triggers -->
-            <div class="flex items-center space-x-3">
+            <!-- Right: CTA + Hamburger -->
+            <div class="flex items-center gap-3">
                 <a href="https://wa.me/6281234567890" target="_blank" class="btn-whatsapp text-xs py-2 px-3.5 hidden sm:inline-flex">
-                    WhatsApp Direct
+                    WhatsApp
                 </a>
-                <a href="{{ route('category.show', 'pelatihan') }}" class="btn-primary text-xs py-2 px-4">
+                <a href="{{ route('category.show', 'pelatihan') }}" class="btn-primary text-xs py-2 px-4 hidden md:inline-flex">
                     Katalog Lengkap
                 </a>
+                <!-- Hamburger Button (mobile) -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen"
+                    class="md:hidden flex flex-col justify-center items-center w-9 h-9 bg-[#0B1526] border border-[#1E324E] hover:border-[#0D7A5F] transition-colors gap-1.5"
+                    :aria-expanded="mobileMenuOpen" aria-label="Buka menu">
+                    <span class="w-5 h-0.5 bg-[#F1F5F9] block transition-all duration-300" :class="mobileMenuOpen ? 'rotate-45 translate-y-2' : ''"></span>
+                    <span class="w-5 h-0.5 bg-[#F1F5F9] block transition-all duration-300" :class="mobileMenuOpen ? 'opacity-0 scale-x-0' : ''"></span>
+                    <span class="w-5 h-0.5 bg-[#F1F5F9] block transition-all duration-300" :class="mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''"></span>
+                </button>
             </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div x-show="mobileMenuOpen"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            class="md:hidden border-t border-[#1E324E] bg-[#0B1526]">
+            <nav class="max-w-7xl mx-auto px-4 py-3 flex flex-col space-y-1 font-space text-xs uppercase tracking-wider">
+                <a href="{{ route('category.show', 'pelatihan') }}" @click="mobileMenuOpen=false"
+                   class="px-4 py-3 flex items-center gap-3 {{ request()->is('pelatihan*') ? 'text-[#10B981] border-l-2 border-[#0D7A5F] bg-[#142338]' : 'text-[#F1F5F9] border-l-2 border-transparent hover:border-[#0D7A5F] hover:bg-[#142338]' }} transition-colors">
+                    <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block shrink-0"></span>
+                    Pelatihan K3 (53 Program)
+                </a>
+                <a href="{{ route('category.show', 'kajian') }}" @click="mobileMenuOpen=false"
+                   class="px-4 py-3 flex items-center gap-3 {{ request()->is('kajian*') ? 'text-[#38BDF8] border-l-2 border-[#38BDF8] bg-[#142338]' : 'text-[#94A3B8] border-l-2 border-transparent hover:border-[#38BDF8] hover:bg-[#142338]' }} transition-colors">
+                    <span class="w-1.5 h-1.5 bg-[#38BDF8] inline-block shrink-0"></span>
+                    Kajian Teknis K3 (3)
+                </a>
+                <a href="{{ route('category.show', 'jasa') }}" @click="mobileMenuOpen=false"
+                   class="px-4 py-3 flex items-center gap-3 {{ request()->is('jasa*') ? 'text-[#F59E0B] border-l-2 border-[#D97706] bg-[#142338]' : 'text-[#94A3B8] border-l-2 border-transparent hover:border-[#D97706] hover:bg-[#142338]' }} transition-colors">
+                    <span class="w-1.5 h-1.5 bg-[#D97706] inline-block shrink-0"></span>
+                    Jasa SLF &amp; Riksa Uji (6)
+                </a>
+                <a href="{{ route('home') }}#widget-kota" @click="mobileMenuOpen=false"
+                   class="px-4 py-3 flex items-center gap-3 text-[#94A3B8] border-l-2 border-transparent hover:text-[#F1F5F9] hover:bg-[#142338] hover:border-[#1E324E] transition-colors">
+                    <span class="w-1.5 h-1.5 bg-[#64748B] inline-block shrink-0"></span>
+                    212 Kota / Kabupaten
+                </a>
+                <div class="pt-3 pb-1 border-t border-[#1E324E] flex gap-2">
+                    <a href="{{ route('category.show', 'pelatihan') }}" class="btn-primary text-xs py-3 flex-1 text-center">
+                        Katalog Lengkap
+                    </a>
+                    <a href="https://wa.me/6281234567890" target="_blank" class="btn-whatsapp text-xs py-3 flex-1 text-center">
+                        WhatsApp
+                    </a>
+                </div>
+            </nav>
         </div>
     </header>
 

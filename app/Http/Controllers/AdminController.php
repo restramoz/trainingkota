@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\City;
 use App\Models\CityServiceContent;
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -51,21 +52,40 @@ class AdminController extends Controller
         // 3. Overrides Query
         $overrides = CityServiceContent::with(['city', 'service'])->latest()->paginate(10, ['*'], 'overrides_page')->withQueryString();
 
+        // 4. Articles Query (NEW — sync dengan homepage)
+        $articleSearch = $request->query('article_q');
+        $articleCategoryFilter = $request->query('article_category');
+
+        $articlesQuery = Article::with(['city'])->latest();
+        if ($articleCategoryFilter) {
+            $articlesQuery->where('category', $articleCategoryFilter);
+        }
+        if ($articleSearch) {
+            $articlesQuery->where(function ($q) use ($articleSearch) {
+                $q->where('title', 'like', "%{$articleSearch}%")
+                  ->orWhere('slug', 'like', "%{$articleSearch}%")
+                  ->orWhere('focus_keywords', 'like', "%{$articleSearch}%");
+            });
+        }
+        $articles = $articlesQuery->paginate(10, ['*'], 'articles_page')->withQueryString();
+
         // Dropdown lists
         $allServices = Service::orderBy('name')->get();
         $allCities = City::orderBy('name')->get();
         $islands = City::select('island')->distinct()->whereNotNull('island')->pluck('island');
 
-        // Stats Overview
+        // Stats Overview — semua dari DB real (sync dengan homepage)
         $stats = [
-            'total_services' => Service::count(),
-            'total_pelatihan' => Service::where('category', 'pelatihan')->count(),
-            'total_kajian' => Service::where('category', 'kajian')->count(),
-            'total_jasa' => Service::where('category', 'jasa')->count(),
-            'total_cities' => City::count(),
-            'total_hubs' => City::where('is_hub', true)->count(),
-            'active_batches' => 1482,
-            'total_overrides' => CityServiceContent::count(),
+            'total_services'   => Service::count(),
+            'total_pelatihan'  => Service::where('category', 'pelatihan')->count(),
+            'total_kajian'     => Service::where('category', 'kajian')->count(),
+            'total_jasa'       => Service::where('category', 'jasa')->count(),
+            'total_cities'     => City::count(),
+            'total_hubs'       => City::where('is_hub', true)->count(),
+            'total_overrides'  => CityServiceContent::count(),
+            'total_articles'   => Article::count(),
+            'published_articles' => Article::where('status', 'published')->count(),
+            'draft_articles'   => Article::where('status', 'draft')->count(),
         ];
 
         return view('admin.dashboard', compact(
@@ -73,6 +93,7 @@ class AdminController extends Controller
             'services',
             'cities',
             'overrides',
+            'articles',
             'allServices',
             'allCities',
             'stats',
@@ -80,7 +101,9 @@ class AdminController extends Controller
             'categoryFilter',
             'search',
             'citySearch',
-            'islandFilter'
+            'islandFilter',
+            'articleSearch',
+            'articleCategoryFilter'
         ));
     }
 
