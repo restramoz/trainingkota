@@ -19,9 +19,20 @@ class Service extends Model
         'description',
         'syllabus',
         'target_audience',
+        'status',
     ];
 
     protected $casts = [
         'syllabus' => 'array',
     ];
+
+    public function cityServiceContents()
+    {
+        return $this->hasMany(CityServiceContent::class);
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
+    }
 }

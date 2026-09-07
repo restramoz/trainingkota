@@ -5,8 +5,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CityLandingController;
+use App\Http\Controllers\CityServiceLandingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\SitemapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,26 +16,48 @@ use App\Http\Controllers\ArticleController;
 |--------------------------------------------------------------------------
 */
 
-// 1. Homepage: 3 Pilar Layanan & Widget 212 Kota
+// 1. Dynamic Sitemap.xml
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
+// 2. Homepage: 3 Pilar Layanan & Widget 212 Kota
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// 2. CMS Admin Dashboard: Manajemen Katalog & Kota
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+// 3. CMS Admin Dashboard & CRUD
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+    
+    // CRUD Layanan
+    Route::post('/services', [AdminController::class, 'storeService'])->name('services.store');
+    Route::put('/services/{id}', [AdminController::class, 'updateService'])->name('services.update');
+    Route::delete('/services/{id}', [AdminController::class, 'deleteService'])->name('services.delete');
 
-// 6. Artikel SEO: /{slug} — harus SEBELUM route /{category}
+    // CRUD Alamat Perwakilan Kota
+    Route::put('/cities/{id}', [AdminController::class, 'updateCity'])->name('cities.update');
+
+    // CRUD Overrides Konten / SEO per Kota
+    Route::post('/city-service-contents', [AdminController::class, 'storeCityContent'])->name('city-contents.store');
+    Route::delete('/city-service-contents/{id}', [AdminController::class, 'deleteCityContent'])->name('city-contents.delete');
+});
+
+// 4. Artikel SEO: /artikel/{slug}
 Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('article.show');
 
-// 3. Dynamic City Landing Page: /{category}/kota-{city-slug}
+// 5. Hyper-Specific City Service Landing: /{category}/{service-slug}/kota-{city-slug}
+Route::get('/{category}/{serviceSlug}/kota-{citySlug}', [CityServiceLandingController::class, 'show'])
+    ->where('category', 'pelatihan|kajian|jasa')
+    ->name('city.service.landing');
+
+// 6. Dynamic City Landing Page: /{category}/kota-{city-slug}
 Route::get('/{category}/kota-{citySlug}', [CityLandingController::class, 'show'])
     ->where('category', 'pelatihan|kajian|jasa')
     ->name('city.landing');
 
-// 4. Detail Layanan Master: /{category}/{service-slug}
+// 7. Detail Layanan Master: /{category}/{service-slug}
 Route::get('/{category}/{serviceSlug}', [ServiceController::class, 'show'])
     ->where('category', 'pelatihan|kajian|jasa')
     ->name('service.detail');
 
-// 5. Kategori Master: /{category} (pelatihan / kajian / jasa)
+// 8. Kategori Master: /{category} (pelatihan / kajian / jasa)
 Route::get('/{category}', [CategoryController::class, 'show'])
     ->where('category', 'pelatihan|kajian|jasa')
     ->name('category.show');

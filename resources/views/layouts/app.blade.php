@@ -159,11 +159,11 @@
             <!-- Bottom Copyright & Compliance Notes -->
             <div class="pt-8 border-t border-[#142338] flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-[#64748B] font-space">
                 <div>
-                    &copy; {{ date('Y') }} TrainingKota. Database: SQLite Local (62 Layanan &bull; 212 Kota).
+                    &copy; {{ date('Y') }} trainingkota.my.id
                 </div>
                 <div class="flex items-center space-x-6">
-                    <span>ZERO-RADIUS 0PX ENFORCED</span>
-                    <span class="text-[#0D7A5F]">TAILWIND CSS &amp; VITE LOCAL</span>
+                    <span>RESERVED BY</span>
+                    <span class="text-[#0D7A5F]">RYO DGITAL</span>
                 </div>
             </div>
         </div>

@@ -18,6 +18,8 @@ class City extends Model
         'lng',
         'address',
         'province',
+        'sentra_praktik',
+        'maps_embed_url',
     ];
 
     protected $casts = [
@@ -35,6 +37,14 @@ class City extends Model
     }
 
     /**
+     * Overrides konten dan SEO khusus kota ini.
+     */
+    public function cityServiceContents()
+    {
+        return $this->hasMany(CityServiceContent::class);
+    }
+
+    /**
      * Cek apakah kota punya koordinat untuk Maps embed.
      */
     public function hasGeo(): bool
@@ -47,11 +57,17 @@ class City extends Model
      */
     public function mapsEmbedUrl(): string
     {
+        if (!empty($this->maps_embed_url)) {
+            return $this->maps_embed_url;
+        }
+
         if ($this->hasGeo()) {
             return "https://maps.google.com/maps?q={$this->lat},{$this->lng}&z=14&output=embed";
         }
-        // Fallback: search by city name
-        $query = urlencode($this->name . ', Indonesia');
+
+        // Fallback: search by sentra / city name
+        $search = $this->sentra_praktik ? $this->sentra_praktik . ', ' . $this->name : $this->name . ', Indonesia';
+        $query = urlencode($search);
         return "https://maps.google.com/maps?q={$query}&z=13&output=embed";
     }
 }
