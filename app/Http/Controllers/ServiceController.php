@@ -26,7 +26,9 @@ class ServiceController extends Controller
 
         $hubCities = City::where('is_hub', true)->get();
 
-        return view('service-detail', compact(
+        $viewName = view()->exists('services.show') ? 'services.show' : 'service-detail';
+
+        return view($viewName, compact(
             'category',
             'service',
             'relatedServices',

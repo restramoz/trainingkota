@@ -34,7 +34,9 @@ class CategoryController extends Controller
         $categoryTitle = $titles[$category] ?? ucfirst($category);
         $categorySubtitle = $subtitles[$category] ?? '';
 
-        return view('category', compact(
+        $viewName = view()->exists("services.{$category}") ? "services.{$category}" : 'category';
+
+        return view($viewName, compact(
             'category',
             'categoryTitle',
             'categorySubtitle',

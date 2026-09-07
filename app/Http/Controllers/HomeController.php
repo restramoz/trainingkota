@@ -26,7 +26,7 @@ class HomeController extends Controller
         $citiesGrouped = City::orderBy('name')->get()->groupBy('island');
         $hubCities = City::where('is_hub', true)->get();
 
-        return view('home', compact(
+        return view('landing.home', compact(
             'pelatihanServices',
             'kajianServices',
             'jasaServices',
