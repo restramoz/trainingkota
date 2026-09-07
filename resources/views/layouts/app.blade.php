@@ -14,6 +14,15 @@
 
     <!-- Compiled Assets via Vite (Local Compilation) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Alpine.js v3 — UI interaktif (FAQ Accordion, TOC toggle, dll) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Per-page SEO Meta (og:title, og:description, canonical, dll) -->
+    @stack('meta_seo')
+
+    <!-- JSON-LD Structured Data (FAQPage, Article, LocalBusiness) -->
+    @stack('schema')
 </head>
 <body class="bg-[#070D18] text-[#F1F5F9] font-body min-h-screen flex flex-col selection:bg-[#0D7A5F] selection:text-white">
     <!-- Regulatory Top Operational Bar -->

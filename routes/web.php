@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CityLandingController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // 2. CMS Admin Dashboard: Manajemen Katalog & Kota
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+
+// 6. Artikel SEO: /{slug} — harus SEBELUM route /{category}
+Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('article.show');
 
 // 3. Dynamic City Landing Page: /{category}/kota-{city-slug}
 Route::get('/{category}/kota-{citySlug}', [CityLandingController::class, 'show'])

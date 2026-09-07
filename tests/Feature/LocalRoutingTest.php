@@ -46,4 +46,24 @@ class LocalRoutingTest extends TestCase
         $response->assertSee('CMS MANAGEMENT CONSOLE');
         $response->assertSee('Katalog & Manajemen Lokasi Kota');
     }
+
+    public function test_city_landing_page_includes_seo_article_and_schema(): void
+    {
+        $response = $this->get('/pelatihan/kota-malang');
+        $response->assertStatus(200);
+        $response->assertSee('PANDUAN &amp; REGULASI TERKAIT MALANG', false);
+        $response->assertSee('DAFTAR ISI ARTIKEL');
+        $response->assertSee('schema.org');
+        $response->assertSee('FAQPage');
+        $response->assertSee('EducationalOrganization');
+    }
+
+    public function test_standalone_article_page_is_accessible(): void
+    {
+        $response = $this->get('/artikel/panduan-sertifikasi-ahli-k3-umum-kemnaker');
+        $response->assertStatus(200);
+        $response->assertSee('Panduan Lengkap Sertifikasi Ahli K3 Umum');
+        $response->assertSee('DAFTAR ISI');
+        $response->assertSee('schema.org');
+    }
 }

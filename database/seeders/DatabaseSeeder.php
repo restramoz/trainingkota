@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ServiceSeeder::class,
             CitySeeder::class,
+            ArticleSeeder::class, // SEO artikel 1500+ kata
         ]);
     }
 }
