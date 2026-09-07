@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? config('app.name', 'TrainingKota') }} - Portal K3 & Layanan Profesional</title>
+    <title>{{ $title ?? 'TrainingKota' }} - Portal K3 &amp; Layanan Profesional</title>
 
     <!-- Preconnect Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,14 +25,17 @@
                     SISTEM OPERASIONAL K3 NASIONAL
                 </span>
                 <span class="text-[#1E324E]">|</span>
-                <span class="text-[#94A3B8]">JARINGAN RESMI: KEMNAKER RI & BNSP</span>
+                <span class="text-[#94A3B8]">62 PROGRAM LAYANAN &bull; 212 KOTA/KABUPATEN</span>
             </div>
             <div class="flex items-center space-x-4">
-                <span class="text-[#64748B]">REGIONAL HUB: MALANG - JAWA TIMUR</span>
+                <a href="{{ route('admin.dashboard') }}" class="text-[#38BDF8] hover:underline flex items-center gap-1 font-semibold">
+                    <span class="w-1.5 h-1.5 bg-[#38BDF8] inline-block"></span>
+                    CMS ADMIN DASHBOARD
+                </a>
                 <span class="text-[#1E324E]">|</span>
                 <a href="https://wa.me/6281234567890" target="_blank" class="text-[#25D366] hover:underline flex items-center gap-1 font-semibold">
                     <span class="w-1.5 h-1.5 bg-[#25D366] inline-block"></span>
-                    HOTLINE CEPAT: +62 812-3456-7890
+                    HOTLINE: +62 812-3456-7890
                 </a>
             </div>
         </div>
@@ -42,7 +45,7 @@
     <header class="bg-[#0F2038] border-b border-[#1E324E] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 lg:px-8 h-18 flex items-center justify-between">
             <!-- Brand Logo -->
-            <a href="/" class="flex items-center space-x-3 py-3">
+            <a href="{{ route('home') }}" class="flex items-center space-x-3 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" fill="none" class="h-9 w-auto">
                     <g transform="translate(4, 5)">
                         <rect x="0" y="2" width="36" height="36" fill="#0B1526" stroke="#1E324E" stroke-width="1.5"/>
@@ -55,21 +58,32 @@
                 </svg>
             </a>
 
-            <!-- Navigation Links -->
+            <!-- Navigation Links (3 Master Categories + Cities + Admin) -->
             <nav class="hidden md:flex items-center space-x-1 font-space text-xs uppercase tracking-wider">
-                <a href="#katalog" class="px-3 py-2 text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E] transition-colors">Katalog K3</a>
-                <a href="#jadwal" class="px-3 py-2 text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E] transition-colors">Jadwal & Kuota</a>
-                <a href="#perizinan" class="px-3 py-2 text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E] transition-colors">Jasa Teknis & SLF</a>
-                <a href="#akreditasi" class="px-3 py-2 text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E] transition-colors">Verifikasi Sertifikat</a>
+                <a href="{{ route('category.show', 'pelatihan') }}" class="px-3 py-2 {{ request()->is('pelatihan*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
+                    Pelatihan K3 (53)
+                </a>
+                <a href="{{ route('category.show', 'kajian') }}" class="px-3 py-2 {{ request()->is('kajian*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
+                    Kajian Teknis (3)
+                </a>
+                <a href="{{ route('category.show', 'jasa') }}" class="px-3 py-2 {{ request()->is('jasa*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
+                    Jasa SLF &amp; Izin (6)
+                </a>
+                <a href="{{ route('home') }}#widget-kota" class="px-3 py-2 text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E] transition-colors">
+                    212 Kota/Kab
+                </a>
+                <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 text-[#38BDF8] hover:bg-[#142338] border border-transparent hover:border-[#1E324E] transition-colors">
+                    CMS Admin
+                </a>
             </nav>
 
             <!-- Action Triggers -->
             <div class="flex items-center space-x-3">
-                <a href="https://wa.me/6281234567890" target="_blank" class="btn-whatsapp text-xs py-2.5 px-4 hidden sm:inline-flex">
+                <a href="https://wa.me/6281234567890" target="_blank" class="btn-whatsapp text-xs py-2 px-3.5 hidden sm:inline-flex">
                     WhatsApp Direct
                 </a>
-                <a href="#daftar" class="btn-primary text-xs py-2.5 px-5">
-                    Daftar Sekarang
+                <a href="{{ route('category.show', 'pelatihan') }}" class="btn-primary text-xs py-2 px-4">
+                    Katalog Lengkap
                 </a>
             </div>
         </div>
@@ -88,10 +102,10 @@
                 <div class="space-y-3">
                     <div class="font-space font-bold text-sm uppercase text-[#F1F5F9] tracking-wider flex items-center gap-2">
                         <span class="w-2 h-2 bg-[#0D7A5F] inline-block"></span>
-                        TRAININGKOTA.MY.ID
+                        TRAININGKOTA.MY.ID (LOCAL MVP)
                     </div>
                     <p class="text-[#94A3B8] leading-relaxed">
-                        Pusat layanan operasional sertifikasi Keselamatan dan Kesehatan Kerja (K3), audit kepatuhan regulasi, kajian kelayakan teknis industri berstandar Kemnaker RI dan BNSP.
+                        Pusat layanan operasional sertifikasi Keselamatan dan Kesehatan Kerja (K3), audit kepatuhan regulasi, kajian kelayakan teknis industri berstandar Kemnaker RI dan BNSP di 212 Kota/Kabupaten.
                     </p>
                     <div class="flex items-center gap-2 pt-2">
                         <span class="badge-kemnaker">Kemnaker RI</span>
@@ -101,30 +115,32 @@
 
                 <!-- Col 2 -->
                 <div>
-                    <div class="font-space font-bold text-xs uppercase text-[#F1F5F9] tracking-wider mb-3">Layanan Utama K3</div>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-[#10B981] transition-colors">Ahli K3 Umum Kemnaker RI</a></li>
-                        <li><a href="#" class="hover:text-[#10B981] transition-colors">Auditor SMK3 PP 50/2012</a></li>
-                        <li><a href="#" class="hover:text-[#10B981] transition-colors">K3 Lingkungan Kerja & Higiene</a></li>
-                        <li><a href="#" class="hover:text-[#10B981] transition-colors">Sertifikasi Operator Alat Berat</a></li>
+                    <div class="font-space font-bold text-xs uppercase text-[#F1F5F9] tracking-wider mb-3">3 Pilar Layanan Utama</div>
+                    <ul class="space-y-2 font-space text-[12px]">
+                        <li><a href="{{ route('category.show', 'pelatihan') }}" class="hover:text-[#10B981] transition-colors flex items-center justify-between">Pelatihan K3 <span>(53 Program)</span></a></li>
+                        <li><a href="{{ route('category.show', 'kajian') }}" class="hover:text-[#10B981] transition-colors flex items-center justify-between">Kajian Teknis K3 <span>(3 Program)</span></a></li>
+                        <li><a href="{{ route('category.show', 'jasa') }}" class="hover:text-[#10B981] transition-colors flex items-center justify-between">Jasa SLF &amp; Izin <span>(6 Program)</span></a></li>
+                        <li><a href="{{ route('admin.dashboard') }}" class="text-[#38BDF8] hover:underline pt-1 block">Akses CMS Admin &rarr;</a></li>
                     </ul>
                 </div>
 
                 <!-- Col 3 -->
                 <div>
-                    <div class="font-space font-bold text-xs uppercase text-[#F1F5F9] tracking-wider mb-3">Jasa Teknis & Audit</div>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-[#10B981] transition-colors">Kajian Sertifikat Laik Fungsi (SLF)</a></li>
-                        <li><a href="#" class="hover:text-[#10B981] transition-colors">Riksa Uji Instalasi Petir & Listrik</a></li>
-                        <li><a href="#" class="hover:text-[#10B981] transition-colors">Uji Emisi & Baku Mutu Industri</a></li>
-                        <li><a href="#" class="hover:text-[#10B981] transition-colors">Penyusunan Dokumen UKL-UPL / AMDAL</a></li>
-                    </ul>
+                    <div class="font-space font-bold text-xs uppercase text-[#F1F5F9] tracking-wider mb-3">Hub Kota Utama</div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <a href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => 'malang']) }}" class="px-2 py-1 bg-[#070D18] border border-[#1E324E] text-[#94A3B8] hover:text-[#10B981] hover:border-[#0D7A5F] text-[11px] font-space uppercase">Malang</a>
+                        <a href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => 'surabaya']) }}" class="px-2 py-1 bg-[#070D18] border border-[#1E324E] text-[#94A3B8] hover:text-[#10B981] hover:border-[#0D7A5F] text-[11px] font-space uppercase">Surabaya</a>
+                        <a href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => 'jakarta']) }}" class="px-2 py-1 bg-[#070D18] border border-[#1E324E] text-[#94A3B8] hover:text-[#10B981] hover:border-[#0D7A5F] text-[11px] font-space uppercase">Jakarta</a>
+                        <a href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => 'balikpapan']) }}" class="px-2 py-1 bg-[#070D18] border border-[#1E324E] text-[#94A3B8] hover:text-[#10B981] hover:border-[#0D7A5F] text-[11px] font-space uppercase">Balikpapan</a>
+                        <a href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => 'makassar']) }}" class="px-2 py-1 bg-[#070D18] border border-[#1E324E] text-[#94A3B8] hover:text-[#10B981] hover:border-[#0D7A5F] text-[11px] font-space uppercase">Makassar</a>
+                        <a href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => 'medan']) }}" class="px-2 py-1 bg-[#070D18] border border-[#1E324E] text-[#94A3B8] hover:text-[#10B981] hover:border-[#0D7A5F] text-[11px] font-space uppercase">Medan</a>
+                    </div>
                 </div>
 
                 <!-- Col 4 -->
                 <div>
-                    <div class="font-space font-bold text-xs uppercase text-[#F1F5F9] tracking-wider mb-3">Regional Hub & Kontak</div>
-                    <p class="mb-2">Kota Malang, Jawa Timur - Indonesia</p>
+                    <div class="font-space font-bold text-xs uppercase text-[#F1F5F9] tracking-wider mb-3">Kontak Operasional</div>
+                    <p class="mb-2">Local Development Environment: 127.0.0.1:8000</p>
                     <p class="text-[#F1F5F9] font-space font-semibold mb-1">Direct Line: (0341) 500-KOTA</p>
                     <p class="text-[#25D366] font-space font-semibold">WA: +62 812-3456-7890</p>
                     <p class="text-[#64748B] text-[11px] mt-2">Senin - Sabtu: 08.00 - 17.00 WIB</p>
@@ -134,12 +150,11 @@
             <!-- Bottom Copyright & Compliance Notes -->
             <div class="pt-8 border-t border-[#142338] flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-[#64748B] font-space">
                 <div>
-                    &copy; {{ date('Y') }} TrainingKota (trainingkota.my.id). Hak Cipta Dilindungi Undang-Undang.
+                    &copy; {{ date('Y') }} TrainingKota. Database: SQLite Local (62 Layanan &bull; 212 Kota).
                 </div>
                 <div class="flex items-center space-x-6">
-                    <span>REGULATORY COMPLIANCE SYSTEM V1.0</span>
-                    <span>ALL INTERFACES: ZERO-RADIUS (0PX)</span>
-                    <span class="text-[#0D7A5F]">STANDAR KEMNAKER / BNSP</span>
+                    <span>ZERO-RADIUS 0PX ENFORCED</span>
+                    <span class="text-[#0D7A5F]">TAILWIND CSS &amp; VITE LOCAL</span>
                 </div>
             </div>
         </div>
