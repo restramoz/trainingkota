@@ -44,6 +44,26 @@ class City extends Model
         return $this->hasMany(CityServiceContent::class);
     }
 
+    public function kecamatans()
+    {
+        return $this->hasMany(Kecamatan::class);
+    }
+
+    public function locations()
+    {
+        return $this->hasMany(Location::class);
+    }
+
+    public function faqs()
+    {
+        return $this->hasMany(Faq::class);
+    }
+
+    public function trainingSchedules()
+    {
+        return $this->hasMany(TrainingSchedule::class);
+    }
+
     /**
      * Cek apakah kota punya koordinat untuk Maps embed.
      */

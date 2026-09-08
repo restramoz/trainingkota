@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => (filter_var(env('APP_URL'), FILTER_VALIDATE_URL) !== false) ? env('APP_URL') : 'http://localhost:8000',
 
     /*
     |--------------------------------------------------------------------------

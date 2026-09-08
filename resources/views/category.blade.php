@@ -80,8 +80,8 @@
                             {{ $service->description }}
                         </p>
 
-                        <!-- Quick Syllabus Points -->
-                        @if(!empty($service->syllabus) && is_array($service->syllabus))
+                        <!-- Quick Syllabus Points (Pelatihan Only) -->
+                        @if($category === 'pelatihan' && !empty($service->syllabus) && is_array($service->syllabus))
                             <div class="border-t border-[#142338] pt-3 space-y-1">
                                 @foreach(array_slice($service->syllabus, 0, 2) as $point)
                                     <div class="text-[11px] text-[#c5c6ce] flex items-center gap-1.5">
@@ -94,12 +94,12 @@
                     </div>
 
                     <div class="pt-6 mt-6 border-t border-[#1E324E] flex items-center justify-between">
-                        <div>
-                            <span class="text-[10px] uppercase font-space text-[#64748B] block">Estimasi Biaya</span>
-                            <span class="font-space font-bold text-xs text-[#F1F5F9]">{{ $service->price_estimate }}</span>
+                        <div class="flex items-center gap-1.5 text-[#10B981] font-space text-xs">
+                            <span class="w-2 h-2 bg-[#10B981] inline-block"></span>
+                            <span class="text-[11px] uppercase font-bold">{{ $service->badge ?? 'Kemnaker RI' }}</span>
                         </div>
                         <a href="{{ route('service.detail', ['category' => $category, 'serviceSlug' => $service->slug]) }}" class="btn-primary text-xs py-2 px-3.5">
-                            Detail &amp; Silabus &rarr;
+                            Detail Layanan &rarr;
                         </a>
                     </div>
                 </div>
