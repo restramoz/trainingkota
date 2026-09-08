@@ -13,6 +13,7 @@ class Article extends Model
         'category',
         'service_id',
         'city_id',
+        'kecamatan_id',
         'title',
         'slug',
         'excerpt',
@@ -35,6 +36,14 @@ class Article extends Model
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+
+    /**
+     * Relasi ke kecamatan (opsional).
+     */
+    public function kecamatan()
+    {
+        return $this->belongsTo(Kecamatan::class);
     }
 
     /**

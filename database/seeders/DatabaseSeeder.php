@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             CitySeeder::class,
             ArticleSeeder::class, // SEO artikel 1500+ kata
+            KecamatanAndScheduleSeeder::class,
         ]);
     }
 }

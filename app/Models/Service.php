@@ -31,6 +31,16 @@ class Service extends Model
         return $this->hasMany(CityServiceContent::class);
     }
 
+    public function faqs()
+    {
+        return $this->hasMany(Faq::class);
+    }
+
+    public function trainingSchedules()
+    {
+        return $this->hasMany(TrainingSchedule::class);
+    }
+
     public function scopePublished($query)
     {
         return $query->where('status', 'published');

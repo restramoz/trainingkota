@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\City;
 use App\Models\Article;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class CityLandingController extends Controller
@@ -31,27 +32,38 @@ class CityLandingController extends Controller
         ];
         $categoryName = $categoryNames[$category] ?? ucfirst($category);
 
-        // ── Artikel SEO: prioritaskan artikel khusus kota ini,
-        //    fallback ke artikel kategori generic
-        $article = Article::published()
+        // ── Artikel terbaru: prioritaskan per kota, lalu generic per kategori
+        $articlesQuery = Article::published()
             ->where(function ($q) use ($city, $category) {
                 $q->where('city_id', $city->id)
                   ->orWhere(function ($q2) use ($category) {
                       $q2->where('category', $category)->whereNull('city_id');
                   });
             })
-            ->latest()
-            ->first();
+            ->latest();
 
-        // ── Artikel Terkait (2-3, excludes artikel utama)
-        $relatedArticles = Article::published()
-            ->where('category', $category)
-            ->when($article, fn($q) => $q->where('id', '!=', $article->id))
-            ->limit(3)
+        // Featured article (1 artikel utama)
+        $article = (clone $articlesQuery)->first();
+
+        // Blog list: 5 terbaru (kecuali artikel utama)
+        $blogArticles = (clone $articlesQuery)
+            ->when($article, fn($q) => $q->where('id', '!=', $article?->id))
+            ->limit(5)
             ->get();
 
-        // ── FAQ Items per kategori (digunakan juga untuk JSON-LD FAQPage schema)
-        $faqItems = $this->getFaqItems($category, $city->name);
+        // ── FAQ dari DB: prioritaskan per kota, fallback ke per kategori, lalu hardcoded
+        $faqItems = $this->getFaqItems($category, $city);
+
+        // ── Training schedules jika kategori pelatihan
+        $upcomingSchedules = collect();
+        if ($category === 'pelatihan') {
+            $upcomingSchedules = \App\Models\TrainingSchedule::with('service')
+                ->where('city_id', $city->id)
+                ->where('status', 'open')
+                ->orderBy('date')
+                ->take(3)
+                ->get();
+        }
 
         return view('city-landing', compact(
             'category',
@@ -61,16 +73,37 @@ class CityLandingController extends Controller
             'featuredServices',
             'otherCitiesInIsland',
             'article',
-            'relatedArticles',
-            'faqItems'
+            'blogArticles',
+            'faqItems',
+            'upcomingSchedules'
         ));
     }
 
     /**
-     * FAQ items yang relevan per kategori & kota.
-     * Array of ['q' => '...', 'a' => '...']
+     * FAQ: ambil dari DB dulu (per kota/layanan), fallback ke hardcoded per kategori.
      */
-    private function getFaqItems(string $category, string $cityName): array
+    private function getFaqItems(string $category, City $city): array
+    {
+        // Coba dari DB: FAQ yang terkait kota ini
+        $dbFaqs = Faq::published()
+            ->where('city_id', $city->id)
+            ->orderBy('order')
+            ->orderBy('id')
+            ->limit(6)
+            ->get();
+
+        if ($dbFaqs->isNotEmpty()) {
+            return $dbFaqs->map(fn($f) => ['q' => $f->question, 'a' => $f->answer])->toArray();
+        }
+
+        // Fallback ke FAQ hardcoded per kategori
+        return $this->getHardcodedFaqs($category, $city->name);
+    }
+
+    /**
+     * Hardcoded FAQ fallback saat DB kosong — tetap dinamis (pakai nama kota).
+     */
+    private function getHardcodedFaqs(string $category, string $cityName): array
     {
         $base = [
             'pelatihan' => [
@@ -92,7 +125,7 @@ class CityLandingController extends Controller
                 ],
                 [
                     'q' => "Bagaimana cara booking kursi pelatihan K3 di {$cityName}?",
-                    'a' => "Proses booking sangat mudah: (1) Pilih program dari katalog, (2) Hubungi tim kami via WhatsApp +62 812-3456-7890 atau klik tombol Booking Slot, (3) Tim registrasi akan mengirimkan formulir pendaftaran dan invoice DP, (4) Konfirmasi pembayaran untuk penguncian kursi.",
+                    'a' => "Proses booking sangat mudah: (1) Pilih program dari katalog, (2) Hubungi tim kami via WhatsApp atau klik tombol Booking Slot, (3) Tim registrasi akan mengirimkan formulir pendaftaran dan invoice DP, (4) Konfirmasi pembayaran untuk penguncian kursi.",
                 ],
             ],
             'kajian' => [
@@ -120,7 +153,7 @@ class CityLandingController extends Controller
                 ],
                 [
                     'q' => "Berapa biaya pengurusan SLF pabrik di {$cityName}?",
-                    'a' => "Biaya pengurusan SLF bervariasi tergantung luas bangunan, jumlah lantai, dan kompleksitas instalasi MEP (Mechanical, Electrical, Plumbing). Hubungi tim kami untuk mendapatkan estimasi biaya yang akurat untuk fasilitas spesifik Anda di {$cityName}. Kami menjamin transparansi biaya tanpa biaya tersembunyi.",
+                    'a' => "Biaya pengurusan SLF bervariasi tergantung luas bangunan, jumlah lantai, dan kompleksitas instalasi MEP. Hubungi tim kami untuk mendapatkan estimasi biaya yang akurat untuk fasilitas spesifik Anda di {$cityName}. Kami menjamin transparansi biaya tanpa biaya tersembunyi.",
                 ],
                 [
                     'q' => "Apa itu Riksa Uji dan alat apa saja yang wajib diperiksa secara berkala?",
