@@ -201,6 +201,7 @@
     </div>
 </section>
 
+@if($category === 'pelatihan')
 <!-- Jadwal Batch Khusus Kota Ini -->
 <section id="jadwal-kota" class="py-14 border-b border-[#1E324E]">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
@@ -264,6 +265,7 @@
         </div>
     </div>
 </section>
+@endif
 
 <!-- Available Services in this Category for this City -->
 <section class="py-14 bg-[#0B1526]/40 border-b border-[#1E324E]">

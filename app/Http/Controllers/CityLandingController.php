@@ -46,7 +46,7 @@ class CityLandingController extends Controller
         $article = (clone $articlesQuery)->first();
 
         // Blog list: 5 terbaru (kecuali artikel utama)
-        $blogArticles = (clone $articlesQuery)
+        $relatedArticles = (clone $articlesQuery)
             ->when($article, fn($q) => $q->where('id', '!=', $article?->id))
             ->limit(5)
             ->get();
@@ -73,7 +73,7 @@ class CityLandingController extends Controller
             'featuredServices',
             'otherCitiesInIsland',
             'article',
-            'blogArticles',
+            'relatedArticles',
             'faqItems',
             'upcomingSchedules'
         ));
