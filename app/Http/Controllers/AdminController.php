@@ -334,6 +334,7 @@ class AdminController extends Controller
             'meta_description' => 'nullable|string',
             'focus_keywords'   => 'nullable|string|max:255',
             'status'           => 'required|in:draft,published',
+            'internal_links'   => 'nullable|array',
         ]);
 
         if (empty($validated['slug'])) {
@@ -378,6 +379,7 @@ class AdminController extends Controller
             'meta_description' => 'nullable|string',
             'focus_keywords'   => 'nullable|string|max:255',
             'status'           => 'required|in:draft,published',
+            'internal_links'   => 'nullable|array',
         ]);
 
         if (empty($validated['reading_time'])) {
@@ -434,6 +436,14 @@ class AdminController extends Controller
         $city    = isset($validated['city_id']) ? City::find($validated['city_id']) : null;
         $kecamatan = isset($validated['kecamatan_id']) ? Kecamatan::find($validated['kecamatan_id']) : null;
 
+        // Fetch SEO Override context if available for Service + City
+        $seoOverride = null;
+        if ($service && $city) {
+            $seoOverride = CityServiceContent::where('service_id', $service->id)
+                ->where('city_id', $city->id)
+                ->first();
+        }
+
         $params = [
             'service_name'            => $service?->name ?? 'Layanan K3',
             'category'                => $validated['category'] ?? $service?->category ?? 'pelatihan',
@@ -444,6 +454,12 @@ class AdminController extends Controller
             'word_count'              => $validated['word_count'] ?? 1500,
             'tone'                    => $validated['tone'] ?? 'Professional B2B',
             'additional_instructions' => $validated['additional_instructions'] ?? '',
+            'seo_override'            => $seoOverride ? [
+                'seo_title'        => $seoOverride->seo_title,
+                'meta_description' => $seoOverride->meta_description,
+                'custom_heading'   => $seoOverride->custom_heading,
+                'custom_content'   => $seoOverride->custom_content,
+            ] : null,
         ];
 
         $ollama = new OllamaService();
@@ -456,7 +472,7 @@ class AdminController extends Controller
             ], 500);
         }
 
-        // Optionally save as draft
+        // If save_as_draft is NOT provided, we return the result for preview without saving.
         if (!empty($validated['save_as_draft'])) {
             $slug = Str::slug($result['slug'] ?? $result['title']);
             $counter = 1;
@@ -481,6 +497,7 @@ class AdminController extends Controller
                 'meta_description' => $result['meta_description'] ?? null,
                 'focus_keywords'   => $params['target_keyword'] ?? null,
                 'faq_items'        => $result['suggested_faqs'] ?? null,
+                'internal_links'   => $result['suggested_internal_links'] ?? null,
                 'reading_time'     => $readingTime,
                 'status'           => 'draft',
             ]);
@@ -490,6 +507,26 @@ class AdminController extends Controller
         }
 
         return response()->json(array_merge($result, ['success' => true]));
+    }
+
+    public function previewAiArticle(Request $request)
+    {
+        $data = $request->validate([
+            'title' => 'required|string',
+            'slug' => 'required|string',
+            'category' => 'nullable|string',
+            'service_id' => 'nullable|integer',
+            'city_id' => 'nullable|integer',
+            'kecamatan_id' => 'nullable|integer',
+            'excerpt' => 'nullable|string',
+            'content' => 'required|string',
+            'seo_title' => 'nullable|string',
+            'meta_description' => 'nullable|string',
+            'focus_keywords' => 'nullable|string',
+            'faq_items' => 'nullable|array',
+        ]);
+
+        return view('admin.ai-preview', compact('data'));
     }
 
     // ── CRUD FAQ / Q&A ───────────────────────────────────────────────────────
@@ -714,5 +751,95 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard', ['tab' => 'locations'])
             ->with('success', "Lokasi '{$name}' berhasil dihapus.");
+    }
+
+    public function contentMatrix(Request $request)
+    {
+        // Filters
+        $serviceFilter = $request->query('matrix_service');
+        $categoryFilter = $request->query('matrix_category');
+        $cityFilter = $request->query('matrix_city');
+        $kecamatanFilter = $request->query('matrix_kecamatan');
+
+        $servicesQuery = Service::query();
+        if ($serviceFilter) $servicesQuery->where('id', $serviceFilter);
+        if ($categoryFilter) $servicesQuery->where('category', $categoryFilter);
+        $matrixServices = $servicesQuery->orderBy('category')->orderBy('name')->get();
+
+        $citiesQuery = City::query();
+        if ($cityFilter) $citiesQuery->where('id', $cityFilter);
+        $matrixCities = $citiesQuery->orderBy('name')->get();
+
+        $allServices = Service::orderBy('category')->orderBy('name')->get();
+        $allCities = City::orderBy('name')->get();
+        $kecamatans = Kecamatan::orderBy('name')->get();
+
+        // Matrix Data construction
+        $coverageMatrix = [];
+        foreach ($matrixServices as $service) {
+            foreach ($matrixCities as $city) {
+                // Base combination: Service x City
+                // The view expects $coverageMatrix[$service->id][$city->id]
+                $coverageMatrix[$service->id][$city->id] = $this->calculateCoverage($service->id, $city->id);
+            }
+        }
+
+        $stats = [
+            'total_services' => Service::count(),
+            'total_cities' => City::count(),
+            'total_articles' => Article::count(),
+            'total_overrides' => \App\Models\CityServiceContent::count(),
+        ];
+
+        return view('admin.dashboard', compact(
+            'coverageMatrix', 
+            'matrixServices', 
+            'matrixCities', 
+            'allServices', 
+            'allCities', 
+            'kecamatans', 
+            'stats'
+        ))->with('activeTab', 'matrix');
+    }
+
+    private function calculateCoverage($serviceId, $cityId, $kecId = null)
+    {
+        $hasArticle = Article::where('service_id', $serviceId)
+            ->where('city_id', $cityId)
+            ->when($kecId, fn($q) => $q->where('kecamatan_id', $kecId))
+            ->exists();
+
+        $hasFaq = Faq::where('service_id', $serviceId)
+            ->where('city_id', $cityId)
+            ->when($kecId, fn($q) => $q->where('kecamatan_id', $kecId))
+            ->exists();
+
+        $hasSeo = false;
+        if (!$kecId) {
+            $hasSeo = \App\Models\CityServiceContent::where('service_id', $serviceId)
+                ->where('city_id', $cityId)
+                ->exists();
+        }
+
+        $hasLocation = Location::where('city_id', $cityId)
+            ->when($kecId, fn($q) => $q->where('kecamatan_id', $kecId))
+            ->exists();
+
+        $score = 0;
+        if ($hasArticle) $score++;
+        if ($hasFaq) $score++;
+        if ($hasSeo) $score++;
+
+        $status = 'MISSING';
+        if ($score === 3) $status = 'COMPLETE';
+        elseif ($score > 0) $status = 'PARTIAL';
+
+        return [
+            'status' => $status,
+            'article' => $hasArticle,
+            'faq' => $hasFaq,
+            'seo' => $hasSeo,
+            'location' => $hasLocation,
+        ];
     }
 }

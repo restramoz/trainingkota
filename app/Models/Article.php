@@ -24,10 +24,12 @@ class Article extends Model
         'meta_description',
         'focus_keywords',
         'status',
++        'internal_links',
     ];
 
     protected $casts = [
         'faq_items' => 'array',
++        'internal_links' => 'array',
     ];
 
     /**

@@ -77,6 +77,17 @@ class OllamaService
         $tone = $params['tone'] ?? 'Professional B2B';
         $wordCount = $params['word_count'] ?? 1500;
         $extraInstructions = $params['additional_instructions'] ?? '';
+        $seoOverride = $params['seo_override'] ?? null;
+
+        $seoContext = '';
+        if ($seoOverride) {
+            $seoContext = "\n- Existing SEO Context (Override):\n" .
+                          "    - Prioritas SEO Title: {$seoOverride['seo_title']}\n" .
+                          "    - Prioritas Meta Description: {$seoOverride['meta_description']}\n" .
+                          "    - Fokus Heading: {$seoOverride['custom_heading']}\n" .
+                          "    - Poin Kunci Konten: {$seoOverride['custom_content']}\n" .
+                          "    (Gunakan data override ini sebagai referensi utama untuk menjaga konsistensi strategi regional, namun tetap kembangkan menjadi artikel lengkap yang mendalam).";
+        }
 
         $locationContext = $cityName;
         if ($kecamatanName) {
@@ -131,7 +142,7 @@ Silakan buat artikel lengkap dan mendalam dengan rincian berikut:
 - Search Intent: {$intent}
 - Nada Bahasa (Tone): {$tone}
 - Target Panjang Kata: minimal {$wordCount} kata
-- Instruksi Tambahan: {$extraInstructions}
+- Instruksi Tambahan: {$extraInstructions}{$seoContext}
 
 Pastikan artikel berbobot tinggi untuk pengambil keputusan perusahaan (HSE Manager, HRD, Direktur Operasional).
 Keluarkan format HANYA JSON murni yang dapat di-parse oleh json_decode() PHP.

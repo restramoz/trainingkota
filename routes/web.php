@@ -44,6 +44,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     // CRUD Overrides Konten / SEO per Kota
     Route::post('/city-service-contents', [AdminController::class, 'storeCityContent'])->name('city-contents.store');
     Route::delete('/city-service-contents/{id}', [AdminController::class, 'deleteCityContent'])->name('city-contents.delete');
+    Route::get('/content-matrix', [AdminController::class, 'contentMatrix'])->name('content-matrix');
 
     // CRUD Artikel / Blog
     Route::post('/articles', [AdminController::class, 'storeArticle'])->name('articles.store');
@@ -53,6 +54,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
 
     // AI Article Generator
     Route::post('/articles/ai-generate', [AdminController::class, 'aiGenerateArticle'])->name('articles.ai-generate');
+    Route::get('/articles/ai-preview', [AdminController::class, 'previewAiArticle'])->name('articles.ai-preview');
 
     // CRUD FAQ / Q&A
     Route::post('/faqs', [AdminController::class, 'storeFaq'])->name('faqs.store');
