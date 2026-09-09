@@ -43,6 +43,22 @@ class KecamatanLandingController extends Controller
             ->take(6)
             ->get();
 
+        // Related Articles for this Kecamatan/City context
+        // Priority: Kecamatan-specific first, then City-level fallback
+        $relatedArticles = Article::published()
+            ->where(function ($q) use ($kecamatan, $city) {
+                $q->where(function ($qKec) use ($kecamatan) {
+                    $qKec->where('kecamatan_id', $kecamatan->id);
+                })
+                ->orWhere(function ($qCity) use ($city) {
+                    $qCity->where('city_id', $city->id)->whereNull('kecamatan_id');
+                });
+            })
+            ->orderByRaw('kecamatan_id IS NULL')
+            ->latest()
+            ->take(6)
+            ->get();
+
         // Dynamic Article: Priority: Kecamatan -> City -> Category General
         $article = Article::published()
             ->where(function ($q) use ($kecamatan, $city, $category) {
@@ -70,6 +86,7 @@ class KecamatanLandingController extends Controller
             'city',
             'services',
             'locations',
+            'relatedArticles',
             'article',
             'faqs'
         ));

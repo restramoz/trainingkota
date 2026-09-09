@@ -16,34 +16,85 @@ use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
+    public function manageServices(Request $request)
+    {
+        return redirect()->route('admin.dashboard', ['tab' => 'services']);
+    }
+
+    public function manageLocations(Request $request)
+    {
+        return redirect()->route('admin.dashboard', ['tab' => 'locations']);
+    }
+
+    public function manageGraphics(Request $request)
+    {
+        return redirect()->route('admin.dashboard', ['tab' => 'graphics']);
+    }
+
     public function index(Request $request)
     {
         $activeTab = $request->query('tab', 'services');
         $data = $this->getDashboardData($request);
 
-        return view('admin.dashboard', array_merge($data, ['activeTab' => $activeTab]));
+        return view('admin.dashboard', array_merge($data, [
+            'activeTab' => $activeTab,
+            'coverageStats' => $coverageStats,
+        ]));
     }
 
     protected function getDashboardData(Request $request)
     {
-        // 1. Services Query
-        $categoryFilter = $request->query('category') ?? $request->query('filter_category');
-        $search = $request->query('q') ?? $request->query('search_service');
+        // 1. Stats Overview
+        $stats = [
+            'total_services'     => Service::count(),
+            'total_pelatihan'    => Service::where('category', 'pelatihan')->count(),
+            'total_kajian'       => Service::where('category', 'kajian')->count(),
+            'total_jasa'         => Service::where('category', 'jasa')->count(),
+            'total_cities'       => City::count(),
+            'total_hubs'         => City::where('is_hub', true)->count(),
+            'total_articles'     => Article::count(),
+            'published_articles' => Article::where('status', 'published')->count(),
+            'draft_articles'     => Article::where('status', 'draft')->count(),
+            'total_faqs'         => Faq::count(),
+            'total_schedules'    => TrainingSchedule::count(),
+            'total_locations'     => Location::count(),
+        ];
+
+        // 2. Coverage Analysis (New)
+        $coverageStats = City::withCount(['articles as published_articles' => function($q) {
+            $q->where('status', 'published');
+        }])
+        ->withCount(['locations'])
+        ->get()
+        ->map(function ($city) {
+            return [
+                'city_name' => $city->name,
+                'city_slug' => $city->slug,
+                'article_count' => $city->published_articles,
+                'location_count' => $city->locations_count,
+                'coverage_rate' => ($city->published_articles > 0 || $city->locations_count > 0) ? 100 : 0,
+            ];
+        });
+
+
+        // 2. Services Query
+        $serviceCategoryFilter = $request->query('service_category') ?? $request->query('category') ?? $request->query('filter_category');
+        $serviceSearch = $request->query('service_q') ?? $request->query('q') ?? $request->query('search_service');
 
         $servicesQuery = Service::query();
-        if ($categoryFilter) {
-            $servicesQuery->where('category', $categoryFilter);
+        if ($serviceCategoryFilter) {
+            $servicesQuery->where('category', $serviceCategoryFilter);
         }
-        if ($search) {
-            $servicesQuery->where(function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('badge', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%");
+        if ($serviceSearch) {
+            $servicesQuery->where(function ($q) use ($serviceSearch) {
+                $q->where('name', 'like', "%{$serviceSearch}%")
+                  ->orWhere('badge', 'like', "%{$serviceSearch}%")
+                  ->orWhere('slug', 'like', "%{$serviceSearch}%");
             });
         }
         $services = $servicesQuery->orderBy('category')->orderBy('name')->paginate(15, ['*'], 'services_page')->withQueryString();
 
-        // 2. Cities Query
+        // 3. Cities Query
         $citySearch = $request->query('city_q') ?? $request->query('search_city');
         $islandFilter = $request->query('island') ?? $request->query('filter_island');
 
@@ -60,10 +111,16 @@ class AdminController extends Controller
         }
         $cities = $citiesQuery->orderBy('name')->paginate(15, ['*'], 'cities_page')->withQueryString();
 
-        // 3. Overrides Query
-        $overrides = CityServiceContent::with(['city', 'service'])->latest()->paginate(10, ['*'], 'overrides_page')->withQueryString();
+        // 4. CityServiceContent (Overrides) Query
+        $overrideCityFilter = $request->query('override_city');
+        $overridesQuery = CityServiceContent::with(['city', 'service']);
+        if ($overrideCityFilter) {
+            $overridesQuery->where('city_id', $overrideCityFilter);
+        }
+        $overrides = $overridesQuery->paginate(15, ['*'], 'overrides_page')->withQueryString();
 
-        // 4. Articles Query
+
+        // 5. Articles Query
         $articleSearch = $request->query('article_q');
         $articleCategoryFilter = $request->query('article_category');
         $articleServiceFilter = $request->query('article_service');
@@ -86,100 +143,25 @@ class AdminController extends Controller
                   ->orWhere('focus_keywords', 'like', "%{$articleSearch}%");
             });
         }
-        $articles = $articlesQuery->paginate(10, ['*'], 'articles_page')->withQueryString();
+        $articles = $articlesQuery->paginate(15, ['*'], 'articles_page')->withQueryString();
 
-        // 5. FAQs Query
-        $faqSearch = $request->query('faq_q');
-        $faqServiceFilter = $request->query('faq_service');
-        $faqCityFilter = $request->query('faq_city');
+        // 6. Form Dropdowns (Global Lists)
+        $allServices = Service::select('id', 'name', 'category', 'slug')->get();
+        $allCities   = City::select('id', 'name', 'slug', 'province')->get();
+        $kecamatans   = Kecamatan::select('id', 'name', 'city_id')->get();
 
-        $faqsQuery = Faq::with(['service', 'city', 'kecamatan'])->orderBy('order')->orderBy('id');
-        if ($faqServiceFilter) {
-            $faqsQuery->where('service_id', $faqServiceFilter);
-        }
-        if ($faqCityFilter) {
-            $faqsQuery->where('city_id', $faqCityFilter);
-        }
-        if ($faqSearch) {
-            $faqsQuery->where(function ($q) use ($faqSearch) {
-                $q->where('question', 'like', "%{$faqSearch}%")
-                  ->orWhere('answer', 'like', "%{$faqSearch}%");
-            });
-        }
-        $faqs = $faqsQuery->paginate(15, ['*'], 'faqs_page')->withQueryString();
-
-        // 6. Training Schedules Query
-        $scheduleServiceFilter = $request->query('schedule_service');
-        $scheduleCityFilter = $request->query('schedule_city');
-
-        $schedulesQuery = TrainingSchedule::with(['service', 'city'])
-            ->orderBy('date');
-        if ($scheduleServiceFilter) {
-            $schedulesQuery->where('service_id', $scheduleServiceFilter);
-        }
-        if ($scheduleCityFilter) {
-            $schedulesQuery->where('city_id', $scheduleCityFilter);
-        }
-        $schedules = $schedulesQuery->paginate(15, ['*'], 'schedules_page')->withQueryString();
-
-        // 7. Kecamatans Query
-        $kecamatanCityFilter = $request->query('kecamatan_city');
-        $kecamatanSearch = $request->query('kecamatan_q');
-
-        $kecamatansQuery = Kecamatan::with('city')->orderBy('city_id')->orderBy('name');
-        if ($kecamatanCityFilter) {
-            $kecamatansQuery->where('city_id', $kecamatanCityFilter);
-        }
-        if ($kecamatanSearch) {
-            $kecamatansQuery->where('name', 'like', "%{$kecamatanSearch}%");
-        }
-        $kecamatans = $kecamatansQuery->paginate(15, ['*'], 'kecamatans_page')->withQueryString();
-
-        // 8. Locations Query
-        $locationCityFilter = $request->query('location_city');
-        $locationSearch = $request->query('location_q');
-
-        $locationsQuery = Location::with(['city', 'kecamatan'])->orderBy('city_id')->orderBy('id');
-        if ($locationCityFilter) {
-            $locationsQuery->where('city_id', $locationCityFilter);
-        }
-        if ($locationSearch) {
-            $locationsQuery->where('location_name', 'like', "%{$locationSearch}%");
-        }
-        $locations = $locationsQuery->paginate(15, ['*'], 'locations_page')->withQueryString();
-
-        // Dropdown lists
-        $allServices = Service::orderBy('category')->orderBy('name')->get();
-        $allCities   = City::orderBy('name')->get();
-        $islands = City::select('island')->distinct()->whereNotNull('island')->pluck('island');
-
-        // Stats Overview
-        $stats = [
-            'total_services'     => Service::count(),
-            'total_pelatihan'    => Service::where('category', 'pelatihan')->count(),
-            'total_kajian'       => Service::where('category', 'kajian')->count(),
-            'total_jasa'         => Service::where('category', 'jasa')->count(),
-            'total_cities'       => City::count(),
-            'total_hubs'         => City::where('is_hub', true)->count(),
-            'total_overrides'    => CityServiceContent::count(),
-            'total_articles'     => Article::count(),
-            'published_articles' => Article::where('status', 'published')->count(),
-            'draft_articles'     => Article::where('status', 'draft')->count(),
-            'total_faqs'         => Faq::count(),
-            'total_schedules'    => TrainingSchedule::count(),
-            'open_schedules'     => TrainingSchedule::where('status', 'open')->count(),
-            'total_kecamatans'   => Kecamatan::count(),
-            'total_locations'    => Location::count(),
-        ];
-
-        return compact(
-            'services', 'cities', 'overrides', 'articles', 'faqs', 'schedules', 'kecamatans', 'locations',
-            'allServices', 'allCities', 'stats', 'islands', 'categoryFilter', 'search', 'citySearch',
-            'islandFilter', 'articleSearch', 'articleCategoryFilter', 'articleServiceFilter', 'articleCityFilter',
-            'faqSearch', 'faqServiceFilter', 'faqCityFilter', 'scheduleServiceFilter', 'scheduleCityFilter',
-            'kecamatanCityFilter', 'kecamatanSearch', 'locationCityFilter', 'locationSearch'
-        );
+        return array_merge([
+            'stats'         => $stats,
+            'services'      => $services,
+            'cities'        => $cities,
+            'overrides'     => $overrides,
+            'articles'     => $articles,
+            'allServices'   => $allServices,
+            'allCities'     => $allCities,
+            'kecamatans'    => $kecamatans,
+        ], $stats);
     }
+
 
     // ── CRUD LAYANAN ─────────────────────────────────────────────────────────
 

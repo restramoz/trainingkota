@@ -9,8 +9,13 @@ use App\Http\Controllers\CityServiceLandingController;
 use App\Http\Controllers\KecamatanLandingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BlogController;
+
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\ArticleAdminController;
+use App\Http\Controllers\Admin\ScheduleAdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,11 +39,13 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
     // CRUD Layanan
+    Route::get('/services/manage', [AdminController::class, 'manageServices'])->name('services.manage');
     Route::post('/services', [AdminController::class, 'storeService'])->name('services.store');
     Route::put('/services/{id}', [AdminController::class, 'updateService'])->name('services.update');
     Route::delete('/services/{id}', [AdminController::class, 'deleteService'])->name('services.delete');
 
     // CRUD Kota
+    Route::get('/locations', [AdminController::class, 'manageLocations'])->name('locations.manage');
     Route::put('/cities/{id}', [AdminController::class, 'updateCity'])->name('cities.update');
 
     // CRUD Overrides Konten / SEO per Kota
@@ -47,10 +54,19 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::get('/content-matrix', [AdminController::class, 'contentMatrix'])->name('content-matrix');
 
     // CRUD Artikel / Blog
-    Route::post('/articles', [AdminController::class, 'storeArticle'])->name('articles.store');
-    Route::put('/articles/{id}', [AdminController::class, 'updateArticle'])->name('articles.update');
-    Route::delete('/articles/{id}', [AdminController::class, 'deleteArticle'])->name('articles.delete');
-    Route::post('/articles/{id}/toggle-status', [AdminController::class, 'toggleArticleStatus'])->name('articles.toggle-status');
+    Route::resource('articles', ArticleAdminController::class)->names([
+        'index' => 'articles.index',
+        'create' => 'articles.create',
+        'store' => 'articles.store',
+        'show' => 'articles.show',
+        'edit' => 'articles.edit',
+        'update' => 'articles.update',
+        'destroy' => 'articles.destroy',
+    ]);
+    Route::post('/articles/{id}/toggle-status', [ArticleAdminController::class, 'toggleStatus'])->name('articles.toggle-status');
+    Route::get('/kecamatans/get', [ArticleAdminController::class, 'getKecamatansByCity']);
+
+
 
     // AI Article Generator
     Route::post('/articles/ai-generate', [AdminController::class, 'aiGenerateArticle'])->name('articles.ai-generate');
@@ -62,9 +78,15 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::delete('/faqs/{id}', [AdminController::class, 'deleteFaq'])->name('faqs.delete');
 
     // CRUD Jadwal Pelatihan
-    Route::post('/schedules', [AdminController::class, 'storeSchedule'])->name('schedules.store');
-    Route::put('/schedules/{id}', [AdminController::class, 'updateSchedule'])->name('schedules.update');
-    Route::delete('/schedules/{id}', [AdminController::class, 'deleteSchedule'])->name('schedules.delete');
+    Route::resource('schedules', ScheduleAdminController::class)->names([
+        'index' => 'schedules.index',
+        'create' => 'schedules.create',
+        'store' => 'schedules.store',
+        'show' => 'schedules.show',
+        'edit' => 'schedules.edit',
+        'update' => 'schedules.update',
+        'destroy' => 'schedules.destroy',
+    ]);
 
     // CRUD Kecamatan
     Route::post('/kecamatans', [AdminController::class, 'storeKecamatan'])->name('kecamatans.store');
@@ -75,7 +97,14 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::post('/locations', [AdminController::class, 'storeLocation'])->name('locations.store');
     Route::put('/locations/{id}', [AdminController::class, 'updateLocation'])->name('locations.update');
     Route::delete('/locations/{id}', [AdminController::class, 'deleteLocation'])->name('locations.delete');
+
+    // CRUD Graphics
+    Route::get('/graphics', [AdminController::class, 'manageGraphics'])->name('graphics.manage');
 });
+
+
+// 4a. Blog Portal
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 
 
 // 4. Artikel SEO: /artikel/{slug}

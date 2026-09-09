@@ -162,6 +162,70 @@
                         height="100%"
                         style="border:0; min-height: 320px;"
                         allowfullscreen=""
+
+<!-- 5. Related Articles Section -->
+<section class="py-12 border-b border-[#1E324E]">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold font-space text-[#F1F5F9]">
+                    Artikel Terkait Kecamatan {{ $kecamatan->name }}
+                </h2>
+                <p class="text-[#94A3B8] font-body text-sm mt-1">
+                    Panduan, regulasi, dan informasi terbaru seputar {{ ucfirst($category) }} di wilayah {{ $kecamatan->name }} dan {{ $city->name }}.
+                </p>
+            </div>
+            @if($relatedArticles->count() > 0)
+                <a href="{{ route('articles.index', ['city' => $city->slug]) }}" class="btn-secondary text-xs py-2 px-4">
+                    Lihat Semua Artikel {{ $city->name }} &rarr;
+                </a>
+            @endif
+        </div>
+
+        @if($relatedArticles->count() > 0)
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach($relatedArticles as $relArticle)
+                    <article class="group bg-[#0B1526] border border-[#1E324E] rounded-xl overflow-hidden hover:border-[#10B981] transition-all duration-300 flex flex-col">
+                        <div class="aspect-video overflow-hidden relative">
+                            <img src="{{ $relArticle->image_url }}" alt="{{ $relArticle->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-3 left-3">
+                                <span class="bg-[#10B981] text-white text-[10px] font-bold px-2 py-1 rounded uppercase">
+                                    {{ $relArticle->category }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow">
+                            <h3 class="text-lg font-bold font-space text-[#F1F5F9] leading-snug group-hover:text-[#10B981] transition-colors mb-3">
+                                <a href="{{ route('articles.show', $relArticle->slug) }}">{{ $relArticle->title }}</a>
+                            </h3>
+                            <p class="text-[#94A3B8] font-body text-xs line-clamp-3 mb-4 flex-grow">
+                                {{ Str::limit(strip_tags($relArticle->content), 120) }}
+                            </p>
+                            <div class="flex items-center justify-between mt-auto pt-4 border-t border-[#1E324E]">
+                                <span class="text-[10px] text-[#64748B] font-mono">
+                                    {{ $relArticle->created_at->format('d M Y') }}
+                                </span>
+                                <a href="{{ route('articles.show', $relArticle->slug) }}" class="text-[#10B981] text-xs font-bold hover:underline">
+                                    Baca Selengkapnya &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+        @else
+            <div class="bg-[#0B1526] border border-dashed border-[#1E324E] rounded-xl p-12 text-center">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#1E324E] text-[#94A3B8] mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <p class="text-[#94A3B8] font-body text-sm">Belum ada artikel khusus untuk wilayah ini. Silakan jelajahi artikel kota {{ $city->name }}.</p>
+            </div>
+        @endif
+    </div>
+</section>
+
                         loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"
                         title="Google Maps {{ $kecamatan->name }}">

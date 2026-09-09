@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layout')
 
 @section('title', 'Portal CMS Nasional K3 - Dashboard Super Admin')
 
@@ -12,17 +12,6 @@
     addingService: false,
     editingArticle: null,
 
-    // State Live Google SERP Preview
-    selectedCityName: 'Malang',
-    selectedServiceName: 'Ahli K3 Umum',
-    selectedCategory: 'pelatihan',
-    selectedCitySlug: 'malang',
-    selectedServiceSlug: 'ahli-k3-umum',
-    seoTitle: 'Pelatihan Ahli K3 Umum di Malang Terbaik & Resmi Kemnaker',
-    metaDesc: 'Pusat pembinaan dan sertifikasi Ahli K3 Umum Kemnaker RI di Malang. Jadwal batch reguler terdekat, sentra praktik industri, dan sertifikat ber-SKP resmi.',
-    customHeading: 'Pusat Pelatihan Ahli K3 Umum Resmi Wilayah Malang Raya',
-    editorContent: 'Program pelatihan Ahli K3 Umum di Malang diselenggarakan dengan silabus resmi Kemnaker RI.',
-
     closeAllModals() { 
         this.addingService = false; 
         this.editingCity = null; 
@@ -32,25 +21,6 @@
     setEditingService(data) { this.closeAllModals(); this.editingService = data; },
     setEditingCity(data) { this.closeAllModals(); this.editingCity = data; },
     setEditingArticle(data) { this.closeAllModals(); this.editingArticle = data; },
-
-    updatePreviewFromSelection() {
-        let citySelect = document.getElementById('seo_city_select');
-        let serviceSelect = document.getElementById('seo_service_select');
-        if (citySelect && citySelect.selectedIndex > 0) {
-            let opt = citySelect.options[citySelect.selectedIndex];
-            this.selectedCityName = opt.getAttribute('data-name') || 'Kota/Kab';
-            this.selectedCitySlug = opt.getAttribute('data-slug') || 'kota';
-        }
-        if (serviceSelect && serviceSelect.selectedIndex > 0) {
-            let opt = serviceSelect.options[serviceSelect.selectedIndex];
-            this.selectedServiceName = opt.getAttribute('data-title') || 'Layanan K3';
-            this.selectedServiceSlug = opt.getAttribute('data-slug') || 'layanan';
-            this.selectedCategory = opt.getAttribute('data-category') || 'pelatihan';
-        }
-        this.seoTitle = this.selectedServiceName + ' di ' + this.selectedCityName + ' - Sertifikasi Resmi Kemnaker RI';
-        this.metaDesc = 'Pusat layanan resmi ' + this.selectedServiceName + ' di ' + this.selectedCityName + '. Jadwal pembinaan, sertifikat Kemnaker RI/BNSP, dan sentra praktik terdekat.';
-        this.customHeading = 'Pusat ' + this.selectedServiceName + ' Resmi Wilayah ' + this.selectedCityName;
-    },
 
     async generateAiArticle() {
         const btn = this.$refs.aiGenBtn;
@@ -105,91 +75,7 @@
             btn.innerText = originalText;
         }
     },
-
-    insertTag(tag) {
-        let textarea = this.$refs.wysiwygEditor;
-        if (!textarea) return;
-        let start = textarea.selectionStart;
-        let end = textarea.selectionEnd;
-        let selected = textarea.value.substring(start, end);
-        let replacement = '';
-        if (tag === 'h2') replacement = `\n<h2>${selected || 'Subjudul H2'}</h2>\n`;
-        else if (tag === 'h3') replacement = `\n<h3>${selected || 'Subjudul H3'}</h3>\n`;
-        else if (tag === 'b') replacement = `<strong>${selected || 'teks tebal'}</strong>`;
-        else if (tag === 'list') replacement = `\n<ul>\n  <li>${selected || 'Item daftar'}</li>\n</ul>\n`;
-        textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
-        this.editorContent = textarea.value;
-        textarea.focus();
-    },
-
-    insertTable() {
-        let textarea = this.$refs.wysiwygEditor;
-        if (!textarea) return;
-        let t = `\n<table>\n  <thead><tr><th>Fitur</th><th>Detail</th></tr></thead>\n  <tbody><tr><td>Durasi</td><td>3 Hari</td></tr></tbody>\n</table>\n`;
-        let start = textarea.selectionStart;
-        textarea.value = textarea.value.substring(0, start) + t + textarea.value.substring(textarea.selectionEnd);
-        this.editorContent = textarea.value;
-        textarea.focus();
-    },
-
-    insertCallout() {
-        let textarea = this.$refs.wysiwygEditor;
-        if (!textarea) return;
-        let c = `\n> **PENTING**: Seluruh peserta wajib melengkapi berkas ijazah minimal D3/S1 sesuai Permenaker No. 02/1992.\n`;
-        let start = textarea.selectionStart;
-        textarea.value = textarea.value.substring(0, start) + c + textarea.value.substring(textarea.selectionEnd);
-        this.editorContent = textarea.value;
-        textarea.focus();
-    },
-
-    launchAiGenerator(serviceId, cityId, category) {
-        this.activeTab = 'articles';
-        this.$nextTick(() => {
-            const sSel = document.getElementById('ai_service_select');
-            const cSel = document.getElementById('ai_city_select');
-            const catSel = document.getElementById('ai_category_select');
-            
-            if (sSel) sSel.value = serviceId;
-            if (cSel) cSel.value = cityId;
-            if (catSel) catSel.value = category;
-            
-            const aiSection = document.getElementById('ai-generator-section');
-            if (aiSection) {
-                aiSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    },
 }" class="min-h-screen bg-[#070D18] text-[#F1F5F9] font-sans antialiased pb-12">
-
-    <!-- ── Header Control Bar ───────────────────────────────────────────── -->
-    <div class="w-full bg-[#080E19] border-b border-[#1E324E] px-4 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
-        <div class="flex items-center gap-3">
-            <div class="bg-[#0D7A5F]/20 p-2 text-[#10B981] border border-[#0D7A5F] shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-            </div>
-            <div class="flex flex-col">
-                <div class="flex flex-wrap items-center gap-2">
-                    <span class="font-space font-bold text-sm lg:text-base text-[#F1F5F9] tracking-tight">PORTAL CMS NASIONAL K3</span>
-                    <span class="font-space font-bold text-[10px] bg-[#0F2038] text-[#10B981] border border-[#0D7A5F] px-2 py-0.5 uppercase tracking-wider">COMMAND & COMPLIANCE v2.5</span>
-                </div>
-                <span class="font-space text-[11px] text-[#64748B]">Sinkronisasi Multikota Kemnaker RI &bull; 212 Kota/Kab Terhubung</span>
-            </div>
-        </div>
-        <div class="flex items-center gap-4 text-xs font-space">
-            <div class="hidden sm:flex items-center gap-2 bg-[#0B1526] border border-[#1E324E] px-3 py-1.5">
-                <span class="w-2 h-2 bg-[#10B981] inline-block animate-pulse"></span>
-                <span class="text-[#10B981] font-semibold">SISTEM AKTIF</span>
-            </div>
-            <div class="flex items-center bg-[#0F2038] border border-[#1E324E] px-3 py-1.5 gap-2">
-                <span class="text-[#94A3B8]">OPERATOR:</span>
-                <span class="text-[#F1F5F9] font-bold uppercase">{{ auth()->user()->name ?? session('admin_username', 'SUPER ADMIN') }}</span>
-            </div>
-            <a href="{{ route('home') }}" target="_blank" class="hidden sm:flex items-center gap-1.5 text-[#38BDF8] hover:underline font-semibold text-[11px]">
-                <span class="w-1.5 h-1.5 bg-[#38BDF8] inline-block"></span>
-                LIHAT WEBSITE
-            </a>
-        </div>
-    </div>
 
     <!-- ── Alert ──────────────────────────────────────────────────────── -->
     @if(session('success'))
@@ -206,9 +92,9 @@
 
     <div class="max-w-7xl mx-auto px-4 lg:px-8 py-6 space-y-6">
 
-        <!-- ── STAT METRICS ────────────────────────────────────────────── -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-2">
-            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition col-span-1">
+        <!-- ── STAT METRICS (CLEANED) ────────────────────────────────────────────── -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2">
+            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
                 <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Total Layanan</div>
                 <div class="text-xl font-bold text-[#F1F5F9] mt-1 font-space">{{ $stats['total_services'] ?? 0 }}</div>
             </div>
@@ -225,32 +111,28 @@
                 <div class="text-xl font-bold text-[#F59E0B] mt-1 font-space">{{ $stats['total_jasa'] ?? 0 }}</div>
             </div>
             <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Cakupan Kota</div>
-                <div class="text-xl font-bold text-[#F1F5F9] mt-1 font-space">{{ $stats['total_cities'] ?? 0 }}</div>
+                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Kota Tercover</div>
+                <div class="text-xl font-bold text-[#10B981] mt-1 font-space">{{ $stats['cities_with_locations'] ?? 0 }}</div>
             </div>
             <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Sentra Hub</div>
-                <div class="text-xl font-bold text-[#10B981] mt-1 font-space">{{ $stats['total_hubs'] ?? 0 }}</div>
+                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Kota Belum</div>
+                <div class="text-xl font-bold text-[#F59E0B] mt-1 font-space">{{ $stats['cities_without_locations'] ?? 0 }}</div>
             </div>
             <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">SEO Overrides</div>
-                <div class="text-xl font-bold text-[#38BDF8] mt-1 font-space">{{ $stats['total_overrides'] ?? 0 }}</div>
+                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Lokasi Incomplete</div>
+                <div class="text-xl font-bold text-[#EF4444] mt-1 font-space">{{ $stats['incomplete_locations'] ?? 0 }}</div>
             </div>
             <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
                 <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Total Artikel</div>
                 <div class="text-xl font-bold text-[#7cd8b8] mt-1 font-space">{{ $stats['total_articles'] ?? 0 }}</div>
             </div>
             <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Published</div>
-                <div class="text-xl font-bold text-[#10B981] mt-1 font-space">{{ $stats['published_articles'] ?? 0 }}</div>
-            </div>
-            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Draft</div>
-                <div class="text-xl font-bold text-[#F59E0B] mt-1 font-space">{{ $stats['draft_articles'] ?? 0 }}</div>
+                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Status Pub/Draft</div>
+                <div class="text-sm font-bold text-[#F1F5F9] mt-1 font-space">{{ $stats['published_articles'] ?? 0 }}<span class="text-[#64748B] mx-1">/</span>{{ $stats['draft_articles'] ?? 0 }}</div>
             </div>
         </div>
 
-        <!-- ── TAB NAVIGATION ────────────────────────────────────────── -->
+        <!-- ── TAB NAVIGATION (CLEANED) ────────────────────────────────────────── -->
         <div class="bg-[#0F2038] border border-[#1E324E] overflow-x-auto">
             <div class="flex min-w-max p-1 space-x-1 font-space text-xs uppercase">
                 <button @click="activeTab = 'services'"
@@ -268,17 +150,9 @@
                     class="px-4 py-2.5 transition tracking-wider whitespace-nowrap">
                     3. Artikel SEO ({{ $stats['total_articles'] ?? 0 }})
                 </button>
-                <button @click="activeTab = 'overrides'"
-                    :class="activeTab === 'overrides' ? 'bg-[#0D7A5F] text-white font-bold' : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
-                    class="px-4 py-2.5 transition tracking-wider whitespace-nowrap">
-                    4. Overrides SEO ({{ $stats['total_overrides'] ?? 0 }})
-                </button>
-                    <a href="{{ route('admin.content-matrix') }}"
-                        :class="activeTab === 'matrix' ? 'bg-[#0D7A5F] text-white font-bold' : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
-                        class="px-4 py-2.5 transition tracking-wider whitespace-nowrap inline-block text-xs uppercase font-space">
-                        5. Coverage Matrix
-                    </a>
             </div>
+                <button @click=\"activeTab = 'coverage'\"\n                    :class=\"activeTab === 'coverage' ? 'bg-[#0D7A5F] text-white font-bold' : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'\"\n                    class=\"px-4 py-2.5 transition tracking-wider whitespace-nowrap\">\n                    4. Coverage Wilayah ({{ count($coverageStats) }})\n                </button>
+
         </div>
 
         <!-- ══════════════════════════════════════════════════════════════
@@ -442,14 +316,9 @@
                     </select>
                     <button type="submit" class="bg-[#0F2038] hover:bg-[#142338] border border-[#1E324E] text-[#F1F5F9] px-4 py-2 text-xs font-space font-medium uppercase h-10 transition">Filter</button>
                 </form>
-                <div class="flex items-center gap-2 text-xs font-space text-[#94A3B8]">
-                    <span class="w-1.5 h-1.5 bg-[#10B981] inline-block animate-pulse"></span>
-                    ARTIKEL LANGSUNG TAMPIL DI CITY LANDING PAGE
-                </div>
-            </div>
-
-            <div class="bg-[#0F2038] border border-[#1E324E] border-l-4 border-l-[#38BDF8] p-4 text-xs font-space text-[#94A3B8] leading-relaxed">
-                <strong class="text-[#38BDF8]">[ INFO SINKRONISASI ]</strong> Artikel yang ditambahkan akan <strong class="text-[#F1F5F9]">langsung muncul</strong> di halaman city landing page terkait.
+                <a href="{{ route('admin.articles.create') }}" class="bg-[#0D7A5F] hover:bg-[#10B981] text-white font-space font-medium text-xs px-5 py-2.5 uppercase tracking-wider h-10 transition flex items-center shrink-0">
+                    + Tambah Artikel Baru
+                </a>
             </div>
 
             <!-- AI Generation Engine -->
@@ -581,7 +450,12 @@
                                 @endif
                             </td>
                             <td class="p-3 text-right space-x-2 font-space">
-                                <a href="{{ route('article.show', $article->slug) }}" target="_blank" class="text-[#38BDF8] hover:underline text-xs">View</a>
+                                <a href="{{ route('admin.articles.edit', $article->id) }}" class="text-[#38BDF8] hover:underline text-xs">Edit</a>
+                                <form method="POST" action="{{ route('admin.articles.destroy', $article->id) }}" class="inline" onsubmit="return confirm('Hapus artikel ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-[#ffb4ab] hover:underline text-xs">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                         @empty
@@ -594,312 +468,6 @@
             </div>
             @if(method_exists($articles, 'links'))
             <div class="mt-4 font-space text-xs">{{ $articles->appends(request()->query())->links() }}</div>
-            @endif
-        </div>
-
-        <!-- ══════════════════════════════════════════════════════════════
-             TAB 4: SEO OVERRIDES & QUICK EDITOR
-             ══════════════════════════════════════════════════════════════ -->
-        <div x-show="activeTab === 'overrides'" class="space-y-6">
-            <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
-                <!-- LEFT: Override Registry -->
-                <div class="xl:col-span-7 space-y-4">
-                    <div class="bg-[#0B1526] border border-[#1E324E]">
-                        <div class="px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#1E324E]">
-                            <div>
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="w-2 h-2 bg-[#10B981]"></span>
-                                    <span class="font-space font-bold text-sm text-[#F1F5F9] uppercase tracking-wider">Overrides Konten &amp; SEO</span>
-                                    <span class="font-space text-[8px] uppercase tracking-widest font-bold px-2 py-1 bg-[#10B981]/10 border border-[#0D7A5F] text-[#10B981]">LIVE</span>
-                                </div>
-                                <p class="text-[11px] text-[#64748B] font-sans">Konfigurasi SEO khusus untuk kombinasi wilayah dan layanan.</p>
-                            </div>
-                            <div class="text-right">
-                                <div class="font-space font-bold text-2xl text-[#10B981]">{{ $overrides->total() }}</div>
-                                <div class="font-space text-[9px] uppercase text-[#475569] mt-1">Active Override</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-[#070D18] border border-[#1E324E] overflow-x-auto">
-                        <div class="px-4 py-3 border-b border-[#1E324E] flex items-center justify-between">
-                            <span class="font-space text-[10px] font-bold uppercase tracking-wider text-[#CBD5E1]">Active SEO Overrides</span>
-                            <span class="font-space text-[8px] uppercase text-[#475569]">Registry View</span>
-                        </div>
-                        <table class="w-full min-w-[700px] border-collapse">
-                            <thead>
-                                <tr class="bg-[#0B1526] border-b border-[#1E324E]">
-                                    <th class="w-[55px] px-3 py-3 text-left font-space text-[8px] uppercase tracking-widest text-[#475569]">ID</th>
-                                    <th class="w-[140px] px-3 py-3 text-left font-space text-[8px] uppercase tracking-widest text-[#475569]">Wilayah</th>
-                                    <th class="w-[160px] px-3 py-3 text-left font-space text-[8px] uppercase tracking-widest text-[#475569]">Layanan</th>
-                                    <th class="px-3 py-3 text-left font-space text-[8px] uppercase tracking-widest text-[#475569]">SEO Content</th>
-                                    <th class="w-[60px] px-3 py-3 text-right font-space text-[8px] uppercase tracking-widest text-[#475569]">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-[#142338]">
-                                @forelse($overrides as $ov)
-                                <tr class="bg-[#070D18] hover:bg-[#0B1526] transition-colors">
-                                    <td class="px-3 py-3 align-top"><span class="font-mono text-[9px] text-[#475569]">#{{ $ov->id }}</span></td>
-                                    <td class="px-3 py-3 align-top">
-                                        <div class="font-space text-[10px] font-bold text-[#10B981]">{{ optional($ov->city)->name ?? 'Semua Kota' }}</div>
-                                        @if(optional($ov->city)->slug)
-                                        <div class="font-mono text-[8px] text-[#475569] mt-1">/{{ $ov->city->slug }}</div>
-                                        @endif
-                                    </td>
-                                    <td class="px-3 py-3 align-top">
-                                        <div class="font-sans text-[10px] text-[#E2E8F0]">{{ optional($ov->service)->title ?? optional($ov->service)->name ?? 'Semua Layanan' }}</div>
-                                        @if(optional($ov->service)->category)
-                                        <span class="inline-flex mt-1 px-1.5 py-0.5 border border-[#38BDF8]/20 text-[#38BDF8] font-space text-[7px] uppercase">{{ $ov->service->category }}</span>
-                                        @endif
-                                    </td>
-                                    <td class="px-3 py-3 align-top">
-                                        <div class="font-sans text-[10px] text-[#CBD5E1]">{{ Str::limit($ov->seo_title ?? '-', 70) }}</div>
-                                        @if(!empty($ov->meta_description))
-                                        <div class="mt-1 font-sans text-[8px] text-[#475569]">{{ Str::limit($ov->meta_description, 100) }}</div>
-                                        @endif
-                                    </td>
-                                    <td class="px-3 py-3 align-top text-right">
-                                        <form method="POST" action="{{ route('admin.city-contents.delete', $ov->id) }}" class="inline" onsubmit="return confirm('Hapus override ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-[10px] font-space text-[#64748B] hover:text-[#ffb4ab] transition">Hapus</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="5" class="px-6 py-10 text-center">
-                                        <div class="font-space text-[10px] uppercase tracking-widest text-[#64748B]">No Active Override</div>
-                                        <p class="font-sans text-[10px] text-[#475569] mt-1">Gunakan SEO Injection Engine di panel kanan.</p>
-                                    </td>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-
-                    @if(method_exists($overrides, 'links'))
-                    <div class="bg-[#0B1526] border border-[#1E324E] px-3 py-2">
-                        <div class="font-space text-[9px]">{{ $overrides->appends(request()->query())->links() }}</div>
-                    </div>
-                    @endif
-                </div>
-
-                <!-- RIGHT: SEO Command Panel -->
-                <div class="xl:col-span-5 space-y-5">
-                    <!-- SERP Preview -->
-                    <div class="bg-[#0B1526] border border-[#1E324E]">
-                        <div class="px-4 py-3 border-b border-[#1E324E] flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-[#4285F4]"></span>
-                                <div>
-                                    <div class="font-space text-[10px] font-bold uppercase tracking-wider text-[#F1F5F9]">Live SERP Preview</div>
-                                    <div class="font-space text-[8px] text-[#475569] mt-0.5">Google Search Simulator</div>
-                                </div>
-                            </div>
-                            <span class="px-2 py-1 bg-[#38BDF8]/5 border border-[#38BDF8]/20 text-[#38BDF8] font-space text-[8px] font-bold uppercase">LIVE</span>
-                        </div>
-                        <div class="p-4">
-                            <div class="bg-[#202124] border border-[#303134] p-4">
-                                <div class="flex items-center gap-2 text-[10px] text-[#bdc1c6] font-mono truncate">
-                                    <span class="w-4 h-4 shrink-0 bg-[#0D7A5F] text-white flex items-center justify-center text-[8px] font-bold">TK</span>
-                                    <span class="truncate">trainingkota.com › <span x-text="selectedCategory || 'kategori'"></span> › kota-<span x-text="selectedCitySlug || 'kota'"></span></span>
-                                </div>
-                                <div class="text-[17px] leading-snug text-[#8ab4f8] hover:underline cursor-pointer mt-2 break-words" x-text="seoTitle"></div>
-                                <div class="text-[12px] leading-relaxed text-[#bdc1c6] mt-2 break-words" x-text="metaDesc"></div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2 mt-3">
-                                <div class="bg-[#070D18] border border-[#1E324E] px-3 py-2.5">
-                                    <div class="flex items-center justify-between">
-                                        <span class="font-space text-[8px] uppercase text-[#475569]">Title Length</span>
-                                        <span :class="seoTitle.length <= 60 ? 'text-[#10B981]' : 'text-[#F59E0B]'" class="font-space text-[10px] font-bold"><span x-text="seoTitle.length"></span>/60</span>
-                                    </div>
-                                    <div class="h-1 mt-2 bg-[#1E324E] overflow-hidden">
-                                        <div class="h-full transition-all" :class="seoTitle.length <= 60 ? 'bg-[#10B981]' : 'bg-[#F59E0B]'" :style="'width:' + Math.min((seoTitle.length / 60) * 100, 100) + '%'"></div>
-                                    </div>
-                                </div>
-                                <div class="bg-[#070D18] border border-[#1E324E] px-3 py-2.5">
-                                    <div class="flex items-center justify-between">
-                                        <span class="font-space text-[8px] uppercase text-[#475569]">Meta Desc</span>
-                                        <span :class="metaDesc.length <= 160 ? 'text-[#10B981]' : 'text-[#F59E0B]'" class="font-space text-[10px] font-bold"><span x-text="metaDesc.length"></span>/160</span>
-                                    </div>
-                                    <div class="h-1 mt-2 bg-[#1E324E] overflow-hidden">
-                                        <div class="h-full transition-all" :class="metaDesc.length <= 160 ? 'bg-[#10B981]' : 'bg-[#F59E0B]'" :style="'width:' + Math.min((metaDesc.length / 160) * 100, 100) + '%'"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SEO Injection Engine Form -->
-                    <div class="bg-[#0B1526] border border-[#1E324E]">
-                        <div class="px-4 py-3 border-b border-[#1E324E] flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-[#10B981]"></span>
-                                <div>
-                                    <div class="font-space text-[10px] font-bold uppercase tracking-wider text-[#F1F5F9]">SEO Injection Engine</div>
-                                    <div class="font-space text-[8px] text-[#475569] mt-0.5">Regional landing page override</div>
-                                </div>
-                            </div>
-                            <span class="font-space text-[8px] uppercase text-[#10B981]">Instant Override</span>
-                        </div>
-
-                        <form method="POST" action="{{ route('admin.city-contents.store') }}" class="p-4 space-y-4">
-                            @csrf
-                            <div class="bg-[#070D18] border border-[#1E324E] p-3">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="font-space text-[8px] uppercase text-[#64748B]">Target Matrix</span>
-                                    <span class="font-space text-[8px] font-bold text-[#10B981]">REQUIRED</span>
-                                </div>
-                                <div class="space-y-3">
-                                    <div>
-                                        <label class="block font-space text-[8px] uppercase tracking-widest text-[#64748B] mb-1.5">Target Wilayah Kota *</label>
-                                        <select name="city_id" id="seo_city_select" @change="updatePreviewFromSelection()" required
-                                            class="w-full h-10 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-3 text-[11px] font-sans outline-none focus:border-[#0D7A5F] transition">
-                                            <option value="">-- Pilih Kota --</option>
-                                            @foreach($allCities as $c)
-                                                <option value="{{ $c->id }}" data-name="{{ $c->name }}" data-slug="{{ $c->slug }}">{{ $c->name }} ({{ $c->province }})</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="block font-space text-[8px] uppercase tracking-widest text-[#64748B] mb-1.5">Target Layanan K3 *</label>
-                                        <select name="service_id" id="seo_service_select" @change="updatePreviewFromSelection()" required
-                                            class="w-full h-10 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-3 text-[11px] font-sans outline-none focus:border-[#0D7A5F] transition">
-                                            <option value="">-- Pilih Layanan --</option>
-                                            @foreach($allServices as $s)
-                                                <option value="{{ $s->id }}" data-title="{{ $s->title ?? $s->name }}" data-slug="{{ $s->slug }}" data-category="{{ $s->category }}">
-                                                    {{ $s->title ?? $s->name }} [{{ $s->category }}]
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="space-y-3">
-                                <div>
-                                    <div class="flex items-center justify-between mb-1.5">
-                                        <label class="font-space text-[8px] uppercase tracking-widest text-[#64748B]">Judul Meta SEO Override</label>
-                                        <span :class="seoTitle.length <= 60 ? 'text-[#10B981]' : 'text-[#F59E0B]'" class="font-space text-[8px] font-bold"><span x-text="seoTitle.length"></span>/60</span>
-                                    </div>
-                                    <input type="text" name="seo_title" x-model="seoTitle" placeholder="Pelatihan Ahli K3 Umum Resmi Kemnaker di ..."
-                                        class="w-full h-10 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-3 text-[11px] font-sans outline-none focus:border-[#0D7A5F] transition">
-                                </div>
-                                <div>
-                                    <label class="block font-space text-[8px] uppercase tracking-widest text-[#64748B] mb-1.5">Custom Heading (H1)</label>
-                                    <input type="text" name="custom_heading" x-model="customHeading" placeholder="Pusat Sertifikasi K3 Terbaik ..."
-                                        class="w-full h-10 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-3 text-[11px] font-sans outline-none focus:border-[#0D7A5F] transition">
-                                </div>
-                                <div>
-                                    <div class="flex items-center justify-between mb-1.5">
-                                        <label class="font-space text-[8px] uppercase tracking-widest text-[#64748B]">Meta Description Override</label>
-                                        <span :class="metaDesc.length <= 160 ? 'text-[#10B981]' : 'text-[#F59E0B]'" class="font-space text-[8px] font-bold"><span x-text="metaDesc.length"></span>/160</span>
-                                    </div>
-                                    <textarea name="meta_description" x-model="metaDesc" rows="3"
-                                        placeholder="Deskripsi ringkas untuk snippet Google Search..."
-                                        class="w-full bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] p-3 text-[11px] font-sans outline-none focus:border-[#0D7A5F] transition resize-none"></textarea>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-                                    <label class="font-space text-[8px] uppercase tracking-widest text-[#64748B]">Konten Kustom Landing Page</label>
-                                    <span class="font-space text-[8px] uppercase text-[#475569]">HTML TOOLKIT</span>
-                                </div>
-                                <div class="bg-[#070D18] border border-[#1E324E] border-b-0 p-1.5 flex flex-wrap gap-1">
-                                    <button type="button" @click="insertTag('h2')" class="h-7 px-2.5 bg-[#0B1526] border border-[#1E324E] hover:border-[#0D7A5F] hover:text-[#10B981] text-[#CBD5E1] text-[8px] font-space uppercase transition">H2</button>
-                                    <button type="button" @click="insertTag('h3')" class="h-7 px-2.5 bg-[#0B1526] border border-[#1E324E] hover:border-[#0D7A5F] hover:text-[#10B981] text-[#CBD5E1] text-[8px] font-space uppercase transition">H3</button>
-                                    <button type="button" @click="insertTag('b')" class="h-7 px-2.5 bg-[#0B1526] border border-[#1E324E] hover:border-[#0D7A5F] hover:text-[#10B981] text-[#CBD5E1] text-[8px] font-space font-bold transition">B</button>
-                                    <button type="button" @click="insertTable()" class="h-7 px-2.5 bg-[#0B1526] border border-[#1E324E] hover:border-[#0D7A5F] hover:text-[#10B981] text-[#10B981] text-[8px] font-space uppercase transition">+ TABLE</button>
-                                    <button type="button" @click="insertCallout()" class="h-7 px-2.5 bg-[#0B1526] border border-[#1E324E] hover:border-[#D97706] hover:text-[#F59E0B] text-[#F59E0B] text-[8px] font-space uppercase transition">+ CALLOUT</button>
-                                </div>
-                                <textarea name="custom_content" x-ref="wysiwygEditor" x-model="editorContent" rows="7"
-                                    placeholder="Tuliskan materi kustom khusus kota ini..."
-                                    class="w-full bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] p-3 text-[11px] font-mono outline-none focus:border-[#0D7A5F] transition resize-y"></textarea>
-                            </div>
-
-                            <button type="submit" class="w-full min-h-[44px] bg-[#0D7A5F] hover:bg-[#10B981] text-white font-space font-bold text-[10px] uppercase tracking-widest transition flex items-center justify-center gap-2">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                                Simpan Override SEO
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ══════════════════════════════════════════════════════════════
-             TAB 5: CONTENT COVERAGE MATRIX
-             ══════════════════════════════════════════════════════════════ -->
-        <div x-show="activeTab === 'matrix'" class="space-y-6">
-            @if(isset($matrixCities) && isset($matrixServices))
-            <div class="bg-[#0B1526] border border-[#1E324E] p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <h3 class="text-[#F1F5F9] font-space font-bold uppercase tracking-wider">Content Coverage Matrix</h3>
-                    <p class="text-[11px] text-[#64748B]">Visualisasi ketersediaan landing page per kombinasi Layanan & Kota.</p>
-                </div>
-                <div class="flex items-center gap-4 text-[10px] font-space">
-                    <div class="flex items-center gap-1.5">
-                        <span class="w-3 h-3 bg-[#10B981] rounded-full"></span>
-                        <span class="text-[#CBD5E1]">Covered</span>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                        <span class="w-3 h-3 bg-[#1E324E] border border-[#475569] rounded-full"></span>
-                        <span class="text-[#64748B]">Missing</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-[#0B1526] border border-[#1E324E] overflow-hidden rounded-sm">
-                <div class="overflow-x-auto overflow-y-auto max-h-[600px]">
-                    <table class="w-full text-left text-[10px] font-sans border-collapse">
-                        <thead class="bg-[#0F2038] sticky top-0 z-20 shadow-sm">
-                            <tr>
-                                <th class="p-3 border-b border-[#1E324E] bg-[#0F2038] sticky left-0 z-30 min-w-[200px] font-space uppercase text-[#94A3B8] tracking-wider">Layanan / Kota</th>
-                                @foreach($matrixCities as $city)
-                                    <th class="p-3 border-b border-[#1E324E] border-r border-[#1E324E] min-w-[120px] text-center font-space uppercase text-[#94A3B8] tracking-wider whitespace-nowrap">
-                                        {{ $city->name }}
-                                    </th>
-                                @endforeach
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-[#142338]">
-                            @foreach($matrixServices as $service)
-                            <tr class="bg-[#070D18] hover:bg-[#0B1526] transition">
-                                <td class="p-3 sticky left-0 z-10 bg-[#070D18] border-r border-[#1E324E] font-medium text-[#F1F5F9] whitespace-nowrap">
-                                    {{ $service->title ?? $service->name }}
-                                    <span class="text-[8px] text-[#64748B] block uppercase">{{ $service->category }}</span>
-                                </td>
-                                @foreach($matrixCities as $city)
-                                     @php
-                                         $coverage = $coverageMatrix[$service->id][$city->id] ?? [];
-                                         $article = $coverage['article'] ?? false;
-                                     @endphp
-                                     <td class="p-3 border-r border-[#1E324E] text-center">
-                                         @if($article)
-                                             <a href="{{ route('article.show', $article['slug']) }}" target="_blank" 
-                                                class="text-[10px] font-bold text-[#10B981] hover:underline uppercase">
-                                                Edit/View
-                                             </a>
-                                         @else
-                                             <button @click="launchAiGenerator({{ $service->id }}, {{ $city->id }}, '{{ $service->category }}')" 
-                                                     class="bg-[#0D7A5F] hover:bg-[#10B981] text-white text-[9px] font-bold px-2 py-1 rounded uppercase transition">
-                                                 Gen AI
-                                             </button>
-                                         @endif
-                                     </td>
-                                @endforeach
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            @else
-            <div class="p-8 text-center bg-[#0B1526] border border-[#1E324E] rounded-sm">
-                <p class="text-[#64748B] font-space text-sm">Sistem matriks dimuat langsung dari AdminController@contentMatrix.</p>
-            </div>
             @endif
         </div>
 
@@ -1075,6 +643,15 @@
             </template>
         </div>
     </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         TAB 4: COVERAGE WILAYAH
+         ══════════════════════════════════════════════════════════════════ -->
+    <div x-show=\"activeTab === 'coverage'\" class=\"space-y-6\">
+        <div class=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4\">\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Total Kota Monitored</div>\n                <div class=\"text-2xl font-bold text-[#F1F5F9] mt-1 font-space\">{{ count($coverageStats) }}</div>\n            </div>\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Kota dengan Artikel</div>\n                <div class=\"text-2xl font-bold text-[#10B981] mt-1 font-space\">{{ $coverageStats->where('article_count', '>', 0)->count() }}</div>\n            </div>\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Kota dengan Maps</div>\n                <div class=\"text-2xl font-bold text-[#38BDF8] mt-1 font-space\">{{ $coverageStats->where('location_count', '>', 0)->count() }}</div>\n            </div>\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Butuh Perhatian</div>\n                <div class=\"text-2xl font-bold text-[#EF4444] mt-1 font-space\">{{ $coverageStats->where('article_count', 0)->where('location_count', 0)->count() }}</div>\n            </div>\n        </div>
+
+        <div class=\"bg-[#0B1526] border border-[#1E324E] overflow-x-auto\">\n            <table class=\"w-full text-left text-xs font-sans border-collapse\">\n                <thead class=\"bg-[#0F2038] border-b border-[#1E324E] text-[#94A3B8] font-space uppercase text-[11px] tracking-wider\">\n                    <tr>\n                        <th class=\"p-3\">Kota</th>\n                        <th class=\"p-3 text-center\">Artikel</th>\n                        <th class=\"p-3 text-center\">Maps</th>\n                        <th class=\"p-3 text-center\">Status</th>\n                    </tr>\n                </thead>\n                <tbody class=\"divide-y divide-[#142338]\">\n                    @forelse($coverageStats as $stat)\n                    <tr class=\"bg-[#070D18] hover:bg-[#0B1526] transition\">\n                        <td class=\"p-3 font-medium text-[#F1F5F9]\">\n                            {{ $stat['city_name'] }}\n                        </td>\n                        <td class=\"p-3 text-center font-mono\">\n                            <span class=\"{{ $stat['article_count'] > 0 ? 'text-[#10B981]' : 'text-[#64748B]' }}\">\n                                {{ $stat['article_count'] }}\n                            </span>\n                        </td>\n                        <td class=\"p-3 text-center font-mono\">\n                            <span class=\"{{ $stat['location_count'] > 0 ? 'text-[#38BDF8]' : 'text-[#64748B]' }}\">\n                                {{ $stat['location_count'] }}\n                            </span>\n                        </td>\n                        <td class=\"p-3 text-center\">\n                            @php\n                                $status = 'Belum lengkap';\n                                $statusClass = 'border-[#EF4444] text-[#EF4444] bg-[#1A0D0D]';\n                                if ($stat['article_count'] > 0 && $stat['location_count'] > 0)\n                                    $status = 'Lengkap';\n                                elseif ($stat['article_count'] > 0)\n                                    $status = 'Maps belum tersedia';\n                                elseif ($stat['location_count'] > 0)\n                                    $status = 'Artikel belum tersedia';\n                            @endphp\n                            @if($status === 'Lengkap')\n                                <span class=\"px-2 py-0.5 text-[10px] font-space uppercase border border-[#10B981] text-[#10B981] bg-[#0B1526] font-bold\">\n                                    {{ $status }}\n                                </span>\n                            @elseif($status === 'Belum lengkap')\n                                <span class=\"px-2 py-0.5 text-[10px] font-space uppercase border border-[#EF4444] text-[#EF4444] bg-[#1A0D0D] font-bold\">\n                                    {{ $status }}\n                                </span>\n                            @else\n                                <span class=\"px-2 py-0.5 text-[10px] font-space uppercase border border-[#F59E0B] text-[#F59E0B] bg-[#0B1526] font-bold\">\n                                    {{ $status }}\n                                </span>\n                            @endif\n                        </td>\n                    </tr>\n                    @empty\n                    <tr>\n                        <td colspan=\"4\" class=\"p-4 text-center text-[#94A3B8] font-space\">Tidak ada data coverage ditemukan.</td>\n                    </tr>\n                    @endforelse\n                </tbody>\n            </table>\n        </div>\n    </div>
 
 </div>
 @endsection
