@@ -140,7 +140,25 @@
         textarea.value = textarea.value.substring(0, start) + c + textarea.value.substring(textarea.selectionEnd);
         this.editorContent = textarea.value;
         textarea.focus();
-    }
+    },
+
+    launchAiGenerator(serviceId, cityId, category) {
+        this.activeTab = 'articles';
+        this.$nextTick(() => {
+            const sSel = document.getElementById('ai_service_select');
+            const cSel = document.getElementById('ai_city_select');
+            const catSel = document.getElementById('ai_category_select');
+            
+            if (sSel) sSel.value = serviceId;
+            if (cSel) cSel.value = cityId;
+            if (catSel) catSel.value = category;
+            
+            const aiSection = document.getElementById('ai-generator-section');
+            if (aiSection) {
+                aiSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    },
 }" class="min-h-screen bg-[#070D18] text-[#F1F5F9] font-sans antialiased pb-12">
 
     <!-- ── Header Control Bar ───────────────────────────────────────────── -->
@@ -255,11 +273,11 @@
                     class="px-4 py-2.5 transition tracking-wider whitespace-nowrap">
                     4. Overrides SEO ({{ $stats['total_overrides'] ?? 0 }})
                 </button>
-                <button @click="activeTab = 'matrix'"
-                    :class="activeTab === 'matrix' ? 'bg-[#0D7A5F] text-white font-bold' : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
-                    class="px-4 py-2.5 transition tracking-wider whitespace-nowrap">
-                    5. Coverage Matrix
-                </button>
+                    <a href="{{ route('admin.content-matrix') }}"
+                        :class="activeTab === 'matrix' ? 'bg-[#0D7A5F] text-white font-bold' : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
+                        class="px-4 py-2.5 transition tracking-wider whitespace-nowrap inline-block text-xs uppercase font-space">
+                        5. Coverage Matrix
+                    </a>
             </div>
         </div>
 
@@ -435,7 +453,7 @@
             </div>
 
             <!-- AI Generation Engine -->
-            <div class="bg-[#0B1526] border border-[#1E324E] rounded-lg overflow-hidden">
+            <div id="ai-generator-section" class="bg-[#0B1526] border border-[#1E324E] rounded-lg overflow-hidden">
                 <div class="px-4 py-3 border-b border-[#1E324E] bg-[#0F2038] flex items-center justify-between">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 bg-[#10B981] animate-pulse"></span>
@@ -854,16 +872,23 @@
                                     <span class="text-[8px] text-[#64748B] block uppercase">{{ $service->category }}</span>
                                 </td>
                                 @foreach($matrixCities as $city)
-                                    @php
-                                        $isCovered = isset($coverageMatrix[$service->id][$city->id]);
-                                    @endphp
-                                    <td class="p-3 border-r border-[#1E324E] text-center">
-                                        @if($isCovered)
-                                            <div class="w-3 h-3 bg-[#10B981] rounded-full mx-auto shadow-[0_0_8px_#10B981]"></div>
-                                        @else
-                                            <div class="w-3 h-3 bg-[#1E324E] border border-[#475569] rounded-full mx-auto"></div>
-                                        @endif
-                                    </td>
+                                     @php
+                                         $coverage = $coverageMatrix[$service->id][$city->id] ?? [];
+                                         $article = $coverage['article'] ?? false;
+                                     @endphp
+                                     <td class="p-3 border-r border-[#1E324E] text-center">
+                                         @if($article)
+                                             <a href="{{ route('article.show', $article['slug']) }}" target="_blank" 
+                                                class="text-[10px] font-bold text-[#10B981] hover:underline uppercase">
+                                                Edit/View
+                                             </a>
+                                         @else
+                                             <button @click="launchAiGenerator({{ $service->id }}, {{ $city->id }}, '{{ $service->category }}')" 
+                                                     class="bg-[#0D7A5F] hover:bg-[#10B981] text-white text-[9px] font-bold px-2 py-1 rounded uppercase transition">
+                                                 Gen AI
+                                             </button>
+                                         @endif
+                                     </td>
                                 @endforeach
                             </tr>
                             @endforeach

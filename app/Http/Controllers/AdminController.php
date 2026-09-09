@@ -19,7 +19,13 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         $activeTab = $request->query('tab', 'services');
+        $data = $this->getDashboardData($request);
 
+        return view('admin.dashboard', array_merge($data, ['activeTab' => $activeTab]));
+    }
+
+    protected function getDashboardData(Request $request)
+    {
         // 1. Services Query
         $categoryFilter = $request->query('category') ?? $request->query('filter_category');
         $search = $request->query('q') ?? $request->query('search_service');
@@ -166,38 +172,13 @@ class AdminController extends Controller
             'total_locations'    => Location::count(),
         ];
 
-        return view('admin.dashboard', compact(
-            'activeTab',
-            'services',
-            'cities',
-            'overrides',
-            'articles',
-            'faqs',
-            'schedules',
-            'kecamatans',
-            'locations',
-            'allServices',
-            'allCities',
-            'stats',
-            'islands',
-            'categoryFilter',
-            'search',
-            'citySearch',
-            'islandFilter',
-            'articleSearch',
-            'articleCategoryFilter',
-            'articleServiceFilter',
-            'articleCityFilter',
-            'faqSearch',
-            'faqServiceFilter',
-            'faqCityFilter',
-            'scheduleServiceFilter',
-            'scheduleCityFilter',
-            'kecamatanCityFilter',
-            'kecamatanSearch',
-            'locationCityFilter',
-            'locationSearch'
-        ));
+        return compact(
+            'services', 'cities', 'overrides', 'articles', 'faqs', 'schedules', 'kecamatans', 'locations',
+            'allServices', 'allCities', 'stats', 'islands', 'categoryFilter', 'search', 'citySearch',
+            'islandFilter', 'articleSearch', 'articleCategoryFilter', 'articleServiceFilter', 'articleCityFilter',
+            'faqSearch', 'faqServiceFilter', 'faqCityFilter', 'scheduleServiceFilter', 'scheduleCityFilter',
+            'kecamatanCityFilter', 'kecamatanSearch', 'locationCityFilter', 'locationSearch'
+        );
     }
 
     // ── CRUD LAYANAN ─────────────────────────────────────────────────────────
@@ -755,7 +736,10 @@ class AdminController extends Controller
 
     public function contentMatrix(Request $request)
     {
-        // Filters
+        // Get baseline dashboard data to avoid "Undefined variable" errors in admin.dashboard view
+        $data = $this->getDashboardData($request);
+
+        // Filters for the matrix itself
         $serviceFilter = $request->query('matrix_service');
         $categoryFilter = $request->query('matrix_category');
         $cityFilter = $request->query('matrix_city');
@@ -770,44 +754,28 @@ class AdminController extends Controller
         if ($cityFilter) $citiesQuery->where('id', $cityFilter);
         $matrixCities = $citiesQuery->orderBy('name')->get();
 
-        $allServices = Service::orderBy('category')->orderBy('name')->get();
-        $allCities = City::orderBy('name')->get();
-        $kecamatans = Kecamatan::orderBy('name')->get();
-
         // Matrix Data construction
         $coverageMatrix = [];
         foreach ($matrixServices as $service) {
             foreach ($matrixCities as $city) {
-                // Base combination: Service x City
-                // The view expects $coverageMatrix[$service->id][$city->id]
                 $coverageMatrix[$service->id][$city->id] = $this->calculateCoverage($service->id, $city->id);
             }
         }
 
-        $stats = [
-            'total_services' => Service::count(),
-            'total_cities' => City::count(),
-            'total_articles' => Article::count(),
-            'total_overrides' => \App\Models\CityServiceContent::count(),
-        ];
-
-        return view('admin.dashboard', compact(
-            'coverageMatrix', 
-            'matrixServices', 
-            'matrixCities', 
-            'allServices', 
-            'allCities', 
-            'kecamatans', 
-            'stats'
-        ))->with('activeTab', 'matrix');
+        return view('admin.dashboard', array_merge($data, [
+            'coverageMatrix' => $coverageMatrix,
+            'matrixServices' => $matrixServices,
+            'matrixCities'   => $matrixCities,
+            'activeTab'       => 'matrix'
+        ]));
     }
 
     private function calculateCoverage($serviceId, $cityId, $kecId = null)
     {
-        $hasArticle = Article::where('service_id', $serviceId)
+        $article = Article::where('service_id', $serviceId)
             ->where('city_id', $cityId)
             ->when($kecId, fn($q) => $q->where('kecamatan_id', $kecId))
-            ->exists();
+            ->first();
 
         $hasFaq = Faq::where('service_id', $serviceId)
             ->where('city_id', $cityId)
@@ -826,7 +794,7 @@ class AdminController extends Controller
             ->exists();
 
         $score = 0;
-        if ($hasArticle) $score++;
+        if ($article) $score++;
         if ($hasFaq) $score++;
         if ($hasSeo) $score++;
 
@@ -836,7 +804,7 @@ class AdminController extends Controller
 
         return [
             'status' => $status,
-            'article' => $hasArticle,
+            'article' => $article ? ['id' => $article->id, 'slug' => $article->slug] : false,
             'faq' => $hasFaq,
             'seo' => $hasSeo,
             'location' => $hasLocation,
