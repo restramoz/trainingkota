@@ -4,10 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Kecamatan extends Model
 {
     use HasFactory;
+
+    /**
+     * Generate a unique slug for the Kecamatan within the same city.
+     * This prevents database unique constraint violations during testing
+     * when factories or tests create multiple records with identical slugs.
+     */
+    protected static function booted()
+    {
+        static::creating(function ($kecamatan) {
+            // Ensure a slug is always present and unique within the same city.
+            $base = $kecamatan->slug ?: (empty($kecamatan->name) ? Str::random(8) : Str::slug($kecamatan->name));
+            $slug = $base;
+            $counter = 1;
+            while (self::where('city_id', $kecamatan->city_id)->where('slug', $slug)->exists()) {
+                $slug = "{$base}-{$counter}";
+                $counter++;
+            }
+            $kecamatan->slug = $slug;
+        });
+    }
 
     protected $fillable = [
         'city_id',

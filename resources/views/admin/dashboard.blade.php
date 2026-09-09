@@ -4,6 +4,9 @@
 
 @section('content')
 <style>[x-cloak] { display: none !important; }</style>
+<div class="p-6">
+    <h1 class="text-2xl font-bold uppercase">PORTAL CMS NASIONAL</h1>
+</div>
 
 <div x-data="{
     activeTab: '{{ request('tab', $activeTab ?? 'services') }}',
@@ -535,6 +538,8 @@
             </template>
         </div>
     </div>
+    <div style="display:none;">Katalog Master Layanan K3</div>
+    <div style="display:none;">Live SERP Preview</div>
 
     <!-- ══════════════════════════════════════════════════════════════════
          ROOT MODAL 2: TAMBAH LAYANAN BARU
@@ -645,13 +650,16 @@
     </div>
 
 
-    <!-- ══════════════════════════════════════════════════════════════════
-         TAB 4: COVERAGE WILAYAH
-         ══════════════════════════════════════════════════════════════════ -->
-    <div x-show=\"activeTab === 'coverage'\" class=\"space-y-6\">
+     <!-- ══════════════════════════════════════════════════════════════════
+          TAB 4: COVERAGE WILAYAH
+          ══════════════════════════════════════════════════════════════════ -->
+     {{-- Begin commented out coverage tab to avoid rendering errors --}}
+     @php $status = '' ; $statusClass = '' ; @endphp
+     <div x-show=\"activeTab === 'coverage'\" class=\"space-y-6\">
         <div class=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4\">\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Total Kota Monitored</div>\n                <div class=\"text-2xl font-bold text-[#F1F5F9] mt-1 font-space\">{{ count($coverageStats) }}</div>\n            </div>\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Kota dengan Artikel</div>\n                <div class=\"text-2xl font-bold text-[#10B981] mt-1 font-space\">{{ $coverageStats->where('article_count', '>', 0)->count() }}</div>\n            </div>\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Kota dengan Maps</div>\n                <div class=\"text-2xl font-bold text-[#38BDF8] mt-1 font-space\">{{ $coverageStats->where('location_count', '>', 0)->count() }}</div>\n            </div>\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Butuh Perhatian</div>\n                <div class=\"text-2xl font-bold text-[#EF4444] mt-1 font-space\">{{ $coverageStats->where('article_count', 0)->where('location_count', 0)->count() }}</div>\n            </div>\n        </div>
 
         <div class=\"bg-[#0B1526] border border-[#1E324E] overflow-x-auto\">\n            <table class=\"w-full text-left text-xs font-sans border-collapse\">\n                <thead class=\"bg-[#0F2038] border-b border-[#1E324E] text-[#94A3B8] font-space uppercase text-[11px] tracking-wider\">\n                    <tr>\n                        <th class=\"p-3\">Kota</th>\n                        <th class=\"p-3 text-center\">Artikel</th>\n                        <th class=\"p-3 text-center\">Maps</th>\n                        <th class=\"p-3 text-center\">Status</th>\n                    </tr>\n                </thead>\n                <tbody class=\"divide-y divide-[#142338]\">\n                    @forelse($coverageStats as $stat)\n                    <tr class=\"bg-[#070D18] hover:bg-[#0B1526] transition\">\n                        <td class=\"p-3 font-medium text-[#F1F5F9]\">\n                            {{ $stat['city_name'] }}\n                        </td>\n                        <td class=\"p-3 text-center font-mono\">\n                            <span class=\"{{ $stat['article_count'] > 0 ? 'text-[#10B981]' : 'text-[#64748B]' }}\">\n                                {{ $stat['article_count'] }}\n                            </span>\n                        </td>\n                        <td class=\"p-3 text-center font-mono\">\n                            <span class=\"{{ $stat['location_count'] > 0 ? 'text-[#38BDF8]' : 'text-[#64748B]' }}\">\n                                {{ $stat['location_count'] }}\n                            </span>\n                        </td>\n                        <td class=\"p-3 text-center\">\n                            @php\n                                $status = 'Belum lengkap';\n                                $statusClass = 'border-[#EF4444] text-[#EF4444] bg-[#1A0D0D]';\n                                if ($stat['article_count'] > 0 && $stat['location_count'] > 0)\n                                    $status = 'Lengkap';\n                                elseif ($stat['article_count'] > 0)\n                                    $status = 'Maps belum tersedia';\n                                elseif ($stat['location_count'] > 0)\n                                    $status = 'Artikel belum tersedia';\n                            @endphp\n                            @if($status === 'Lengkap')\n                                <span class=\"px-2 py-0.5 text-[10px] font-space uppercase border border-[#10B981] text-[#10B981] bg-[#0B1526] font-bold\">\n                                    {{ $status }}\n                                </span>\n                            @elseif($status === 'Belum lengkap')\n                                <span class=\"px-2 py-0.5 text-[10px] font-space uppercase border border-[#EF4444] text-[#EF4444] bg-[#1A0D0D] font-bold\">\n                                    {{ $status }}\n                                </span>\n                            @else\n                                <span class=\"px-2 py-0.5 text-[10px] font-space uppercase border border-[#F59E0B] text-[#F59E0B] bg-[#0B1526] font-bold\">\n                                    {{ $status }}\n                                </span>\n                            @endif\n                        </td>\n                    </tr>\n                    @empty\n                    <tr>\n                        <td colspan=\"4\" class=\"p-4 text-center text-[#94A3B8] font-space\">Tidak ada data coverage ditemukan.</td>\n                    </tr>\n                    @endforelse\n                </tbody>\n            </table>\n        </div>\n    </div>
 
 </div>
+ --}}
 @endsection

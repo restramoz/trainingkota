@@ -9,6 +9,11 @@ class Article extends Model
 {
     use HasFactory;
 
+    // Ensure excerpt has a default empty value to satisfy database non-null constraint during quick inserts.
+    protected $attributes = [
+        'excerpt' => '',
+    ];
+
     protected $fillable = [
         'category',
         'service_id',
