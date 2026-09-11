@@ -42,24 +42,12 @@
                 <tbody class="divide-y divide-[#142338]">
                     @forelse($schedules as $schedule)
                     <tr class="bg-[#070D18] hover:bg-[#0B1526] transition group">
-                        <td class="p-3 font-medium text-[#F1F5F9]">
-                            {{ $schedule->service->name }}
-                        </td>
-                        <td class="p-3 text-[#94A3B8]">
-                            {{ $schedule->city->name }}
-                        </td>
-                        <td class="p-3 font-mono text-[#F1F5F9]">
-                            {{ $schedule->date->format('d M Y') }}
-                        </td>
-                        <td class="p-3 font-mono text-[#94A3B8]">
-                            {{ $schedule->start_time }} - {{ $schedule->end_time }}
-                        </td>
-                        <td class="p-3 text-[#94A3B8]">
-                            {{ Str::limit($schedule->location, 30) }}
-                        </td>
-                        <td class="p-3 text-center font-mono">
-                            {{ $schedule->available_slots }}
-                        </td>
+                        <td class="p-3 font-medium text-[#F1F5F9]">{{ $schedule->service->name }}</td>
+                        <td class="p-3 text-[#94A3B8]">{{ $schedule->city->name }}</td>
+                        <td class="p-3 font-mono text-[#F1F5F9]">{{ $schedule->date->format('d M Y') }}</td>
+                        <td class="p-3 font-mono text-[#94A3B8]">{{ $schedule->start_time }} - {{ $schedule->end_time }}</td>
+                        <td class="p-3 text-[#94A3B8]">{{ Str::limit($schedule->location, 30) }}</td>
+                        <td class="p-3 text-center font-mono">{{ $schedule->available_slots }}</td>
                         <td class="p-3 text-center">
                             @php
                                 $statusClass = match($schedule->status) {
@@ -75,4 +63,24 @@
                         </td>
                         <td class="p-3 text-right space-x-2">
                             <a href="{{ route('admin.schedules.show', $schedule->id) }}" class="text-[#94A3B8] hover:text-white">
-                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5.757 12 5.757c4.477 0 8.268 2.186 9.542 6.243C21.542 12 21.542 12 21.542 12s0 0-4.084 6.243C18.477 18 14.477 18 12 18c-2.477 0-6.477-2.186-//[line truncated]
+                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5.757 12 5.757c4.477 0 8.268 2.186 9.542 6.243C21.542 12 21.542 12 21.542 12s0 0-4.084 6.243C18.477 18 14.477 18 12 18c-2.477 0-6.477-2.186-9.542-6.243z"/></svg>
+                            </a>
+                            <a href="{{ route('admin.schedules.edit', $schedule->id) }}" class="text-[#38BDF8] hover:text-white">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr><td colspan="8" class="p-4 text-center text-[#94A3B8]">Tidak ada jadwal ditemukan.</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="mt-4">
+        {{ $schedules->withQueryString()->links() }}
+    </div>
+</div>
+
+@endsection
+

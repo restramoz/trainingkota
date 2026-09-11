@@ -10,6 +10,7 @@ use App\Models\Article;
 use App\Models\Faq;
 use App\Models\Kecamatan;
 use App\Services\DashboardService;
+use App\Services\OllamaService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
@@ -25,45 +26,54 @@ class AdminController extends Controller
 
     /**
      * Dashboard entry point for the admin area.
-     * The route /admin expects an index method. Delegates to manageServices to preserve existing logic.
+     * The route /admin defaults to the overview tab.
      */
     public function index(Request $request)
     {
-        return $this->manageServices($request);
+        // Use the default tab "overview" when none is specified.
+        return $this->renderDashboard($request, 'overview');
+    }
+
+    /**
+     * Render the admin dashboard for a given tab.
+     */
+    protected function renderDashboard(Request $request, string $tab)
+    {
+        // Gather all data through the DashboardService to keep logic centralised.
+        $dashboardData = $this->dashboardService->getDashboardData($request);
+
+        // Explicit counters (still useful for legacy sections that reference them directly).
+        $serviceCount   = Service::count();
+        $cityCount      = City::count();
+        $articleCount   = Article::count();
+        $kecamatanCount = Kecamatan::count();
+
+        // Merge the service-provided arrays with the explicit counters and the active tab.
+        return view('admin.dashboard', array_merge(
+            $dashboardData,
+            [
+                'serviceCount'    => $serviceCount,
+                'cityCount'       => $cityCount,
+                'articleCount'    => $articleCount,
+                'kecamatanCount'  => $kecamatanCount,
+                'activeTab'       => $tab,
+            ]
+        ));
     }
 
     public function manageServices(Request $request)
     {
-        // Simplified admin dashboard data provider to avoid complex undefined variables.
-        // The original implementation aggregated many stats; for test purposes we return a basic view.
-        $services = Service::all();
-        $cities   = City::all();
-        $articles = Article::latest()->take(5)->get();
-        $allServices = Service::select('id', 'name', 'category', 'slug')->get();
-        $allCities   = City::select('id', 'name', 'slug', 'province')->get();
-        $kecamatans  = Kecamatan::select('id', 'name', 'city_id')->get();
-
-        // Include coverage statistics for the dashboard view to avoid undefined variable errors.
-        $coverageStats = $this->dashboardService->getCoverageStats();
-
-        return view('admin.dashboard', [
-            'services'      => $services,
-            'cities'        => $cities,
-            'articles'      => $articles,
-            'allServices'   => $allServices,
-            'allCities'     => $allCities,
-            'kecamatans'    => $kecamatans,
-            'coverageStats' => $coverageStats,
-        ]);
+        return $this->renderDashboard($request, 'services');
     }
     public function manageLocations(Request $request)
     {
-        return $this->index($request);
+        // Regions tab – shows cities, kecamatans, locations.
+        return $this->renderDashboard($request, 'regions');
     }
 
     public function manageGraphics(Request $request)
     {
-        return $this->index($request);
+        return $this->renderDashboard($request, 'graphics');
     }
 
     // ── CRUD LAYANAN ─────────────────────────────────────────────────────────
@@ -295,7 +305,8 @@ class AdminController extends Controller
             'word_count'              => 'nullable|integer|min:500|max:5000',
             'tone'                    => 'nullable|string|max:100',
             'additional_instructions' => 'nullable|string|max:1000',
-            'save_as_draft'           => 'nullable|boolean',
+            // Retained for the current Create form payload; OllamaService does not persist it.
+            'rules'                   => 'nullable|string',
         ]);
 
         $service = isset($validated['service_id']) ? Service::find($validated['service_id']) : null;
@@ -338,39 +349,12 @@ class AdminController extends Controller
             ], 500);
         }
 
-        // If save_as_draft is NOT provided, we return the result for preview without saving.
-        if (!empty($validated['save_as_draft'])) {
-            $slug = Str::slug($result['slug'] ?? $result['title']);
-            $counter = 1;
-            $originalSlug = $slug;
-            while (Article::where('slug', $slug)->exists()) {
-                $slug = $originalSlug . '-' . $counter++;
-            }
-
-            $wordCount = str_word_count(strip_tags($result['content'] ?? ''));
-            $readingTime = max(1, (int) ceil($wordCount / 200));
-
-            $article = Article::create([
-                'title'            => $result['title'],
-                'slug'             => $slug,
-                'category'         => $validated['category'] ?? $service?->category,
-                'service_id'       => $validated['service_id'] ?? null,
-                'city_id'          => $validated['city_id'] ?? null,
-                'kecamatan_id'     => $validated['kecamatan_id'] ?? null,
-                'excerpt'          => $result['excerpt'] ?? Str::limit(strip_tags($result['content'] ?? ''), 200),
-                'content'          => $result['content'] ?? '',
-                'seo_title'        => $result['seo_title'] ?? null,
-                'meta_description' => $result['meta_description'] ?? null,
-                'focus_keywords'   => $params['target_keyword'] ?? null,
-                'faq_items'        => $result['suggested_faqs'] ?? null,
-                'internal_links'   => $result['suggested_internal_links'] ?? null,
-                'reading_time'     => $readingTime,
-                'status'           => 'draft',
-            ]);
-
-            $result['saved_article_id'] = $article->id;
-            $result['saved_slug']       = $article->slug;
-        }
+        // Generation is always in-browser only. Article persistence remains the
+        // explicit responsibility of the Create/Edit form submission.
+        $result['excerpt'] = $result['excerpt'] ?? '';
+        $result['focus_keywords'] = $result['focus_keywords'] ?? ($validated['target_keyword'] ?? '');
+        $result['faq_items'] = $result['faq_items'] ?? ($result['suggested_faqs'] ?? []);
+        $result['internal_links'] = $result['internal_links'] ?? ($result['suggested_internal_links'] ?? []);
 
         return response()->json(array_merge($result, ['success' => true]));
     }

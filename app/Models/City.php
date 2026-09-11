@@ -12,6 +12,8 @@ class City extends Model
     protected $fillable = [
         'name',
         'slug',
+        'bps_code',
+        'wilayah_code',
         'island',
         'is_hub',
         'lat',
@@ -20,6 +22,8 @@ class City extends Model
         'province',
         'sentra_praktik',
         'maps_embed_url',
+        'classification',
+        'status',
     ];
 
     protected $casts = [

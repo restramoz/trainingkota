@@ -1,0 +1,5085 @@
+{
+    "summary": {
+        "total_cities": 212,
+        "verified_exact": 12,
+        "verified_normalized": 0,
+        "verified_alias": 0,
+        "ambiguous": 0,
+        "not_found": 194,
+        "non_regency_entity": 6
+    },
+    "details": [
+        {
+            "city_id": 1,
+            "city_name": "Kota Luwuk",
+            "city_slug": "kota-luwuk",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 3
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 3
+                },
+                {
+                    "code": "32.76",
+                    "name": "Kota Depok",
+                    "distance": 3
+                }
+            ]
+        },
+        {
+            "city_id": 2,
+            "city_name": "Kota Medan",
+            "city_slug": "kota-medan",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "12.71",
+                    "name": "Kota Medan"
+                }
+            ]
+        },
+        {
+            "city_id": 3,
+            "city_name": "Kota Pekanbaru",
+            "city_slug": "kota-pekanbaru",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "14.71",
+                    "name": "Kota Pekanbaru"
+                }
+            ]
+        },
+        {
+            "city_id": 4,
+            "city_name": "Kota Padang",
+            "city_slug": "kota-padang",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "13.71",
+                    "name": "Kota Padang"
+                }
+            ]
+        },
+        {
+            "city_id": 5,
+            "city_name": "Kota Batam",
+            "city_slug": "kota-batam",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "21.71",
+                    "name": "Kota Batam"
+                }
+            ]
+        },
+        {
+            "city_id": 6,
+            "city_name": "Jambi",
+            "city_slug": "jambi",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 3
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 4
+                },
+                {
+                    "code": "81.71",
+                    "name": "Kota Ambon",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 7,
+            "city_name": "Kota Palembang",
+            "city_slug": "kota-palembang",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "16.71",
+                    "name": "Kota Palembang"
+                }
+            ]
+        },
+        {
+            "city_id": 8,
+            "city_name": "Bandar Lampung",
+            "city_slug": "bandar-lampung",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "18.71",
+                    "name": "Kota Bandar Lampung",
+                    "distance": 3
+                },
+                {
+                    "code": "32.73",
+                    "name": "Kota Bandung",
+                    "distance": 6
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 9,
+            "city_name": "Kota Cilegon",
+            "city_slug": "kota-cilegon",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "36.72",
+                    "name": "Kota Cilegon"
+                }
+            ]
+        },
+        {
+            "city_id": 10,
+            "city_name": "Kota Serang",
+            "city_slug": "kota-serang",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "36.73",
+                    "name": "Kota Serang"
+                }
+            ]
+        },
+        {
+            "city_id": 11,
+            "city_name": "Tangerang",
+            "city_slug": "tangerang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "36.71",
+                    "name": "Kota Tangerang",
+                    "distance": 3
+                },
+                {
+                    "code": "36.73",
+                    "name": "Kota Serang",
+                    "distance": 3
+                },
+                {
+                    "code": "33.71",
+                    "name": "Kota Magelang",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 12,
+            "city_name": "Jakarta",
+            "city_slug": "jakarta",
+            "province": null,
+            "classification": "NON_REGENCY_ENTITY",
+            "matches": [],
+            "reason": "City name corresponds to a province or region, not a regency"
+        },
+        {
+            "city_id": 13,
+            "city_name": "Bekasi",
+            "city_slug": "bekasi",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.75",
+                    "name": "Kota Bekasi",
+                    "distance": 3
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 14,
+            "city_name": "Bogor",
+            "city_slug": "bogor",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.71",
+                    "name": "Kota Bogor",
+                    "distance": 3
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 5
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 15,
+            "city_name": "Cikarang",
+            "city_slug": "cikarang",
+            "province": null,
+            "classification": "NON_REGENCY_ENTITY",
+            "matches": [],
+            "reason": "City name corresponds to a province or region, not a regency"
+        },
+        {
+            "city_id": 16,
+            "city_name": "Karawang",
+            "city_slug": "karawang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 4
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 4
+                },
+                {
+                    "code": "35.73",
+                    "name": "Kota Malang",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 17,
+            "city_name": "Bandung",
+            "city_slug": "bandung",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.73",
+                    "name": "Kota Bandung",
+                    "distance": 3
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 4
+                },
+                {
+                    "code": "71.72",
+                    "name": "Kota Bitung",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 18,
+            "city_name": "Semarang",
+            "city_slug": "semarang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "33.74",
+                    "name": "Kota Semarang",
+                    "distance": 3
+                },
+                {
+                    "code": "36.73",
+                    "name": "Kota Serang",
+                    "distance": 3
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 19,
+            "city_name": "Yogyakarta",
+            "city_slug": "yogyakarta",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "34.71",
+                    "name": "Kota Yogyakarta",
+                    "distance": 3
+                },
+                {
+                    "code": "33.72",
+                    "name": "Kota Surakarta",
+                    "distance": 4
+                },
+                {
+                    "code": "16.72",
+                    "name": "Kota Pagar Alam",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 20,
+            "city_name": "Surabaya",
+            "city_slug": "surabaya",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.78",
+                    "name": "Kota Surabaya",
+                    "distance": 3
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 21,
+            "city_name": "Pasuruan",
+            "city_slug": "pasuruan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.75",
+                    "name": "Kota Pasuruan",
+                    "distance": 3
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "74.72",
+                    "name": "Kota Bau Bau",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 22,
+            "city_name": "Bali",
+            "city_slug": "bali",
+            "province": null,
+            "classification": "NON_REGENCY_ENTITY",
+            "matches": [],
+            "reason": "City name corresponds to a province or region, not a regency"
+        },
+        {
+            "city_id": 23,
+            "city_name": "Sumbawa",
+            "city_slug": "sumbawa",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 24,
+            "city_name": "Lombok",
+            "city_slug": "lombok",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "81.71",
+                    "name": "Kota Ambon",
+                    "distance": 3
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 4
+                },
+                {
+                    "code": "32.76",
+                    "name": "Kota Depok",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 25,
+            "city_name": "Balikpapan",
+            "city_slug": "balikpapan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "64.71",
+                    "name": "Kota Balikpapan",
+                    "distance": 3
+                },
+                {
+                    "code": "65.71",
+                    "name": "Kota Tarakan",
+                    "distance": 6
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 26,
+            "city_name": "Samarinda",
+            "city_slug": "samarinda",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "64.72",
+                    "name": "Kota Samarinda",
+                    "distance": 3
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 5
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 27,
+            "city_name": "Kutai Kartanegara",
+            "city_slug": "kutai-kartanegara",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "33.20",
+                    "name": "Kabupaten Jepara",
+                    "distance": 7
+                },
+                {
+                    "code": "73.72",
+                    "name": "Kota Parepare",
+                    "distance": 7
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 8
+                }
+            ]
+        },
+        {
+            "city_id": 28,
+            "city_name": "Banjarmasin",
+            "city_slug": "banjarmasin",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "63.71",
+                    "name": "Kota Banjarmasin",
+                    "distance": 3
+                },
+                {
+                    "code": "13.77",
+                    "name": "Kota Pariaman",
+                    "distance": 6
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 29,
+            "city_name": "Pontianak",
+            "city_slug": "pontianak",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "61.71",
+                    "name": "Kota Pontianak",
+                    "distance": 3
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 4
+                },
+                {
+                    "code": "32.79",
+                    "name": "Kota Banjar",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 30,
+            "city_name": "Makassar",
+            "city_slug": "makassar",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "73.71",
+                    "name": "Kota Makassar",
+                    "distance": 3
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 31,
+            "city_name": "Morowali",
+            "city_slug": "morowali",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 32,
+            "city_name": "Gorontalo",
+            "city_slug": "gorontalo",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "75.71",
+                    "name": "Kota Gorontalo",
+                    "distance": 3
+                },
+                {
+                    "code": "64.74",
+                    "name": "Kota Bontang",
+                    "distance": 4
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 33,
+            "city_name": "Manado",
+            "city_slug": "manado",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "71.71",
+                    "name": "Kota Manado",
+                    "distance": 3
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 34,
+            "city_name": "Ternate",
+            "city_slug": "ternate",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "82.71",
+                    "name": "Kota Ternate",
+                    "distance": 3
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 4
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 35,
+            "city_name": "Bontang",
+            "city_slug": "bontang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "64.74",
+                    "name": "Kota Bontang",
+                    "distance": 3
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 4
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 36,
+            "city_name": "Mamuju",
+            "city_slug": "mamuju",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "74.72",
+                    "name": "Kota Bau Bau",
+                    "distance": 4
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 37,
+            "city_name": "Dumai",
+            "city_slug": "dumai",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 3
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 4
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 38,
+            "city_name": "Batulicin",
+            "city_slug": "batulicin",
+            "province": null,
+            "classification": "NON_REGENCY_ENTITY",
+            "matches": [],
+            "reason": "City name corresponds to a province or region, not a regency"
+        },
+        {
+            "city_id": 39,
+            "city_name": "Gresik",
+            "city_slug": "gresik",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.76",
+                    "name": "Kota Depok",
+                    "distance": 5
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 5
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 40,
+            "city_name": "Cepu",
+            "city_slug": "cepu",
+            "province": null,
+            "classification": "NON_REGENCY_ENTITY",
+            "matches": [],
+            "reason": "City name corresponds to a province or region, not a regency"
+        },
+        {
+            "city_id": 41,
+            "city_name": "Prabumulih",
+            "city_slug": "prabumulih",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "16.74",
+                    "name": "Kota Prabumulih",
+                    "distance": 3
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 6
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 42,
+            "city_name": "Muara Enim",
+            "city_slug": "muara-enim",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                },
+                {
+                    "code": "36.73",
+                    "name": "Kota Serang",
+                    "distance": 5
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 43,
+            "city_name": "Subang",
+            "city_slug": "subang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 4
+                },
+                {
+                    "code": "53.71",
+                    "name": "Kota Kupang",
+                    "distance": 4
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 44,
+            "city_name": "Sukabumi",
+            "city_slug": "sukabumi",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.72",
+                    "name": "Kota Sukabumi",
+                    "distance": 3
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 4
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 45,
+            "city_name": "Purwakarta",
+            "city_slug": "purwakarta",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "33.72",
+                    "name": "Kota Surakarta",
+                    "distance": 4
+                },
+                {
+                    "code": "16.72",
+                    "name": "Kota Pagar Alam",
+                    "distance": 6
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 46,
+            "city_name": "Cirebon",
+            "city_slug": "cirebon",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.74",
+                    "name": "Kota Cirebon",
+                    "distance": 3
+                },
+                {
+                    "code": "81.71",
+                    "name": "Kota Ambon",
+                    "distance": 4
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 47,
+            "city_name": "Cilacap",
+            "city_slug": "cilacap",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 48,
+            "city_name": "Batang",
+            "city_slug": "batang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 4
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 4
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 49,
+            "city_name": "Kota Solo",
+            "city_slug": "kota-solo",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 1
+                },
+                {
+                    "code": "32.71",
+                    "name": "Kota Bogor",
+                    "distance": 2
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 2
+                }
+            ]
+        },
+        {
+            "city_id": 50,
+            "city_name": "Mojokerto",
+            "city_slug": "mojokerto",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.76",
+                    "name": "Kota Mojokerto",
+                    "distance": 3
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 5
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 51,
+            "city_name": "Malang",
+            "city_slug": "malang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.73",
+                    "name": "Kota Malang",
+                    "distance": 3
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 4
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 52,
+            "city_name": "Sidoarjo",
+            "city_slug": "sidoarjo",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 6
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 6
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 53,
+            "city_name": "Banyuwangi",
+            "city_slug": "banyuwangi",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "53.71",
+                    "name": "Kota Kupang",
+                    "distance": 5
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 6
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 54,
+            "city_name": "Kediri",
+            "city_slug": "kediri",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.71",
+                    "name": "Kota Kediri",
+                    "distance": 3
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 5
+                },
+                {
+                    "code": "74.71",
+                    "name": "Kota Kendari",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 55,
+            "city_name": "Lamongan",
+            "city_slug": "lamongan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 5
+                },
+                {
+                    "code": "64.74",
+                    "name": "Kota Bontang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 56,
+            "city_name": "Tuban",
+            "city_slug": "tuban",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 57,
+            "city_name": "Bengkulu",
+            "city_slug": "bengkulu",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "17.71",
+                    "name": "Kota Bengkulu",
+                    "distance": 3
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 5
+                },
+                {
+                    "code": "74.72",
+                    "name": "Kota Bau Bau",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 58,
+            "city_name": "Bangka Belitung",
+            "city_slug": "bangka-belitung",
+            "province": null,
+            "classification": "NON_REGENCY_ENTITY",
+            "matches": [],
+            "reason": "City name corresponds to a province or region, not a regency"
+        },
+        {
+            "city_id": 59,
+            "city_name": "Denpasar",
+            "city_slug": "denpasar",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "51.71",
+                    "name": "Kota Denpasar",
+                    "distance": 3
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                },
+                {
+                    "code": "32.79",
+                    "name": "Kota Banjar",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 60,
+            "city_name": "Kolaka",
+            "city_slug": "kolaka",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 3
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 3
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 61,
+            "city_name": "Konawe",
+            "city_slug": "konawe",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 4
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 4
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 62,
+            "city_name": "Palu",
+            "city_slug": "palu",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 3
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 4
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 63,
+            "city_name": "Banggai",
+            "city_slug": "banggai",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 5
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 5
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 64,
+            "city_name": "Tenggarong",
+            "city_slug": "tenggarong",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "96.71",
+                    "name": "Kota Sorong",
+                    "distance": 5
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 6
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 65,
+            "city_name": "Sangatta",
+            "city_slug": "sangatta",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 66,
+            "city_name": "Berau",
+            "city_slug": "berau",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 4
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 67,
+            "city_name": "Tarakan",
+            "city_slug": "tarakan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "65.71",
+                    "name": "Kota Tarakan",
+                    "distance": 3
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 68,
+            "city_name": "Bintan",
+            "city_slug": "bintan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 5
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 69,
+            "city_name": "Jakarta Barat",
+            "city_slug": "jakarta-barat",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "52.71",
+                    "name": "Kota Mataram",
+                    "distance": 5
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 6
+                },
+                {
+                    "code": "74.72",
+                    "name": "Kota Bau Bau",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 70,
+            "city_name": "Majalengka",
+            "city_slug": "majalengka",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 5
+                },
+                {
+                    "code": "12.12",
+                    "name": "Kabupaten Toba",
+                    "distance": 6
+                },
+                {
+                    "code": "13.06",
+                    "name": "Kabupaten Agam",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 71,
+            "city_name": "Demak",
+            "city_slug": "demak",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 5
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 72,
+            "city_name": "Kendal",
+            "city_slug": "kendal",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 73,
+            "city_name": "Bontang",
+            "city_slug": "bontang-2",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "64.74",
+                    "name": "Kota Bontang",
+                    "distance": 3
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 4
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 74,
+            "city_name": "Halmahera",
+            "city_slug": "halmahera",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 6
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 75,
+            "city_name": "Kotabaru",
+            "city_slug": "kotabaru",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 2
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 2
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 3
+                }
+            ]
+        },
+        {
+            "city_id": 76,
+            "city_name": "Barito",
+            "city_slug": "barito",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 5
+                },
+                {
+                    "code": "35.72",
+                    "name": "Kota Blitar",
+                    "distance": 5
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 77,
+            "city_name": "Kotawaringin",
+            "city_slug": "kotawaringin",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "13.77",
+                    "name": "Kota Pariaman",
+                    "distance": 4
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 78,
+            "city_name": "Kapuas",
+            "city_slug": "kapuas",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "74.72",
+                    "name": "Kota Bau Bau",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 79,
+            "city_name": "Malinau",
+            "city_slug": "malinau",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.72",
+                    "name": "Kota Blitar",
+                    "distance": 4
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 5
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 80,
+            "city_name": "Bintuni",
+            "city_slug": "bintuni",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "71.72",
+                    "name": "Kota Bitung",
+                    "distance": 5
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 81,
+            "city_name": "Lhokseumawe",
+            "city_slug": "lhokseumawe",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.73",
+                    "name": "Kota Lhokseumawe",
+                    "distance": 3
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 6
+                },
+                {
+                    "code": "82.71",
+                    "name": "Kota Ternate",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 82,
+            "city_name": "Langsa",
+            "city_slug": "langsa",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 3
+                },
+                {
+                    "code": "32.71",
+                    "name": "Kota Bogor",
+                    "distance": 5
+                },
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 83,
+            "city_name": "Langkat",
+            "city_slug": "langkat",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 5
+                },
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 5
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 84,
+            "city_name": "Binjai\u00c2\u00a0",
+            "city_slug": "binjai",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 3
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 85,
+            "city_name": "Deli Serdang",
+            "city_slug": "deli-serdang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "36.73",
+                    "name": "Kota Serang",
+                    "distance": 4
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 86,
+            "city_name": "Asahan",
+            "city_slug": "asahan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 87,
+            "city_name": "Kisaran",
+            "city_slug": "kisaran",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 4
+                },
+                {
+                    "code": "36.73",
+                    "name": "Kota Serang",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 88,
+            "city_name": "Batubara",
+            "city_slug": "batubara",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 89,
+            "city_name": "Sungai Liat",
+            "city_slug": "sungai-liat",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 5
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 90,
+            "city_name": "Kendari",
+            "city_slug": "kendari",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "74.71",
+                    "name": "Kota Kendari",
+                    "distance": 3
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 5
+                },
+                {
+                    "code": "35.71",
+                    "name": "Kota Kediri",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 91,
+            "city_name": "Aceh Singkil",
+            "city_slug": "aceh-singkil",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 6
+                },
+                {
+                    "code": "17.71",
+                    "name": "Kota Bengkulu",
+                    "distance": 6
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 92,
+            "city_name": "Aceh Barat",
+            "city_slug": "aceh-barat",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                },
+                {
+                    "code": "74.72",
+                    "name": "Kota Bau Bau",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 93,
+            "city_name": "Nagan Raya",
+            "city_slug": "nagan-raya",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 5
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                },
+                {
+                    "code": "35.78",
+                    "name": "Kota Surabaya",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 94,
+            "city_name": "Melawi",
+            "city_slug": "melawi",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 5
+                },
+                {
+                    "code": "32.75",
+                    "name": "Kota Bekasi",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 95,
+            "city_name": "Sambas",
+            "city_slug": "sambas",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "81.71",
+                    "name": "Kota Ambon",
+                    "distance": 4
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 96,
+            "city_name": "Sanggau",
+            "city_slug": "sanggau",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 5
+                },
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 5
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 97,
+            "city_name": "Sintang",
+            "city_slug": "sintang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "64.74",
+                    "name": "Kota Bontang",
+                    "distance": 4
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 98,
+            "city_name": "Kapuas Hulu",
+            "city_slug": "kapuas-hulu",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 5
+                },
+                {
+                    "code": "74.72",
+                    "name": "Kota Bau Bau",
+                    "distance": 5
+                },
+                {
+                    "code": "17.71",
+                    "name": "Kota Bengkulu",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 99,
+            "city_name": "Kayong Utara",
+            "city_slug": "kayong-utara",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.72",
+                    "name": "Kota Blitar",
+                    "distance": 6
+                },
+                {
+                    "code": "52.71",
+                    "name": "Kota Mataram",
+                    "distance": 6
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 100,
+            "city_name": "Bengkayang",
+            "city_slug": "bengkayang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 5
+                },
+                {
+                    "code": "35.73",
+                    "name": "Kota Malang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 101,
+            "city_name": "Mempawah",
+            "city_slug": "mempawah",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                },
+                {
+                    "code": "74.72",
+                    "name": "Kota Bau Bau",
+                    "distance": 5
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 102,
+            "city_name": "Landak",
+            "city_slug": "landak",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 4
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 5
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 103,
+            "city_name": "Ngabang",
+            "city_slug": "ngabang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 3
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 4
+                },
+                {
+                    "code": "35.73",
+                    "name": "Kota Malang",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 104,
+            "city_name": "Sukamara",
+            "city_slug": "sukamara",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 5
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 105,
+            "city_name": "Gunung Mas",
+            "city_slug": "gunung-mas",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 5
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 6
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 106,
+            "city_name": "Lamandau",
+            "city_slug": "lamandau",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 4
+                },
+                {
+                    "code": "74.72",
+                    "name": "Kota Bau Bau",
+                    "distance": 4
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 107,
+            "city_name": "Katingan",
+            "city_slug": "katingan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 4
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 4
+                },
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 108,
+            "city_name": "Murung Raya",
+            "city_slug": "murung-raya",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 6
+                },
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 6
+                },
+                {
+                    "code": "35.78",
+                    "name": "Kota Surabaya",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 109,
+            "city_name": "Seruyan",
+            "city_slug": "seruyan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "53.71",
+                    "name": "Kota Kupang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 110,
+            "city_name": "Tana Tidung",
+            "city_slug": "tana-tidung",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "71.72",
+                    "name": "Kota Bitung",
+                    "distance": 3
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 4
+                },
+                {
+                    "code": "32.73",
+                    "name": "Kota Bandung",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 111,
+            "city_name": "Nunukan",
+            "city_slug": "nunukan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "53.71",
+                    "name": "Kota Kupang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 112,
+            "city_name": "Bulungan",
+            "city_slug": "bulungan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 5
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 113,
+            "city_name": "Kutai Timur",
+            "city_slug": "kutai-timur",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.72",
+                    "name": "Kota Blitar",
+                    "distance": 4
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 4
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 114,
+            "city_name": "Kutai Barat",
+            "city_slug": "kutai-barat",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 4
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 4
+                },
+                {
+                    "code": "52.71",
+                    "name": "Kota Mataram",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 115,
+            "city_name": "Paser",
+            "city_slug": "paser",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 5
+                },
+                {
+                    "code": "32.71",
+                    "name": "Kota Bogor",
+                    "distance": 5
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 116,
+            "city_name": "Mahakam Ulu",
+            "city_slug": "mahakam-ulu",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 4
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 5
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 117,
+            "city_name": "Pulau Laut",
+            "city_slug": "pulau-laut",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "74.72",
+                    "name": "Kota Bau Bau",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 118,
+            "city_name": "Banjarbaru",
+            "city_slug": "banjarbaru",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "63.72",
+                    "name": "Kota Banjarbaru",
+                    "distance": 3
+                },
+                {
+                    "code": "14.71",
+                    "name": "Kota Pekanbaru",
+                    "distance": 5
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 119,
+            "city_name": "Hulu Sungai Selatan",
+            "city_slug": "hulu-sungai-selatan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.14",
+                    "name": "Kabupaten Nias Selatan",
+                    "distance": 8
+                },
+                {
+                    "code": "15.72",
+                    "name": "Kota Sungai Penuh",
+                    "distance": 8
+                },
+                {
+                    "code": "33.10",
+                    "name": "Kabupaten Klaten",
+                    "distance": 8
+                }
+            ]
+        },
+        {
+            "city_id": 120,
+            "city_name": "Hulu Sungai Tengah",
+            "city_slug": "hulu-sungai-tengah",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "15.72",
+                    "name": "Kota Sungai Penuh",
+                    "distance": 5
+                },
+                {
+                    "code": "13.06",
+                    "name": "Kabupaten Agam",
+                    "distance": 7
+                },
+                {
+                    "code": "12.04",
+                    "name": "Kabupaten Nias",
+                    "distance": 8
+                }
+            ]
+        },
+        {
+            "city_id": 121,
+            "city_name": "Banjar",
+            "city_slug": "banjar",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.79",
+                    "name": "Kota Banjar",
+                    "distance": 3
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 4
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 122,
+            "city_name": "Balangan",
+            "city_slug": "balangan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 4
+                },
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 4
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 123,
+            "city_name": "Tapin",
+            "city_slug": "tapin",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "32.76",
+                    "name": "Kota Depok",
+                    "distance": 5
+                },
+                {
+                    "code": "35.77",
+                    "name": "Kota Madiun",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 124,
+            "city_name": "Pandeglang",
+            "city_slug": "pandeglang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "33.71",
+                    "name": "Kota Magelang",
+                    "distance": 5
+                },
+                {
+                    "code": "35.73",
+                    "name": "Kota Malang",
+                    "distance": 5
+                },
+                {
+                    "code": "36.73",
+                    "name": "Kota Serang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 125,
+            "city_name": "Lebak",
+            "city_slug": "lebak",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 5
+                },
+                {
+                    "code": "32.76",
+                    "name": "Kota Depok",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 126,
+            "city_name": "Garut",
+            "city_slug": "garut",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 5
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 127,
+            "city_name": "Cianjur",
+            "city_slug": "cianjur",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.79",
+                    "name": "Kota Banjar",
+                    "distance": 4
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 5
+                },
+                {
+                    "code": "32.71",
+                    "name": "Kota Bogor",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 128,
+            "city_name": "Wonogiri",
+            "city_slug": "wonogiri",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.71",
+                    "name": "Kota Bogor",
+                    "distance": 4
+                },
+                {
+                    "code": "35.71",
+                    "name": "Kota Kediri",
+                    "distance": 4
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 129,
+            "city_name": "Kebumen",
+            "city_slug": "kebumen",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "81.71",
+                    "name": "Kota Ambon",
+                    "distance": 5
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 130,
+            "city_name": "Banjarnegara",
+            "city_slug": "banjarnegara",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "33.20",
+                    "name": "Kabupaten Jepara",
+                    "distance": 6
+                },
+                {
+                    "code": "73.72",
+                    "name": "Kota Parepare",
+                    "distance": 6
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 131,
+            "city_name": "Lumajang",
+            "city_slug": "lumajang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 4
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 4
+                },
+                {
+                    "code": "35.73",
+                    "name": "Kota Malang",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 132,
+            "city_name": "Jember",
+            "city_slug": "jember",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 5
+                },
+                {
+                    "code": "81.71",
+                    "name": "Kota Ambon",
+                    "distance": 5
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 133,
+            "city_name": "Pacitan",
+            "city_slug": "pacitan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.72",
+                    "name": "Kota Blitar",
+                    "distance": 4
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 134,
+            "city_name": "Dompu",
+            "city_slug": "dompu",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 4
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 135,
+            "city_name": "Bima",
+            "city_slug": "bima",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 3
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "32.77",
+                    "name": "Kota Cimahi",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 136,
+            "city_name": "Kupang",
+            "city_slug": "kupang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "53.71",
+                    "name": "Kota Kupang",
+                    "distance": 3
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 137,
+            "city_name": "Ende",
+            "city_slug": "ende",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 6
+                },
+                {
+                    "code": "32.76",
+                    "name": "Kota Depok",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 138,
+            "city_name": "Mimika",
+            "city_slug": "mimika",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 5
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 139,
+            "city_name": "Merauke",
+            "city_slug": "merauke",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 140,
+            "city_name": "Jayapura",
+            "city_slug": "jayapura",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "91.71",
+                    "name": "Kota Jayapura",
+                    "distance": 3
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 141,
+            "city_name": "Sawalunto",
+            "city_slug": "sawalunto",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "13.73",
+                    "name": "Kota Sawahlunto",
+                    "distance": 4
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 6
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 142,
+            "city_name": "Jakarta Selatan",
+            "city_slug": "jakarta-selatan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 7
+                },
+                {
+                    "code": "13.77",
+                    "name": "Kota Pariaman",
+                    "distance": 7
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 143,
+            "city_name": "Jakarta Pusat",
+            "city_slug": "jakarta-pusat",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 6
+                },
+                {
+                    "code": "52.71",
+                    "name": "Kota Mataram",
+                    "distance": 6
+                },
+                {
+                    "code": "73.71",
+                    "name": "Kota Makassar",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 144,
+            "city_name": "Jakarta Timur",
+            "city_slug": "jakarta-timur",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 6
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 6
+                },
+                {
+                    "code": "13.77",
+                    "name": "Kota Pariaman",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 145,
+            "city_name": "Jakarta Utara",
+            "city_slug": "jakarta-utara",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "52.71",
+                    "name": "Kota Mataram",
+                    "distance": 5
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 6
+                },
+                {
+                    "code": "33.72",
+                    "name": "Kota Surakarta",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 146,
+            "city_name": "Sorong",
+            "city_slug": "sorong",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "96.71",
+                    "name": "Kota Sorong",
+                    "distance": 3
+                },
+                {
+                    "code": "36.73",
+                    "name": "Kota Serang",
+                    "distance": 4
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 147,
+            "city_name": "Tangerang Selatan",
+            "city_slug": "tangerang-selatan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "36.74",
+                    "name": "Kota Tangerang Selatan",
+                    "distance": 3
+                },
+                {
+                    "code": "19.03",
+                    "name": "Kabupaten Bangka Selatan",
+                    "distance": 8
+                },
+                {
+                    "code": "33.10",
+                    "name": "Kabupaten Klaten",
+                    "distance": 8
+                }
+            ]
+        },
+        {
+            "city_id": 148,
+            "city_name": "Magelang",
+            "city_slug": "magelang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "33.71",
+                    "name": "Kota Magelang",
+                    "distance": 3
+                },
+                {
+                    "code": "35.73",
+                    "name": "Kota Malang",
+                    "distance": 4
+                },
+                {
+                    "code": "36.73",
+                    "name": "Kota Serang",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 149,
+            "city_name": "Tegal",
+            "city_slug": "tegal",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 3
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 150,
+            "city_name": "Blitar",
+            "city_slug": "blitar",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.72",
+                    "name": "Kota Blitar",
+                    "distance": 3
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 5
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 151,
+            "city_name": "Madiun",
+            "city_slug": "madiun",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.77",
+                    "name": "Kota Madiun",
+                    "distance": 3
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "35.71",
+                    "name": "Kota Kediri",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 152,
+            "city_name": "Probolinggo",
+            "city_slug": "probolinggo",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.74",
+                    "name": "Kota Probolinggo",
+                    "distance": 3
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 7
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 153,
+            "city_name": "Singkawang",
+            "city_slug": "singkawang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "61.72",
+                    "name": "Kota Singkawang",
+                    "distance": 3
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 154,
+            "city_name": "Palopo",
+            "city_slug": "palopo",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "73.73",
+                    "name": "Kota Palopo",
+                    "distance": 3
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 5
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 155,
+            "city_name": "Parepare",
+            "city_slug": "parepare",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "73.72",
+                    "name": "Kota Parepare",
+                    "distance": 3
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                },
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 156,
+            "city_name": "Baubau",
+            "city_slug": "baubau",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 4
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 4
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 157,
+            "city_name": "Bitung",
+            "city_slug": "bitung",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "71.72",
+                    "name": "Kota Bitung",
+                    "distance": 3
+                },
+                {
+                    "code": "53.71",
+                    "name": "Kota Kupang",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 158,
+            "city_name": "Tomohon",
+            "city_slug": "tomohon",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "71.73",
+                    "name": "Kota Tomohon",
+                    "distance": 3
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 4
+                },
+                {
+                    "code": "32.71",
+                    "name": "Kota Bogor",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 159,
+            "city_name": "Tapanuli",
+            "city_slug": "tapanuli",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 5
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 160,
+            "city_name": "Lubuk Linggau",
+            "city_slug": "lubuk-linggau",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "16.73",
+                    "name": "Kota Lubuk Linggau",
+                    "distance": 3
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 7
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 161,
+            "city_name": "Musi Banyuasin",
+            "city_slug": "musi-banyuasin",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "16.07",
+                    "name": "Kabupaten Banyuasin",
+                    "distance": 7
+                },
+                {
+                    "code": "32.75",
+                    "name": "Kota Bekasi",
+                    "distance": 7
+                },
+                {
+                    "code": "63.71",
+                    "name": "Kota Banjarmasin",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 162,
+            "city_name": "Sekayu",
+            "city_slug": "sekayu",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 4
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 4
+                },
+                {
+                    "code": "32.75",
+                    "name": "Kota Bekasi",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 163,
+            "city_name": "Binjai",
+            "city_slug": "binjai-2",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 3
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 164,
+            "city_name": "Dairi",
+            "city_slug": "dairi",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.71",
+                    "name": "Kota Kediri",
+                    "distance": 4
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 4
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 165,
+            "city_name": "Karo",
+            "city_slug": "karo",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "18.72",
+                    "name": "Kota Metro",
+                    "distance": 4
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 5
+                },
+                {
+                    "code": "32.71",
+                    "name": "Kota Bogor",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 166,
+            "city_name": "Tebing Tinggi",
+            "city_slug": "tebing-tinggi",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.76",
+                    "name": "Kota Tebing Tinggi",
+                    "distance": 3
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 7
+                },
+                {
+                    "code": "13.75",
+                    "name": "Kota Bukittinggi",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 167,
+            "city_name": "Ambon",
+            "city_slug": "ambon",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "81.71",
+                    "name": "Kota Ambon",
+                    "distance": 3
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 6
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 168,
+            "city_name": "Pulau Sebuku",
+            "city_slug": "pulau-sebuku",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.72",
+                    "name": "Kota Sukabumi",
+                    "distance": 6
+                },
+                {
+                    "code": "32.76",
+                    "name": "Kota Depok",
+                    "distance": 6
+                },
+                {
+                    "code": "73.17",
+                    "name": "Kabupaten Luwu",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 169,
+            "city_name": "Palangkaraya",
+            "city_slug": "palangkaraya",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "62.71",
+                    "name": "Kota Palangkaraya",
+                    "distance": 3
+                },
+                {
+                    "code": "35.78",
+                    "name": "Kota Surabaya",
+                    "distance": 6
+                },
+                {
+                    "code": "61.72",
+                    "name": "Kota Singkawang",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 170,
+            "city_name": "Pulau Madura",
+            "city_slug": "pulau-madura",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "91.71",
+                    "name": "Kota Jayapura",
+                    "distance": 5
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 6
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 171,
+            "city_name": "Tanjung Jabung",
+            "city_slug": "tanjung-jabung",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "21.72",
+                    "name": "Kota Tanjung Pinang",
+                    "distance": 6
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 7
+                },
+                {
+                    "code": "15.72",
+                    "name": "Kota Sungai Penuh",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 172,
+            "city_name": "Sei Semangkei",
+            "city_slug": "sei-semangkei",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 7
+                },
+                {
+                    "code": "36.73",
+                    "name": "Kota Serang",
+                    "distance": 7
+                },
+                {
+                    "code": "11.71",
+                    "name": "Kota Banda Aceh",
+                    "distance": 8
+                }
+            ]
+        },
+        {
+            "city_id": 173,
+            "city_name": "Tanjungbalai",
+            "city_slug": "tanjungbalai",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.74",
+                    "name": "Kota Tanjungbalai",
+                    "distance": 3
+                },
+                {
+                    "code": "35.78",
+                    "name": "Kota Surabaya",
+                    "distance": 7
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 8
+                }
+            ]
+        },
+        {
+            "city_id": 174,
+            "city_name": "Dharmasraya",
+            "city_slug": "dharmasraya",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "33.74",
+                    "name": "Kota Semarang",
+                    "distance": 6
+                },
+                {
+                    "code": "35.78",
+                    "name": "Kota Surabaya",
+                    "distance": 6
+                },
+                {
+                    "code": "36.73",
+                    "name": "Kota Serang",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 175,
+            "city_name": "Bukittinggi",
+            "city_slug": "bukittinggi",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "13.75",
+                    "name": "Kota Bukittinggi",
+                    "distance": 3
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 6
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 176,
+            "city_name": "Payakumbuh",
+            "city_slug": "payakumbuh",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "13.76",
+                    "name": "Kota Payakumbuh",
+                    "distance": 3
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 6
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 177,
+            "city_name": "Lahat",
+            "city_slug": "lahat",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 178,
+            "city_name": "Bengkalis",
+            "city_slug": "bengkalis",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "17.71",
+                    "name": "Kota Bengkulu",
+                    "distance": 6
+                },
+                {
+                    "code": "32.75",
+                    "name": "Kota Bekasi",
+                    "distance": 6
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 179,
+            "city_name": "Indragiri Hulu & Hilir",
+            "city_slug": "indragiri-hulu-hilir",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "16.74",
+                    "name": "Kota Prabumulih",
+                    "distance": 10
+                },
+                {
+                    "code": "14.04",
+                    "name": "Kabupaten Indragiri Hilir",
+                    "distance": 11
+                },
+                {
+                    "code": "14.07",
+                    "name": "Kabupaten Rokan Hilir",
+                    "distance": 11
+                }
+            ]
+        },
+        {
+            "city_id": 180,
+            "city_name": "Kampar",
+            "city_slug": "kampar",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 181,
+            "city_name": "Pelalawan",
+            "city_slug": "pelalawan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 182,
+            "city_name": "Rokan Hulu & Hilir",
+            "city_slug": "rokan-hulu-hilir",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.72",
+                    "name": "Kota Blitar",
+                    "distance": 6
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 7
+                },
+                {
+                    "code": "16.74",
+                    "name": "Kota Prabumulih",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 183,
+            "city_name": "Kota Siak",
+            "city_slug": "kota-siak",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 2
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 2
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 3
+                }
+            ]
+        },
+        {
+            "city_id": 184,
+            "city_name": "Karimun",
+            "city_slug": "karimun",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "13.77",
+                    "name": "Kota Pariaman",
+                    "distance": 5
+                },
+                {
+                    "code": "35.77",
+                    "name": "Kota Madiun",
+                    "distance": 5
+                },
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 185,
+            "city_name": "Pulau Matak",
+            "city_slug": "pulau-matak",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 4
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "35.72",
+                    "name": "Kota Blitar",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 186,
+            "city_name": "Kota Tanjung Pinang",
+            "city_slug": "kota-tanjung-pinang",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "21.72",
+                    "name": "Kota Tanjung Pinang"
+                }
+            ]
+        },
+        {
+            "city_id": 187,
+            "city_name": "Batanghari",
+            "city_slug": "batanghari",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "74.71",
+                    "name": "Kota Kendari",
+                    "distance": 4
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 5
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 188,
+            "city_name": "Pangkal Pinang",
+            "city_slug": "pangkal-pinang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "19.71",
+                    "name": "Kota Pangkal Pinang",
+                    "distance": 3
+                },
+                {
+                    "code": "35.73",
+                    "name": "Kota Malang",
+                    "distance": 6
+                },
+                {
+                    "code": "61.72",
+                    "name": "Kota Singkawang",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 189,
+            "city_name": "Tasikmalaya",
+            "city_slug": "tasikmalaya",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.78",
+                    "name": "Kota Tasikmalaya",
+                    "distance": 3
+                },
+                {
+                    "code": "35.78",
+                    "name": "Kota Surabaya",
+                    "distance": 6
+                },
+                {
+                    "code": "33.74",
+                    "name": "Kota Semarang",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 190,
+            "city_name": "Jombang",
+            "city_slug": "jombang",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 3
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 4
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 191,
+            "city_name": "Kota Mataram",
+            "city_slug": "kota-mataram",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "52.71",
+                    "name": "Kota Mataram"
+                }
+            ]
+        },
+        {
+            "city_id": 192,
+            "city_name": "Kubu raya",
+            "city_slug": "kubu-raya",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.78",
+                    "name": "Kota Surabaya",
+                    "distance": 5
+                },
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 6
+                },
+                {
+                    "code": "21.71",
+                    "name": "Kota Batam",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 193,
+            "city_name": "Sekadau",
+            "city_slug": "sekadau",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 4
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 4
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 194,
+            "city_name": "Tabalong",
+            "city_slug": "tabalong",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "35.73",
+                    "name": "Kota Malang",
+                    "distance": 4
+                },
+                {
+                    "code": "96.71",
+                    "name": "Kota Sorong",
+                    "distance": 4
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 195,
+            "city_name": "Tanah Bumbu",
+            "city_slug": "tanah-bumbu",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "14.72",
+                    "name": "Kota Dumai",
+                    "distance": 5
+                },
+                {
+                    "code": "15.71",
+                    "name": "Kota Jambi",
+                    "distance": 5
+                },
+                {
+                    "code": "74.72",
+                    "name": "Kota Bau Bau",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 196,
+            "city_name": "Penajam Paser Utara",
+            "city_slug": "penajam-paser-utara",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "64.09",
+                    "name": "Kabupaten Penajam Paser Utara",
+                    "distance": 8
+                },
+                {
+                    "code": "64.72",
+                    "name": "Kota Samarinda",
+                    "distance": 8
+                },
+                {
+                    "code": "73.71",
+                    "name": "Kota Makassar",
+                    "distance": 8
+                }
+            ]
+        },
+        {
+            "city_id": 197,
+            "city_name": "Buton",
+            "city_slug": "buton",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "81.71",
+                    "name": "Kota Ambon",
+                    "distance": 4
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 198,
+            "city_name": "Buol",
+            "city_slug": "buol",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 5
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 199,
+            "city_name": "Donggala",
+            "city_slug": "donggala",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 4
+                },
+                {
+                    "code": "72.71",
+                    "name": "Kota Palu",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 200,
+            "city_name": "Parigi Moutong",
+            "city_slug": "parigi-moutong",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "64.74",
+                    "name": "Kota Bontang",
+                    "distance": 7
+                },
+                {
+                    "code": "71.72",
+                    "name": "Kota Bitung",
+                    "distance": 7
+                },
+                {
+                    "code": "96.71",
+                    "name": "Kota Sorong",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 201,
+            "city_name": "Melak",
+            "city_slug": "melak",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 5
+                },
+                {
+                    "code": "13.72",
+                    "name": "Kota Solok",
+                    "distance": 5
+                },
+                {
+                    "code": "32.76",
+                    "name": "Kota Depok",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 202,
+            "city_name": "Bolaang Mongondow",
+            "city_slug": "bolaang-mongondow",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "21.72",
+                    "name": "Kota Tanjung Pinang",
+                    "distance": 7
+                },
+                {
+                    "code": "12.74",
+                    "name": "Kota Tanjungbalai",
+                    "distance": 8
+                },
+                {
+                    "code": "19.71",
+                    "name": "Kota Pangkal Pinang",
+                    "distance": 8
+                }
+            ]
+        },
+        {
+            "city_id": 203,
+            "city_name": "Kotamobagu",
+            "city_slug": "kotamobagu",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "71.74",
+                    "name": "Kota Kotamobagu",
+                    "distance": 3
+                },
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 4
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 4
+                }
+            ]
+        },
+        {
+            "city_id": 204,
+            "city_name": "Majene",
+            "city_slug": "majene",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "11.72",
+                    "name": "Kota Sabang",
+                    "distance": 6
+                },
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 6
+                },
+                {
+                    "code": "13.71",
+                    "name": "Kota Padang",
+                    "distance": 6
+                }
+            ]
+        },
+        {
+            "city_id": 205,
+            "city_name": "Mamasa",
+            "city_slug": "mamasa",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "52.72",
+                    "name": "Kota Bima",
+                    "distance": 4
+                },
+                {
+                    "code": "81.72",
+                    "name": "Kota Tual",
+                    "distance": 4
+                },
+                {
+                    "code": "11.74",
+                    "name": "Kota Langsa",
+                    "distance": 5
+                }
+            ]
+        },
+        {
+            "city_id": 206,
+            "city_name": "Polewali Mandar",
+            "city_slug": "polewali-mandar",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "32.79",
+                    "name": "Kota Banjar",
+                    "distance": 6
+                },
+                {
+                    "code": "35.72",
+                    "name": "Kota Blitar",
+                    "distance": 6
+                },
+                {
+                    "code": "12.75",
+                    "name": "Kota Binjai",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 207,
+            "city_name": "Kabupaten Seram",
+            "city_slug": "kabupaten-seram",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "64.03",
+                    "name": "Kabupaten Berau",
+                    "distance": 1
+                },
+                {
+                    "code": "13.06",
+                    "name": "Kabupaten Agam",
+                    "distance": 2
+                },
+                {
+                    "code": "33.21",
+                    "name": "Kabupaten Demak",
+                    "distance": 2
+                }
+            ]
+        },
+        {
+            "city_id": 208,
+            "city_name": "Kabupaten Halmahera Barat",
+            "city_slug": "kabupaten-halmahera-barat",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "82.01",
+                    "name": "Kabupaten Halmahera Barat"
+                }
+            ]
+        },
+        {
+            "city_id": 209,
+            "city_name": "Kabupaten Halmahera Tengah",
+            "city_slug": "kabupaten-halmahera-tengah",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "82.02",
+                    "name": "Kabupaten Halmahera Tengah"
+                }
+            ]
+        },
+        {
+            "city_id": 210,
+            "city_name": "Kabupaten Halmahera Utara",
+            "city_slug": "kabupaten-halmahera-utara",
+            "province": null,
+            "classification": "VERIFIED_EXACT",
+            "matches": [
+                {
+                    "type": "exact",
+                    "code": "82.03",
+                    "name": "Kabupaten Halmahera Utara"
+                }
+            ]
+        },
+        {
+            "city_id": 211,
+            "city_name": "Halmahera Selatan",
+            "city_slug": "halmahera-selatan",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.14",
+                    "name": "Kabupaten Nias Selatan",
+                    "distance": 7
+                },
+                {
+                    "code": "36.74",
+                    "name": "Kota Tangerang Selatan",
+                    "distance": 7
+                },
+                {
+                    "code": "81.09",
+                    "name": "Kabupaten Buru Selatan",
+                    "distance": 7
+                }
+            ]
+        },
+        {
+            "city_id": 212,
+            "city_name": "Weda",
+            "city_slug": "weda",
+            "province": null,
+            "classification": "NOT_FOUND",
+            "matches": [],
+            "nearest_candidates": [
+                {
+                    "code": "12.71",
+                    "name": "Kota Medan",
+                    "distance": 4
+                },
+                {
+                    "code": "33.76",
+                    "name": "Kota Tegal",
+                    "distance": 5
+                },
+                {
+                    "code": "35.79",
+                    "name": "Kota Batu",
+                    "distance": 5
+                }
+            ]
+        }
+    ]
+}

@@ -72,7 +72,7 @@
     "longitude": {{ $city->lng }}
   },
   @endif
-  "telephone": "+6281234567890",
+  "telephone": "+{{ config('contact.whatsapp') }}",
   "openingHours": "Mo-Sa 08:00-17:00"
 }
 </script>
@@ -150,10 +150,10 @@
                 @endif
 
                 <div class="flex flex-wrap items-center gap-4 pt-2">
-                    <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Admin TrainingKota, saya ingin booking kursi untuk ' . $service->name . ' di ' . $city->name) }}" target="_blank" class="btn-primary">
+                    <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, saya ingin booking kursi untuk ' . $service->name . ' di ' . $city->name) }}" target="_blank" class="btn-primary">
                         Booking Slot di {{ $city->name }} &rarr;
                     </a>
-                    <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Admin TrainingKota, mohon kirimkan proposal silabus & jadwal ' . $service->name . ' di ' . $city->name) }}" target="_blank" class="btn-whatsapp">
+                    <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, mohon kirimkan proposal silabus & jadwal ' . $service->name . ' di ' . $city->name) }}" target="_blank" class="btn-whatsapp">
                         Minta Silabus &amp; Penawaran
                     </a>
                 </div>
@@ -212,19 +212,10 @@
                 </h2>
 
                 @if(!empty($service->syllabus) && is_array($service->syllabus))
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        @foreach($service->syllabus as $idx => $syl)
-                            <div class="bg-[#0B1526] border border-[#1E324E] p-4 flex items-start gap-3">
-                                <span class="w-6 h-6 bg-[#0F2038] border border-[#1E324E] text-[#10B981] font-space font-bold text-xs flex items-center justify-center shrink-0">
-                                    {{ $idx + 1 }}
-                                </span>
-                                <div>
-                                    <div class="font-space font-semibold text-xs text-[#F1F5F9] mb-1">{{ $syl }}</div>
-                                    <p class="text-[11px] text-[#94A3B8]">Pemahaman regulasi, studi kasus implementasi, dan pengujian lapangan langsung.</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                    <x-syllabus-table
+                        :syllabus="$service->syllabus"
+                        description="Pemahaman regulasi, studi kasus implementasi, dan pengujian lapangan langsung."
+                    />
                 @endif
             </div>
 
@@ -246,4 +237,79 @@
         </div>
     </div>
 </section>
+
+<!-- FAQ & Regional Q&A -->
+<section class="py-14 bg-[#0B1526] border-b border-[#1E324E]">
+   <div class="max-w-7xl mx-auto px-4 lg:px-8">
+       <div class="text-center max-w-3xl mx-auto mb-12">
+           <h2 class="text-2xl lg:text-3xl font-bold font-space text-[#F1F5F9] mb-4">
+               Pertanyaan Umum (FAQ) <span class="text-[#10B981]">&</span> Q&A
+           </h2>
+           <p class="text-[#94A3B8] text-sm leading-relaxed">
+               Jawaban atas pertanyaan yang paling sering diajukan terkait pelaksanaan {{ $service->name }} di wilayah {{ $city->name }}.
+           </p>
+       </div>
+
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+           @forelse($faqs as $faq)
+               <div class="bg-[#0F2038] border border-[#1E324E] p-5 rounded-sm">
+                   <h3 class="text-sm font-bold text-[#F1F5F9] mb-3 flex gap-3">
+                       <span class="text-[#10B981] font-space">Q:</span>
+                       {{ $faq->question }}
+                   </h3>
+                   <p class="text-xs text-[#94A3B8] leading-relaxed pl-6">
+                       <span class="text-[#10B981] font-space font-bold">A:</span>
+                       {{ $faq->answer }}
+                   </p>
+               </div>
+           @empty
+               <div class="col-span-full text-center py-10 text-[#94A3B8] text-sm italic">
+                   Belum ada FAQ spesifik untuk wilayah ini. Hubungi admin untuk informasi lebih lanjut.
+               </div>
+           @endforelse
+       </div>
+   </div>
+</section>
+
+<!-- Supporting Articles Section -->
+<section class="py-14">
+   <div class="max-w-7xl mx-auto px-4 lg:px-8">
+       <div class="flex items-center justify-between mb-10">
+           <div>
+               <h2 class="text-xl lg:text-2xl font-bold font-space text-[#F1F5F9]">
+                   Artikel Pendukung
+               </h2>
+               <p class="text-sm text-[#94A3B8]">Wawasan tambahan terkait {{ $service->name }} di {{ $city->name }}</p>
+           </div>
+       </div>
+
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+           @forelse($relatedArticles as $relArt)
+               <a href="{{ route('article.show', $relArt->slug) }}" class="group block bg-[#0F2038] border border-[#1E324E] overflow-hidden hover:border-[#10B981] transition-all">
+                   <div class="p-5 space-y-3">
+                       <div class="flex items-center gap-2">
+                           <span class="text-[10px] px-2 py-0.5 bg-[#1E324E] text-[#10B981] font-bold uppercase tracking-wider rounded-sm">
+                               {{ $relArt->category }}
+                           </span>
+                       </div>
+                       <h3 class="text-sm font-bold text-[#F1F5F9] group-hover:text-[#10B981] transition-colors">
+                           {{ $relArt->title }}
+                       </h3>
+                       <p class="text-xs text-[#94A3B8] line-clamp-2 leading-relaxed">
+                           {{ $relArt->excerpt }}
+                       </p>
+                       <div class="pt-2 flex items-center text-[11px] font-bold text-[#10B981] uppercase">
+                           Baca Selengkapnya &rarr;
+                       </div>
+                   </div>
+               </a>
+           @empty
+               <div class="col-span-full text-center py-10 text-[#94A3B8] text-sm italic">
+                   Tidak ada artikel pendukung untuk saat ini.
+               </div>
+           @endforelse
+       </div>
+   </div>
+</section>
 @endsection
+

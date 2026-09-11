@@ -17,9 +17,15 @@ class CityLandingController extends Controller
             abort(404);
         }
 
-        $city = City::where('slug', $citySlug)->firstOrFail();
-        $services = Service::where('category', $category)->orderBy('id')->get();
-        $featuredServices = $services->take(8);
+        $city = City::with(['kecamatans' => function($q){ $q->distinct(); }])->where('slug', $citySlug)->firstOrFail();
+        
+        // Business Rule: City Page is a Service Catalog.
+        // Show services that have coverage (CityServiceContent) in this city.
+        // If no coverage is explicitly defined, we can still show all services but they'll link to the catalog detail.
+        $services = Service::where('category', $category)
+            ->orderBy('name')
+            ->get();
+            
         $otherCitiesInIsland = City::where('island', $city->island)
             ->where('id', '!=', $city->id)
             ->take(12)
@@ -32,24 +38,13 @@ class CityLandingController extends Controller
         ];
         $categoryName = $categoryNames[$category] ?? ucfirst($category);
 
-        // ── Artikel terbaru: prioritaskan per kota, lalu generic per kategori
+        // ── Artikel sebagai konten pendukung (NOT primary)
         $articlesQuery = Article::published()
-            ->where(function ($q) use ($city, $category) {
-                $q->where('city_id', $city->id)
-                  ->orWhere(function ($q2) use ($category) {
-                      $q2->where('category', $category)->whereNull('city_id');
-                  });
-            })
+            ->where('city_id', $city->id)
             ->latest();
 
-        // Featured article (1 artikel utama)
-        $article = (clone $articlesQuery)->first();
-
-        // Blog list: 5 terbaru (kecuali artikel utama)
-        $relatedArticles = (clone $articlesQuery)
-            ->when($article, fn($q) => $q->where('id', '!=', $article?->id))
-            ->limit(5)
-            ->get();
+        $relatedArticles = $articlesQuery->limit(6)->get();
+        $article = $relatedArticles->first();
 
         // ── FAQ dari DB: prioritaskan per kota, fallback ke per kategori, lalu hardcoded
         $faqItems = $this->getFaqItems($category, $city);
@@ -70,7 +65,6 @@ class CityLandingController extends Controller
             'categoryName',
             'city',
             'services',
-            'featuredServices',
             'otherCitiesInIsland',
             'article',
             'relatedArticles',

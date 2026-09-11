@@ -37,9 +37,9 @@
                 <span class="hidden sm:inline text-[#94A3B8]">62 PROGRAM &bull; 212 KOTA</span>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="https://wa.me/6281234567890" target="_blank" class="text-[#25D366] hover:underline flex items-center gap-1 font-semibold">
+                <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="text-[#25D366] hover:underline flex items-center gap-1 font-semibold">
                     <span class="w-1.5 h-1.5 bg-[#25D366] inline-block"></span>
-                    HOTLINE: +62 812-3456-7890
+                    HOTLINE: {{ config('contact.display') }}
                 </a>
             </div>
         </div>
@@ -80,7 +80,7 @@
 
             <!-- Right: CTA + Hamburger -->
             <div class="flex items-center gap-3">
-                <a href="https://wa.me/6281234567890" target="_blank" class="btn-whatsapp text-xs py-2 px-3.5 hidden sm:inline-flex">
+                <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="btn-whatsapp text-xs py-2 px-3.5 hidden sm:inline-flex">
                     WhatsApp
                 </a>
                 <a href="{{ route('category.show', 'pelatihan') }}" class="btn-primary text-xs py-2 px-4 hidden md:inline-flex">
@@ -131,7 +131,7 @@
                     <a href="{{ route('category.show', 'pelatihan') }}" class="btn-primary text-xs py-3 flex-1 text-center">
                         Katalog Lengkap
                     </a>
-                    <a href="https://wa.me/6281234567890" target="_blank" class="btn-whatsapp text-xs py-3 flex-1 text-center">
+                    <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="btn-whatsapp text-xs py-3 flex-1 text-center">
                         WhatsApp
                     </a>
                 </div>
@@ -192,7 +192,7 @@
                     <div class="font-space font-bold text-xs uppercase text-[#F1F5F9] tracking-wider mb-3">Kontak Operasional</div>
                     <p class="mb-2">Local Development Environment: 127.0.0.1:8000</p>
                     <p class="text-[#F1F5F9] font-space font-semibold mb-1">Direct Line: (0341) 500-KOTA</p>
-                    <p class="text-[#25D366] font-space font-semibold">WA: +62 812-3456-7890</p>
+                    <p class="text-[#25D366] font-space font-semibold">WA: {{ config('contact.display') }}</p>
                     <p class="text-[#64748B] text-[11px] mt-2">Senin - Sabtu: 08.00 - 17.00 WIB</p>
                 </div>
             </div>
@@ -211,3 +211,4 @@
     </footer>
 </body>
 </html>
+

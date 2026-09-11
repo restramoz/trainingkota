@@ -9,7 +9,7 @@
 </div>
 
 <div x-data="{
-    activeTab: '{{ request('tab', $activeTab ?? 'services') }}',
+    activeTab: 'overview',
     editingService: null,
     editingCity: null,
     addingService: false,
@@ -96,67 +96,467 @@
     <div class="max-w-7xl mx-auto px-4 lg:px-8 py-6 space-y-6">
 
         <!-- ── STAT METRICS (CLEANED) ────────────────────────────────────────────── -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2">
-            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Total Layanan</div>
-                <div class="text-xl font-bold text-[#F1F5F9] mt-1 font-space">{{ $stats['total_services'] ?? 0 }}</div>
+        <!-- ══════════════════════════════════════════════════════════════
+     OVERVIEW / COMMAND CENTER
+     ══════════════════════════════════════════════════════════════ -->
+<div x-show="activeTab === 'overview'" class="space-y-6">
+
+    <!-- KPI GRID -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2">
+
+        <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
+            <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                Total Layanan
             </div>
-            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Pelatihan</div>
-                <div class="text-xl font-bold text-[#10B981] mt-1 font-space">{{ $stats['total_pelatihan'] ?? 0 }}</div>
-            </div>
-            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Kajian K3</div>
-                <div class="text-xl font-bold text-[#38BDF8] mt-1 font-space">{{ $stats['total_kajian'] ?? 0 }}</div>
-            </div>
-            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Jasa Teknis</div>
-                <div class="text-xl font-bold text-[#F59E0B] mt-1 font-space">{{ $stats['total_jasa'] ?? 0 }}</div>
-            </div>
-            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Kota Tercover</div>
-                <div class="text-xl font-bold text-[#10B981] mt-1 font-space">{{ $stats['cities_with_locations'] ?? 0 }}</div>
-            </div>
-            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Kota Belum</div>
-                <div class="text-xl font-bold text-[#F59E0B] mt-1 font-space">{{ $stats['cities_without_locations'] ?? 0 }}</div>
-            </div>
-            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Lokasi Incomplete</div>
-                <div class="text-xl font-bold text-[#EF4444] mt-1 font-space">{{ $stats['incomplete_locations'] ?? 0 }}</div>
-            </div>
-            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Total Artikel</div>
-                <div class="text-xl font-bold text-[#7cd8b8] mt-1 font-space">{{ $stats['total_articles'] ?? 0 }}</div>
-            </div>
-            <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
-                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">Status Pub/Draft</div>
-                <div class="text-sm font-bold text-[#F1F5F9] mt-1 font-space">{{ $stats['published_articles'] ?? 0 }}<span class="text-[#64748B] mx-1">/</span>{{ $stats['draft_articles'] ?? 0 }}</div>
+            <div class="text-xl font-bold text-[#F1F5F9] mt-1 font-space">
+                {{ $stats['total_services'] ?? 0 }}
             </div>
         </div>
 
+        <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
+            <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                Pelatihan
+            </div>
+            <div class="text-xl font-bold text-[#10B981] mt-1 font-space">
+                {{ $stats['total_pelatihan'] ?? 0 }}
+            </div>
+        </div>
+
+        <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
+            <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                Kajian K3
+            </div>
+            <div class="text-xl font-bold text-[#38BDF8] mt-1 font-space">
+                {{ $stats['total_kajian'] ?? 0 }}
+            </div>
+        </div>
+
+        <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
+            <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                Jasa Teknis
+            </div>
+            <div class="text-xl font-bold text-[#F59E0B] mt-1 font-space">
+                {{ $stats['total_jasa'] ?? 0 }}
+            </div>
+        </div>
+
+        <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
+            <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                Kota Tercover
+            </div>
+            <div class="text-xl font-bold text-[#10B981] mt-1 font-space">
+                {{ $stats['cities_with_locations'] ?? 0 }}
+            </div>
+        </div>
+
+        <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
+            <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                Kota Belum
+            </div>
+            <div class="text-xl font-bold text-[#F59E0B] mt-1 font-space">
+                {{ $stats['cities_without_locations'] ?? 0 }}
+            </div>
+        </div>
+
+        <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
+            <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                Lokasi Incomplete
+            </div>
+            <div class="text-xl font-bold text-[#EF4444] mt-1 font-space">
+                {{ $stats['incomplete_locations'] ?? 0 }}
+            </div>
+        </div>
+
+        <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
+            <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                Total Artikel
+            </div>
+            <div class="text-xl font-bold text-[#7cd8b8] mt-1 font-space">
+                {{ $stats['total_articles'] ?? 0 }}
+            </div>
+        </div>
+
+        <div class="bg-[#0B1526] border border-[#1E324E] p-3 hover:border-[#0D7A5F] transition">
+            <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                Pub / Draft
+            </div>
+            <div class="text-sm font-bold text-[#F1F5F9] mt-1 font-space">
+                {{ $stats['published_articles'] ?? 0 }}
+                <span class="text-[#64748B] mx-1">/</span>
+                {{ $stats['draft_articles'] ?? 0 }}
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SYSTEM HEALTH + COVERAGE -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+        <!-- CONTENT HEALTH -->
+        <div class="bg-[#0B1526] border border-[#1E324E]">
+
+            <div class="px-4 py-3 border-b border-[#1E324E] bg-[#0F2038] flex items-center justify-between">
+                <div>
+                    <div class="font-space text-xs font-bold uppercase tracking-wider text-[#F1F5F9]">
+                        Content Health
+                    </div>
+                    <div class="text-[10px] text-[#64748B] mt-0.5">
+                        Ringkasan status konten CMS
+                    </div>
+                </div>
+
+                <span class="text-[10px] font-space uppercase text-[#10B981]">
+                    LIVE
+                </span>
+            </div>
+
+            <div class="p-4 grid grid-cols-2 gap-3">
+
+                <div class="border border-[#1E324E] bg-[#070D18] p-3">
+                    <div class="text-[10px] uppercase font-space text-[#64748B]">
+                        Published
+                    </div>
+                    <div class="text-lg font-bold font-space text-[#10B981] mt-1">
+                        {{ $stats['published_articles'] ?? 0 }}
+                    </div>
+                </div>
+
+                <div class="border border-[#1E324E] bg-[#070D18] p-3">
+                    <div class="text-[10px] uppercase font-space text-[#64748B]">
+                        Draft
+                    </div>
+                    <div class="text-lg font-bold font-space text-[#F59E0B] mt-1">
+                        {{ $stats['draft_articles'] ?? 0 }}
+                    </div>
+                </div>
+
+                <div class="border border-[#1E324E] bg-[#070D18] p-3">
+                    <div class="text-[10px] uppercase font-space text-[#64748B]">
+                        Total Jadwal
+                    </div>
+                    <div class="text-lg font-bold font-space text-[#38BDF8] mt-1">
+                        {{ $stats['total_schedules'] ?? 0 }}
+                    </div>
+                </div>
+
+                <div class="border border-[#1E324E] bg-[#070D18] p-3">
+                    <div class="text-[10px] uppercase font-space text-[#64748B]">
+                        Lokasi Incomplete
+                    </div>
+                    <div class="text-lg font-bold font-space text-[#EF4444] mt-1">
+                        {{ $stats['incomplete_locations'] ?? 0 }}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- COVERAGE HEALTH -->
+        <div class="bg-[#0B1526] border border-[#1E324E]">
+
+            <div class="px-4 py-3 border-b border-[#1E324E] bg-[#0F2038] flex items-center justify-between">
+                <div>
+                    <div class="font-space text-xs font-bold uppercase tracking-wider text-[#F1F5F9]">
+                        Coverage Health
+                    </div>
+                    <div class="text-[10px] text-[#64748B] mt-0.5">
+                        Kondisi coverage kota dan lokasi
+                    </div>
+                </div>
+
+                <span class="text-[10px] font-space uppercase text-[#38BDF8]">
+                    MONITOR
+                </span>
+            </div>
+
+            <div class="p-4 space-y-3">
+
+                <div class="flex items-center justify-between border-b border-[#1E324E] pb-3">
+                    <span class="text-xs text-[#94A3B8]">Total Kota</span>
+                    <span class="font-space font-bold text-[#F1F5F9]">
+                        {{ $stats['total_cities'] ?? 0 }}
+                    </span>
+                </div>
+
+                <div class="flex items-center justify-between border-b border-[#1E324E] pb-3">
+                    <span class="text-xs text-[#94A3B8]">Kota dengan Maps</span>
+                    <span class="font-space font-bold text-[#10B981]">
+                        {{ $stats['cities_with_locations'] ?? 0 }}
+                    </span>
+                </div>
+
+                <div class="flex items-center justify-between border-b border-[#1E324E] pb-3">
+                    <span class="text-xs text-[#94A3B8]">Kota tanpa Maps</span>
+                    <span class="font-space font-bold text-[#F59E0B]">
+                        {{ $stats['cities_without_locations'] ?? 0 }}
+                    </span>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <span class="text-xs text-[#94A3B8]">Lokasi perlu diperbaiki</span>
+                    <span class="font-space font-bold text-[#EF4444]">
+                        {{ $stats['incomplete_locations'] ?? 0 }}
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="bg-[#0B1526] border border-[#1E324E]">
+
+        <div class="px-4 py-3 border-b border-[#1E324E] bg-[#0F2038]">
+            <div class="font-space text-xs font-bold uppercase tracking-wider text-[#F1F5F9]">
+                Quick Actions
+            </div>
+            <div class="text-[10px] text-[#64748B] mt-0.5">
+                Akses cepat ke modul utama
+            </div>
+        </div>
+
+        <div class="p-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
+
+            <button
+                @click="activeTab = 'services'"
+                class="bg-[#070D18] border border-[#1E324E] hover:border-[#0D7A5F] hover:bg-[#0F2038] px-3 py-3 text-left transition"
+            >
+                <div class="font-space text-[10px] font-bold uppercase text-[#F1F5F9]">
+                    Layanan
+                </div>
+                <div class="text-[10px] text-[#64748B] mt-1">
+                    Kelola katalog
+                </div>
+            </button>
+
+            <button
+                @click="activeTab = 'regions'"
+                class="bg-[#070D18] border border-[#1E324E] hover:border-[#0D7A5F] hover:bg-[#0F2038] px-3 py-3 text-left transition"
+            >
+                <div class="font-space text-[10px] font-bold uppercase text-[#F1F5F9]">
+                    Wilayah
+                </div>
+                <div class="text-[10px] text-[#64748B] mt-1">
+                    Kelola kota
+                </div>
+            </button>
+
+            <button
+                @click="activeTab = 'articles'"
+                class="bg-[#070D18] border border-[#1E324E] hover:border-[#0D7A5F] hover:bg-[#0F2038] px-3 py-3 text-left transition"
+            >
+                <div class="font-space text-[10px] font-bold uppercase text-[#F1F5F9]">
+                    Artikel
+                </div>
+                <div class="text-[10px] text-[#64748B] mt-1">
+                    Kelola konten SEO
+                </div>
+            </button>
+
+            <button
+                @click="activeTab = 'coverage'"
+                class="bg-[#070D18] border border-[#1E324E] hover:border-[#0D7A5F] hover:bg-[#0F2038] px-3 py-3 text-left transition"
+            >
+                <div class="font-space text-[10px] font-bold uppercase text-[#F1F5F9]">
+                    Coverage
+                </div>
+                <div class="text-[10px] text-[#64748B] mt-1">
+                    Monitor wilayah
+                </div>
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- RECENT ACTIVITY -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+        <!-- RECENT ARTICLES -->
+        <div class="bg-[#0B1526] border border-[#1E324E] overflow-hidden">
+
+            <div class="px-4 py-3 border-b border-[#1E324E] bg-[#0F2038] flex items-center justify-between">
+                <div>
+                    <div class="font-space text-xs font-bold uppercase tracking-wider text-[#F1F5F9]">
+                        Artikel Terbaru
+                    </div>
+                    <div class="text-[10px] text-[#64748B] mt-0.5">
+                        Konten terbaru di CMS
+                    </div>
+                </div>
+
+                <button
+                    @click="activeTab = 'articles'"
+                    class="text-[10px] uppercase font-space text-[#38BDF8] hover:text-white"
+                >
+                    Lihat semua
+                </button>
+            </div>
+
+            <div class="divide-y divide-[#142338]">
+
+                @forelse($articles->take(5) as $article)
+                    <div class="px-4 py-3 flex items-start justify-between gap-3 hover:bg-[#0F2038] transition">
+                        <div class="min-w-0">
+                            <div class="text-xs font-medium text-[#F1F5F9] truncate">
+                                {{ $article->title }}
+                            </div>
+
+                            <div class="text-[10px] text-[#64748B] mt-1">
+                                {{ $article->created_at?->format('d M Y') ?? '-' }}
+                            </div>
+                        </div>
+
+                        <span class="shrink-0 text-[9px] uppercase font-space font-bold
+                            {{ ($article->status ?? '') === 'published'
+                                ? 'text-[#10B981]'
+                                : 'text-[#F59E0B]' }}">
+                            {{ $article->status ?? 'draft' }}
+                        </span>
+                    </div>
+                @empty
+                    <div class="p-5 text-center text-xs text-[#64748B] font-space">
+                        Belum ada artikel.
+                    </div>
+                @endforelse
+
+            </div>
+
+        </div>
+
+        <!-- RECENT SCHEDULES -->
+        <div class="bg-[#0B1526] border border-[#1E324E] overflow-hidden">
+
+            <div class="px-4 py-3 border-b border-[#1E324E] bg-[#0F2038] flex items-center justify-between">
+                <div>
+                    <div class="font-space text-xs font-bold uppercase tracking-wider text-[#F1F5F9]">
+                        Jadwal Terbaru
+                    </div>
+                    <div class="text-[10px] text-[#64748B] mt-0.5">
+                        Schedule / ticket terbaru
+                    </div>
+                </div>
+
+                <button
+                    @click="activeTab = 'schedules'"
+                    class="text-[10px] uppercase font-space text-[#38BDF8] hover:text-white"
+                >
+                    Lihat semua
+                </button>
+            </div>
+
+            <div class="divide-y divide-[#142338]">
+
+                @forelse($schedules->take(5) as $schedule)
+                    <div class="px-4 py-3 flex items-start justify-between gap-3 hover:bg-[#0F2038] transition">
+
+                        <div class="min-w-0">
+                            <div class="text-xs font-medium text-[#F1F5F9] truncate">
+                                {{ $schedule->service->name ?? 'Layanan' }}
+                            </div>
+
+                            <div class="text-[10px] text-[#64748B] mt-1">
+                                {{ $schedule->date?->format('d M Y') ?? $schedule->date ?? '-' }}
+                                ·
+                                {{ $schedule->location ?? 'Lokasi belum diisi' }}
+                            </div>
+                        </div>
+
+                        <span class="shrink-0 text-[9px] uppercase font-space font-bold text-[#38BDF8]">
+                            {{ $schedule->status ?? 'draft' }}
+                        </span>
+
+                    </div>
+                @empty
+                    <div class="p-5 text-center text-xs text-[#64748B] font-space">
+                        Belum ada jadwal.
+                    </div>
+                @endforelse
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
         <!-- ── TAB NAVIGATION (CLEANED) ────────────────────────────────────────── -->
         <div class="bg-[#0F2038] border border-[#1E324E] overflow-x-auto">
-            <div class="flex min-w-max p-1 space-x-1 font-space text-xs uppercase">
-                <button @click="activeTab = 'services'"
-                    :class="activeTab === 'services' ? 'bg-[#0D7A5F] text-white font-bold' : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
-                    class="px-4 py-2.5 transition tracking-wider whitespace-nowrap">
-                    1. Katalog Layanan ({{ $stats['total_services'] ?? 0 }})
-                </button>
-                <button @click="activeTab = 'cities'"
-                    :class="activeTab === 'cities' ? 'bg-[#0D7A5F] text-white font-bold' : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
-                    class="px-4 py-2.5 transition tracking-wider whitespace-nowrap">
-                    2. Direktori Wilayah ({{ $stats['total_cities'] ?? 0 }})
-                </button>
-                <button @click="activeTab = 'articles'"
-                    :class="activeTab === 'articles' ? 'bg-[#0D7A5F] text-white font-bold' : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
-                    class="px-4 py-2.5 transition tracking-wider whitespace-nowrap">
-                    3. Artikel SEO ({{ $stats['total_articles'] ?? 0 }})
-                </button>
-            </div>
-                <button @click=\"activeTab = 'coverage'\"\n                    :class=\"activeTab === 'coverage' ? 'bg-[#0D7A5F] text-white font-bold' : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'\"\n                    class=\"px-4 py-2.5 transition tracking-wider whitespace-nowrap\">\n                    4. Coverage Wilayah ({{ count($coverageStats) }})\n                </button>
+        <div class="flex min-w-max p-1 space-x-1 font-space text-xs uppercase">
 
-        </div>
+        <!-- Overview Tab -->
+        <button
+            @click="activeTab = 'overview'"
+            :class="activeTab === 'overview'
+                ? 'bg-[#0D7A5F] text-white font-bold'
+                : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
+            class="px-4 py-2.5 transition tracking-wider whitespace-nowrap"
+        >
+            1. Overview
+        </button>
+
+        <!-- Services Tab -->
+        <button
+            @click="activeTab = 'services'"
+            :class="activeTab === 'services'
+                ? 'bg-[#0D7A5F] text-white font-bold'
+                : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
+            class="px-4 py-2.5 transition tracking-wider whitespace-nowrap"
+        >
+            2. Katalog Layanan ({{ $stats['total_services'] ?? 0 }})
+        </button>
+
+        <!-- Regions Tab -->
+        <button
+            @click="activeTab = 'regions'"
+            :class="activeTab === 'regions'
+                ? 'bg-[#0D7A5F] text-white font-bold'
+                : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
+            class="px-4 py-2.5 transition tracking-wider whitespace-nowrap"
+        >
+            3. Direktori Wilayah ({{ $stats['total_cities'] ?? 0 }})
+        </button>
+
+        <!-- Articles Tab -->
+        <button
+            @click="activeTab = 'articles'"
+            :class="activeTab === 'articles'
+                ? 'bg-[#0D7A5F] text-white font-bold'
+                : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
+            class="px-4 py-2.5 transition tracking-wider whitespace-nowrap"
+        >
+            4. Artikel SEO ({{ $stats['total_articles'] ?? 0 }})
+        </button>
+
+        <!-- Schedules Tab -->
+        <button
+            @click="activeTab = 'schedules'"
+            :class="activeTab === 'schedules'
+                ? 'bg-[#0D7A5F] text-white font-bold'
+                : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
+            class="px-4 py-2.5 transition tracking-wider whitespace-nowrap"
+        >
+            5. Tiket/Jadwal
+        </button>
+
+        <!-- Coverage Tab -->
+        <button
+            @click="activeTab = 'coverage'"
+            :class="activeTab === 'coverage'
+                ? 'bg-[#0D7A5F] text-white font-bold'
+                : 'text-[#94A3B8] hover:text-white hover:bg-[#142338]'"
+            class="px-4 py-2.5 transition tracking-wider whitespace-nowrap"
+        >
+            6. Coverage Wilayah ({{ count($coverageStats) }})
+        </button>
+
+
+
+    </div>
+</div>
 
         <!-- ══════════════════════════════════════════════════════════════
              TAB 1: MANAJEMEN LAYANAN
@@ -236,10 +636,10 @@
         <!-- ══════════════════════════════════════════════════════════════
              TAB 2: DIREKTORI WILAYAH & HUB
              ══════════════════════════════════════════════════════════════ -->
-        <div x-show="activeTab === 'cities'" class="space-y-6">
+         <div x-show="activeTab === 'regions'" class="space-y-6">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#0B1526] p-4 border border-[#1E324E]">
                 <form method="GET" action="{{ route('admin.dashboard') }}" class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-                    <input type="hidden" name="tab" value="cities">
+                    <input type="hidden" name="tab" value="regions">
                     <input type="text" name="search_city" value="{{ request('search_city', $citySearch ?? '') }}" placeholder="Cari kota / alamat..."
                         class="bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-3 py-2 text-xs font-sans focus:border-[#0D7A5F] outline-none h-10 w-48">
                     <select name="filter_island" class="bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-3 py-2 text-xs font-sans focus:border-[#0D7A5F] outline-none h-10">
@@ -252,15 +652,26 @@
                 </form>
             </div>
 
+            <div class="mb-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="text-lg font-bold text-[#F1F5F9] font-space uppercase tracking-wider">Target Regions</span>
+                    <span class="px-2 py-0.5 bg-[#0D7A5F] text-white text-[10px] font-bold rounded-full font-space">
+                        TOTAL: 212
+                    </span>
+                </div>
+                <div class="text-[10px] text-[#64748B] font-space italic">
+                    Data imported from mapping_summary_v3.json
+                </div>
+            </div>
             <div class="bg-[#0B1526] border border-[#1E324E] overflow-x-auto">
                 <table class="w-full text-left text-xs font-sans border-collapse">
                     <thead class="bg-[#0F2038] border-b border-[#1E324E] text-[#94A3B8] font-space uppercase text-[11px] tracking-wider">
                         <tr>
-                            <th class="p-3"># ID</th>
-                            <th class="p-3">Kota / Kabupaten</th>
-                            <th class="p-3 hidden sm:table-cell">Provinsi / Island</th>
-                            <th class="p-3 hidden md:table-cell">Alamat / Koordinat</th>
-                            <th class="p-3">Status Hub</th>
+                            <th class="p-3">Index</th>
+                            <th class="p-3">Name</th>
+                            <th class="p-3">Classification</th>
+                            <th class="p-3">Status</th>
+                            <th class="p-3 text-center">Coverage</th>
                             <th class="p-3 text-right">Aksi</th>
                         </tr>
                     </thead>
@@ -272,25 +683,24 @@
                                 <a href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => $city->slug]) }}" target="_blank" class="hover:text-[#10B981] flex items-center gap-1 font-space">
                                     {{ $city->name }}<span class="text-[10px] text-[#64748B]">&nearr;</span>
                                 </a>
-                            </td>
-                            <td class="p-3 text-[#94A3B8] font-space hidden sm:table-cell">{{ $city->province ?? '-' }} ({{ $city->island ?? '-' }})</td>
-                            <td class="p-3 hidden md:table-cell">
-                                <span class="text-[#94A3B8] text-[10px] block">{{ $city->address ?? 'Belum diisi' }}</span>
-                                @if($city->lat && $city->lng)
-                                <span class="text-[#64748B] text-[10px] font-mono">{{ $city->lat }}, {{ $city->lng }}</span>
-                                @endif
-                            </td>
-                            <td class="p-3">
-                                @if($city->is_hub)
-                                    <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#0D7A5F] text-[#10B981] bg-[#0B1526] font-bold">&#9733; HUB</span>
-                                @else
-                                    <span class="text-[#64748B] font-space text-[10px]">Cabang</span>
-                                @endif
-                            </td>
-                            <td class="p-3 text-right font-space">
-                                <button @click="setEditingCity({{ json_encode($city) }})" class="text-[#38BDF8] hover:underline text-xs">Edit</button>
-                            </td>
-                        </tr>
+                           </td>
+                           <td class="p-3 font-space text-xs text-[#94A3B8]">
+                               {{ $city->classification ?? '-' }}
+                           </td>
+                           <td class="p-3">
+                               <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#0D7A5F] text-[#10B981] bg-[#0B1526] font-bold">
+                                   {{ $city->status ?? 'draft' }}
+                               </span>
+                           </td>
+                           <td class="p-3 text-center">
+                               <span class="text-[10px] font-space font-bold {{ $city->city_service_contents_count > 0 ? 'text-[#10B981]' : 'text-[#EF4444]' }}">
+                                   {{ $city->city_service_contents_count }} / {{ $stats['total_services'] ?? 0 }} SERVICES ACTIVE
+                               </span>
+                           </td>
+                           <td class="p-3 text-right font-space">
+                               <button @click="setEditingCity({{ json_encode($city) }})" class="text-[#38BDF8] hover:underline text-xs">Edit</button>
+                           </td>
+                       </tr>
                         @empty
                         <tr><td colspan="6" class="p-4 text-center text-[#94A3B8] font-space">Tidak ada data wilayah ditemukan.</td></tr>
                         @endforelse
@@ -302,109 +712,52 @@
             @endif
         </div>
 
-        <!-- ══════════════════════════════════════════════════════════════
+                <!-- ================================================================
              TAB 3: MANAJEMEN ARTIKEL SEO
-             ══════════════════════════════════════════════════════════════ -->
+             ================================================================ -->
         <div x-show="activeTab === 'articles'" class="space-y-6">
+
+            <!-- Article Toolbar -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#0B1526] p-4 border border-[#1E324E]">
-                <form method="GET" action="{{ route('admin.dashboard') }}" class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                <form method="GET"
+                      action="{{ route('admin.dashboard') }}"
+                      class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+
                     <input type="hidden" name="tab" value="articles">
-                    <input type="text" name="article_q" value="{{ request('article_q', $articleSearch ?? '') }}" placeholder="Cari judul atau keyword..."
-                        class="bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-3 py-2 text-xs font-sans focus:border-[#0D7A5F] outline-none h-10 w-48">
-                    <select name="article_category" class="bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-3 py-2 text-xs font-sans focus:border-[#0D7A5F] outline-none h-10">
+
+                    <input type="text"
+                           name="article_q"
+                           value="{{ request('article_q', $articleSearch ?? '') }}"
+                           placeholder="Cari judul atau keyword..."
+                           class="bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-3 py-2 text-xs font-sans focus:border-[#0D7A5F] outline-none h-10 w-48">
+
+                    <select name="article_category"
+                            class="bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-3 py-2 text-xs font-sans focus:border-[#0D7A5F] outline-none h-10">
                         <option value="">Semua Kategori</option>
-                        <option value="pelatihan" {{ request('article_category', $articleCategoryFilter ?? '') == 'pelatihan' ? 'selected' : '' }}>Pelatihan</option>
-                        <option value="kajian" {{ request('article_category', $articleCategoryFilter ?? '') == 'kajian' ? 'selected' : '' }}>Kajian K3</option>
-                        <option value="jasa" {{ request('article_category', $articleCategoryFilter ?? '') == 'jasa' ? 'selected' : '' }}>Jasa Teknis</option>
+                        <option value="pelatihan" {{ request('article_category', $articleCategoryFilter ?? '') == 'pelatihan' ? 'selected' : '' }}>
+                            Pelatihan
+                        </option>
+                        <option value="kajian" {{ request('article_category', $articleCategoryFilter ?? '') == 'kajian' ? 'selected' : '' }}>
+                            Kajian K3
+                        </option>
+                        <option value="jasa" {{ request('article_category', $articleCategoryFilter ?? '') == 'jasa' ? 'selected' : '' }}>
+                            Jasa Teknis
+                        </option>
                     </select>
-                    <button type="submit" class="bg-[#0F2038] hover:bg-[#142338] border border-[#1E324E] text-[#F1F5F9] px-4 py-2 text-xs font-space font-medium uppercase h-10 transition">Filter</button>
+
+                    <button type="submit"
+                            class="bg-[#0F2038] hover:bg-[#142338] border border-[#1E324E] text-[#F1F5F9] px-4 py-2 text-xs font-space font-medium uppercase h-10 transition">
+                        Filter
+                    </button>
                 </form>
-                <a href="{{ route('admin.articles.create') }}" class="bg-[#0D7A5F] hover:bg-[#10B981] text-white font-space font-medium text-xs px-5 py-2.5 uppercase tracking-wider h-10 transition flex items-center shrink-0">
+
+                <a href="{{ route('admin.articles.create') }}"
+                   class="bg-[#0D7A5F] hover:bg-[#10B981] text-white font-space font-medium text-xs px-5 py-2.5 uppercase tracking-wider h-10 transition flex items-center shrink-0">
                     + Tambah Artikel Baru
                 </a>
             </div>
 
-            <!-- AI Generation Engine -->
-            <div id="ai-generator-section" class="bg-[#0B1526] border border-[#1E324E] rounded-lg overflow-hidden">
-                <div class="px-4 py-3 border-b border-[#1E324E] bg-[#0F2038] flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 bg-[#10B981] animate-pulse"></span>
-                        <span class="font-space text-xs font-bold uppercase tracking-wider text-[#CBD5E1]">AI Article Generator (Gemma 4)</span>
-                    </div>
-                    <span class="text-[10px] text-[#64748B] font-mono">B2B CONTENT ENGINE</span>
-                </div>
-                <div class="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="space-y-3">
-                        <div>
-                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">Layanan *</label>
-                            <select id="ai_service_select" class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
-                                <option value="">-- Pilih Layanan --</option>
-                                @foreach($allServices as $s)
-                                    <option value="{{ $s->id }}" data-category="{{ $s->category }}">{{ $s->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">Kategori *</label>
-                            <select id="ai_category_select" class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
-                                <option value="pelatihan">Pelatihan</option>
-                                <option value="kajian">Kajian</option>
-                                <option value="jasa">Jasa</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">Kota Target *</label>
-                            <select id="ai_city_select" class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
-                                <option value="">-- Pilih Kota --</option>
-                                @foreach($allCities as $c)
-                                    <option value="{{ $c->id }}">{{ $c->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="space-y-3">
-                        <div>
-                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">Topik / Judul Spesifik</label>
-                            <input type="text" id="ai_topic" placeholder="Misal: Panduan Sertifikasi K3 Kimia" class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
-                        </div>
-                        <div>
-                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">Target Keyword</label>
-                            <input type="text" id="ai_keyword" placeholder="keyword utama, kota, layanan" class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
-                        </div>
-                        <div>
-                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">Kecamatan (Opsional)</label>
-                            <select id="ai_kecamatan_select" class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
-                                <option value="">-- Lewati --</option>
-                                @foreach($kecamatans as $k)
-                                    <option value="{{ $k->id }}">{{ $k->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="space-y-3">
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">Panjang (Kata)</label>
-                                <input type="number" id="ai_word_count" value="1500" class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
-                            </div>
-                            <div>
-                                <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">Nada Bahasa</label>
-                                <input type="text" id="ai_tone" value="Professional B2B" class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">Instruksi Tambahan</label>
-                            <textarea id="ai_instructions" rows="1" placeholder="Catatan khusus untuk AI..." class="w-full h-14 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 py-1 text-xs outline-none focus:border-[#0D7A5F] resize-none"></textarea>
-                        </div>
-                        <button @click="generateAiArticle()" x-ref="aiGenBtn" class="w-full h-10 bg-[#0D7A5F] hover:bg-[#10B981] text-white font-space font-bold text-[10px] uppercase tracking-widest transition rounded-sm flex items-center justify-center gap-2">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            Generate & Review Article
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Articles Table -->
+            <!-- Article List -->
             <div class="bg-[#0B1526] border border-[#1E324E] overflow-x-auto">
                 <table class="w-full text-left text-xs font-sans border-collapse">
                     <thead class="bg-[#0F2038] border-b border-[#1E324E] text-[#94A3B8] font-space uppercase text-[11px] tracking-wider">
@@ -418,68 +771,498 @@
                             <th class="p-3 text-right">Aksi</th>
                         </tr>
                     </thead>
+
                     <tbody class="divide-y divide-[#142338]">
                         @forelse($articles as $article)
-                        <tr class="bg-[#070D18] hover:bg-[#0B1526] transition">
-                            <td class="p-3 font-space text-[#64748B]">#{{ $article->id }}</td>
-                            <td class="p-3">
-                                <a href="{{ route('article.show', $article->slug) }}" target="_blank" class="font-space font-medium text-[#F1F5F9] hover:text-[#10B981] flex items-center gap-1">
-                                    {{ Str::limit($article->title, 55) }}
-                                    <span class="text-[10px] text-[#64748B]">&nearr;</span>
-                                </a>
-                                <span class="text-[10px] text-[#64748B] font-space block">/artikel/{{ $article->slug }}</span>
-                            </td>
-                            <td class="p-3 hidden sm:table-cell">
-                                @if($article->category)
-                                <span class="px-2 py-0.5 text-[10px] font-space uppercase border font-semibold
-                                    {{ $article->category == 'pelatihan' ? 'border-[#0D7A5F] text-[#10B981] bg-[#0B1526]' : '' }}
-                                    {{ $article->category == 'kajian' ? 'border-[#38BDF8] text-[#38BDF8] bg-[#0B1526]' : '' }}
-                                    {{ $article->category == 'jasa' ? 'border-[#D97706] text-[#F59E0B] bg-[#0B1526]' : '' }}">
-                                    {{ $article->category }}
-                                </span>
-                                @else
-                                <span class="text-[#64748B] text-[10px]">Generic</span>
-                                @endif
-                            </td>
-                            <td class="p-3 hidden md:table-cell font-space text-[#10B981] text-[11px]">
-                                {{ $article->city?->name ?? '— Semua Kota' }}
-                            </td>
-                            <td class="p-3 hidden lg:table-cell text-[#94A3B8] font-space">{{ $article->reading_time ?? '-' }} mnt</td>
-                            <td class="p-3">
-                                @if($article->status === 'published')
-                                <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#0D7A5F] text-[#10B981] bg-[#0B1526] font-bold">LIVE</span>
-                                @else
-                                <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#D97706] text-[#F59E0B] bg-[#0B1526]">DRAFT</span>
-                                @endif
-                            </td>
-                            <td class="p-3 text-right space-x-2 font-space">
-                                <a href="{{ route('admin.articles.edit', $article->id) }}" class="text-[#38BDF8] hover:underline text-xs">Edit</a>
-                                <form method="POST" action="{{ route('admin.articles.destroy', $article->id) }}" class="inline" onsubmit="return confirm('Hapus artikel ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-[#ffb4ab] hover:underline text-xs">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
+                            <tr class="bg-[#070D18] hover:bg-[#0B1526] transition">
+                                <td class="p-3 font-space text-[#64748B]">
+                                    #{{ $article->id }}
+                                </td>
+
+                                <td class="p-3">
+                                    <a href="{{ route('article.show', $article->slug) }}"
+                                       target="_blank"
+                                       class="font-space font-medium text-[#F1F5F9] hover:text-[#10B981] flex items-center gap-1">
+                                        {{ Str::limit($article->title, 55) }}
+                                        <span class="text-[10px] text-[#64748B]">&nearr;</span>
+                                    </a>
+                                </td>
+
+                                <td class="p-3 hidden sm:table-cell">
+                                    @if($article->category)
+                                        <span class="px-2 py-0.5 text-[10px] font-space uppercase border font-semibold
+                                            {{ $article->category === 'pelatihan' ? 'border-[#0D7A5F] text-[#10B981] bg-[#0B1526]' : '' }}
+                                            {{ $article->category === 'kajian' ? 'border-[#38BDF8] text-[#38BDF8] bg-[#0B1526]' : '' }}
+                                            {{ $article->category === 'jasa' ? 'border-[#D97706] text-[#F59E0B] bg-[#0B1526]' : '' }}">
+                                            {{ $article->category }}
+                                        </span>
+                                    @else
+                                        <span class="text-[#64748B] text-[10px]">Generic</span>
+                                    @endif
+                                </td>
+
+                                <td class="p-3 hidden md:table-cell font-space text-[#10B981] text-[11px]">
+                                    {{ $article->city?->name ?? '— Semua Kota' }}
+                                </td>
+
+                                <td class="p-3 hidden lg:table-cell text-[#94A3B8] font-space">
+                                    {{ $article->reading_time ?? '-' }} mnt
+                                </td>
+
+                                <td class="p-3">
+                                    @if($article->status === 'published')
+                                        <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#0D7A5F] text-[#10B981] bg-[#0B1526] font-bold">
+                                            LIVE
+                                        </span>
+                                    @else
+                                        <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#D97706] text-[#F59E0B] bg-[#0B1526]">
+                                            DRAFT
+                                        </span>
+                                    @endif
+                                </td>
+
+                                <td class="p-3 text-right space-x-2 font-space">
+                                    <a href="{{ route('admin.articles.edit', $article->id) }}"
+                                       class="text-[#38BDF8] hover:underline text-xs">
+                                        Edit
+                                    </a>
+
+                                    <form method="POST"
+                                          action="{{ route('admin.articles.destroy', $article->id) }}"
+                                          class="inline"
+                                          onsubmit="return confirm('Hapus artikel ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                                class="text-[#ffb4ab] hover:underline text-xs">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                         @empty
-                        <tr><td colspan="7" class="p-6 text-center text-[#94A3B8] font-space">
-                            Belum ada artikel.
-                        </td></tr>
+                            <tr>
+                                <td colspan="7"
+                                    class="p-6 text-center text-[#94A3B8] font-space">
+                                    Belum ada artikel.
+                                </td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
+
             @if(method_exists($articles, 'links'))
-            <div class="mt-4 font-space text-xs">{{ $articles->appends(request()->query())->links() }}</div>
+                <div class="mt-4 font-space text-xs">
+                    {{ $articles->appends(request()->query())->links() }}
+                </div>
             @endif
         </div>
 
-    </div><!-- /.max-w-7xl -->
 
-    <!-- ══════════════════════════════════════════════════════════════════
+        <!-- ================================================================
+             TAB 5: TIKET / JADWAL
+             ================================================================ -->
+        <div x-show="activeTab === 'schedules'" class="space-y-6">
+
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#0B1526] p-4 border border-[#1E324E]">
+
+                <form method="GET"
+                      action="{{ route('admin.dashboard') }}"
+                      class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+
+                    <input type="hidden" name="tab" value="schedules">
+
+                    <input type="text"
+                           name="schedule_q"
+                           value="{{ request('schedule_q', '') }}"
+                           placeholder="Cari layanan / kota / lokasi..."
+                           class="bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-3 py-2 text-xs font-sans focus:border-[#0D7A5F] outline-none h-10 w-56">
+
+                    <button type="submit"
+                            class="bg-[#0F2038] hover:bg-[#142338] border border-[#1E324E] text-[#F1F5F9] px-4 py-2 text-xs font-space font-medium uppercase h-10 transition">
+                        Filter
+                    </button>
+                </form>
+
+                <a href="{{ route('admin.schedules.create') }}"
+                   class="bg-[#0D7A5F] hover:bg-[#10B981] text-white font-space font-medium text-xs px-5 py-2.5 uppercase tracking-wider h-10 transition flex items-center shrink-0">
+                    + Buat Jadwal
+                </a>
+            </div>
+
+            <div class="bg-[#0B1526] border border-[#1E324E] overflow-x-auto">
+                <table class="w-full text-left text-xs font-sans border-collapse">
+                    <thead class="bg-[#0F2038] border-b border-[#1E324E] text-[#94A3B8] font-space uppercase text-[11px] tracking-wider">
+                        <tr>
+                            <th class="p-3">Layanan</th>
+                            <th class="p-3">Kota</th>
+                            <th class="p-3">Tanggal</th>
+                            <th class="p-3">Waktu</th>
+                            <th class="p-3 hidden md:table-cell">Lokasi</th>
+                            <th class="p-3 text-center">Kuota</th>
+                            <th class="p-3">Status</th>
+                            <th class="p-3 text-right">Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-[#142338]">
+                        @forelse($schedules as $schedule)
+                            <tr class="bg-[#070D18] hover:bg-[#0B1526] transition">
+
+                                <td class="p-3 font-medium text-[#F1F5F9]">
+                                    {{ $schedule->service?->name ?? '-' }}
+                                </td>
+
+                                <td class="p-3 text-[#CBD5E1]">
+                                    {{ $schedule->city?->name ?? '-' }}
+                                </td>
+
+                                <td class="p-3 font-space text-[#F1F5F9]">
+                                    {{ $schedule->date ? \Illuminate\Support\Carbon::parse($schedule->date)->format('d M Y') : '-' }}
+                                </td>
+
+                                <td class="p-3 font-space text-[#94A3B8]">
+                                    {{ $schedule->start_time ?? '-' }}
+                                    @if($schedule->end_time)
+                                        – {{ $schedule->end_time }}
+                                    @endif
+                                </td>
+
+                                <td class="p-3 hidden md:table-cell text-[#94A3B8]">
+                                    {{ $schedule->location ?? '-' }}
+                                </td>
+
+                                <td class="p-3 text-center font-mono text-[#F1F5F9]">
+                                    {{ $schedule->available_slots ?? 0 }}
+                                </td>
+
+                                <td class="p-3">
+                                    <span class="px-2 py-0.5 text-[10px] font-space uppercase border
+                                        {{ $schedule->status === 'published'
+                                            ? 'border-[#0D7A5F] text-[#10B981] bg-[#0B1526]'
+                                            : 'border-[#D97706] text-[#F59E0B] bg-[#0B1526]' }}">
+                                        {{ $schedule->status ?? 'draft' }}
+                                    </span>
+                                </td>
+
+                                <td class="p-3 text-right font-space whitespace-nowrap">
+                                    <a href="{{ route('admin.schedules.edit', $schedule->id) }}"
+                                       class="text-[#38BDF8] hover:underline text-xs">
+                                        Edit
+                                    </a>
+
+                                    <a href="{{ route('admin.schedules.show', $schedule->id) }}"
+                                       class="text-[#10B981] hover:underline text-xs ml-2">
+                                        View
+                                    </a>
+                                </td>
+
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="8"
+                                    class="p-6 text-center text-[#94A3B8] font-space">
+                                    Belum ada jadwal pelatihan.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            @if(method_exists($schedules, 'links'))
+                <div class="mt-4 font-space text-xs">
+                    {{ $schedules->appends(request()->query())->links() }}
+                </div>
+            @endif
+        </div>
+
+
+        <!-- ================================================================
+             TAB 6: COVERAGE WILAYAH
+             ================================================================ -->
+        <div x-show="activeTab === 'coverage'" class="space-y-6">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                <div class="bg-[#0B1526] border border-[#1E324E] p-4">
+                    <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                        Total Kota Monitored
+                    </div>
+                    <div class="text-2xl font-bold text-[#F1F5F9] mt-1 font-space">
+                        {{ count($coverageStats) }}
+                    </div>
+                </div>
+
+                <div class="bg-[#0B1526] border border-[#1E324E] p-4">
+                    <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                        Kota dengan Artikel
+                    </div>
+                    <div class="text-2xl font-bold text-[#10B981] mt-1 font-space">
+                        {{ $coverageStats->where('article_count', '>', 0)->count() }}
+                    </div>
+                </div>
+
+                <div class="bg-[#0B1526] border border-[#1E324E] p-4">
+                    <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                        Kota dengan Maps
+                    </div>
+                    <div class="text-2xl font-bold text-[#38BDF8] mt-1 font-space">
+                        {{ $coverageStats->where('location_count', '>', 0)->count() }}
+                    </div>
+                </div>
+
+                <div class="bg-[#0B1526] border border-[#1E324E] p-4">
+                    <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                        Butuh Perhatian
+                    </div>
+                    <div class="text-2xl font-bold text-[#EF4444] mt-1 font-space">
+                        {{ $coverageStats->where('article_count', 0)->where('location_count', 0)->count() }}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bg-[#0B1526] border border-[#1E324E] overflow-x-auto">
+                <table class="w-full text-left text-xs font-sans border-collapse">
+                    <thead class="bg-[#0F2038] border-b border-[#1E324E] text-[#94A3B8] font-space uppercase text-[11px] tracking-wider">
+                        <tr>
+                            <th class="p-3">Kota</th>
+                            <th class="p-3 text-center">Artikel</th>
+                            <th class="p-3 text-center">Maps</th>
+                            <th class="p-3 text-center">Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-[#142338]">
+                        @forelse($coverageStats as $stat)
+                            <tr class="bg-[#070D18] hover:bg-[#0B1526] transition">
+                                <td class="p-3 font-medium text-[#F1F5F9]">
+                                    {{ $stat['city_name'] }}
+                                </td>
+
+                                <td class="p-3 text-center font-mono">
+                                    <span class="{{ $stat['article_count'] > 0 ? 'text-[#10B981]' : 'text-[#64748B]' }}">
+                                        {{ $stat['article_count'] }}
+                                    </span>
+                                </td>
+
+                                <td class="p-3 text-center font-mono">
+                                    <span class="{{ $stat['location_count'] > 0 ? 'text-[#38BDF8]' : 'text-[#64748B]' }}">
+                                        {{ $stat['location_count'] }}
+                                    </span>
+                                </td>
+
+                                <td class="p-3 text-center">
+                                    @php
+                                        $status = 'Belum lengkap';
+
+                                        if ($stat['article_count'] > 0 && $stat['location_count'] > 0) {
+                                            $status = 'Lengkap';
+                                        } elseif ($stat['article_count'] > 0) {
+                                            $status = 'Maps belum tersedia';
+                                        } elseif ($stat['location_count'] > 0) {
+                                            $status = 'Artikel belum tersedia';
+                                        }
+                                    @endphp
+
+                                    @if($status === 'Lengkap')
+                                        <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#10B981] text-[#10B981] bg-[#0B1526] font-bold">
+                                            {{ $status }}
+                                        </span>
+                                    @elseif($status === 'Belum lengkap')
+                                        <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#EF4444] text-[#EF4444] bg-[#1A0D0D] font-bold">
+                                            {{ $status }}
+                                        </span>
+                                    @else
+                                        <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#F59E0B] text-[#F59E0B] bg-[#0B1526] font-bold">
+                                            {{ $status }}
+                                        </span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4"
+                                    class="p-4 text-center text-[#94A3B8] font-space">
+                                    Tidak ada data coverage ditemukan.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+        <!-- ================================================================
+             TAB 7: AI ARTICLE GENERATOR
+             ================================================================ -->
+        <div x-show="activeTab === 'ai'" class="space-y-6">
+
+            <div id="ai-generator-section"
+                 class="bg-[#0B1526] border border-[#1E324E] overflow-hidden">
+
+                <div class="px-4 py-3 border-b border-[#1E324E] bg-[#0F2038] flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-[#10B981] animate-pulse"></span>
+                        <span class="font-space text-xs font-bold uppercase tracking-wider text-[#CBD5E1]">
+                            AI Article Generator
+                        </span>
+                    </div>
+
+                    <span class="text-[10px] text-[#64748B] font-mono">
+                        B2B CONTENT ENGINE
+                    </span>
+                </div>
+
+                <div class="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">
+                                Layanan *
+                            </label>
+
+                            <select id="ai_service_select"
+                                    class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
+                                <option value="">-- Pilih Layanan --</option>
+                                @foreach($allServices as $s)
+                                    <option value="{{ $s->id }}"
+                                            data-category="{{ $s->category }}">
+                                        {{ $s->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">
+                                Kategori *
+                            </label>
+
+                            <select id="ai_category_select"
+                                    class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
+                                <option value="pelatihan">Pelatihan</option>
+                                <option value="kajian">Kajian</option>
+                                <option value="jasa">Jasa</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">
+                                Kota Target *
+                            </label>
+
+                            <select id="ai_city_select"
+                                    class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
+                                <option value="">-- Pilih Kota --</option>
+                                @foreach($allCities as $c)
+                                    <option value="{{ $c->id }}">
+                                        {{ $c->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">
+                                Topik / Judul Spesifik
+                            </label>
+
+                            <input type="text"
+                                   id="ai_topic"
+                                   placeholder="Misal: Panduan Sertifikasi K3 Kimia"
+                                   class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
+                        </div>
+
+                        <div>
+                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">
+                                Target Keyword
+                            </label>
+
+                            <input type="text"
+                                   id="ai_keyword"
+                                   placeholder="keyword utama, kota, layanan"
+                                   class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
+                        </div>
+
+                        <div>
+                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">
+                                Kecamatan
+                            </label>
+
+                            <select id="ai_kecamatan_select"
+                                    class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
+                                <option value="">-- Lewati --</option>
+
+                                @foreach($kecamatans as $k)
+                                    <option value="{{ $k->id }}">
+                                        {{ $k->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="space-y-3">
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">
+                                    Panjang
+                                </label>
+
+                                <input type="number"
+                                       id="ai_word_count"
+                                       value="1500"
+                                       class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
+                            </div>
+
+                            <div>
+                                <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">
+                                    Nada Bahasa
+                                </label>
+
+                                <input type="text"
+                                       id="ai_tone"
+                                       value="Professional B2B"
+                                       class="w-full h-9 bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 text-xs outline-none focus:border-[#0D7A5F]">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block font-space text-[9px] uppercase text-[#64748B] mb-1">
+                                Instruksi Tambahan
+                            </label>
+
+                            <textarea id="ai_instructions"
+                                      rows="2"
+                                      class="w-full bg-[#080E19] border border-[#1E324E] text-[#F1F5F9] px-2 py-2 text-xs outline-none focus:border-[#0D7A5F] resize-y"
+                                      placeholder="Catatan khusus untuk AI..."></textarea>
+                        </div>
+
+                        <button type="button"
+                                @click="generateAiArticle()"
+                                x-ref="aiGenBtn"
+                                class="w-full h-10 bg-[#0D7A5F] hover:bg-[#10B981] text-white font-space font-bold text-[10px] uppercase tracking-widest transition flex items-center justify-center gap-2">
+                            Generate AI Article
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+                <!-- ══════════════════════════════════════════════════════════════════
          ROOT MODAL 1: EDIT SERVICE
          ══════════════════════════════════════════════════════════════════ -->
-    <div x-show="editingService !== null" x-cloak x-transition.opacity class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
+        <div x-show="editingService !== null" x-cloak x-transition.opacity class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
         <div class="bg-[#0B1526] border border-[#1E324E] w-full max-w-xl max-h-[90vh] overflow-y-auto" @click.away="editingService = null">
             <div class="px-5 py-4 border-b border-[#1E324E] flex items-center justify-between">
                 <span class="font-space font-bold text-sm text-[#F1F5F9] uppercase">Edit Layanan K3</span>
@@ -537,9 +1320,9 @@
                 </form>
             </template>
         </div>
-    </div>
-    <div style="display:none;">Katalog Master Layanan K3</div>
-    <div style="display:none;">Live SERP Preview</div>
+        </div>
+        <div style="display:none;">Katalog Master Layanan K3</div>
+        <div style="display:none;">Live SERP Preview</div>
 
     <!-- ══════════════════════════════════════════════════════════════════
          ROOT MODAL 2: TAMBAH LAYANAN BARU
@@ -650,16 +1433,119 @@
     </div>
 
 
-     <!-- ══════════════════════════════════════════════════════════════════
-          TAB 4: COVERAGE WILAYAH
-          ══════════════════════════════════════════════════════════════════ -->
-     {{-- Begin commented out coverage tab to avoid rendering errors --}}
-     @php $status = '' ; $statusClass = '' ; @endphp
-     <div x-show=\"activeTab === 'coverage'\" class=\"space-y-6\">
-        <div class=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4\">\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Total Kota Monitored</div>\n                <div class=\"text-2xl font-bold text-[#F1F5F9] mt-1 font-space\">{{ count($coverageStats) }}</div>\n            </div>\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Kota dengan Artikel</div>\n                <div class=\"text-2xl font-bold text-[#10B981] mt-1 font-space\">{{ $coverageStats->where('article_count', '>', 0)->count() }}</div>\n            </div>\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Kota dengan Maps</div>\n                <div class=\"text-2xl font-bold text-[#38BDF8] mt-1 font-space\">{{ $coverageStats->where('location_count', '>', 0)->count() }}</div>\n            </div>\n            <div class=\"bg-[#0B1526] border border-[#1E324E] p-4\">\n                <div class=\"text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider\">Butuh Perhatian</div>\n                <div class=\"text-2xl font-bold text-[#EF4444] mt-1 font-space\">{{ $coverageStats->where('article_count', 0)->where('location_count', 0)->count() }}</div>\n            </div>\n        </div>
+    <!--  ═════════════════════════════════════
+        TAB 6: COVERAGE WILAYAH
+        ═════════════════════════════════════ 
+    <div x-show="activeTab === 'coverage'" class="space-y-6">
 
-        <div class=\"bg-[#0B1526] border border-[#1E324E] overflow-x-auto\">\n            <table class=\"w-full text-left text-xs font-sans border-collapse\">\n                <thead class=\"bg-[#0F2038] border-b border-[#1E324E] text-[#94A3B8] font-space uppercase text-[11px] tracking-wider\">\n                    <tr>\n                        <th class=\"p-3\">Kota</th>\n                        <th class=\"p-3 text-center\">Artikel</th>\n                        <th class=\"p-3 text-center\">Maps</th>\n                        <th class=\"p-3 text-center\">Status</th>\n                    </tr>\n                </thead>\n                <tbody class=\"divide-y divide-[#142338]\">\n                    @forelse($coverageStats as $stat)\n                    <tr class=\"bg-[#070D18] hover:bg-[#0B1526] transition\">\n                        <td class=\"p-3 font-medium text-[#F1F5F9]\">\n                            {{ $stat['city_name'] }}\n                        </td>\n                        <td class=\"p-3 text-center font-mono\">\n                            <span class=\"{{ $stat['article_count'] > 0 ? 'text-[#10B981]' : 'text-[#64748B]' }}\">\n                                {{ $stat['article_count'] }}\n                            </span>\n                        </td>\n                        <td class=\"p-3 text-center font-mono\">\n                            <span class=\"{{ $stat['location_count'] > 0 ? 'text-[#38BDF8]' : 'text-[#64748B]' }}\">\n                                {{ $stat['location_count'] }}\n                            </span>\n                        </td>\n                        <td class=\"p-3 text-center\">\n                            @php\n                                $status = 'Belum lengkap';\n                                $statusClass = 'border-[#EF4444] text-[#EF4444] bg-[#1A0D0D]';\n                                if ($stat['article_count'] > 0 && $stat['location_count'] > 0)\n                                    $status = 'Lengkap';\n                                elseif ($stat['article_count'] > 0)\n                                    $status = 'Maps belum tersedia';\n                                elseif ($stat['location_count'] > 0)\n                                    $status = 'Artikel belum tersedia';\n                            @endphp\n                            @if($status === 'Lengkap')\n                                <span class=\"px-2 py-0.5 text-[10px] font-space uppercase border border-[#10B981] text-[#10B981] bg-[#0B1526] font-bold\">\n                                    {{ $status }}\n                                </span>\n                            @elseif($status === 'Belum lengkap')\n                                <span class=\"px-2 py-0.5 text-[10px] font-space uppercase border border-[#EF4444] text-[#EF4444] bg-[#1A0D0D] font-bold\">\n                                    {{ $status }}\n                                </span>\n                            @else\n                                <span class=\"px-2 py-0.5 text-[10px] font-space uppercase border border-[#F59E0B] text-[#F59E0B] bg-[#0B1526] font-bold\">\n                                    {{ $status }}\n                                </span>\n                            @endif\n                        </td>\n                    </tr>\n                    @empty\n                    <tr>\n                        <td colspan=\"4\" class=\"p-4 text-center text-[#94A3B8] font-space\">Tidak ada data coverage ditemukan.</td>\n                    </tr>\n                    @endforelse\n                </tbody>\n            </table>\n        </div>\n    </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-[#0B1526] border border-[#1E324E] p-4">
+                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                    Total Kota Monitored
+                </div>
+                <div class="text-2xl font-bold text-[#F1F5F9] mt-1 font-space">
+                    {{ count($coverageStats) }}
+                </div>
+            </div>
 
-</div>
- --}}
+            <div class="bg-[#0B1526] border border-[#1E324E] p-4">
+                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                    Kota dengan Artikel
+                </div>
+                <div class="text-2xl font-bold text-[#10B981] mt-1 font-space">
+                    {{ $coverageStats->where('article_count', '>', 0)->count() }}
+                </div>
+            </div>
+
+            <div class="bg-[#0B1526] border border-[#1E324E] p-4">
+                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                    Kota dengan Maps
+                </div>
+                <div class="text-2xl font-bold text-[#38BDF8] mt-1 font-space">
+                    {{ $coverageStats->where('location_count', '>', 0)->count() }}
+                </div>
+            </div>
+
+            <div class="bg-[#0B1526] border border-[#1E324E] p-4">
+                <div class="text-[10px] uppercase font-space font-bold text-[#94A3B8] tracking-wider">
+                    Butuh Perhatian
+                </div>
+                <div class="text-2xl font-bold text-[#EF4444] mt-1 font-space">
+                    {{ $coverageStats->where('article_count', 0)->where('location_count', 0)->count() }}
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-[#0B1526] border border-[#1E324E] overflow-x-auto">
+            <table class="w-full text-left text-xs font-sans border-collapse">
+                <thead class="bg-[#0F2038] border-b border-[#1E324E] text-[#94A3B8] font-space uppercase text-[11px] tracking-wider">
+                    <tr>
+                        <th class="p-3">Kota</th>
+                        <th class="p-3 text-center">Artikel</th>
+                        <th class="p-3 text-center">Maps</th>
+                        <th class="p-3 text-center">Status</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-[#142338]">
+                    @forelse($coverageStats as $stat)
+                        <tr class="bg-[#070D18] hover:bg-[#0B1526] transition">
+                            <td class="p-3 font-medium text-[#F1F5F9]">
+                                {{ $stat['city_name'] }}
+                            </td>
+
+                            <td class="p-3 text-center font-mono">
+                                <span class="{{ $stat['article_count'] > 0 ? 'text-[#10B981]' : 'text-[#64748B]' }}">
+                                    {{ $stat['article_count'] }}
+                                </span>
+                            </td>
+
+                            <td class="p-3 text-center font-mono">
+                                <span class="{{ $stat['location_count'] > 0 ? 'text-[#38BDF8]' : 'text-[#64748B]' }}">
+                                    {{ $stat['location_count'] }}
+                                </span>
+                            </td>
+
+                            <td class="p-3 text-center">
+                                @php
+                                    $status = 'Belum lengkap';
+
+                                    if ($stat['article_count'] > 0 && $stat['location_count'] > 0) {
+                                        $status = 'Lengkap';
+                                    } elseif ($stat['article_count'] > 0) {
+                                        $status = 'Maps belum tersedia';
+                                    } elseif ($stat['location_count'] > 0) {
+                                        $status = 'Artikel belum tersedia';
+                                    }
+                                @endphp
+
+                                @if($status === 'Lengkap')
+                                    <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#10B981] text-[#10B981] bg-[#0B1526] font-bold">
+                                        {{ $status }}
+                                    </span>
+                                @elseif($status === 'Belum lengkap')
+                                    <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#EF4444] text-[#EF4444] bg-[#1A0D0D] font-bold">
+                                        {{ $status }}
+                                    </span>
+                                @else
+                                    <span class="px-2 py-0.5 text-[10px] font-space uppercase border border-[#F59E0B] text-[#F59E0B] bg-[#0B1526] font-bold">
+                                        {{ $status }}
+                                    </span>
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="p-4 text-center text-[#94A3B8] font-space">
+                                Tidak ada data coverage ditemukan.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        </div>
+
+    </div> -->
 @endsection

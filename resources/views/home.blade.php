@@ -29,7 +29,7 @@
                     <a href="#widget-kota" class="btn-secondary">
                         Pilih 212 Kota Pelaksanaan
                     </a>
-                    <a href="https://wa.me/6281234567890" target="_blank" class="btn-whatsapp">
+                    <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="btn-whatsapp">
                         Hubungi Hotline WhatsApp
                     </a>
                 </div>
@@ -65,7 +65,7 @@
                         <span class="text-[11px] font-space text-[#10B981] uppercase font-semibold">RESPON &lt; 5 MENIT</span>
                     </div>
 
-                    <form action="#" method="POST" onsubmit="event.preventDefault(); window.open('https://wa.me/6281234567890?text=' + encodeURIComponent('Halo Admin TrainingKota, saya ingin konsultasi program K3 di kota saya.'), '_blank');" class="space-y-4">
+                    <form action="#" method="POST" onsubmit="event.preventDefault(); window.open('https://wa.me/{{ config('contact.whatsapp') }}?text=' + encodeURIComponent('Halo Admin TrainingKota, saya ingin konsultasi program K3 di kota saya.'), '_blank');" class="space-y-4">
                         <div>
                             <label class="block text-xs font-space uppercase text-[#94A3B8] mb-1 tracking-wider">Pilih Kategori Kebutuhan</label>
                             <select id="quick-category" class="input-k3 w-full" onchange="window.location.href='/' + this.value">
@@ -317,3 +317,4 @@ function filterCities(query) {
 }
 </script>
 @endsection
+

@@ -33,7 +33,7 @@
                     <a href="#jadwal" class="btn-secondary">
                         Cek Jadwal & Kuota Kota
                     </a>
-                    <a href="https://wa.me/6281234567890" target="_blank" class="btn-whatsapp">
+                    <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="btn-whatsapp">
                         Konsultasi Cepat
                     </a>
                 </div>
@@ -373,12 +373,12 @@
                 <div class="bg-[#070D18] border border-[#1E324E] p-6 flex flex-col justify-between">
                     <div>
                         <div class="text-[11px] font-space uppercase tracking-wider text-[#64748B] mb-2">Fast Response Corporate Desk</div>
-                        <div class="text-lg font-bold font-space text-[#25D366] mb-1">+62 812-3456-7890</div>
+                        <div class="text-lg font-bold font-space text-[#25D366] mb-1">{{ config('contact.display') }}</div>
                         <div class="text-xs text-[#94A3B8]">Email: halo@trainingkota.my.id</div>
                     </div>
 
                     <div class="pt-6 mt-6 border-t border-[#1E324E] flex flex-wrap gap-3">
-                        <a href="https://wa.me/6281234567890" target="_blank" class="btn-whatsapp text-xs py-2.5 px-4 w-full text-center">
+                        <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="btn-whatsapp text-xs py-2.5 px-4 w-full text-center">
                             Chat via WhatsApp
                         </a>
                     </div>
@@ -388,3 +388,4 @@
     </div>
 </section>
 @endsection
+

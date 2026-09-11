@@ -1,0 +1,2989 @@
+{
+    "total_verified_cities": 150,
+    "total_districts": 2083,
+    "details": {
+        "12.71": {
+            "regency_name": "Kota Medan",
+            "district_count": 21,
+            "districts": [
+                "Medan Kota",
+                "Medan Sunggal",
+                "Medan Helvetia",
+                "Medan Denai",
+                "Medan Barat",
+                "Medan Deli",
+                "Medan Tuntungan",
+                "Medan Belawan",
+                "Medan Amplas",
+                "Medan Area",
+                "Medan Johor",
+                "Medan Marelan",
+                "Medan Labuhan",
+                "Medan Tembung",
+                "Medan Maimun",
+                "Medan Polonia",
+                "Medan Baru",
+                "Medan Perjuangan",
+                "Medan Petisah",
+                "Medan Timur",
+                "Medan Selayang"
+            ]
+        },
+        "14.71": {
+            "regency_name": "Kota Pekanbaru",
+            "district_count": 15,
+            "districts": [
+                "Sukajadi",
+                "Pekanbaru Kota",
+                "Sail",
+                "Limapuluh",
+                "Senapelan",
+                "Rumbai Barat",
+                "Bukit Raya",
+                "Binawidya",
+                "Marpoyan Damai",
+                "Tenayan Raya",
+                "Payung Sekaki",
+                "Rumbai",
+                "Tuahmadani",
+                "Kulim",
+                "Rumbai Timur"
+            ]
+        },
+        "13.71": {
+            "regency_name": "Kota Padang",
+            "district_count": 11,
+            "districts": [
+                "Padang Selatan",
+                "Padang Timur",
+                "Padang Barat",
+                "Padang Utara",
+                "Bungus Teluk Kabung",
+                "Lubuk Begalung",
+                "Lubuk Kilangan",
+                "Pauh",
+                "Kuranji",
+                "Nanggalo",
+                "Koto Tangah"
+            ]
+        },
+        "21.71": {
+            "regency_name": "Kota Batam",
+            "district_count": 12,
+            "districts": [
+                "Belakang Padang",
+                "Batu Ampar",
+                "Sekupang",
+                "Nongsa",
+                "Bulang",
+                "Lubuk Baja",
+                "Sei Beduk",
+                "Galang",
+                "Bengkong",
+                "Batam Kota",
+                "Sagulung",
+                "Batu Aji"
+            ]
+        },
+        "15.71": {
+            "regency_name": "Kota Jambi",
+            "district_count": 11,
+            "districts": [
+                "Telanaipura",
+                "Jambi Selatan",
+                "Jambi Timur",
+                "Pasar Jambi",
+                "Pelayangan",
+                "Danau Teluk",
+                "Kota Baru",
+                "Jelutung",
+                "Alam Barajo",
+                "Danau Sipin",
+                "Paal Merah"
+            ]
+        },
+        "16.71": {
+            "regency_name": "Kota Palembang",
+            "district_count": 18,
+            "districts": [
+                "Ilir Barat Dua",
+                "Seberang Ulu Satu",
+                "Seberang Ulu Dua",
+                "Ilir Barat Satu",
+                "Ilir Timur Satu",
+                "Ilir Timur Dua",
+                "Sukarami",
+                "Sako",
+                "Kemuning",
+                "Kalidoni",
+                "Bukitkecil",
+                "Gandus",
+                "Kertapati",
+                "Plaju",
+                "Alang-alang Lebar",
+                "Sematangborang",
+                "Jakabaring",
+                "Ilir Timur Tiga"
+            ]
+        },
+        "18.71": {
+            "regency_name": "Kota Bandar Lampung",
+            "district_count": 20,
+            "districts": [
+                "Kedaton",
+                "Sukarame",
+                "Tanjungkarang Barat",
+                "Panjang",
+                "Tanjungkarang Timur",
+                "Tanjungkarang Pusat",
+                "Telukbetung Selatan",
+                "Telukbetung Barat",
+                "Telukbetung Utara",
+                "Rajabasa",
+                "Tanjung Senang",
+                "Sukabumi",
+                "Kemiling",
+                "Labuhan Ratu",
+                "Way Halim",
+                "Langkapura",
+                "Enggal",
+                "Kedamaian",
+                "Telukbetung Timur",
+                "Bumi Waras"
+            ]
+        },
+        "36.72": {
+            "regency_name": "Kota Cilegon",
+            "district_count": 8,
+            "districts": [
+                "Cibeber",
+                "Cilegon",
+                "Pulomerak",
+                "Ciwandan",
+                "Jombang",
+                "Gerogol",
+                "Purwakarta",
+                "Citangkil"
+            ]
+        },
+        "36.73": {
+            "regency_name": "Kota Serang",
+            "district_count": 6,
+            "districts": [
+                "Serang",
+                "Kasemen",
+                "Walantaka",
+                "Curug",
+                "Cipocok Jaya",
+                "Taktakan"
+            ]
+        },
+        "32.15": {
+            "regency_name": "Kabupaten Karawang",
+            "district_count": 30,
+            "districts": [
+                "Karawang Barat",
+                "Pangkalan",
+                "Telukjambe Timur",
+                "Ciampel",
+                "Klari",
+                "Rengasdengklok",
+                "Kutawaluya",
+                "Batujaya",
+                "Tirtajaya",
+                "Pedes",
+                "Cibuaya",
+                "Pakisjaya",
+                "Cikampek",
+                "Jatisari",
+                "Cilamaya Wetan",
+                "Tirtamulya",
+                "Telagasari",
+                "Rawamerta",
+                "Lemahabang",
+                "Tempuran",
+                "Majalaya",
+                "Jayakerta",
+                "Cilamaya Kulon",
+                "Banyusari",
+                "Kota Baru",
+                "Karawang Timur",
+                "Telukjambe Barat",
+                "Tegalwaru",
+                "Purwasari",
+                "Cilebar"
+            ]
+        },
+        "34.71": {
+            "regency_name": "Kota Yogyakarta",
+            "district_count": 14,
+            "districts": [
+                "Tegalrejo",
+                "Jetis",
+                "Gondokusuman",
+                "Danurejan",
+                "Gedongtengen",
+                "Ngampilan",
+                "Wirobrajan",
+                "Mantrijeron",
+                "Kraton",
+                "Gondomanan",
+                "Pakualaman",
+                "Mergangsan",
+                "Umbulharjo",
+                "Kotagede"
+            ]
+        },
+        "35.78": {
+            "regency_name": "Kota Surabaya",
+            "district_count": 31,
+            "districts": [
+                "Karang Pilang",
+                "Wonocolo",
+                "Rungkut",
+                "Wonokromo",
+                "Tegalsari",
+                "Sawahan",
+                "Genteng",
+                "Gubeng",
+                "Sukolilo",
+                "Tambaksari",
+                "Simokerto",
+                "Pabean Cantian",
+                "Bubutan",
+                "Tandes",
+                "Krembangan",
+                "Semampir",
+                "Kenjeran",
+                "Lakarsantri",
+                "Benowo",
+                "Wiyung",
+                "Dukuh Pakis",
+                "Gayungan",
+                "Jambangan",
+                "Tenggilis Mejoyo",
+                "Gunung Anyar",
+                "Mulyorejo",
+                "Sukomanunggal",
+                "Asem Rowo",
+                "Bulak",
+                "Pakal",
+                "Sambikerep"
+            ]
+        },
+        "52.04": {
+            "regency_name": "Kabupaten Sumbawa",
+            "district_count": 24,
+            "districts": [
+                "Lunyuk",
+                "Alas",
+                "Utan",
+                "Batu Lanteh",
+                "Sumbawa",
+                "Moyo Hilir",
+                "Moyo Hulu",
+                "Ropang",
+                "Lape",
+                "Plampang",
+                "Empang",
+                "Alas Barat",
+                "Labuhan Badas",
+                "Labangka",
+                "Buer",
+                "Rhee",
+                "Unter Iwes",
+                "Moyo Utara",
+                "Maronge",
+                "Tarano",
+                "Lopok",
+                "Lenangguar",
+                "Orong Telu",
+                "Lantung"
+            ]
+        },
+        "64.71": {
+            "regency_name": "Kota Balikpapan",
+            "district_count": 6,
+            "districts": [
+                "Balikpapan Timur",
+                "Balikpapan Barat",
+                "Balikpapan Utara",
+                "Balikpapan Tengah",
+                "Balikpapan Selatan",
+                "Balikpapan Kota"
+            ]
+        },
+        "64.72": {
+            "regency_name": "Kota Samarinda",
+            "district_count": 10,
+            "districts": [
+                "Palaran",
+                "Samarinda Seberang",
+                "Samarinda Ulu",
+                "Samarinda Ilir",
+                "Samarinda Utara",
+                "Sungai Kunjang",
+                "Sambutan",
+                "Sungai Pinang",
+                "Samarinda Kota",
+                "Loa Janan Ilir"
+            ]
+        },
+        "64.02": {
+            "regency_name": "Kabupaten Kutai Kartanegara",
+            "district_count": 20,
+            "districts": [
+                "Muara Muntai",
+                "Loa Kulu",
+                "Loa Janan",
+                "Anggana",
+                "Muara Badak",
+                "Tenggarong",
+                "Sebulu",
+                "Kota Bangun",
+                "Kenohan",
+                "Kembang Janggut",
+                "Muara Kaman",
+                "Tabang",
+                "Samboja",
+                "Muara Jawa",
+                "Sanga Sanga",
+                "Tenggarong Seberang",
+                "Marang Kayu",
+                "Muara Wis",
+                "Kota Bangun Darat",
+                "Samboja Barat"
+            ]
+        },
+        "63.71": {
+            "regency_name": "Kota Banjarmasin",
+            "district_count": 5,
+            "districts": [
+                "Banjarmasin Selatan",
+                "Banjarmasin Timur",
+                "Banjarmasin Barat",
+                "Banjarmasin Utara",
+                "Banjarmasin Tengah"
+            ]
+        },
+        "61.71": {
+            "regency_name": "Kota Pontianak",
+            "district_count": 6,
+            "districts": [
+                "Pontianak Selatan",
+                "Pontianak Timur",
+                "Pontianak Barat",
+                "Pontianak Utara",
+                "Pontianak Kota",
+                "Pontianak Tenggara"
+            ]
+        },
+        "73.71": {
+            "regency_name": "Kota Makassar",
+            "district_count": 15,
+            "districts": [
+                "Mariso",
+                "Mamajang",
+                "Makassar",
+                "Ujung Pandang",
+                "Wajo",
+                "Bontoala",
+                "Tallo",
+                "Ujung Tanah",
+                "Panakkukang",
+                "Tamalate",
+                "Biringkanaya",
+                "Manggala",
+                "Rappocini",
+                "Tamalanrea",
+                "Kepulauan Sangkarrang"
+            ]
+        },
+        "72.06": {
+            "regency_name": "Kabupaten Morowali",
+            "district_count": 10,
+            "districts": [
+                "Bungku Tengah",
+                "Bungku Selatan",
+                "Menui Kepulauan",
+                "Bungku Barat",
+                "Bumi Raya",
+                "Bahodopi",
+                "Wita Ponda",
+                "Bungku Pesisir",
+                "Bungku Timur",
+                "Sombori Kepulauan"
+            ]
+        },
+        "71.71": {
+            "regency_name": "Kota Manado",
+            "district_count": 11,
+            "districts": [
+                "Bunaken",
+                "Tuminting",
+                "Singkil",
+                "Wenang",
+                "Tikala",
+                "Sario",
+                "Wanea",
+                "Mapanget",
+                "Malalayang",
+                "Bunaken Kepulauan",
+                "Paal Dua"
+            ]
+        },
+        "82.71": {
+            "regency_name": "Kota Ternate",
+            "district_count": 8,
+            "districts": [
+                "Pulau Ternate",
+                "Kota Ternate Selatan",
+                "Kota Ternate Utara",
+                "Moti",
+                "Pulau Batang Dua",
+                "Kota Ternate Tengah",
+                "Pulau Hiri",
+                "Ternate Barat"
+            ]
+        },
+        "64.74": {
+            "regency_name": "Kota Bontang",
+            "district_count": 3,
+            "districts": [
+                "Bontang Utara",
+                "Bontang Selatan",
+                "Bontang Barat"
+            ]
+        },
+        "76.02": {
+            "regency_name": "Kabupaten Mamuju",
+            "district_count": 11,
+            "districts": [
+                "Mamuju",
+                "Tapalang",
+                "Kalukku",
+                "Kalumpang",
+                "Papalang",
+                "Sampaga",
+                "Tommo",
+                "Simboro",
+                "Tapalang Barat",
+                "Bonehau",
+                "Kepulauan Bala Balakang"
+            ]
+        },
+        "14.72": {
+            "regency_name": "Kota Dumai",
+            "district_count": 7,
+            "districts": [
+                "Dumai Barat",
+                "Dumai Timur",
+                "Bukit Kapur",
+                "Sungai Sembilan",
+                "Medang Kampai",
+                "Dumai Kota",
+                "Dumai Selatan"
+            ]
+        },
+        "35.25": {
+            "regency_name": "Kabupaten Gresik",
+            "district_count": 18,
+            "districts": [
+                "Dukun",
+                "Balongpanggang",
+                "Panceng",
+                "Benjeng",
+                "Duduksampeyan",
+                "Wringinanom",
+                "Ujungpangkah",
+                "Kedamean",
+                "Sidayu",
+                "Manyar",
+                "Cerme",
+                "Bungah",
+                "Menganti",
+                "Kebomas",
+                "Driyorejo",
+                "Gresik",
+                "Sangkapura",
+                "Tambak"
+            ]
+        },
+        "16.74": {
+            "regency_name": "Kota Prabumulih",
+            "district_count": 6,
+            "districts": [
+                "Prabumulih Barat",
+                "Prabumulih Timur",
+                "Cambai",
+                "Rambang Kapak Tengah",
+                "Prabumulih Utara",
+                "Prabumulih Selatan"
+            ]
+        },
+        "16.03": {
+            "regency_name": "Kabupaten Muara Enim",
+            "district_count": 22,
+            "districts": [
+                "Tanjung Agung",
+                "Muara Enim",
+                "Rambang Niru",
+                "Gunung Megang",
+                "Gelumbang",
+                "Lawang Kidul",
+                "Semende Darat Laut",
+                "Semende Darat Tengah",
+                "Semende Darat Ulu",
+                "Ujan Mas",
+                "Lubai",
+                "Rambang",
+                "Sungai Rotan",
+                "Lembak",
+                "Benakat",
+                "Kelekar",
+                "Muara Belida",
+                "Belimbing",
+                "Belida Darat",
+                "Lubai Ulu",
+                "Empat Petulai Dangku",
+                "Panang Enim"
+            ]
+        },
+        "32.13": {
+            "regency_name": "Kabupaten Subang",
+            "district_count": 30,
+            "districts": [
+                "Sagalaherang",
+                "Cisalak",
+                "Subang",
+                "Kalijati",
+                "Pabuaran",
+                "Purwadadi",
+                "Pagaden",
+                "Binong",
+                "Ciasem",
+                "Pusakanagara",
+                "Pamanukan",
+                "Jalancagak",
+                "Blanakan",
+                "Tanjungsiang",
+                "Compreng",
+                "Patokbeusi",
+                "Cibogo",
+                "Cipunagara",
+                "Cijambe",
+                "Cipeundeuy",
+                "Legonkulon",
+                "Cikaum",
+                "Serangpanjang",
+                "Sukasari",
+                "Tambakdahan",
+                "Kasomalang",
+                "Dawuan",
+                "Pagaden Barat",
+                "Ciater",
+                "Pusakajaya"
+            ]
+        },
+        "32.14": {
+            "regency_name": "Kabupaten Purwakarta",
+            "district_count": 17,
+            "districts": [
+                "Purwakarta",
+                "Campaka",
+                "Jatiluhur",
+                "Plered",
+                "Sukatani",
+                "Darangdan",
+                "Maniis",
+                "Tegalwaru",
+                "Wanayasa",
+                "Pasawahan",
+                "Bojong",
+                "Babakancikao",
+                "Bungursari",
+                "Cibatu",
+                "Sukasari",
+                "Pondoksalam",
+                "Kiarapedes"
+            ]
+        },
+        "33.01": {
+            "regency_name": "Kabupaten Cilacap",
+            "district_count": 24,
+            "districts": [
+                "Kedungreja",
+                "Kesugihan",
+                "Adipala",
+                "Binangun",
+                "Nusawungu",
+                "Kroya",
+                "Maos",
+                "Jeruklegi",
+                "Kawunganten",
+                "Gandrungmangu",
+                "Sidareja",
+                "Karangpucung",
+                "Cimanggu",
+                "Majenang",
+                "Wanareja",
+                "Dayeuhluhur",
+                "Sampang",
+                "Cipari",
+                "Patimuan",
+                "Bantarsari",
+                "Cilacap Selatan",
+                "Cilacap Tengah",
+                "Cilacap Utara",
+                "Kampung Laut"
+            ]
+        },
+        "33.25": {
+            "regency_name": "Kabupaten Batang",
+            "district_count": 15,
+            "districts": [
+                "Wonotunggal",
+                "Bandar",
+                "Blado",
+                "Reban",
+                "Bawang",
+                "Tersono",
+                "Gringsing",
+                "Limpung",
+                "Subah",
+                "Tulis",
+                "Batang",
+                "Warungasem",
+                "Kandeman",
+                "Pecalungan",
+                "Banyuputih"
+            ]
+        },
+        "35.15": {
+            "regency_name": "Kabupaten Sidoarjo",
+            "district_count": 18,
+            "districts": [
+                "Tarik",
+                "Prambon",
+                "Krembung",
+                "Porong",
+                "Jabon",
+                "Tanggulangin",
+                "Candi",
+                "Sidoarjo",
+                "Tulangan",
+                "Wonoayu",
+                "Krian",
+                "Balongbendo",
+                "Taman",
+                "Sukodono",
+                "Buduran",
+                "Gedangan",
+                "Sedati",
+                "Waru"
+            ]
+        },
+        "35.10": {
+            "regency_name": "Kabupaten Banyuwangi",
+            "district_count": 25,
+            "districts": [
+                "Pesanggaran",
+                "Bangorejo",
+                "Purwoharjo",
+                "Tegaldlimo",
+                "Muncar",
+                "Cluring",
+                "Gambiran",
+                "Srono",
+                "Genteng",
+                "Glenmore",
+                "Kalibaru",
+                "Singojuruh",
+                "Rogojampi",
+                "Kabat",
+                "Glagah",
+                "Banyuwangi",
+                "Giri",
+                "Wongsorejo",
+                "Songgon",
+                "Sempu",
+                "Kalipuro",
+                "Siliragung",
+                "Tegalsari",
+                "Licin",
+                "Blimbingsari"
+            ]
+        },
+        "35.24": {
+            "regency_name": "Kabupaten Lamongan",
+            "district_count": 27,
+            "districts": [
+                "Sukorame",
+                "Bluluk",
+                "Modo",
+                "Ngimbang",
+                "Babat",
+                "Kedungpring",
+                "Brondong",
+                "Laren",
+                "Sekaran",
+                "Maduran",
+                "Sambeng",
+                "Sugio",
+                "Pucuk",
+                "Paciran",
+                "Solokuro",
+                "Mantup",
+                "Sukodadi",
+                "Karanggeneng",
+                "Kembangbahu",
+                "Kalitengah",
+                "Turi",
+                "Lamongan",
+                "Tikung",
+                "Karangbinangun",
+                "Deket",
+                "Glagah",
+                "Sarirejo"
+            ]
+        },
+        "35.23": {
+            "regency_name": "Kabupaten Tuban",
+            "district_count": 20,
+            "districts": [
+                "Kenduruan",
+                "Jatirogo",
+                "Bangilan",
+                "Bancar",
+                "Senori",
+                "Tambakboyo",
+                "Singgahan",
+                "Kerek",
+                "Parengan",
+                "Montong",
+                "Soko",
+                "Jenu",
+                "Merakurak",
+                "Rengel",
+                "Semanding",
+                "Tuban",
+                "Plumpang",
+                "Palang",
+                "Widang",
+                "Grabagan"
+            ]
+        },
+        "17.71": {
+            "regency_name": "Kota Bengkulu",
+            "district_count": 9,
+            "districts": [
+                "Selebar",
+                "Gading Cempaka",
+                "Teluk Segara",
+                "Muara Bangka Hulu",
+                "Kampung Melayu",
+                "Ratu Agung",
+                "Ratu Samban",
+                "Sungai Serut",
+                "Singaran Pati"
+            ]
+        },
+        "51.71": {
+            "regency_name": "Kota Denpasar",
+            "district_count": 4,
+            "districts": [
+                "Denpasar Selatan",
+                "Denpasar Timur",
+                "Denpasar Barat",
+                "Denpasar Utara"
+            ]
+        },
+        "74.01": {
+            "regency_name": "Kabupaten Kolaka",
+            "district_count": 12,
+            "districts": [
+                "Wundulako",
+                "Kolaka",
+                "Pomalaa",
+                "Watubangga",
+                "Wolo",
+                "Baula",
+                "Latambaga",
+                "Tanggetada",
+                "Samaturu",
+                "Toari",
+                "Polinggona",
+                "Iwoimendaa"
+            ]
+        },
+        "74.02": {
+            "regency_name": "Kabupaten Konawe",
+            "district_count": 28,
+            "districts": [
+                "Lambuya",
+                "Unaaha",
+                "Wawotobi",
+                "Pondidaha",
+                "Sampara",
+                "Abuki",
+                "Soropia",
+                "Tongauna",
+                "Latoma",
+                "Puriala",
+                "Uepai",
+                "Wonggeduku",
+                "Besulutu",
+                "Bondoala",
+                "Routa",
+                "Anggaberi",
+                "Meluhu",
+                "Amonggedo",
+                "Asinua",
+                "Konawe",
+                "Kapoiala",
+                "Lalonggasumeeto",
+                "Onembute",
+                "Padangguni",
+                "Morosi",
+                "Anggalomoare",
+                "Wonggeduku Barat",
+                "Tongauna Utara"
+            ]
+        },
+        "72.71": {
+            "regency_name": "Kota Palu",
+            "district_count": 8,
+            "districts": [
+                "Palu Timur",
+                "Palu Barat",
+                "Palu Selatan",
+                "Palu Utara",
+                "Ulujadi",
+                "Tatanga",
+                "Tawaeli",
+                "Mantikulore"
+            ]
+        },
+        "72.01": {
+            "regency_name": "Kabupaten Banggai",
+            "district_count": 24,
+            "districts": [
+                "Batui",
+                "Bunta",
+                "Kintom",
+                "Luwuk",
+                "Lamala",
+                "Balantak",
+                "Pagimana",
+                "Bualemo",
+                "Toili",
+                "Masama",
+                "Luwuk Timur",
+                "Toili Barat",
+                "Nuhon",
+                "Moilong",
+                "Batui Selatan",
+                "Lobu",
+                "Simpang Raya",
+                "Balantak Selatan",
+                "Balantak Utara",
+                "Luwuk Selatan",
+                "Luwuk Utara",
+                "Mantoh",
+                "Nambo",
+                "Toili Jaya"
+            ]
+        },
+        "64.03": {
+            "regency_name": "Kabupaten Berau",
+            "district_count": 13,
+            "districts": [
+                "Kelay",
+                "Talisayan",
+                "Sambaliung",
+                "Segah",
+                "Tanjung Redeb",
+                "Gunung Tabur",
+                "Pulau Derawan",
+                "Biduk-Biduk",
+                "Teluk Bayur",
+                "Tabalar",
+                "Maratua",
+                "Batu Putih",
+                "Biatan"
+            ]
+        },
+        "65.71": {
+            "regency_name": "Kota Tarakan",
+            "district_count": 4,
+            "districts": [
+                "Tarakan Barat",
+                "Tarakan Tengah",
+                "Tarakan Timur",
+                "Tarakan Utara"
+            ]
+        },
+        "21.01": {
+            "regency_name": "Kabupaten Bintan",
+            "district_count": 10,
+            "districts": [
+                "Gunung Kijang",
+                "Bintan Timur",
+                "Bintan Utara",
+                "Teluk Bintan",
+                "Tambelan",
+                "Teluk Sebong",
+                "Toapaya",
+                "Mantang",
+                "Bintan Pesisir",
+                "Seri Kuala Lobam"
+            ]
+        },
+        "31.73": {
+            "regency_name": "Kota Administrasi Jakarta Barat",
+            "district_count": 8,
+            "districts": [
+                "Cengkareng",
+                "Grogol Petamburan",
+                "Taman Sari",
+                "Tambora",
+                "Kebon Jeruk",
+                "Kalideres",
+                "Pal Merah",
+                "Kembangan"
+            ]
+        },
+        "32.10": {
+            "regency_name": "Kabupaten Majalengka",
+            "district_count": 26,
+            "districts": [
+                "Lemahsugih",
+                "Bantarujeg",
+                "Cikijing",
+                "Talaga",
+                "Argapura",
+                "Maja",
+                "Majalengka",
+                "Sukahaji",
+                "Rajagaluh",
+                "Leuwimunding",
+                "Jatiwangi",
+                "Dawuan",
+                "Kadipaten",
+                "Kertajati",
+                "Jatitujuh",
+                "Ligung",
+                "Sumberjaya",
+                "Panyingkiran",
+                "Palasah",
+                "Cigasong",
+                "Sindangwangi",
+                "Banjaran",
+                "Cingambul",
+                "Kasokandel",
+                "Sindang",
+                "Malausma"
+            ]
+        },
+        "33.21": {
+            "regency_name": "Kabupaten Demak",
+            "district_count": 14,
+            "districts": [
+                "Mranggen",
+                "Karangawen",
+                "Guntur",
+                "Sayung",
+                "Karangtengah",
+                "Wonosalam",
+                "Dempet",
+                "Gajah",
+                "Karanganyar",
+                "Mijen",
+                "Demak",
+                "Bonang",
+                "Wedung",
+                "Kebonagung"
+            ]
+        },
+        "33.24": {
+            "regency_name": "Kabupaten Kendal",
+            "district_count": 20,
+            "districts": [
+                "Plantungan",
+                "Pageruyung",
+                "Sukorejo",
+                "Patean",
+                "Singorojo",
+                "Limbangan",
+                "Boja",
+                "Kaliwungu",
+                "Brangsong",
+                "Pegandon",
+                "Gemuh",
+                "Weleri",
+                "Cepiring",
+                "Patebon",
+                "Kendal",
+                "Rowosari",
+                "Kangkung",
+                "Ringinarum",
+                "Ngampel",
+                "Kaliwungu Selatan"
+            ]
+        },
+        "63.02": {
+            "regency_name": "Kabupaten Kotabaru",
+            "district_count": 22,
+            "districts": [
+                "Pulau Sembilan",
+                "Pulau Laut Barat",
+                "Pulau Laut Selatan",
+                "Pulau Laut Timur",
+                "Pulau Sebuku",
+                "Pulaulaut Utara",
+                "Kelumpang Selatan",
+                "Kelumpang Hulu",
+                "Kelumpang Tengah",
+                "Kelumpang Utara",
+                "Pamukan Selatan",
+                "Sampanahan",
+                "Pamukan Utara",
+                "Hampang",
+                "Sungai Durian",
+                "Pulau Laut Tengah",
+                "Kelumpang Hilir",
+                "Kelumpang Barat",
+                "Pamukan Barat",
+                "Pulau Laut Kepulauan",
+                "Pulau Laut Tanjung Selayar",
+                "Pulaulaut Sigam"
+            ]
+        },
+        "62.03": {
+            "regency_name": "Kabupaten Kapuas",
+            "district_count": 17,
+            "districts": [
+                "Selat",
+                "Kapuas Hilir",
+                "Kapuas Timur",
+                "Kapuas Kuala",
+                "Kapuas Barat",
+                "Pulau Petak",
+                "Kapuas Murung",
+                "Basarang",
+                "Mantangai",
+                "Timpah",
+                "Kapuas Tengah",
+                "Kapuas Hulu",
+                "Tamban Catur",
+                "Pasak Talawang",
+                "Mandau Talawang",
+                "Dadahup",
+                "Bataguh"
+            ]
+        },
+        "65.02": {
+            "regency_name": "Kabupaten Malinau",
+            "district_count": 15,
+            "districts": [
+                "Mentarang",
+                "Malinau Kota",
+                "Pujungan",
+                "Kayan Hilir",
+                "Kayan Hulu",
+                "Malinau Selatan",
+                "Malinau Utara",
+                "Malinau Barat",
+                "Sungai Boh",
+                "Kayan Selatan",
+                "Bahau Hulu",
+                "Mentarang Hulu",
+                "Malinau Selatan Hilir",
+                "Malinau Selatan Hulu",
+                "Sungai Tubu"
+            ]
+        },
+        "11.73": {
+            "regency_name": "Kota Lhokseumawe",
+            "district_count": 4,
+            "districts": [
+                "Muara Dua",
+                "Banda Sakti",
+                "Blang Mangat",
+                "Muara Satu"
+            ]
+        },
+        "11.74": {
+            "regency_name": "Kota Langsa",
+            "district_count": 5,
+            "districts": [
+                "Langsa Timur",
+                "Langsa Barat",
+                "Langsa Kota",
+                "Langsa Lama",
+                "Langsa Baro"
+            ]
+        },
+        "12.05": {
+            "regency_name": "Kabupaten Langkat",
+            "district_count": 23,
+            "districts": [
+                "Bahorok",
+                "Salapian",
+                "Kuala",
+                "Sei Bingai",
+                "Binjai",
+                "Selesai",
+                "Stabat",
+                "Wampu",
+                "Secanggang",
+                "Hinai",
+                "Tanjung Pura",
+                "Padang Tualang",
+                "Gebang",
+                "Babalan",
+                "Pangkalan Susu",
+                "Besitang",
+                "Sei Lepan",
+                "Berandan Barat",
+                "Batang Serangan",
+                "Sawit Seberang",
+                "Sirapit",
+                "Kutambaru",
+                "Pematang Jaya"
+            ]
+        },
+        "12.07": {
+            "regency_name": "Kabupaten Deli Serdang",
+            "district_count": 22,
+            "districts": [
+                "Gunung Meriah",
+                "Tanjung Morawa",
+                "Sibolangit",
+                "Kutalimbaru",
+                "Pancur Batu",
+                "Namo Rambe",
+                "Biru-Biru",
+                "Sinembah Tanjung Muda Hilir",
+                "Bangun Purba",
+                "Galang",
+                "Sinembah Tanjung Muda Hulu",
+                "Patumbak",
+                "Deli Tua",
+                "Sunggal",
+                "Hamparan Perak",
+                "Labuhan Deli",
+                "Percut Sei Tuan",
+                "Batang Kuis",
+                "Lubuk Pakam",
+                "Pagar Merbau",
+                "Pantai Labu",
+                "Beringin"
+            ]
+        },
+        "12.09": {
+            "regency_name": "Kabupaten Asahan",
+            "district_count": 25,
+            "districts": [
+                "Meranti",
+                "Air Joman",
+                "Tanjung Balai",
+                "Sei Kepayang",
+                "Simpang Empat",
+                "Air Batu",
+                "Pulau Rakyat",
+                "Bandar Pulau",
+                "Buntu Pane",
+                "Bandar Pasir Mandoge",
+                "Aek Kuasan",
+                "Kota Kisaran Barat",
+                "Kota Kisaran Timur",
+                "Aek Songsongan",
+                "Rahuning",
+                "Sei Dadap",
+                "Sei Kepayang Barat",
+                "Sei Kepayang Timur",
+                "Tinggi Raja",
+                "Setia Janji",
+                "Silau Laut",
+                "Rawang Panca Arga",
+                "Pulo Bandring",
+                "Teluk Dalam",
+                "Aek Ledong"
+            ]
+        },
+        "74.71": {
+            "regency_name": "Kota Kendari",
+            "district_count": 11,
+            "districts": [
+                "Mandonga",
+                "Kendari",
+                "Baruga",
+                "Poasia",
+                "Kendari Barat",
+                "Abeli",
+                "Wua-Wua",
+                "Kadia",
+                "Puuwatu",
+                "Kambu",
+                "Nambo"
+            ]
+        },
+        "11.10": {
+            "regency_name": "Kabupaten Aceh Singkil",
+            "district_count": 11,
+            "districts": [
+                "Pulau Banyak",
+                "Simpang Kanan",
+                "Singkil",
+                "Gunung Meriah",
+                "Kota Baharu",
+                "Singkil Utara",
+                "Danau Paris",
+                "Suro Makmur",
+                "Singkohor",
+                "Kuala Baru",
+                "Pulau Banyak Barat"
+            ]
+        },
+        "11.05": {
+            "regency_name": "Kabupaten Aceh Barat",
+            "district_count": 12,
+            "districts": [
+                "Johan Pahlawan",
+                "Kaway XVI",
+                "Sungai Mas",
+                "Woyla",
+                "Samatiga",
+                "Bubon",
+                "Arongan Lambalek",
+                "Pante Ceureumen",
+                "Meureubo",
+                "Woyla Barat",
+                "Woyla Timur",
+                "Panton Reu"
+            ]
+        },
+        "11.15": {
+            "regency_name": "Kabupaten Nagan Raya",
+            "district_count": 10,
+            "districts": [
+                "Kuala",
+                "Seunagan",
+                "Seunagan Timur",
+                "Beutong",
+                "Darul Makmur",
+                "Suka Makmue",
+                "Kuala Pesisir",
+                "Tadu Raya",
+                "Tripa Makmur",
+                "Beutong Ateuh Banggalang"
+            ]
+        },
+        "61.10": {
+            "regency_name": "Kabupaten Melawi",
+            "district_count": 11,
+            "districts": [
+                "Belimbing",
+                "Nanga Pinoh",
+                "Ella Hilir",
+                "Menukung",
+                "Sayan",
+                "Tanah Pinoh",
+                "Sokan",
+                "Pinoh Utara",
+                "Pinoh Selatan",
+                "Belimbing Hulu",
+                "Tanah Pinoh Barat"
+            ]
+        },
+        "61.01": {
+            "regency_name": "Kabupaten Sambas",
+            "district_count": 19,
+            "districts": [
+                "Sambas",
+                "Teluk Keramat",
+                "Jawai",
+                "Tebas",
+                "Pemangkat",
+                "Sejangkung",
+                "Selakau",
+                "Paloh",
+                "Sajingan Besar",
+                "Subah",
+                "Galing",
+                "Tekarang",
+                "Semparuk",
+                "Sajad",
+                "Sebawi",
+                "Jawai Selatan",
+                "Tangaran",
+                "Salatiga",
+                "Selakau Timur"
+            ]
+        },
+        "61.03": {
+            "regency_name": "Kabupaten Sanggau",
+            "district_count": 15,
+            "districts": [
+                "Kapuas",
+                "Mukok",
+                "Noyan",
+                "Jangkang",
+                "Bonti",
+                "Beduai",
+                "Sekayam",
+                "Kembayan",
+                "Parindu",
+                "Tayan Hulu",
+                "Tayan Hilir",
+                "Balai",
+                "Toba",
+                "Meliau",
+                "Entikong"
+            ]
+        },
+        "61.05": {
+            "regency_name": "Kabupaten Sintang",
+            "district_count": 14,
+            "districts": [
+                "Sintang",
+                "Tempunak",
+                "Sepauk",
+                "Ketungau Hilir",
+                "Ketungau Tengah",
+                "Ketungau Hulu",
+                "Dedai",
+                "Kayan Hilir",
+                "Kayan Hulu",
+                "Serawai",
+                "Ambalau",
+                "Kelam Permai",
+                "Sungai Tebelian",
+                "Binjai Hulu"
+            ]
+        },
+        "61.06": {
+            "regency_name": "Kabupaten Kapuas Hulu",
+            "district_count": 23,
+            "districts": [
+                "Putussibau Utara",
+                "Bika",
+                "Embaloh Hilir",
+                "Embaloh Hulu",
+                "Bunut Hilir",
+                "Bunut Hulu",
+                "Jongkong",
+                "Hulu Gurung",
+                "Selimbau",
+                "Semitau",
+                "Seberuang",
+                "Batang Lupar",
+                "Empanang",
+                "Badau",
+                "Silat Hilir",
+                "Silat Hulu",
+                "Putussibau Selatan",
+                "Kalis",
+                "Boyan Tanjung",
+                "Mentebah",
+                "Pengkadan",
+                "Suhaid",
+                "Puring Kencana"
+            ]
+        },
+        "61.11": {
+            "regency_name": "Kabupaten Kayong Utara",
+            "district_count": 6,
+            "districts": [
+                "Sukadana",
+                "Simpang Hilir",
+                "Teluk Batang",
+                "Pulau Maya",
+                "Seponti",
+                "Kepulauan Karimata"
+            ]
+        },
+        "61.07": {
+            "regency_name": "Kabupaten Bengkayang",
+            "district_count": 17,
+            "districts": [
+                "Sungai Raya",
+                "Samalantan",
+                "Ledo",
+                "Bengkayang",
+                "Seluas",
+                "Sanggau Ledo",
+                "Jagoi Babang",
+                "Monterado",
+                "Teriak",
+                "Suti Semarang",
+                "Capkala",
+                "Siding",
+                "Lumar",
+                "Sungai Betung",
+                "Sungai Raya Kepulauan",
+                "Lembah Bawang",
+                "Tujuh Belas"
+            ]
+        },
+        "61.02": {
+            "regency_name": "Kabupaten Mempawah",
+            "district_count": 9,
+            "districts": [
+                "Mempawah Hilir",
+                "Toho",
+                "Sungai Pinyuh",
+                "Jongkat",
+                "Sungai Kunyit",
+                "Segedong",
+                "Anjongan",
+                "Sadaniang",
+                "Mempawah Timur"
+            ]
+        },
+        "61.08": {
+            "regency_name": "Kabupaten Landak",
+            "district_count": 13,
+            "districts": [
+                "Ngabang",
+                "Mempawah Hulu",
+                "Menjalin",
+                "Mandor",
+                "Air Besar",
+                "Menyuke",
+                "Sengah Temila",
+                "Meranti",
+                "Kuala Behe",
+                "Sebangki",
+                "Jelimpo",
+                "Banyuke Hulu",
+                "Sompak"
+            ]
+        },
+        "62.08": {
+            "regency_name": "Kabupaten Sukamara",
+            "district_count": 5,
+            "districts": [
+                "Sukamara",
+                "Jelai",
+                "Balai Riam",
+                "Pantai Lunci",
+                "Permata Kecubung"
+            ]
+        },
+        "62.10": {
+            "regency_name": "Kabupaten Gunung Mas",
+            "district_count": 12,
+            "districts": [
+                "Sepang",
+                "Kurun",
+                "Tewah",
+                "Kahayan Hulu Utara",
+                "Rungan",
+                "Manuhing",
+                "Mihing Raya",
+                "Damang Batu",
+                "Miri Manasa",
+                "Rungan Hulu",
+                "Manuhing Raya",
+                "Rungan Barat"
+            ]
+        },
+        "62.09": {
+            "regency_name": "Kabupaten Lamandau",
+            "district_count": 8,
+            "districts": [
+                "Lamandau",
+                "Delang",
+                "Bulik",
+                "Bulik Timur",
+                "Menthobi Raya",
+                "Sematu Jaya",
+                "Belantikan Raya",
+                "Batang Kawa"
+            ]
+        },
+        "62.06": {
+            "regency_name": "Kabupaten Katingan",
+            "district_count": 13,
+            "districts": [
+                "Kamipang",
+                "Katingan Hilir",
+                "Tewang Sangalang Garing",
+                "Pulau Malan",
+                "Katingan Tengah",
+                "Sanaman Mantikei",
+                "Marikit",
+                "Katingan Hulu",
+                "Mendawai",
+                "Katingan Kuala",
+                "Tasik Payawan",
+                "Petak Malai",
+                "Bukit Raya"
+            ]
+        },
+        "62.12": {
+            "regency_name": "Kabupaten Murung Raya",
+            "district_count": 10,
+            "districts": [
+                "Murung",
+                "Tanah Siang",
+                "Laung Tuhup",
+                "Permata Intan",
+                "Sumber Barito",
+                "Barito Tuhup Raya",
+                "Tanah Siang Selatan",
+                "Sungai Babuat",
+                "Seribu Riam",
+                "Uut Murung"
+            ]
+        },
+        "62.07": {
+            "regency_name": "Kabupaten Seruyan",
+            "district_count": 10,
+            "districts": [
+                "Seruyan Hilir",
+                "Seruyan Tengah",
+                "Danau Sembuluh",
+                "Hanau",
+                "Seruyan Hulu",
+                "Seruyan Hilir Timur",
+                "Seruyan Raya",
+                "Danau Seluluk",
+                "Batu Ampar",
+                "Suling Tambun"
+            ]
+        },
+        "65.04": {
+            "regency_name": "Kabupaten Tana Tidung",
+            "district_count": 5,
+            "districts": [
+                "Sesayap",
+                "Sesayap Hilir",
+                "Tana Lia",
+                "Betayau",
+                "Muruk Rian"
+            ]
+        },
+        "65.03": {
+            "regency_name": "Kabupaten Nunukan",
+            "district_count": 21,
+            "districts": [
+                "Sebatik",
+                "Nunukan",
+                "Sembakung",
+                "Lumbis",
+                "Krayan",
+                "Sebuku",
+                "Krayan Selatan",
+                "Sebatik Barat",
+                "Nunukan Selatan",
+                "Sebatik Timur",
+                "Sebatik Utara",
+                "Sebatik Tengah",
+                "Sei Menggaris",
+                "Tulin Onsoi",
+                "Lumbis Ogong",
+                "Sembakung Atulai",
+                "Krayan Tengah",
+                "Krayan Timur",
+                "Krayan Barat",
+                "Lumbis Pansiangan",
+                "Lumbis Hulu"
+            ]
+        },
+        "65.01": {
+            "regency_name": "Kabupaten Bulungan",
+            "district_count": 10,
+            "districts": [
+                "Tanjung Palas",
+                "Tanjung Palas Barat",
+                "Tanjung Palas Utara",
+                "Tanjung Palas Timur",
+                "Tanjung Selor",
+                "Tanjung Palas Tengah",
+                "Peso",
+                "Peso Hilir",
+                "Sekatak",
+                "Bunyu"
+            ]
+        },
+        "64.08": {
+            "regency_name": "Kabupaten Kutai Timur",
+            "district_count": 18,
+            "districts": [
+                "Muara Ancalong",
+                "Muara Wahau",
+                "Muara Bengkal",
+                "Sangatta Utara",
+                "Sangkulirang",
+                "Busang",
+                "Telen",
+                "Kombeng",
+                "Bengalon",
+                "Kaliorang",
+                "Sandaran",
+                "Sangatta Selatan",
+                "Teluk Pandan",
+                "Rantau Pulung",
+                "Kaubun",
+                "Karangan",
+                "Batu Ampar",
+                "Long Mesangat"
+            ]
+        },
+        "64.07": {
+            "regency_name": "Kabupaten Kutai Barat",
+            "district_count": 16,
+            "districts": [
+                "Long Iram",
+                "Melak",
+                "Barong Tongkok",
+                "Damai",
+                "Muara Lawa",
+                "Muara Pahu",
+                "Jempang",
+                "Bongan",
+                "Penyinggahan",
+                "Bentian Besar",
+                "Linggang Bigung",
+                "Nyuatan",
+                "Siluq Ngurai",
+                "Mook Manaar Bulatn",
+                "Tering",
+                "Sekolaq Darat"
+            ]
+        },
+        "64.01": {
+            "regency_name": "Kabupaten Paser",
+            "district_count": 10,
+            "districts": [
+                "Batu Sopang",
+                "Tanjung Harapan",
+                "Paser Belengkong",
+                "Tanah Grogot",
+                "Kuaro",
+                "Long Ikis",
+                "Muara Komam",
+                "Long Kali",
+                "Batu Engau",
+                "Muara Samu"
+            ]
+        },
+        "64.11": {
+            "regency_name": "Kabupaten Mahakam Ulu",
+            "district_count": 5,
+            "districts": [
+                "Long Bagun",
+                "Long Hubung",
+                "Laham",
+                "Long Apari",
+                "Long Pahangai"
+            ]
+        },
+        "63.72": {
+            "regency_name": "Kota Banjarbaru",
+            "district_count": 5,
+            "districts": [
+                "Landasan Ulin",
+                "Cempaka",
+                "Banjarbaru Utara",
+                "Banjarbaru Selatan",
+                "Liang Anggang"
+            ]
+        },
+        "63.06": {
+            "regency_name": "Kabupaten Hulu Sungai Selatan",
+            "district_count": 11,
+            "districts": [
+                "Sungai Raya",
+                "Padang Batung",
+                "Telaga Langsat",
+                "Angkinang",
+                "Kandangan",
+                "Simpur",
+                "Daha Selatan",
+                "Daha Utara",
+                "Kalumpang",
+                "Loksado",
+                "Daha Barat"
+            ]
+        },
+        "63.07": {
+            "regency_name": "Kabupaten Hulu Sungai Tengah",
+            "district_count": 11,
+            "districts": [
+                "Haruyan",
+                "Batu Benawa",
+                "Labuan Amas Selatan",
+                "Labuan Amas Utara",
+                "Pandawan",
+                "Barabai",
+                "Batang Alai Selatan",
+                "Batang Alai Utara",
+                "Hantakan",
+                "Batang Alai Timur",
+                "Limpasu"
+            ]
+        },
+        "63.11": {
+            "regency_name": "Kabupaten Balangan",
+            "district_count": 8,
+            "districts": [
+                "Juai",
+                "Halong",
+                "Awayan",
+                "Batu Mandi",
+                "Lampihong",
+                "Paringin",
+                "Paringin Selatan",
+                "Tebing Tinggi"
+            ]
+        },
+        "63.05": {
+            "regency_name": "Kabupaten Tapin",
+            "district_count": 12,
+            "districts": [
+                "Binuang",
+                "Tapin Selatan",
+                "Tapin Tengah",
+                "Tapin Utara",
+                "Candi Laras Selatan",
+                "Candi Laras Utara",
+                "Bakarangan",
+                "Piani",
+                "Bungur",
+                "Lokpaikat",
+                "Salam Babaris",
+                "Hatungun"
+            ]
+        },
+        "36.01": {
+            "regency_name": "Kabupaten Pandeglang",
+            "district_count": 35,
+            "districts": [
+                "Sumur",
+                "Cimanggu",
+                "Cibaliung",
+                "Cikeusik",
+                "Cigeulis",
+                "Panimbang",
+                "Angsana",
+                "Munjul",
+                "Pagelaran",
+                "Bojong",
+                "Picung",
+                "Labuan",
+                "Menes",
+                "Saketi",
+                "Cipeucang",
+                "Jiput",
+                "Mandalawangi",
+                "Cimanuk",
+                "Kaduhejo",
+                "Banjar",
+                "Pandeglang",
+                "Cadasari",
+                "Cisata",
+                "Patia",
+                "Karang Tanjung",
+                "Cikedal",
+                "Cibitung",
+                "Carita",
+                "Sukaresmi",
+                "Mekarjaya",
+                "Sindangresmi",
+                "Pulosari",
+                "Koroncong",
+                "Majasari",
+                "Sobang"
+            ]
+        },
+        "36.02": {
+            "regency_name": "Kabupaten Lebak",
+            "district_count": 28,
+            "districts": [
+                "Malingping",
+                "Panggarangan",
+                "Bayah",
+                "Cipanas",
+                "Muncang",
+                "Leuwidamar",
+                "Bojongmanik",
+                "Gunungkencana",
+                "Banjarsari",
+                "Cileles",
+                "Cimarga",
+                "Sajira",
+                "Maja",
+                "Rangkasbitung",
+                "Warunggunung",
+                "Cijaku",
+                "Cikulur",
+                "Cibadak",
+                "Cibeber",
+                "Cilograng",
+                "Wanasalam",
+                "Sobang",
+                "Curugbitung",
+                "Kalanganyar",
+                "Lebakgedong",
+                "Cihara",
+                "Cirinten",
+                "Cigemblong"
+            ]
+        },
+        "32.05": {
+            "regency_name": "Kabupaten Garut",
+            "district_count": 42,
+            "districts": [
+                "Garut Kota",
+                "Karangpawitan",
+                "Wanaraja",
+                "Tarogong Kaler",
+                "Tarogong Kidul",
+                "Banyuresmi",
+                "Samarang",
+                "Pasirwangi",
+                "Leles",
+                "Kadungora",
+                "Leuwigoong",
+                "Cibatu",
+                "Kersamanah",
+                "Malangbong",
+                "Sukawening",
+                "Karangtengah",
+                "Bayongbong",
+                "Cigedug",
+                "Cilawu",
+                "Cisurupan",
+                "Sukaresmi",
+                "Cikajang",
+                "Banjarwangi",
+                "Singajaya",
+                "Cihurip",
+                "Peundeuy",
+                "Pameungpeuk",
+                "Cisompet",
+                "Cibalong",
+                "Cikelet",
+                "Bungbulang",
+                "Mekarmukti",
+                "Pakenjeng",
+                "Pamulihan",
+                "Cisewu",
+                "Caringin",
+                "Talegong",
+                "Limbangan",
+                "Selaawi",
+                "Cibiuk",
+                "Pangatikan",
+                "Sucinaraja"
+            ]
+        },
+        "32.03": {
+            "regency_name": "Kabupaten Cianjur",
+            "district_count": 32,
+            "districts": [
+                "Cianjur",
+                "Warungkondang",
+                "Cibeber",
+                "Cilaku",
+                "Ciranjang",
+                "Bonjogpicung",
+                "Karangtengah",
+                "Mande",
+                "Sukaluyu",
+                "Pacet",
+                "Cugenang",
+                "Cikalongkulon",
+                "Sukaresmi",
+                "Sukanagara",
+                "Campaka",
+                "Takokak",
+                "Kadupandak",
+                "Pagelarang",
+                "Tanggeung",
+                "Cubinong",
+                "Sindangbarang",
+                "Agrabinta",
+                "Cidaun",
+                "Naringgul",
+                "Campakamulya",
+                "Cikadu",
+                "Gekbrong",
+                "Cipanas",
+                "Cijati",
+                "Leles",
+                "Haurwangi",
+                "Pasirkuda"
+            ]
+        },
+        "33.12": {
+            "regency_name": "Kabupaten Wonogiri",
+            "district_count": 25,
+            "districts": [
+                "Pracimantoro",
+                "Giritontro",
+                "Giriwoyo",
+                "Batuwarno",
+                "Tirtomoyo",
+                "Nguntoronadi",
+                "Baturetno",
+                "Eromoko",
+                "Wuryantoro",
+                "Manyaran",
+                "Selogiri",
+                "Wonogiri",
+                "Ngadirojo",
+                "Sidoharjo",
+                "Jatiroto",
+                "Kismantoro",
+                "Purwantoro",
+                "Bulukerto",
+                "Slogohimo",
+                "Jatisrono",
+                "Jatipurno",
+                "Girimarto",
+                "Karangtengah",
+                "Paranggupito",
+                "Puhpelem"
+            ]
+        },
+        "33.05": {
+            "regency_name": "Kabupaten Kebumen",
+            "district_count": 26,
+            "districts": [
+                "Ayah",
+                "Buayan",
+                "Puring",
+                "Petanahan",
+                "Klirong",
+                "Buluspesantren",
+                "Ambal",
+                "Mirit",
+                "Prembun",
+                "Kutowinangun",
+                "Alian",
+                "Kebumen",
+                "Pejagoan",
+                "Sruweng",
+                "Adimulyo",
+                "Kuwarasan",
+                "Rowokele",
+                "Sempor",
+                "Gombong",
+                "Karanganyar",
+                "Karanggayam",
+                "Sadang",
+                "Bonorowo",
+                "Padureso",
+                "Poncowarno",
+                "Karangsambung"
+            ]
+        },
+        "33.04": {
+            "regency_name": "Kabupaten Banjarnegara",
+            "district_count": 20,
+            "districts": [
+                "Susukan",
+                "Purworeja Klampok",
+                "Mandiraja",
+                "Purwanegara",
+                "Bawang",
+                "Banjarnegara",
+                "Sigaluh",
+                "Madukara",
+                "Banjarmangu",
+                "Wanadadi",
+                "Rakit",
+                "Punggelan",
+                "Karangkobar",
+                "Pagentan",
+                "Pejawaran",
+                "Batur",
+                "Wanayasa",
+                "Kalibening",
+                "Pandanarum",
+                "Pagedongan"
+            ]
+        },
+        "35.08": {
+            "regency_name": "Kabupaten Lumajang",
+            "district_count": 21,
+            "districts": [
+                "Tempursari",
+                "Pronojiwo",
+                "Candipuro",
+                "Pasirian",
+                "Tempeh",
+                "Kunir",
+                "Yosowilangun",
+                "Rowokangkung",
+                "Tekung",
+                "Lumajang",
+                "Pasrujambe",
+                "Senduro",
+                "Gucialit",
+                "Padang",
+                "Sukodono",
+                "Kedungjajang",
+                "Jatiroto",
+                "Randuagung",
+                "Klakah",
+                "Ranuyoso",
+                "Sumbersuko"
+            ]
+        },
+        "35.09": {
+            "regency_name": "Kabupaten Jember",
+            "district_count": 31,
+            "districts": [
+                "Jombang",
+                "Kencong",
+                "Sumberbaru",
+                "Gumukmas",
+                "Umbulsari",
+                "Tanggul",
+                "Semboro",
+                "Puger",
+                "Bangsalsari",
+                "Balung",
+                "Wuluhan",
+                "Ambulu",
+                "Rambipuji",
+                "Panti",
+                "Sukorambi",
+                "Jenggawah",
+                "Ajung",
+                "Tempurejo",
+                "Kaliwates",
+                "Patrang",
+                "Sumbersari",
+                "Arjasa",
+                "Mumbulsari",
+                "Pakusari",
+                "Jelbuk",
+                "Mayang",
+                "Kalisat",
+                "Ledokombo",
+                "Sukowono",
+                "Silo",
+                "Sumberjambe"
+            ]
+        },
+        "35.01": {
+            "regency_name": "Kabupaten Pacitan",
+            "district_count": 12,
+            "districts": [
+                "Donorojo",
+                "Pringkuku",
+                "Punung",
+                "Pacitan",
+                "Kebonagung",
+                "Arjosari",
+                "Nawangan",
+                "Bandar",
+                "Tegalombo",
+                "Tulakan",
+                "Ngadirojo",
+                "Sudimoro"
+            ]
+        },
+        "52.05": {
+            "regency_name": "Kabupaten Dompu",
+            "district_count": 8,
+            "districts": [
+                "Dompu",
+                "Kempo",
+                "Hu'u",
+                "Kilo",
+                "Woja",
+                "Pekat",
+                "Manggalewa",
+                "Pajo"
+            ]
+        },
+        "53.08": {
+            "regency_name": "Kabupaten Ende",
+            "district_count": 21,
+            "districts": [
+                "Nangapanda",
+                "Pulau Ende",
+                "Ende",
+                "Ende Selatan",
+                "Ndona",
+                "Detusoko",
+                "Wewaria",
+                "Wolowaru",
+                "Wolojita",
+                "Maurole",
+                "Maukaro",
+                "Lio Timur",
+                "Kota Baru",
+                "Kelimutu",
+                "Detukeli",
+                "Ndona Timur",
+                "Ndori",
+                "Ende Utara",
+                "Ende Tengah",
+                "Ende Timur",
+                "Lepembusu Kelisoke"
+            ]
+        },
+        "94.04": {
+            "regency_name": "Kabupaten Mimika",
+            "district_count": 18,
+            "districts": [
+                "Mimika Baru",
+                "Agimuga",
+                "Mimika Timur",
+                "Mimika Barat",
+                "Jita",
+                "Jila",
+                "Mimika Timur Jauh",
+                "Mimika Tengah",
+                "Kuala Kencana",
+                "Tembagapura",
+                "Mimika Barat Jauh",
+                "Mimika Barat Tengah",
+                "Kwamki Narama",
+                "Hoya",
+                "Iwaka",
+                "Wania",
+                "Amar",
+                "Alama"
+            ]
+        },
+        "93.01": {
+            "regency_name": "Kabupaten Merauke",
+            "district_count": 22,
+            "districts": [
+                "Merauke",
+                "Muting",
+                "Okaba",
+                "Kimaam",
+                "Semangga",
+                "Tanah Miring",
+                "Jagebob",
+                "Sota",
+                "Ulilin",
+                "Elikobal",
+                "Kurik",
+                "Naukenjerai",
+                "Animha",
+                "Malind",
+                "Tubang",
+                "Ngguti",
+                "Kaptel",
+                "Tabonji",
+                "Waan",
+                "Ilwayab",
+                "Padua",
+                "Kontuar"
+            ]
+        },
+        "31.74": {
+            "regency_name": "Kota Administrasi Jakarta Selatan",
+            "district_count": 10,
+            "districts": [
+                "Tebet",
+                "Setiabudi",
+                "Mampang Prapatan",
+                "Pasar Minggu",
+                "Kebayoran Lama",
+                "Cilandak",
+                "Kebayoran Baru",
+                "Pancoran",
+                "Jagakarsa",
+                "Pesanggrahan"
+            ]
+        },
+        "31.71": {
+            "regency_name": "Kota Administrasi Jakarta Pusat",
+            "district_count": 8,
+            "districts": [
+                "Gambir",
+                "Sawah Besar",
+                "Kemayoran",
+                "Senen",
+                "Cempaka Putih",
+                "Menteng",
+                "Tanah Abang",
+                "Johar Baru"
+            ]
+        },
+        "31.75": {
+            "regency_name": "Kota Administrasi Jakarta Timur",
+            "district_count": 10,
+            "districts": [
+                "Matraman",
+                "Pulogadung",
+                "Jatinegara",
+                "Kramatjati",
+                "Pasar Rebo",
+                "Cakung",
+                "Duren Sawit",
+                "Makasar",
+                "Ciracas",
+                "Cipayung"
+            ]
+        },
+        "31.72": {
+            "regency_name": "Kota Administrasi Jakarta Utara ",
+            "district_count": 6,
+            "districts": [
+                "Penjaringan",
+                "Tanjung Priok",
+                "Koja",
+                "Cilincing",
+                "Pademangan",
+                "Kelapa Gading"
+            ]
+        },
+        "36.74": {
+            "regency_name": "Kota Tangerang Selatan",
+            "district_count": 7,
+            "districts": [
+                "Serpong",
+                "Serpong Utara",
+                "Pondok Aren",
+                "Ciputat",
+                "Ciputat Timur",
+                "Pamulang",
+                "Setu"
+            ]
+        },
+        "61.72": {
+            "regency_name": "Kota Singkawang",
+            "district_count": 5,
+            "districts": [
+                "Singkawang Tengah",
+                "Singkawang Barat",
+                "Singkawang Timur",
+                "Singkawang Utara",
+                "Singkawang Selatan"
+            ]
+        },
+        "73.73": {
+            "regency_name": "Kota Palopo",
+            "district_count": 9,
+            "districts": [
+                "Wara",
+                "Wara Utara",
+                "Wara Selatan",
+                "Telluwanua",
+                "Wara Timur",
+                "Wara Barat",
+                "Sendana",
+                "Mungkajang",
+                "Bara"
+            ]
+        },
+        "73.72": {
+            "regency_name": "Kota Parepare",
+            "district_count": 4,
+            "districts": [
+                "Bacukiki",
+                "Ujung",
+                "Soreang",
+                "Bacukiki Barat"
+            ]
+        },
+        "71.72": {
+            "regency_name": "Kota Bitung",
+            "district_count": 8,
+            "districts": [
+                "Lembeh Selatan",
+                "Madidir",
+                "Ranowulu",
+                "Aertembaga",
+                "Matuari",
+                "Girian",
+                "Maesa",
+                "Lembeh Utara"
+            ]
+        },
+        "71.73": {
+            "regency_name": "Kota Tomohon",
+            "district_count": 5,
+            "districts": [
+                "Tomohon Selatan",
+                "Tomohon Tengah",
+                "Tomohon Utara",
+                "Tomohon Barat",
+                "Tomohon Timur"
+            ]
+        },
+        "16.73": {
+            "regency_name": "Kota Lubuk Linggau",
+            "district_count": 8,
+            "districts": [
+                "Lubuk Linggau Timur I",
+                "Lubuk Linggau Barat I",
+                "Lubuk Linggau Selatan I",
+                "Lubuk Linggau Utara I",
+                "Lubuk Linggau Timur II",
+                "Lubuk Linggau Barat II",
+                "Lubuk Linggau Selatan II",
+                "Lubuk Linggau Utara II"
+            ]
+        },
+        "16.06": {
+            "regency_name": "Kabupaten Musi Banyuasin",
+            "district_count": 15,
+            "districts": [
+                "Sekayu",
+                "Lais",
+                "Sungai Keruh",
+                "Batang Hari Leko",
+                "Sanga Desa",
+                "Babat Toman",
+                "Sungai Lilin",
+                "Keluang",
+                "Bayung Lencir",
+                "Plakat Tinggi",
+                "Lalan",
+                "Tungkal Jaya",
+                "Lawan Wetan",
+                "Babat Supat",
+                "Jirak Jaya"
+            ]
+        },
+        "12.11": {
+            "regency_name": "Kabupaten Dairi",
+            "district_count": 15,
+            "districts": [
+                "Sidikalang",
+                "Sumbul",
+                "Tigalingga",
+                "Siempat Nempu",
+                "Silima Pungga Pungga",
+                "Tanah Pinem",
+                "Siempat Nempu Hulu",
+                "Siempat Nempu Hilir",
+                "Pegagan Hilir",
+                "Parbuluan",
+                "Lae Parira",
+                "Gunung Sitember",
+                "Berampu",
+                "Silahisabungan",
+                "Sitinjo"
+            ]
+        },
+        "12.06": {
+            "regency_name": "Kabupaten Karo",
+            "district_count": 17,
+            "districts": [
+                "Kabanjahe",
+                "Berastagi",
+                "Barusjahe",
+                "Tigapanah",
+                "Merek",
+                "Munte",
+                "Juhar",
+                "Tigabinanga",
+                "Laubaleng",
+                "Mardingding",
+                "Payung",
+                "Simpang Empat",
+                "Kutabuluh",
+                "Dolat Rayat",
+                "Merdeka",
+                "Naman Teran",
+                "Tiganderket"
+            ]
+        },
+        "12.76": {
+            "regency_name": "Kota Tebing Tinggi",
+            "district_count": 5,
+            "districts": [
+                "Padang Hulu",
+                "Rambutan",
+                "Padang Hilir",
+                "Bajenis",
+                "Tebing Tinggi Kota"
+            ]
+        },
+        "81.71": {
+            "regency_name": "Kota Ambon",
+            "district_count": 5,
+            "districts": [
+                "Nusaniwe",
+                "Sirimau",
+                "Baguala",
+                "Teluk Ambon",
+                "Leitimur Selatan"
+            ]
+        },
+        "62.71": {
+            "regency_name": "Kota Palangkaraya",
+            "district_count": 5,
+            "districts": [
+                "Pahandut",
+                "Bukit Batu",
+                "Jekan Raya",
+                "Sabangau",
+                "Rakumpit"
+            ]
+        },
+        "12.74": {
+            "regency_name": "Kota Tanjungbalai",
+            "district_count": 6,
+            "districts": [
+                "Tanjungbalai Selatan",
+                "Tanjungbalai Utara",
+                "Sei Tualang Raso",
+                "Teluk Nibung",
+                "Datuk Bandar",
+                "Datuk Bandar Timur"
+            ]
+        },
+        "13.10": {
+            "regency_name": "Kabupaten Dharmasraya",
+            "district_count": 11,
+            "districts": [
+                "Koto Baru",
+                "Pulau Punjung",
+                "Sungai Rumbai",
+                "Sitiung",
+                "Sembilan Koto",
+                "Timpeh",
+                "Koto Salak",
+                "Tiumang",
+                "Padang Laweh",
+                "Asam Jujuhan",
+                "Koto Besar"
+            ]
+        },
+        "13.75": {
+            "regency_name": "Kota Bukittinggi",
+            "district_count": 3,
+            "districts": [
+                "Guguak Panjang",
+                "Mandiangin Koto Selayan",
+                "Aur Birugo Tigo Baleh"
+            ]
+        },
+        "13.76": {
+            "regency_name": "Kota Payakumbuh",
+            "district_count": 5,
+            "districts": [
+                "Payakumbuh Barat",
+                "Payakumbuh Utara",
+                "Payakumbuh Timur",
+                "Lamposi Tigo Nagori",
+                "Payakumbuh Selatan"
+            ]
+        },
+        "16.04": {
+            "regency_name": "Kabupaten Lahat",
+            "district_count": 24,
+            "districts": [
+                "Tanjungsakti Pumu",
+                "Jarai",
+                "Kota Agung",
+                "Pulau Pinang",
+                "Merapi Barat",
+                "Lahat",
+                "Pajar Bulan",
+                "Mulak Ulu",
+                "Kikim Selatan",
+                "Kikim Timur",
+                "Kikim Tengah",
+                "Kikim Barat",
+                "Pseksu",
+                "Gumay Talang",
+                "Pagar Gunung",
+                "Merapi Timur",
+                "Tanjung Sakti Pumi",
+                "Gumay Ulu",
+                "Merapi Selatan",
+                "Tanjungtebat",
+                "Muarapayang",
+                "Sukamerindu",
+                "Mulak Sebingkai",
+                "Lahat Selatan"
+            ]
+        },
+        "14.03": {
+            "regency_name": "Kabupaten Bengkalis",
+            "district_count": 11,
+            "districts": [
+                "Bengkalis",
+                "Bantan",
+                "Bukit Batu",
+                "Mandau",
+                "Rupat",
+                "Rupat Utara",
+                "Siak Kecil",
+                "Pinggir",
+                "Bandar Laksamana",
+                "Talang Muandau",
+                "Bathin Solapan"
+            ]
+        },
+        "14.01": {
+            "regency_name": "Kabupaten Kampar",
+            "district_count": 21,
+            "districts": [
+                "Bangkinang Kota",
+                "Kampar",
+                "Tambang",
+                "XIII Koto Kampar",
+                "Kuok",
+                "Siak Hulu",
+                "Kampar Kiri",
+                "Kampar Kiri Hilir",
+                "Kampar Kiri Hulu",
+                "Tapung",
+                "Tapung Hilir",
+                "Tapung Hulu",
+                "Salo",
+                "Rumbio Jaya",
+                "Bangkinang",
+                "Perhentian Raja",
+                "Kampa",
+                "Kampar Utara",
+                "Kampar Kiri Tengah",
+                "Gunung Sahilan",
+                "Koto Kampar Hulu"
+            ]
+        },
+        "14.05": {
+            "regency_name": "Kabupaten Pelalawan",
+            "district_count": 12,
+            "districts": [
+                "Ukui",
+                "Pangkalan Kerinci",
+                "Pangkalan Kuras",
+                "Pangkalan Lesung",
+                "Langgam",
+                "Pelalawan",
+                "Kerumutan",
+                "Bunut",
+                "Teluk Meranti",
+                "Kuala Kampar",
+                "Bandar Sei Kijang",
+                "Bandar Petalangan"
+            ]
+        },
+        "21.02": {
+            "regency_name": "Kabupaten Karimun",
+            "district_count": 14,
+            "districts": [
+                "Moro",
+                "Kundur",
+                "Karimun",
+                "Meral",
+                "Tebing",
+                "Buru",
+                "Kundur Utara",
+                "Kundur Barat",
+                "Durai",
+                "Meral Barat",
+                "Ungar",
+                "Belat",
+                "Selat Gelam",
+                "Sugie Besar"
+            ]
+        },
+        "21.72": {
+            "regency_name": "Kota Tanjung Pinang",
+            "district_count": 4,
+            "districts": [
+                "Tanjung Pinang Barat",
+                "Tanjung Pinang Timur",
+                "Tanjung Pinang Kota",
+                "Bukit Bestari"
+            ]
+        },
+        "15.04": {
+            "regency_name": "Kabupaten Batanghari",
+            "district_count": 8,
+            "districts": [
+                "Mersam",
+                "Muara Tembesi",
+                "Muara Bulian",
+                "Batin XXIV",
+                "Pemayung",
+                "Maro Sebo Ulu",
+                "Bajubang",
+                "Maro Sebo Ilir"
+            ]
+        },
+        "19.71": {
+            "regency_name": "Kota Pangkal Pinang",
+            "district_count": 7,
+            "districts": [
+                "Bukit Intan",
+                "Taman Sari",
+                "Pangkal Balam",
+                "Rangkui",
+                "Gerunggang",
+                "Gabek",
+                "Girimaya"
+            ]
+        },
+        "35.17": {
+            "regency_name": "Kabupaten Jombang",
+            "district_count": 21,
+            "districts": [
+                "Perak",
+                "Gudo",
+                "Ngoro",
+                "Bareng",
+                "Wonosalam",
+                "Mojoagung",
+                "Mojowarno",
+                "Diwek",
+                "Jombang",
+                "Peterongan",
+                "Sumobito",
+                "Kesamben",
+                "Tembelang",
+                "Ploso",
+                "Plandaan",
+                "Kabuh",
+                "Kudu",
+                "Bandarkedungmulyo",
+                "Jogoroto",
+                "Megaluh",
+                "Ngusikan"
+            ]
+        },
+        "52.71": {
+            "regency_name": "Kota Mataram",
+            "district_count": 6,
+            "districts": [
+                "Ampenan",
+                "Mataram",
+                "Cakranegara",
+                "Sekarbela",
+                "Selaparang",
+                "Sandubaya"
+            ]
+        },
+        "61.09": {
+            "regency_name": "Kabupaten Sekadau",
+            "district_count": 7,
+            "districts": [
+                "Sekadau Hilir",
+                "Sekadau Hulu",
+                "Nanga Taman",
+                "Nanga Mahap",
+                "Belitang Hilir",
+                "Belitang Hulu",
+                "Belitang"
+            ]
+        },
+        "63.09": {
+            "regency_name": "Kabupaten Tabalong",
+            "district_count": 12,
+            "districts": [
+                "Banua Lawas",
+                "Kelua",
+                "Tanta",
+                "Tanjung",
+                "Haruai",
+                "Murung Pudak",
+                "Muara Uya",
+                "Muara Harus",
+                "Pugaan",
+                "Upau",
+                "Jaro",
+                "Bintang Ara"
+            ]
+        },
+        "63.10": {
+            "regency_name": "Kabupaten Tanah Bumbu",
+            "district_count": 12,
+            "districts": [
+                "Batu Licin",
+                "Kusan Hilir",
+                "Sungai Loban",
+                "Satui",
+                "Kusan Hulu",
+                "Simpang Empat",
+                "Karang Bintang",
+                "Mantewe",
+                "Angsana",
+                "Kuranji",
+                "Kusan Tengah",
+                "Teluk Kepayang"
+            ]
+        },
+        "64.09": {
+            "regency_name": "Kabupaten Penajam Paser Utara",
+            "district_count": 4,
+            "districts": [
+                "Penajam",
+                "Waru",
+                "Babulu",
+                "Sepaku"
+            ]
+        },
+        "74.04": {
+            "regency_name": "Kabupaten Buton",
+            "district_count": 7,
+            "districts": [
+                "Pasarwajo",
+                "Kapontori",
+                "Lasalimu",
+                "Lasalimu Selatan",
+                "Siotapina",
+                "Wolowa",
+                "Wabula"
+            ]
+        },
+        "72.05": {
+            "regency_name": "Kabupaten Buol",
+            "district_count": 11,
+            "districts": [
+                "Momunu",
+                "Lakea",
+                "Bokat",
+                "Bunobogu",
+                "Paleleh",
+                "Biau",
+                "Tiloan",
+                "Bukal",
+                "Gadung",
+                "Karamat",
+                "Paleleh Barat"
+            ]
+        },
+        "72.03": {
+            "regency_name": "Kabupaten Donggala",
+            "district_count": 16,
+            "districts": [
+                "Rio Pakava",
+                "Dampelas",
+                "Banawa",
+                "Labuan",
+                "Sindue",
+                "Sirenja",
+                "Balaesang",
+                "Sojol",
+                "Banawa Selatan",
+                "Tanantovea",
+                "Pinembani",
+                "Sindue Tombusabora",
+                "Sindue Tobata",
+                "Banawa Tengah",
+                "Sojol Utara",
+                "Balaesang Tanjung"
+            ]
+        },
+        "72.08": {
+            "regency_name": "Kabupaten Parigi Moutong",
+            "district_count": 23,
+            "districts": [
+                "Parigi",
+                "Ampibabo",
+                "Tinombo",
+                "Moutong",
+                "Tomini",
+                "Sausu",
+                "Bolano Lambunu",
+                "Kasimbar",
+                "Torue",
+                "Tinombo Selatan",
+                "Parigi Selatan",
+                "Mepanga",
+                "Toribulu",
+                "Taopa",
+                "Balinggi",
+                "Parigi Barat",
+                "Siniu",
+                "Palasa",
+                "Parigi Utara",
+                "Parigi Tengah",
+                "Bolano",
+                "Ongka Malino",
+                "Sidoan"
+            ]
+        },
+        "71.01": {
+            "regency_name": "Kabupaten Bolaang Mongondow",
+            "district_count": 15,
+            "districts": [
+                "Sang Tombolang",
+                "Dumoga Barat",
+                "Dumoga Timur",
+                "Dumoga Utara",
+                "Lolak",
+                "Bolaang",
+                "Lolayan",
+                "Passi Barat",
+                "Poigar",
+                "Passi Timur",
+                "Bolaang Timur",
+                "Bilalang",
+                "Dumoga",
+                "Dumoga Tenggara",
+                "Dumoga Tengah"
+            ]
+        },
+        "71.74": {
+            "regency_name": "Kota Kotamobagu",
+            "district_count": 4,
+            "districts": [
+                "Kotamobagu Utara",
+                "Kotamobagu Timur",
+                "Kotamobagu Selatan",
+                "Kotamobagu Barat"
+            ]
+        },
+        "76.05": {
+            "regency_name": "Kabupaten Majene",
+            "district_count": 8,
+            "districts": [
+                "Banggae",
+                "Pamboang",
+                "Sendana",
+                "Malunda",
+                "Ulumanda",
+                "Tammerodo Sendana",
+                "Tubo Sendana",
+                "Banggae Timur"
+            ]
+        },
+        "76.03": {
+            "regency_name": "Kabupaten Mamasa",
+            "district_count": 17,
+            "districts": [
+                "Mambi",
+                "Aralle",
+                "Mamasa",
+                "Pana",
+                "Tabulahan",
+                "Sumarorong",
+                "Messawa",
+                "Sesenapadang",
+                "Tanduk Kalua",
+                "Tabang",
+                "Bambang",
+                "Balla",
+                "Nosu",
+                "Tawalian",
+                "Rantebulahan Timur",
+                "Buntumalangka",
+                "Mehalaan"
+            ]
+        },
+        "76.04": {
+            "regency_name": "Kabupaten Polewali Mandar",
+            "district_count": 16,
+            "districts": [
+                "Tinambung",
+                "Campalagian",
+                "Wonomulyo",
+                "Polewali",
+                "Tutar",
+                "Binuang",
+                "Tapango",
+                "Mapilli",
+                "Matangnga",
+                "Luyo",
+                "Limboro",
+                "Balanipa",
+                "Anreapi",
+                "Matakali",
+                "Allu",
+                "Bulo"
+            ]
+        },
+        "82.01": {
+            "regency_name": "Kabupaten Halmahera Barat",
+            "district_count": 9,
+            "districts": [
+                "Jailolo",
+                "Loloda",
+                "Ibu",
+                "Sahu",
+                "Jailolo Selatan",
+                "Ibu Utara",
+                "Ibu Selatan",
+                "Sahu Timur",
+                "Loloda Tengah"
+            ]
+        },
+        "82.02": {
+            "regency_name": "Kabupaten Halmahera Tengah",
+            "district_count": 10,
+            "districts": [
+                "Weda",
+                "Patani",
+                "Pulau Gebe",
+                "Weda Utara",
+                "Weda Selatan",
+                "Patani Utara",
+                "Weda Tengah",
+                "Patani Barat",
+                "Weda Timur",
+                "Patani Timur"
+            ]
+        },
+        "82.03": {
+            "regency_name": "Kabupaten Halmahera Utara",
+            "district_count": 17,
+            "districts": [
+                "Galela",
+                "Tobelo",
+                "Tobelo Selatan",
+                "Kao",
+                "Malifut",
+                "Loloda Utara",
+                "Tobelo Utara",
+                "Tobelo Tengah",
+                "Tobelo Timur",
+                "Tobelo Barat",
+                "Galela Barat",
+                "Galela Utara",
+                "Galela Selatan",
+                "Loloda Kepulauan",
+                "Kao Utara",
+                "Kao Barat",
+                "Kao Teluk"
+            ]
+        },
+        "82.04": {
+            "regency_name": "Kabupaten Halmahera Selatan",
+            "district_count": 30,
+            "districts": [
+                "Pulau Makian",
+                "Kayoa",
+                "Gane Timur",
+                "Gane Barat",
+                "Obi Selatan",
+                "Obi",
+                "Bacan Timur",
+                "Bacan",
+                "Bacan Barat",
+                "Makian Barat",
+                "Kayoa Barat",
+                "Kayoa Selatan",
+                "Kayoa Utara",
+                "Bacan Barat Utara",
+                "Kasiruta Barat",
+                "Kasiruta Timur",
+                "Bacan Selatan",
+                "Kepulauan Botanglomang",
+                "Mandioli Selatan",
+                "Mandioli Utara",
+                "Bacan Timur Selatan",
+                "Bacan Timur Tengah",
+                "Gane Barat Selatan",
+                "Gane Barat Utara",
+                "Kepulauan Joronga",
+                "Gane Timur Selatan",
+                "Gane Timur Tengah",
+                "Obi Barat",
+                "Obi Timur",
+                "Obi Utara"
+            ]
+        }
+    }
+}

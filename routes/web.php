@@ -54,6 +54,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::get('/content-matrix', [AdminController::class, 'contentMatrix'])->name('content-matrix');
 
     // CRUD Artikel / Blog
+    // Coverage matrix for articles
+    Route::get('/articles/coverage', [ArticleAdminController::class, 'coverage'])->name('articles.coverage');
+
     Route::resource('articles', ArticleAdminController::class)->names([
         'index' => 'articles.index',
         'create' => 'articles.create',
@@ -68,7 +71,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
 
 
 
-    // AI Article Generator
+    // AI Article Generator - returns an unsaved draft to the Article form.
     Route::post('/articles/ai-generate', [AdminController::class, 'aiGenerateArticle'])->name('articles.ai-generate');
     Route::get('/articles/ai-preview', [AdminController::class, 'previewAiArticle'])->name('articles.ai-preview');
 

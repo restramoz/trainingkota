@@ -20,7 +20,7 @@
         <div class="lg:col-span-2 space-y-6">
             <div class="bg-[#0E1726] p-6 rounded-xl border border-[#1E293B]">
                 <h2 class="text-xl font-bold text-[#F1F5F9] mb-4">{{ $article->title }}</h2>
-                <div class="prose prose-invert max-w-none text-slate-300">
+                <div class="flex flex-col w-full min-w-0 overflow-x-auto text-slate-300 [&_table]:w-full [&_table]:border-collapse [&_table]:border [&_table]:border-slate-700 [&_table]:my-4 [&_th]:border [&_th]:border-slate-700 [&_th]:bg-slate-800 [&_th]:p-2 [&_th]:overflow-wrap-[anywhere] [&_th]:whitespace-normal [&_td]:border [&_td]:border-slate-700 [&_td]:p-2 [&_td]:overflow-wrap-[anywhere] [&_td]:whitespace-normal">
                     {!! $article->content !!}
                 </div>
             </div>
@@ -77,4 +77,5 @@
     </div>
 </div>
 @endsection
+
 

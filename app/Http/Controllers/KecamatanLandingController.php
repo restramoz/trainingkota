@@ -9,6 +9,7 @@ use App\Models\Location;
 use App\Models\Article;
 use App\Models\Faq;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class KecamatanLandingController extends Controller
 {
@@ -25,12 +26,15 @@ class KecamatanLandingController extends Controller
             ->firstOrFail();
 
         $city = $kecamatan->city;
+        if (!$city) {
+            abort(404);
+        }
 
         // Services in this category
+        // Services in this category (all published services)
         $services = Service::where('category', $category)
             ->where('status', 'published')
             ->orderBy('id')
-            ->take(9)
             ->get();
 
         // Locations in this Kecamatan & City
@@ -45,31 +49,39 @@ class KecamatanLandingController extends Controller
 
         // Related Articles for this Kecamatan/City context
         // Priority: Kecamatan-specific first, then City-level fallback
-        $relatedArticles = Article::published()
-            ->where(function ($q) use ($kecamatan, $city) {
-                $q->where(function ($qKec) use ($kecamatan) {
-                    $qKec->where('kecamatan_id', $kecamatan->id);
+        if (Schema::hasTable('articles')) {
+            $relatedArticles = Article::published()
+                ->where(function ($q) use ($kecamatan, $city) {
+                    $q->where(function ($qKec) use ($kecamatan) {
+                        $qKec->where('kecamatan_id', $kecamatan->id);
+                    })
+                    ->orWhere(function ($qCity) use ($city) {
+                        $qCity->where('city_id', $city->id)->whereNull('kecamatan_id');
+                    });
                 })
-                ->orWhere(function ($qCity) use ($city) {
-                    $qCity->where('city_id', $city->id)->whereNull('kecamatan_id');
-                });
-            })
-            ->orderByRaw('kecamatan_id IS NULL')
-            ->latest()
-            ->take(6)
-            ->get();
+                ->orderByRaw('kecamatan_id IS NULL')
+                ->latest()
+                ->take(6)
+                ->get();
+        } else {
+            $relatedArticles = collect();
+        }
 
         // Dynamic Article: Priority: Kecamatan -> City -> Category General
-        $article = Article::published()
-            ->where(function ($q) use ($kecamatan, $city, $category) {
-                $q->where('kecamatan_id', $kecamatan->id)
-                  ->orWhere('city_id', $city->id)
-                  ->orWhere(function ($q2) use ($category) {
-                      $q2->where('category', $category)->whereNull('city_id');
-                  });
-            })
-            ->latest()
-            ->first();
+        if (Schema::hasTable('articles')) {
+            $article = Article::published()
+                ->where(function ($q) use ($kecamatan, $city, $category) {
+                    $q->where('kecamatan_id', $kecamatan->id)
+                      ->orWhere('city_id', $city->id)
+                      ->orWhere(function ($q2) use ($category) {
+                          $q2->where('category', $category)->whereNull('city_id');
+                      });
+                })
+                ->latest()
+                ->first();
+        } else {
+            $article = null;
+        }
 
         // Dynamic FAQs from database
         $faqs = Faq::published()

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @php
     $seoTitle = $kecamatan->seo_title ?: "Layanan " . ucfirst($category) . " K3 di Kecamatan {$kecamatan->name}, {$city->name} - TrainingKota";
     $metaDesc = $kecamatan->meta_description ?: "Pusat informasi " . ucfirst($category) . " K3 resmi di Kecamatan {$kecamatan->name}, {$city->name}. Sentra praktik, jadwal, konsultasi izin dan sertifikasi Kemnaker RI.";
@@ -47,7 +46,7 @@
         </p>
 
         <div class="flex flex-wrap items-center gap-4 pt-2">
-            <a href="https://wa.me/6281234567890?text={{ urlencode("Halo Admin TrainingKota, saya membutuhkan informasi program {$category} di Kecamatan {$kecamatan->name}, {$city->name}") }}" target="_blank" class="btn-primary">
+            <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode("Halo Admin TrainingKota, saya membutuhkan informasi program {$category} di Kecamatan {$kecamatan->name}, {$city->name}") }}" target="_blank" class="btn-primary">
                 Konsultasi Layanan {{ ucfirst($category) }}
             </a>
             <a href="#locations" class="btn-secondary">
@@ -161,7 +160,12 @@
                         width="100%"
                         height="100%"
                         style="border:0; min-height: 320px;"
-                        allowfullscreen=""
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Google Maps {{ $kecamatan->name }}">
+                    </iframe>
+                </div>
 
 <!-- 5. Related Articles Section -->
 <section class="py-12 border-b border-[#1E324E]">
@@ -226,10 +230,6 @@
     </div>
 </section>
 
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Google Maps {{ $kecamatan->name }}">
-                    </iframe>
                 </div>
             </div>
         </div>
@@ -299,7 +299,7 @@
             Tim instruktur dan konsultan keselamatan kerja TrainingKota siap memberikan solusi pembinaan dan inspeksi terakreditasi langsung di tempat kerja Anda.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <a href="https://wa.me/6281234567890?text={{ urlencode("Halo Admin TrainingKota, saya ingin konsultasi program di Kecamatan {$kecamatan->name}, {$city->name}") }}" target="_blank" class="btn-whatsapp">
+            <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode("Halo Admin TrainingKota, saya ingin konsultasi program di Kecamatan {$kecamatan->name}, {$city->name}") }}" target="_blank" class="btn-whatsapp">
                 Hubungi Konsultan Wilayah (WhatsApp)
             </a>
             <a href="{{ route('city.landing', ['category' => $category, 'citySlug' => $city->slug]) }}" class="btn-secondary">
@@ -364,3 +364,4 @@
 }
 </script>
 @endsection
+

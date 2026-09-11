@@ -198,7 +198,7 @@
                         <div class="font-space font-bold text-sm text-[#F1F5F9] mb-1">Butuh pendampingan teknis atau pelatihan K3?</div>
                         <p class="text-xs text-[#94A3B8]">Tim TrainingKota siap membantu di lebih dari 212 kota seluruh Indonesia.</p>
                     </div>
-                    <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Admin TrainingKota, saya baru membaca artikel: ' . $article->title . '. Saya butuh konsultasi.') }}" target="_blank" class="btn-whatsapp text-xs shrink-0">
+                    <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, saya baru membaca artikel: ' . $article->title . '. Saya butuh konsultasi.') }}" target="_blank" class="btn-whatsapp text-xs shrink-0">
                         Konsultasi Gratis via WA
                     </a>
                 </div>
@@ -224,7 +224,7 @@
                         KONSULTASI GRATIS
                     </div>
                     <p class="text-xs text-[#94A3B8] mb-4 leading-relaxed">Diskusikan kebutuhan pelatihan K3 atau jasa teknis langsung dengan tim spesialis kami.</p>
-                    <a href="https://wa.me/6281234567890" target="_blank" class="btn-whatsapp w-full text-xs py-3 text-center block mb-2">
+                    <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="btn-whatsapp w-full text-xs py-3 text-center block mb-2">
                         WhatsApp Sekarang
                     </a>
                     @if($article->category)
@@ -315,3 +315,4 @@ function articleTOC() {
 .article-prose a:hover { color: #10B981; }
 </style>
 @endsection
+

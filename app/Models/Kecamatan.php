@@ -41,6 +41,8 @@ class Kecamatan extends Model
         'seo_title',
         'meta_description',
         'status',
+        'bps_code',
+        'wilayah_code',
     ];
 
     protected $casts = [

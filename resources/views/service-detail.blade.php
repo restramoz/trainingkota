@@ -37,24 +37,24 @@
 
                 <div class="flex flex-wrap items-center gap-4 pt-2">
                     @if($category === 'pelatihan')
-                        <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Admin TrainingKota, saya berminat mendaftar program pelatihan ' . $service->name) }}" target="_blank" class="btn-primary">
+                        <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, saya berminat mendaftar program pelatihan ' . $service->name) }}" target="_blank" class="btn-primary">
                             Booking Kursi Pelatihan Sekarang
                         </a>
-                        <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Admin TrainingKota, mohon kirimkan proposal silabus lengkap untuk ' . $service->name) }}" target="_blank" class="btn-whatsapp">
+                        <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, mohon kirimkan proposal silabus lengkap untuk ' . $service->name) }}" target="_blank" class="btn-whatsapp">
                             Minta Proposal &amp; Silabus
                         </a>
                     @elseif($category === 'kajian')
-                        <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Admin TrainingKota, kami ingin konsultasi kajian teknis: ' . $service->name) }}" target="_blank" class="btn-primary">
+                        <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, kami ingin konsultasi kajian teknis: ' . $service->name) }}" target="_blank" class="btn-primary">
                             Konsultasi Kajian Teknis Fasilitas
                         </a>
-                        <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Admin TrainingKota, mohon kirimkan Term of Reference (TOR) kajian ' . $service->name) }}" target="_blank" class="btn-whatsapp">
+                        <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, mohon kirimkan Term of Reference (TOR) kajian ' . $service->name) }}" target="_blank" class="btn-whatsapp">
                             Minta Dokumen TOR &amp; Metodologi
                         </a>
                     @else
-                        <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Admin TrainingKota, kami membutuhkan jasa teknis & riksa uji: ' . $service->name) }}" target="_blank" class="btn-primary">
+                        <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, kami membutuhkan jasa teknis & riksa uji: ' . $service->name) }}" target="_blank" class="btn-primary">
                             Ajukan Permohonan Jasa / Riksa Uji
                         </a>
-                        <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Admin TrainingKota, mohon kirimkan penawaran resmi untuk ' . $service->name) }}" target="_blank" class="btn-whatsapp">
+                        <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, mohon kirimkan penawaran resmi untuk ' . $service->name) }}" target="_blank" class="btn-whatsapp">
                             Minta Penawaran Biaya Resmi
                         </a>
                     @endif
@@ -117,19 +117,10 @@
                         </h2>
 
                         @if(!empty($service->syllabus) && is_array($service->syllabus))
-                            <div class="space-y-3">
-                                @foreach($service->syllabus as $index => $item)
-                                    <div class="bg-[#0B1526] border border-[#1E324E] p-4 flex items-start gap-4">
-                                        <span class="w-7 h-7 bg-[#0F2038] border border-[#1E324E] text-[#10B981] font-space font-bold flex items-center justify-center text-xs shrink-0">
-                                            {{ sprintf('%02d', $index + 1) }}
-                                        </span>
-                                        <div>
-                                            <h3 class="font-space font-bold text-sm text-[#F1F5F9] mb-1">{{ $item }}</h3>
-                                            <p class="text-xs text-[#94A3B8] font-body">Pembahasan teori, studi implementasi industri, dan bedah regulasi pemerintah terkait keselamatan kerja operasional.</p>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
+                            <x-syllabus-table
+                                :syllabus="$service->syllabus"
+                                description="Pembahasan teori, studi implementasi industri, dan bedah regulasi pemerintah terkait keselamatan kerja operasional."
+                            />
                         @else
                             <div class="bg-[#0B1526] border border-[#1E324E] p-4 text-xs text-[#94A3B8] font-body">
                                 Kurikulum dirancang sesuai pedoman Kemnaker RI dan standar BNSP terkini. Silabus lengkap mencakup regulasi dasar, manajemen risiko, pengoperasian alat, serta praktik PKL.
@@ -191,7 +182,7 @@
                                             </span>
                                         </td>
                                         <td class="p-3 text-right">
-                                            <a href="https://wa.me/6281234567890?text={{ urlencode("Halo Admin TrainingKota, saya ingin booking kursi untuk {$service->name} batch " . \Carbon\Carbon::parse($sch->date)->format('d M Y') . " di {$sch->location}") }}" target="_blank" class="btn-primary py-1 px-3 text-[11px]">
+                                            <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode("Halo Admin TrainingKota, saya ingin booking kursi untuk {$service->name} batch " . \Carbon\Carbon::parse($sch->date)->format('d M Y') . " di {$sch->location}") }}" target="_blank" class="btn-primary py-1 px-3 text-[11px]">
                                                 Booking &rarr;
                                             </a>
                                         </td>
@@ -329,7 +320,7 @@
                         Hubungi Tim Teknis Regional
                     </h3>
 
-                    <form action="#" method="POST" onsubmit="event.preventDefault(); window.open('https://wa.me/6281234567890?text=' + encodeURIComponent('Halo Admin TrainingKota, saya berminat konsultasi program ' + '{{ $service->name }}' + ' untuk wilayah: ' + document.getElementById('reg-city').value), '_blank');" class="space-y-4">
+                    <form action="#" method="POST" onsubmit="event.preventDefault(); window.open('https://wa.me/{{ config('contact.whatsapp') }}?text=' + encodeURIComponent('Halo Admin TrainingKota, saya berminat konsultasi program ' + '{{ $service->name }}' + ' untuk wilayah: ' + document.getElementById('reg-city').value), '_blank');" class="space-y-4">
                         <div>
                             <label class="block text-xs font-space uppercase text-[#94A3B8] mb-1">Pilih Kota Wilayah</label>
                             <select id="reg-city" class="input-k3 w-full">
@@ -374,3 +365,4 @@
     </div>
 </section>
 @endsection
+

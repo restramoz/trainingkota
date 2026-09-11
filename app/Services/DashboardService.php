@@ -27,6 +27,10 @@ class DashboardService
             'faqs' => $this->getFaqsData($request),
             'schedules' => $this->getSchedulesData($request),
             'locations' => $this->getLocationsData($request),
+            // Helper collections used by modals and selectors
+            'allServices' => Service::select('id', 'name', 'category', 'slug')->get(),
+            'allCities' => City::select('id', 'name', 'slug', 'province')->get(),
+            'kecamatans' => \App\Models\Kecamatan::select('id', 'name', 'city_id')->get(),
         ];
     }
 
@@ -134,7 +138,7 @@ class DashboardService
             });
         }
 
-        return $query->orderBy('start_date', 'asc')->paginate(15)->withQueryString();
+        return $query->orderBy('date', 'asc')->paginate(15)->withQueryString();
     }
 
     /**
@@ -169,13 +173,22 @@ class DashboardService
     {
         $search = $request->query('city_q') ?? $request->query('q') ?? $request->query('search_city');
 
-        $query = City::query();
+        $query = City::withCount('cityServiceContents');
 
         if ($search) {
             $query->where('name', 'like', "%{$search}%");
         }
 
         return $query->orderBy('name')->paginate(15)->withQueryString();
-     }
+    }
+
+    /**
+     * Get recent articles for the dashboard overview.
+     */
+    public function getArticlesData(Request $request)
+    {
+        // Simple recent articles, limited to 5 for the overview card.
+        return \App\Models\Article::latest()->take(5)->get();
+    }
 
 }

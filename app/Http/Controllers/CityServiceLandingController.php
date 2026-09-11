@@ -39,14 +39,22 @@ class CityServiceLandingController extends Controller
             ->take(4)
             ->get();
 
-        // Related articles
-        $relatedArticle = Article::published()
-            ->where(function ($q) use ($city, $category) {
-                $q->where('city_id', $city->id)
-                  ->orWhere('category', $category);
-            })
+        // Related articles - MUST be specific to this service + city
+        $relatedArticles = Article::published()
+            ->where('city_id', $city->id)
+            ->where('service_id', $service->id)
             ->latest()
-            ->first();
+            ->take(3)
+            ->get();
+
+        // FAQ for this service + city, fallback to service-wide FAQ
+        $faqs = \App\Models\Faq::published()
+            ->where(function($q) use ($city, $service) {
+                $q->where('city_id', $city->id)->where('service_id', $service->id)
+                  ->orWhere('city_id', null)->where('service_id', $service->id);
+            })
+            ->orderBy('order')
+            ->get();
 
         return view('city-service-landing', compact(
             'category',
@@ -55,7 +63,8 @@ class CityServiceLandingController extends Controller
             'override',
             'otherCities',
             'relatedServices',
-            'relatedArticle'
+            'relatedArticles',
+            'faqs'
         ));
     }
 }
