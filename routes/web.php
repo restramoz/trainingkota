@@ -114,12 +114,12 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('article.show');
 
 // 5. Hyper-Specific City Service Landing: /{category}/{service-slug}/kota-{city-slug}
-Route::get('/{category}/{serviceSlug}/kota-{citySlug}', [CityServiceLandingController::class, 'show'])
+Route::get('/{category}/{serviceSlug}/{citySlug}', [CityServiceLandingController::class, 'show'])
     ->where('category', 'pelatihan|kajian|jasa')
     ->name('city.service.landing');
 
 // 6. Dynamic City Landing Page: /{category}/kota-{city-slug}
-Route::get('/{category}/kota-{citySlug}', [CityLandingController::class, 'show'])
+Route::get('/{category}/{citySlug}', [CityLandingController::class, 'show'])
     ->where('category', 'pelatihan|kajian|jasa')
     ->name('city.landing');
 

@@ -359,7 +359,6 @@
         </div>
     </div>
 </section>
-@endif
 
 <!-- Kecamatan Widgets Section -->
 @if($city->kecamatans->count() > 0)
