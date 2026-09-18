@@ -13,6 +13,7 @@ class City extends Model
         'name',
         'slug',
         'bps_code',
+        'bps_province_code',
         'wilayah_code',
         'island',
         'is_hub',

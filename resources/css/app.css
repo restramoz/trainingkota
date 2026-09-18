@@ -39,6 +39,19 @@
 }
 
 @layer components {
+    /* ... existing styles ... */
+
+    .article-content, .article-rich-content {
+        overflow-x: auto;
+    }
+
+    .article-content table, .article-rich-content table {
+        min-width: 0 !important;
+        width: 100% !important;
+        display: table;
+    }
+}
+@layer components {
     /* Action Triggers (Buttons) from DESIGN.md */
     .btn-primary {
         background-color: #0D7A5F;

@@ -1,0 +1,515 @@
+Kode Provinsi,Provinsi,Kode Kab/Kota,Kabupaten/Kota,Jenis Wilayah
+1100000,Aceh,1101000,Simeulue,Kabupaten
+1100000,Aceh,1102000,Aceh Singkil,Kabupaten
+1100000,Aceh,1103000,Aceh Selatan,Kabupaten
+1100000,Aceh,1104000,Aceh Tenggara,Kabupaten
+1100000,Aceh,1105000,Aceh Timur,Kabupaten
+1100000,Aceh,1106000,Aceh Tengah,Kabupaten
+1100000,Aceh,1107000,Aceh Barat,Kabupaten
+1100000,Aceh,1108000,Aceh Besar,Kabupaten
+1100000,Aceh,1109000,Pidie,Kabupaten
+1100000,Aceh,1110000,Bireuen,Kabupaten
+1100000,Aceh,1111000,Aceh Utara,Kabupaten
+1100000,Aceh,1112000,Aceh Barat Daya,Kabupaten
+1100000,Aceh,1113000,Gayo Lues,Kabupaten
+1100000,Aceh,1114000,Aceh Tamiang,Kabupaten
+1100000,Aceh,1115000,Nagan Raya,Kabupaten
+1100000,Aceh,1116000,Aceh Jaya,Kabupaten
+1100000,Aceh,1117000,Bener Meriah,Kabupaten
+1100000,Aceh,1118000,Pidie Jaya,Kabupaten
+1100000,Aceh,1171000,Banda Aceh,Kota
+1100000,Aceh,1172000,Sabang,Kota
+1100000,Aceh,1173000,Langsa,Kota
+1100000,Aceh,1174000,Lhokseumawe,Kota
+1100000,Aceh,1175000,Subulussalam,Kota
+1200000,Sumatera Utara,1201000,Nias,Kabupaten
+1200000,Sumatera Utara,1202000,Mandailing Natal,Kabupaten
+1200000,Sumatera Utara,1203000,Tapanuli Selatan,Kabupaten
+1200000,Sumatera Utara,1204000,Tapanuli Tengah,Kabupaten
+1200000,Sumatera Utara,1205000,Tapanuli Utara,Kabupaten
+1200000,Sumatera Utara,1206000,Toba Samosir,Kabupaten
+1200000,Sumatera Utara,1207000,Labuhan Batu,Kabupaten
+1200000,Sumatera Utara,1208000,Asahan,Kabupaten
+1200000,Sumatera Utara,1209000,Simalungun,Kabupaten
+1200000,Sumatera Utara,1210000,Dairi,Kabupaten
+1200000,Sumatera Utara,1211000,Karo,Kabupaten
+1200000,Sumatera Utara,1212000,Deli Serdang,Kabupaten
+1200000,Sumatera Utara,1213000,Langkat,Kabupaten
+1200000,Sumatera Utara,1214000,Nias Selatan,Kabupaten
+1200000,Sumatera Utara,1215000,Humbang Hasundutan,Kabupaten
+1200000,Sumatera Utara,1216000,Pakpak Bharat,Kabupaten
+1200000,Sumatera Utara,1217000,Samosir,Kabupaten
+1200000,Sumatera Utara,1218000,Serdang Bedagai,Kabupaten
+1200000,Sumatera Utara,1219000,Batu Bara,Kabupaten
+1200000,Sumatera Utara,1220000,Padang Lawas Utara,Kabupaten
+1200000,Sumatera Utara,1221000,Padang Lawas,Kabupaten
+1200000,Sumatera Utara,1222000,Labuhan Batu Selatan,Kabupaten
+1200000,Sumatera Utara,1223000,Labuhan Batu Utara,Kabupaten
+1200000,Sumatera Utara,1224000,Nias Utara,Kabupaten
+1200000,Sumatera Utara,1225000,Nias Barat,Kabupaten
+1200000,Sumatera Utara,1271000,Sibolga,Kota
+1200000,Sumatera Utara,1272000,Tanjung Balai,Kota
+1200000,Sumatera Utara,1273000,Pematang Siantar,Kota
+1200000,Sumatera Utara,1274000,Tebing Tinggi,Kota
+1200000,Sumatera Utara,1275000,Medan,Kota
+1200000,Sumatera Utara,1276000,Binjai,Kota
+1200000,Sumatera Utara,1277000,Padangsidimpuan,Kota
+1200000,Sumatera Utara,1278000,Gunungsitoli,Kota
+1300000,Sumatera Barat,1301000,Kepulauan Mentawai,Kabupaten
+1300000,Sumatera Barat,1302000,Pesisir Selatan,Kabupaten
+1300000,Sumatera Barat,1303000,Solok,Kabupaten
+1300000,Sumatera Barat,1304000,Sijunjung,Kabupaten
+1300000,Sumatera Barat,1305000,Tanah Datar,Kabupaten
+1300000,Sumatera Barat,1306000,Padang Pariaman,Kabupaten
+1300000,Sumatera Barat,1307000,Agam,Kabupaten
+1300000,Sumatera Barat,1308000,Lima Puluh Kota,Kabupaten
+1300000,Sumatera Barat,1309000,Pasaman,Kabupaten
+1300000,Sumatera Barat,1310000,Solok Selatan,Kabupaten
+1300000,Sumatera Barat,1311000,Dharmasraya,Kabupaten
+1300000,Sumatera Barat,1312000,Pasaman Barat,Kabupaten
+1300000,Sumatera Barat,1371000,Padang,Kota
+1300000,Sumatera Barat,1372000,Solok,Kota
+1300000,Sumatera Barat,1373000,Sawah Lunto,Kota
+1300000,Sumatera Barat,1374000,Padang Panjang,Kota
+1300000,Sumatera Barat,1375000,Bukittinggi,Kota
+1300000,Sumatera Barat,1376000,Payakumbuh,Kota
+1300000,Sumatera Barat,1377000,Pariaman,Kota
+1400000,Riau,1401000,Kuantan Singingi,Kabupaten
+1400000,Riau,1402000,Indragiri Hulu,Kabupaten
+1400000,Riau,1403000,Indragiri Hilir,Kabupaten
+1400000,Riau,1404000,Pelalawan,Kabupaten
+1400000,Riau,1405000,Siak,Kabupaten
+1400000,Riau,1406000,Kampar,Kabupaten
+1400000,Riau,1407000,Rokan Hulu,Kabupaten
+1400000,Riau,1408000,Bengkalis,Kabupaten
+1400000,Riau,1409000,Rokan Hilir,Kabupaten
+1400000,Riau,1410000,Kepulauan Meranti,Kabupaten
+1400000,Riau,1471000,Pekanbaru,Kota
+1400000,Riau,1473000,Dumai,Kota
+1500000,Jambi,1501000,Kerinci,Kabupaten
+1500000,Jambi,1502000,Merangin,Kabupaten
+1500000,Jambi,1503000,Sarolangun,Kabupaten
+1500000,Jambi,1504000,Batang Hari,Kabupaten
+1500000,Jambi,1505000,Muaro Jambi,Kabupaten
+1500000,Jambi,1506000,Tanjung Jabung Timur,Kabupaten
+1500000,Jambi,1507000,Tanjung Jabung Barat,Kabupaten
+1500000,Jambi,1508000,Tebo,Kabupaten
+1500000,Jambi,1509000,Bungo,Kabupaten
+1500000,Jambi,1571000,Jambi,Kota
+1500000,Jambi,1572000,Sungai Penuh,Kota
+1600000,Sumatera Selatan,1601000,Ogan Komering Ulu,Kabupaten
+1600000,Sumatera Selatan,1602000,Ogan Komering Ilir,Kabupaten
+1600000,Sumatera Selatan,1603000,Muara Enim,Kabupaten
+1600000,Sumatera Selatan,1604000,Lahat,Kabupaten
+1600000,Sumatera Selatan,1605000,Musi Rawas,Kabupaten
+1600000,Sumatera Selatan,1606000,Musi Banyuasin,Kabupaten
+1600000,Sumatera Selatan,1607000,Banyu Asin,Kabupaten
+1600000,Sumatera Selatan,1608000,Ogan Komering Ulu Selatan,Kabupaten
+1600000,Sumatera Selatan,1609000,Ogan Komering Ulu Timur,Kabupaten
+1600000,Sumatera Selatan,1610000,Ogan Ilir,Kabupaten
+1600000,Sumatera Selatan,1611000,Empat Lawang,Kabupaten
+1600000,Sumatera Selatan,1612000,Penukal Abab Lematang Ilir,Kabupaten
+1600000,Sumatera Selatan,1613000,Musi Rawas Utara,Kabupaten
+1600000,Sumatera Selatan,1671000,Palembang,Kota
+1600000,Sumatera Selatan,1672000,Prabumulih,Kota
+1600000,Sumatera Selatan,1673000,Pagar Alam,Kota
+1600000,Sumatera Selatan,1674000,Lubuklinggau,Kota
+1700000,Bengkulu,1701000,Bengkulu Selatan,Kabupaten
+1700000,Bengkulu,1702000,Rejang Lebong,Kabupaten
+1700000,Bengkulu,1703000,Bengkulu Utara,Kabupaten
+1700000,Bengkulu,1704000,Kaur,Kabupaten
+1700000,Bengkulu,1705000,Seluma,Kabupaten
+1700000,Bengkulu,1706000,Mukomuko,Kabupaten
+1700000,Bengkulu,1707000,Lebong,Kabupaten
+1700000,Bengkulu,1708000,Kepahiang,Kabupaten
+1700000,Bengkulu,1709000,Bengkulu Tengah,Kabupaten
+1700000,Bengkulu,1771000,Bengkulu,Kota
+1800000,Lampung,1801000,Lampung Barat,Kabupaten
+1800000,Lampung,1802000,Tanggamus,Kabupaten
+1800000,Lampung,1803000,Lampung Selatan,Kabupaten
+1800000,Lampung,1804000,Lampung Timur,Kabupaten
+1800000,Lampung,1805000,Lampung Tengah,Kabupaten
+1800000,Lampung,1806000,Lampung Utara,Kabupaten
+1800000,Lampung,1807000,Way Kanan,Kabupaten
+1800000,Lampung,1808000,Tulangbawang,Kabupaten
+1800000,Lampung,1809000,Pesawaran,Kabupaten
+1800000,Lampung,1810000,Pringsewu,Kabupaten
+1800000,Lampung,1811000,Mesuji,Kabupaten
+1800000,Lampung,1812000,Tulang Bawang Barat,Kabupaten
+1800000,Lampung,1813000,Pesisir Barat,Kabupaten
+1800000,Lampung,1871000,Bandar Lampung,Kota
+1800000,Lampung,1872000,Metro,Kota
+1900000,Kepulauan Bangka Belitung,1901000,Bangka,Kabupaten
+1900000,Kepulauan Bangka Belitung,1902000,Belitung,Kabupaten
+1900000,Kepulauan Bangka Belitung,1903000,Bangka Barat,Kabupaten
+1900000,Kepulauan Bangka Belitung,1904000,Bangka Tengah,Kabupaten
+1900000,Kepulauan Bangka Belitung,1905000,Bangka Selatan,Kabupaten
+1900000,Kepulauan Bangka Belitung,1906000,Belitung Timur,Kabupaten
+1900000,Kepulauan Bangka Belitung,1971000,Pangkal Pinang,Kota
+2100000,Kepulauan Riau,2101000,Karimun,Kabupaten
+2100000,Kepulauan Riau,2102000,Bintan,Kabupaten
+2100000,Kepulauan Riau,2103000,Natuna,Kabupaten
+2100000,Kepulauan Riau,2104000,Lingga,Kabupaten
+2100000,Kepulauan Riau,2105000,Kepulauan Anambas,Kabupaten
+2100000,Kepulauan Riau,2171000,Batam,Kota
+2100000,Kepulauan Riau,2172000,Tanjung Pinang,Kota
+3100000,DKI Jakarta,3101000,Kepulauan Seribu,Kabupaten
+3100000,DKI Jakarta,3171000,Jakarta Selatan,Kota
+3100000,DKI Jakarta,3172000,Jakarta Timur,Kota
+3100000,DKI Jakarta,3173000,Jakarta Pusat,Kota
+3100000,DKI Jakarta,3174000,Jakarta Barat,Kota
+3100000,DKI Jakarta,3175000,Jakarta Utara,Kota
+3200000,Jawa Barat,3201000,Bogor,Kabupaten
+3200000,Jawa Barat,3202000,Sukabumi,Kabupaten
+3200000,Jawa Barat,3203000,Cianjur,Kabupaten
+3200000,Jawa Barat,3204000,Bandung,Kabupaten
+3200000,Jawa Barat,3205000,Garut,Kabupaten
+3200000,Jawa Barat,3206000,Tasikmalaya,Kabupaten
+3200000,Jawa Barat,3207000,Ciamis,Kabupaten
+3200000,Jawa Barat,3208000,Kuningan,Kabupaten
+3200000,Jawa Barat,3209000,Cirebon,Kabupaten
+3200000,Jawa Barat,3210000,Majalengka,Kabupaten
+3200000,Jawa Barat,3211000,Sumedang,Kabupaten
+3200000,Jawa Barat,3212000,Indramayu,Kabupaten
+3200000,Jawa Barat,3213000,Subang,Kabupaten
+3200000,Jawa Barat,3214000,Purwakarta,Kabupaten
+3200000,Jawa Barat,3215000,Karawang,Kabupaten
+3200000,Jawa Barat,3216000,Bekasi,Kabupaten
+3200000,Jawa Barat,3217000,Bandung Barat,Kabupaten
+3200000,Jawa Barat,3218000,Pangandaran,Kabupaten
+3200000,Jawa Barat,3271000,Bogor,Kota
+3200000,Jawa Barat,3272000,Sukabumi,Kota
+3200000,Jawa Barat,3273000,Bandung,Kota
+3200000,Jawa Barat,3274000,Cirebon,Kota
+3200000,Jawa Barat,3275000,Bekasi,Kota
+3200000,Jawa Barat,3276000,Depok,Kota
+3200000,Jawa Barat,3277000,Cimahi,Kota
+3200000,Jawa Barat,3278000,Tasikmalaya,Kota
+3200000,Jawa Barat,3279000,Banjar,Kota
+3300000,Jawa Tengah,3301000,Cilacap,Kabupaten
+3300000,Jawa Tengah,3302000,Banyumas,Kabupaten
+3300000,Jawa Tengah,3303000,Purbalingga,Kabupaten
+3300000,Jawa Tengah,3304000,Banjarnegara,Kabupaten
+3300000,Jawa Tengah,3305000,Kebumen,Kabupaten
+3300000,Jawa Tengah,3306000,Purworejo,Kabupaten
+3300000,Jawa Tengah,3307000,Wonosobo,Kabupaten
+3300000,Jawa Tengah,3308000,Magelang,Kabupaten
+3300000,Jawa Tengah,3309000,Boyolali,Kabupaten
+3300000,Jawa Tengah,3310000,Klaten,Kabupaten
+3300000,Jawa Tengah,3311000,Sukoharjo,Kabupaten
+3300000,Jawa Tengah,3312000,Wonogiri,Kabupaten
+3300000,Jawa Tengah,3313000,Karanganyar,Kabupaten
+3300000,Jawa Tengah,3314000,Sragen,Kabupaten
+3300000,Jawa Tengah,3315000,Grobogan,Kabupaten
+3300000,Jawa Tengah,3316000,Blora,Kabupaten
+3300000,Jawa Tengah,3317000,Rembang,Kabupaten
+3300000,Jawa Tengah,3318000,Pati,Kabupaten
+3300000,Jawa Tengah,3319000,Kudus,Kabupaten
+3300000,Jawa Tengah,3320000,Jepara,Kabupaten
+3300000,Jawa Tengah,3321000,Demak,Kabupaten
+3300000,Jawa Tengah,3322000,Semarang,Kabupaten
+3300000,Jawa Tengah,3323000,Temanggung,Kabupaten
+3300000,Jawa Tengah,3324000,Kendal,Kabupaten
+3300000,Jawa Tengah,3325000,Batang,Kabupaten
+3300000,Jawa Tengah,3326000,Pekalongan,Kabupaten
+3300000,Jawa Tengah,3327000,Pemalang,Kabupaten
+3300000,Jawa Tengah,3328000,Tegal,Kabupaten
+3300000,Jawa Tengah,3329000,Brebes,Kabupaten
+3300000,Jawa Tengah,3371000,Magelang,Kota
+3300000,Jawa Tengah,3372000,Surakarta,Kota
+3300000,Jawa Tengah,3373000,Salatiga,Kota
+3300000,Jawa Tengah,3374000,Semarang,Kota
+3300000,Jawa Tengah,3375000,Pekalongan,Kota
+3300000,Jawa Tengah,3376000,Tegal,Kota
+3400000,DI Yogyakarta,3401000,Kulon Progo,Kabupaten
+3400000,DI Yogyakarta,3402000,Bantul,Kabupaten
+3400000,DI Yogyakarta,3403000,Gunungkidul,Kabupaten
+3400000,DI Yogyakarta,3404000,Sleman,Kabupaten
+3400000,DI Yogyakarta,3471000,Yogyakarta,Kota
+3500000,Jawa Timur,3501000,Pacitan,Kabupaten
+3500000,Jawa Timur,3502000,Ponorogo,Kabupaten
+3500000,Jawa Timur,3503000,Trenggalek,Kabupaten
+3500000,Jawa Timur,3504000,Tulungagung,Kabupaten
+3500000,Jawa Timur,3505000,Blitar,Kabupaten
+3500000,Jawa Timur,3506000,Kediri,Kabupaten
+3500000,Jawa Timur,3507000,Malang,Kabupaten
+3500000,Jawa Timur,3508000,Lumajang,Kabupaten
+3500000,Jawa Timur,3509000,Jember,Kabupaten
+3500000,Jawa Timur,3510000,Banyuwangi,Kabupaten
+3500000,Jawa Timur,3511000,Bondowoso,Kabupaten
+3500000,Jawa Timur,3512000,Situbondo,Kabupaten
+3500000,Jawa Timur,3513000,Probolinggo,Kabupaten
+3500000,Jawa Timur,3514000,Pasuruan,Kabupaten
+3500000,Jawa Timur,3515000,Sidoarjo,Kabupaten
+3500000,Jawa Timur,3516000,Mojokerto,Kabupaten
+3500000,Jawa Timur,3517000,Jombang,Kabupaten
+3500000,Jawa Timur,3518000,Nganjuk,Kabupaten
+3500000,Jawa Timur,3519000,Madiun,Kabupaten
+3500000,Jawa Timur,3520000,Magetan,Kabupaten
+3500000,Jawa Timur,3521000,Ngawi,Kabupaten
+3500000,Jawa Timur,3522000,Bojonegoro,Kabupaten
+3500000,Jawa Timur,3523000,Tuban,Kabupaten
+3500000,Jawa Timur,3524000,Lamongan,Kabupaten
+3500000,Jawa Timur,3525000,Gresik,Kabupaten
+3500000,Jawa Timur,3526000,Bangkalan,Kabupaten
+3500000,Jawa Timur,3527000,Sampang,Kabupaten
+3500000,Jawa Timur,3528000,Pamekasan,Kabupaten
+3500000,Jawa Timur,3529000,Sumenep,Kabupaten
+3500000,Jawa Timur,3571000,Kediri,Kota
+3500000,Jawa Timur,3572000,Blitar,Kota
+3500000,Jawa Timur,3573000,Malang,Kota
+3500000,Jawa Timur,3574000,Probolinggo,Kota
+3500000,Jawa Timur,3575000,Pasuruan,Kota
+3500000,Jawa Timur,3576000,Mojokerto,Kota
+3500000,Jawa Timur,3577000,Madiun,Kota
+3500000,Jawa Timur,3578000,Surabaya,Kota
+3500000,Jawa Timur,3579000,Batu,Kota
+3600000,Banten,3601000,Pandeglang,Kabupaten
+3600000,Banten,3602000,Lebak,Kabupaten
+3600000,Banten,3603000,Tangerang,Kabupaten
+3600000,Banten,3604000,Serang,Kabupaten
+3600000,Banten,3671000,Tangerang,Kota
+3600000,Banten,3672000,Cilegon,Kota
+3600000,Banten,3673000,Serang,Kota
+3600000,Banten,3674000,Tangerang Selatan,Kota
+5100000,Bali,5101000,Jembrana,Kabupaten
+5100000,Bali,5102000,Tabanan,Kabupaten
+5100000,Bali,5103000,Badung,Kabupaten
+5100000,Bali,5104000,Gianyar,Kabupaten
+5100000,Bali,5105000,Klungkung,Kabupaten
+5100000,Bali,5106000,Bangli,Kabupaten
+5100000,Bali,5107000,Karang Asem,Kabupaten
+5100000,Bali,5108000,Buleleng,Kabupaten
+5100000,Bali,5171000,Denpasar,Kota
+5200000,Nusa Tenggara Barat,5201000,Lombok Barat,Kabupaten
+5200000,Nusa Tenggara Barat,5202000,Lombok Tengah,Kabupaten
+5200000,Nusa Tenggara Barat,5203000,Lombok Timur,Kabupaten
+5200000,Nusa Tenggara Barat,5204000,Sumbawa,Kabupaten
+5200000,Nusa Tenggara Barat,5205000,Dompu,Kabupaten
+5200000,Nusa Tenggara Barat,5206000,Bima,Kabupaten
+5200000,Nusa Tenggara Barat,5207000,Sumbawa Barat,Kabupaten
+5200000,Nusa Tenggara Barat,5208000,Lombok Utara,Kabupaten
+5200000,Nusa Tenggara Barat,5271000,Mataram,Kota
+5200000,Nusa Tenggara Barat,5272000,Bima,Kota
+5300000,Nusa Tenggara Timur,5301000,Sumba Barat,Kabupaten
+5300000,Nusa Tenggara Timur,5302000,Sumba Timur,Kabupaten
+5300000,Nusa Tenggara Timur,5303000,Kupang,Kabupaten
+5300000,Nusa Tenggara Timur,5304000,Timor Tengah Selatan,Kabupaten
+5300000,Nusa Tenggara Timur,5305000,Timor Tengah Utara,Kabupaten
+5300000,Nusa Tenggara Timur,5306000,Belu,Kabupaten
+5300000,Nusa Tenggara Timur,5307000,Alor,Kabupaten
+5300000,Nusa Tenggara Timur,5308000,Lembata,Kabupaten
+5300000,Nusa Tenggara Timur,5309000,Flores Timur,Kabupaten
+5300000,Nusa Tenggara Timur,5310000,Sikka,Kabupaten
+5300000,Nusa Tenggara Timur,5311000,Ende,Kabupaten
+5300000,Nusa Tenggara Timur,5312000,Ngada,Kabupaten
+5300000,Nusa Tenggara Timur,5313000,Manggarai,Kabupaten
+5300000,Nusa Tenggara Timur,5314000,Rote Ndao,Kabupaten
+5300000,Nusa Tenggara Timur,5315000,Manggarai Barat,Kabupaten
+5300000,Nusa Tenggara Timur,5316000,Sumba Tengah,Kabupaten
+5300000,Nusa Tenggara Timur,5317000,Sumba Barat Daya,Kabupaten
+5300000,Nusa Tenggara Timur,5318000,Nagekeo,Kabupaten
+5300000,Nusa Tenggara Timur,5319000,Manggarai Timur,Kabupaten
+5300000,Nusa Tenggara Timur,5320000,Sabu Raijua,Kabupaten
+5300000,Nusa Tenggara Timur,5321000,Malaka,Kabupaten
+5300000,Nusa Tenggara Timur,5371000,Kupang,Kota
+6100000,Kalimantan Barat,6101000,Sambas,Kabupaten
+6100000,Kalimantan Barat,6102000,Bengkayang,Kabupaten
+6100000,Kalimantan Barat,6103000,Landak,Kabupaten
+6100000,Kalimantan Barat,6104000,Mempawah,Kabupaten
+6100000,Kalimantan Barat,6105000,Sanggau,Kabupaten
+6100000,Kalimantan Barat,6106000,Ketapang,Kabupaten
+6100000,Kalimantan Barat,6107000,Sintang,Kabupaten
+6100000,Kalimantan Barat,6108000,Kapuas Hulu,Kabupaten
+6100000,Kalimantan Barat,6109000,Sekadau,Kabupaten
+6100000,Kalimantan Barat,6110000,Melawi,Kabupaten
+6100000,Kalimantan Barat,6111000,Kayong Utara,Kabupaten
+6100000,Kalimantan Barat,6112000,Kubu Raya,Kabupaten
+6100000,Kalimantan Barat,6171000,Pontianak,Kota
+6100000,Kalimantan Barat,6172000,Singkawang,Kota
+6200000,Kalimantan Tengah,6201000,Kotawaringin Barat,Kabupaten
+6200000,Kalimantan Tengah,6202000,Kotawaringin Timur,Kabupaten
+6200000,Kalimantan Tengah,6203000,Kapuas,Kabupaten
+6200000,Kalimantan Tengah,6204000,Barito Selatan,Kabupaten
+6200000,Kalimantan Tengah,6205000,Barito Utara,Kabupaten
+6200000,Kalimantan Tengah,6206000,Sukamara,Kabupaten
+6200000,Kalimantan Tengah,6207000,Lamandau,Kabupaten
+6200000,Kalimantan Tengah,6208000,Seruyan,Kabupaten
+6200000,Kalimantan Tengah,6209000,Katingan,Kabupaten
+6200000,Kalimantan Tengah,6210000,Pulang Pisau,Kabupaten
+6200000,Kalimantan Tengah,6211000,Gunung Mas,Kabupaten
+6200000,Kalimantan Tengah,6212000,Barito Timur,Kabupaten
+6200000,Kalimantan Tengah,6213000,Murung Raya,Kabupaten
+6200000,Kalimantan Tengah,6271000,Palangka Raya,Kota
+6300000,Kalimantan Selatan,6301000,Tanah Laut,Kabupaten
+6300000,Kalimantan Selatan,6302000,Kota Baru,Kabupaten
+6300000,Kalimantan Selatan,6303000,Banjar,Kabupaten
+6300000,Kalimantan Selatan,6304000,Barito Kuala,Kabupaten
+6300000,Kalimantan Selatan,6305000,Tapin,Kabupaten
+6300000,Kalimantan Selatan,6306000,Hulu Sungai Selatan,Kabupaten
+6300000,Kalimantan Selatan,6307000,Hulu Sungai Tengah,Kabupaten
+6300000,Kalimantan Selatan,6308000,Hulu Sungai Utara,Kabupaten
+6300000,Kalimantan Selatan,6309000,Tabalong,Kabupaten
+6300000,Kalimantan Selatan,6310000,Tanah Bumbu,Kabupaten
+6300000,Kalimantan Selatan,6311000,Balangan,Kabupaten
+6300000,Kalimantan Selatan,6371000,Banjarmasin,Kota
+6300000,Kalimantan Selatan,6372000,Banjar Baru,Kota
+6400000,Kalimantan Timur,6401000,Paser,Kabupaten
+6400000,Kalimantan Timur,6402000,Kutai Barat,Kabupaten
+6400000,Kalimantan Timur,6403000,Kutai Kartanegara,Kabupaten
+6400000,Kalimantan Timur,6404000,Kutai Timur,Kabupaten
+6400000,Kalimantan Timur,6405000,Berau,Kabupaten
+6400000,Kalimantan Timur,6409000,Penajam Paser Utara,Kabupaten
+6400000,Kalimantan Timur,6411000,Mahakam Ulu,Kabupaten
+6400000,Kalimantan Timur,6471000,Balikpapan,Kota
+6400000,Kalimantan Timur,6472000,Samarinda,Kota
+6400000,Kalimantan Timur,6474000,Bontang,Kota
+6500000,Kalimantan Utara,6501000,Malinau,Kabupaten
+6500000,Kalimantan Utara,6502000,Bulungan,Kabupaten
+6500000,Kalimantan Utara,6503000,Tana Tidung,Kabupaten
+6500000,Kalimantan Utara,6504000,Nunukan,Kabupaten
+6500000,Kalimantan Utara,6571000,Tarakan,Kota
+7100000,Sulawesi Utara,7101000,Bolaang Mongondow,Kabupaten
+7100000,Sulawesi Utara,7102000,Minahasa,Kabupaten
+7100000,Sulawesi Utara,7103000,Kepulauan Sangihe,Kabupaten
+7100000,Sulawesi Utara,7104000,Kepulauan Talaud,Kabupaten
+7100000,Sulawesi Utara,7105000,Minahasa Selatan,Kabupaten
+7100000,Sulawesi Utara,7106000,Minahasa Utara,Kabupaten
+7100000,Sulawesi Utara,7107000,Bolaang Mongondow Utara,Kabupaten
+7100000,Sulawesi Utara,7108000,Siau Tagulandang Biaro,Kabupaten
+7100000,Sulawesi Utara,7109000,Minahasa Tenggara,Kabupaten
+7100000,Sulawesi Utara,7110000,Bolaang Mongondow Selatan,Kabupaten
+7100000,Sulawesi Utara,7111000,Bolaang Mongondow Timur,Kabupaten
+7100000,Sulawesi Utara,7171000,Manado,Kota
+7100000,Sulawesi Utara,7172000,Bitung,Kota
+7100000,Sulawesi Utara,7173000,Tomohon,Kota
+7100000,Sulawesi Utara,7174000,Kotamobagu,Kota
+7200000,Sulawesi Tengah,7201000,Banggai Kepulauan,Kabupaten
+7200000,Sulawesi Tengah,7202000,Banggai,Kabupaten
+7200000,Sulawesi Tengah,7203000,Morowali,Kabupaten
+7200000,Sulawesi Tengah,7204000,Poso,Kabupaten
+7200000,Sulawesi Tengah,7205000,Donggala,Kabupaten
+7200000,Sulawesi Tengah,7206000,Toli-Toli,Kabupaten
+7200000,Sulawesi Tengah,7207000,Buol,Kabupaten
+7200000,Sulawesi Tengah,7208000,Parigi Moutong,Kabupaten
+7200000,Sulawesi Tengah,7209000,Tojo Una-Una,Kabupaten
+7200000,Sulawesi Tengah,7210000,Sigi,Kabupaten
+7200000,Sulawesi Tengah,7211000,Banggai Laut,Kabupaten
+7200000,Sulawesi Tengah,7212000,Morowali Utara,Kabupaten
+7200000,Sulawesi Tengah,7271000,Palu,Kota
+7300000,Sulawesi Selatan,7301000,Kepulauan Selayar,Kabupaten
+7300000,Sulawesi Selatan,7302000,Bulukumba,Kabupaten
+7300000,Sulawesi Selatan,7303000,Bantaeng,Kabupaten
+7300000,Sulawesi Selatan,7304000,Jeneponto,Kabupaten
+7300000,Sulawesi Selatan,7305000,Takalar,Kabupaten
+7300000,Sulawesi Selatan,7306000,Gowa,Kabupaten
+7300000,Sulawesi Selatan,7307000,Sinjai,Kabupaten
+7300000,Sulawesi Selatan,7308000,Maros,Kabupaten
+7300000,Sulawesi Selatan,7309000,Pangkajene Dan Kepulauan,Kabupaten
+7300000,Sulawesi Selatan,7310000,Barru,Kabupaten
+7300000,Sulawesi Selatan,7311000,Bone,Kabupaten
+7300000,Sulawesi Selatan,7312000,Soppeng,Kabupaten
+7300000,Sulawesi Selatan,7313000,Wajo,Kabupaten
+7300000,Sulawesi Selatan,7314000,Sidenreng Rappang,Kabupaten
+7300000,Sulawesi Selatan,7315000,Pinrang,Kabupaten
+7300000,Sulawesi Selatan,7316000,Enrekang,Kabupaten
+7300000,Sulawesi Selatan,7317000,Luwu,Kabupaten
+7300000,Sulawesi Selatan,7318000,Tana Toraja,Kabupaten
+7300000,Sulawesi Selatan,7322000,Luwu Utara,Kabupaten
+7300000,Sulawesi Selatan,7325000,Luwu Timur,Kabupaten
+7300000,Sulawesi Selatan,7326000,Toraja Utara,Kabupaten
+7300000,Sulawesi Selatan,7371000,Makassar,Kota
+7300000,Sulawesi Selatan,7372000,Parepare,Kota
+7300000,Sulawesi Selatan,7373000,Palopo,Kota
+7400000,Sulawesi Tenggara,7401000,Buton,Kabupaten
+7400000,Sulawesi Tenggara,7402000,Muna,Kabupaten
+7400000,Sulawesi Tenggara,7403000,Konawe,Kabupaten
+7400000,Sulawesi Tenggara,7404000,Kolaka,Kabupaten
+7400000,Sulawesi Tenggara,7405000,Konawe Selatan,Kabupaten
+7400000,Sulawesi Tenggara,7406000,Bombana,Kabupaten
+7400000,Sulawesi Tenggara,7407000,Wakatobi,Kabupaten
+7400000,Sulawesi Tenggara,7408000,Kolaka Utara,Kabupaten
+7400000,Sulawesi Tenggara,7409000,Buton Utara,Kabupaten
+7400000,Sulawesi Tenggara,7410000,Konawe Utara,Kabupaten
+7400000,Sulawesi Tenggara,7411000,Kolaka Timur,Kabupaten
+7400000,Sulawesi Tenggara,7412000,Konawe Kepulauan,Kabupaten
+7400000,Sulawesi Tenggara,7413000,Muna Barat,Kabupaten
+7400000,Sulawesi Tenggara,7414000,Buton Tengah,Kabupaten
+7400000,Sulawesi Tenggara,7415000,Buton Selatan,Kabupaten
+7400000,Sulawesi Tenggara,7471000,Kendari,Kota
+7400000,Sulawesi Tenggara,7472000,Baubau,Kota
+7500000,Gorontalo,7501000,Boalemo,Kabupaten
+7500000,Gorontalo,7502000,Gorontalo,Kabupaten
+7500000,Gorontalo,7503000,Pohuwato,Kabupaten
+7500000,Gorontalo,7504000,Bone Bolango,Kabupaten
+7500000,Gorontalo,7505000,Gorontalo Utara,Kabupaten
+7500000,Gorontalo,7571000,Gorontalo,Kota
+7600000,Sulawesi Barat,7601000,Majene,Kabupaten
+7600000,Sulawesi Barat,7602000,Polewali Mandar,Kabupaten
+7600000,Sulawesi Barat,7603000,Mamasa,Kabupaten
+7600000,Sulawesi Barat,7604000,Mamuju,Kabupaten
+7600000,Sulawesi Barat,7605000,Pasangkayu,Kabupaten
+7600000,Sulawesi Barat,7606000,Mamuju Tengah,Kabupaten
+8100000,Maluku,8101000,Kepulauan Tanimbar,Kabupaten
+8100000,Maluku,8102000,Maluku Tenggara,Kabupaten
+8100000,Maluku,8103000,Maluku Tengah,Kabupaten
+8100000,Maluku,8104000,Buru,Kabupaten
+8100000,Maluku,8105000,Kepulauan Aru,Kabupaten
+8100000,Maluku,8106000,Seram Bagian Barat,Kabupaten
+8100000,Maluku,8107000,Seram Bagian Timur,Kabupaten
+8100000,Maluku,8108000,Maluku Barat Daya,Kabupaten
+8100000,Maluku,8109000,Buru Selatan,Kabupaten
+8100000,Maluku,8171000,Ambon,Kota
+8100000,Maluku,8172000,Tual,Kota
+8200000,Maluku Utara,8201000,Halmahera Barat,Kabupaten
+8200000,Maluku Utara,8202000,Halmahera Tengah,Kabupaten
+8200000,Maluku Utara,8203000,Kepulauan Sula,Kabupaten
+8200000,Maluku Utara,8204000,Halmahera Selatan,Kabupaten
+8200000,Maluku Utara,8205000,Halmahera Utara,Kabupaten
+8200000,Maluku Utara,8206000,Halmahera Timur,Kabupaten
+8200000,Maluku Utara,8207000,Pulau Morotai,Kabupaten
+8200000,Maluku Utara,8208000,Pulau Taliabu,Kabupaten
+8200000,Maluku Utara,8271000,Ternate,Kota
+8200000,Maluku Utara,8272000,Tidore Kepulauan,Kota
+9100000,Papua Barat,9101000,Fakfak,Kabupaten
+9100000,Papua Barat,9102000,Kaimana,Kabupaten
+9100000,Papua Barat,9103000,Teluk Wondama,Kabupaten
+9100000,Papua Barat,9104000,Teluk Bintuni,Kabupaten
+9100000,Papua Barat,9105000,Manokwari,Kabupaten
+9100000,Papua Barat,9111000,Manokwari Selatan,Kabupaten
+9100000,Papua Barat,9112000,Pegunungan Arfak,Kabupaten
+9200000,Papua Barat Daya,9201000,Raja Ampat,Kabupaten
+9200000,Papua Barat Daya,9202000,Sorong,Kabupaten
+9200000,Papua Barat Daya,9203000,Sorong Selatan,Kabupaten
+9200000,Papua Barat Daya,9204000,Maybrat,Kabupaten
+9200000,Papua Barat Daya,9205000,Tambrauw,Kabupaten
+9200000,Papua Barat Daya,9271000,Sorong,Kota
+9400000,Papua,9403000,Jayapura,Kabupaten
+9400000,Papua,9408000,Kepulauan Yapen,Kabupaten
+9400000,Papua,9409000,Biak Numfor,Kabupaten
+9400000,Papua,9419000,Sarmi,Kabupaten
+9400000,Papua,9420000,Keerom,Kabupaten
+9400000,Papua,9426000,Waropen,Kabupaten
+9400000,Papua,9427000,Supiori,Kabupaten
+9400000,Papua,9428000,Mamberamo Raya,Kabupaten
+9400000,Papua,9471000,Jayapura,Kota
+9500000,Papua Selatan,9501000,Merauke,Kabupaten
+9500000,Papua Selatan,9502000,Boven Digoel,Kabupaten
+9500000,Papua Selatan,9503000,Mappi,Kabupaten
+9500000,Papua Selatan,9504000,Asmat,Kabupaten
+9600000,Papua Tengah,9601000,Mimika,Kabupaten
+9600000,Papua Tengah,9602000,Dogiyai,Kabupaten
+9600000,Papua Tengah,9603000,Deiyai,Kabupaten
+9600000,Papua Tengah,9604000,Nabire,Kabupaten
+9600000,Papua Tengah,9605000,Paniai,Kabupaten
+9600000,Papua Tengah,9606000,Intan Jaya,Kabupaten
+9600000,Papua Tengah,9607000,Puncak,Kabupaten
+9600000,Papua Tengah,9608000,Puncak Jaya,Kabupaten
+9700000,Papua Pegunungan,9701000,Nduga,Kabupaten
+9700000,Papua Pegunungan,9702000,Jayawijaya,Kabupaten
+9700000,Papua Pegunungan,9703000,Lanny Jaya,Kabupaten
+9700000,Papua Pegunungan,9704000,Tolikara,Kabupaten
+9700000,Papua Pegunungan,9705000,Mamberamo Tengah,Kabupaten
+9700000,Papua Pegunungan,9706000,Yalimo,Kabupaten
+9700000,Papua Pegunungan,9707000,Yahukimo,Kabupaten
+9700000,Papua Pegunungan,9708000,Pegunungan Bintang,Kabupaten
