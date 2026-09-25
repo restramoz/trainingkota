@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\City;
 use App\Models\Kecamatan;
@@ -12,7 +13,7 @@ class KecamatanLandingTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_shows_all_published_services_for_a_kecamatan()
     {
         // Create a city
@@ -65,7 +66,7 @@ class KecamatanLandingTest extends TestCase
         ]), false);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_404_for_invalid_kecamatan_slug()
     {
         $response = $this->get('/pelatihan/kecamatan-nonexistent');

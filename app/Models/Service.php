@@ -41,6 +41,11 @@ class Service extends Model
         return $this->hasMany(TrainingSchedule::class);
     }
 
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
     public function scopePublished($query)
     {
         return $query->where('status', 'published');

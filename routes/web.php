@@ -34,6 +34,15 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 // 2. Homepage: 3 Pilar Layanan & Widget 212 Kota
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// 2a. City Index: List cities with pagination (default 12 per page)
+// This implements the UI/UX rule that limits the number of cards shown initially.
+// The view will display pagination links to navigate through all cities.
+Route::get('/kota', function () {
+    // Use pagination to avoid loading all 500+ cities at once.
+    $cities = \App\Models\City::orderBy('name')->paginate(12);
+    return view('city-index', compact('cities'));
+})->name('city.index');
+
 // 3. CMS Admin Dashboard & CRUD (Protected by admin.auth)
 Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
@@ -113,13 +122,13 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 // 4. Artikel SEO: /artikel/{slug}
 Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('article.show');
 
-// 5. Hyper-Specific City Service Landing: /{category}/{service-slug}/kota-{city-slug}
-Route::get('/{category}/{serviceSlug}/{citySlug}', [CityServiceLandingController::class, 'show'])
+// 5. Hyper-Specific City Service Landing: /{category}/{serviceSlug}/kota-{citySlug}
+Route::get('/{category}/{serviceSlug}/kota-{citySlug}', [CityServiceLandingController::class, 'show'])
     ->where('category', 'pelatihan|kajian|jasa')
     ->name('city.service.landing');
 
-// 6. Dynamic City Landing Page: /{category}/kota-{city-slug}
-Route::get('/{category}/{citySlug}', [CityLandingController::class, 'show'])
+// 6. Dynamic City Landing Page: /{category}/kota-{citySlug}
+Route::get('/{category}/kota-{citySlug}', [CityLandingController::class, 'show'])
     ->where('category', 'pelatihan|kajian|jasa')
     ->name('city.landing');
 

@@ -19,29 +19,29 @@
 {{-- ── 1. BreadcrumbList Schema ────────────────────────────────────────── --}}
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
   "itemListElement": [
     {
-      "@type": "ListItem",
+      "@@type": "ListItem",
       "position": 1,
       "name": "Beranda",
       "item": "{{ route('home') }}"
     },
     {
-      "@type": "ListItem",
+      "@@type": "ListItem",
       "position": 2,
       "name": "{{ ucfirst($category) }}",
       "item": "{{ route('category.show', $category) }}"
     },
     {
-      "@type": "ListItem",
+      "@@type": "ListItem",
       "position": 3,
       "name": "{{ $service->name }}",
       "item": "{{ route('service.detail', ['category' => $category, 'serviceSlug' => $service->slug]) }}"
     },
     {
-      "@type": "ListItem",
+      "@@type": "ListItem",
       "position": 4,
       "name": "{{ $city->name }}",
       "item": "{{ url()->current() }}"
@@ -53,13 +53,13 @@
 {{-- ── 2. LocalBusiness / EducationalOrganization Schema ─────────────── --}}
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
+  "@@context": "https://schema.org",
+  "@@type": "EducationalOrganization",
   "name": "TrainingKota {{ $service->name }} — Sentra {{ $city->name }}",
   "url": "{{ url()->current() }}",
   "description": "{{ $pageDesc }}",
   "address": {
-    "@type": "PostalAddress",
+    "@@type": "PostalAddress",
     "addressLocality": "{{ $city->name }}",
     "addressRegion": "{{ $city->province ?? $city->island }}",
     "addressCountry": "ID",
@@ -67,7 +67,7 @@
   },
   @if($city->hasGeo())
   "geo": {
-    "@type": "GeoCoordinates",
+    "@@type": "GeoCoordinates",
     "latitude": {{ $city->lat }},
     "longitude": {{ $city->lng }}
   },
@@ -80,22 +80,22 @@
 {{-- ── 3. FAQPage Schema ───────────────────────────────────────────────── --}}
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
+  "@@context": "https://schema.org",
+  "@@type": "FAQPage",
   "mainEntity": [
     {
-      "@type": "Question",
+      "@@type": "Question",
       "name": "Kapan jadwal batch terdekat {{ $service->name }} di {{ $city->name }}?",
       "acceptedAnswer": {
-        "@type": "Answer",
+        "@@type": "Answer",
         "text": "Jadwal batch {{ $service->name }} di wilayah {{ $city->name }} diselenggarakan setiap bulan. Hubungi hotline tim pendaftaran kami untuk konfirmasi tanggal pasti dan ketersediaan kuota kelas."
       }
     },
     {
-      "@type": "Question",
+      "@@type": "Question",
       "name": "Apakah sertifikat {{ $service->name }} yang diselenggarakan di {{ $city->name }} resmi Kemnaker RI?",
       "acceptedAnswer": {
-        "@type": "Answer",
+        "@@type": "Answer",
         "text": "Benar. Seluruh peserta yang lulus evaluasi akan mendapatkan sertifikat, lisensi K3, dan SKP resmi yang diterbitkan oleh Kementerian Ketenagakerjaan RI atau BNSP yang berlaku sah secara nasional."
       }
     }
@@ -129,9 +129,6 @@
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="badge-kemnaker">{{ $service->badge }}</span>
                     <span class="badge-bnsp">LOKASI: {{ strtoupper($city->name) }}</span>
-                    @if($city->is_hub)
-                        <span class="badge-warning">★ HUB SENTRA K3</span>
-                    @endif
                 </div>
 
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-space text-[#F1F5F9] leading-tight">

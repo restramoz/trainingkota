@@ -34,7 +34,7 @@
                     SISTEM OPERASIONAL K3 NASIONAL
                 </span>
                 <span class="hidden sm:inline text-[#1E324E]">|</span>
-                <span class="hidden sm:inline text-[#94A3B8]">62 PROGRAM &bull; 212 KOTA</span>
+                <span class="hidden sm:inline text-[#94A3B8]">62 PROGRAM &bull; 514 KOTA &amp; KABUPATEN</span>
             </div>
             <div class="flex items-center space-x-4">
                 <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="text-[#25D366] hover:underline flex items-center gap-1 font-semibold">
@@ -45,8 +45,8 @@
         </div>
     </div>
 
-    <!-- Main Navigation Header (Alpine.js for hamburger) -->
-    <header class="bg-[#0F2038] border-b border-[#1E324E] sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
+    <!-- Main Navigation Header (Sticky on all pages) -->
+    <header class="bg-[#0F2038]/95 backdrop-blur border-b border-[#1E324E] sticky top-0 z-50 shadow-md" x-data="{ mobileMenuOpen: false }">
         <div class="max-w-7xl mx-auto px-4 lg:px-8 py-3 flex items-center justify-between">
             <!-- Brand Logo -->
             <a href="{{ route('home') }}" class="flex items-center space-x-3 shrink-0">
@@ -62,30 +62,32 @@
                 </svg>
             </a>
 
-            <!-- Desktop Navigation -->
+            <!-- Desktop Navigation: Home, Pelatihan, Jasa, Kajian, Kota, Button WhatsApp -->
             <nav class="hidden md:flex items-center space-x-1 font-space text-xs uppercase tracking-wider">
-                <a href="{{ route('category.show', 'pelatihan') }}" class="px-3 py-2 {{ request()->is('pelatihan*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
-                    Pelatihan K3 (53)
+                <a href="{{ route('home') }}" class="px-3.5 py-2 {{ request()->is('/') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
+                    Home
                 </a>
-                <a href="{{ route('category.show', 'kajian') }}" class="px-3 py-2 {{ request()->is('kajian*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
-                    Kajian Teknis (3)
+                <a href="{{ route('category.show', 'pelatihan') }}" class="px-3.5 py-2 {{ request()->is('pelatihan*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
+                    Pelatihan
                 </a>
-                <a href="{{ route('category.show', 'jasa') }}" class="px-3 py-2 {{ request()->is('jasa*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
-                    Jasa SLF &amp; Izin (6)
+                <a href="{{ route('category.show', 'jasa') }}" class="px-3.5 py-2 {{ request()->is('jasa*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
+                    Jasa
                 </a>
-                <a href="{{ route('home') }}#widget-kota" class="px-3 py-2 text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E] transition-colors">
-                    212 Kota/Kab
+                <a href="{{ route('category.show', 'kajian') }}" class="px-3.5 py-2 {{ request()->is('kajian*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
+                    Kajian
+                </a>
+                <a href="{{ route('city.index') }}" class="px-3.5 py-2 {{ request()->is('kota*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
+                    Kota
                 </a>
             </nav>
 
-            <!-- Right: CTA + Hamburger -->
+            <!-- Right: Button WhatsApp & Mobile Toggle -->
             <div class="flex items-center gap-3">
-                <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="btn-whatsapp text-xs py-2 px-3.5 hidden sm:inline-flex">
+                <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, saya ingin konsultasi layanan K3.') }}" target="_blank" class="btn-whatsapp text-xs py-2 px-4 inline-flex items-center gap-2 shadow">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.062-2.115-.527-1.748-.724-2.883-2.493-2.97-2.607-.088-.114-.709-.942-.709-1.796 0-.853.447-1.274.607-1.446.16-.172.352-.215.469-.215.118 0 .235.001.338.006.109.005.255-.041.399.304.149.356.508 1.239.553 1.329.045.09.076.196.015.315-.06.12-.091.196-.18.301-.091.106-.19.237-.272.318-.09.09-.184.188-.079.369.105.18.468.772 1.004 1.249.69.614 1.272.805 1.452.895.18.09.286.076.392-.045.106-.12.454-.528.575-.708.121-.18.243-.15.406-.09.164.06 1.034.488 1.212.577.177.09.296.135.34.21.045.075.045.436-.099.841z"/></svg>
                     WhatsApp
                 </a>
-                <a href="{{ route('category.show', 'pelatihan') }}" class="btn-primary text-xs py-2 px-4 hidden md:inline-flex">
-                    Katalog Lengkap
-                </a>
+
                 <!-- Hamburger Button (mobile) -->
                 <button @click="mobileMenuOpen = !mobileMenuOpen"
                     class="md:hidden flex flex-col justify-center items-center w-9 h-9 bg-[#0B1526] border border-[#1E324E] hover:border-[#0D7A5F] transition-colors gap-1.5"
@@ -107,32 +109,34 @@
             x-transition:leave-end="opacity-0 -translate-y-2"
             class="md:hidden border-t border-[#1E324E] bg-[#0B1526]">
             <nav class="max-w-7xl mx-auto px-4 py-3 flex flex-col space-y-1 font-space text-xs uppercase tracking-wider">
+                <a href="{{ route('home') }}" @click="mobileMenuOpen=false"
+                   class="px-4 py-3 flex items-center gap-3 {{ request()->is('/') ? 'text-[#10B981] border-l-2 border-[#0D7A5F] bg-[#142338]' : 'text-[#F1F5F9] border-l-2 border-transparent hover:border-[#0D7A5F] hover:bg-[#142338]' }} transition-colors">
+                    <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block shrink-0"></span>
+                    Home
+                </a>
                 <a href="{{ route('category.show', 'pelatihan') }}" @click="mobileMenuOpen=false"
                    class="px-4 py-3 flex items-center gap-3 {{ request()->is('pelatihan*') ? 'text-[#10B981] border-l-2 border-[#0D7A5F] bg-[#142338]' : 'text-[#F1F5F9] border-l-2 border-transparent hover:border-[#0D7A5F] hover:bg-[#142338]' }} transition-colors">
                     <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block shrink-0"></span>
-                    Pelatihan K3 (53 Program)
-                </a>
-                <a href="{{ route('category.show', 'kajian') }}" @click="mobileMenuOpen=false"
-                   class="px-4 py-3 flex items-center gap-3 {{ request()->is('kajian*') ? 'text-[#38BDF8] border-l-2 border-[#38BDF8] bg-[#142338]' : 'text-[#94A3B8] border-l-2 border-transparent hover:border-[#38BDF8] hover:bg-[#142338]' }} transition-colors">
-                    <span class="w-1.5 h-1.5 bg-[#38BDF8] inline-block shrink-0"></span>
-                    Kajian Teknis K3 (3)
+                    Pelatihan
                 </a>
                 <a href="{{ route('category.show', 'jasa') }}" @click="mobileMenuOpen=false"
-                   class="px-4 py-3 flex items-center gap-3 {{ request()->is('jasa*') ? 'text-[#F59E0B] border-l-2 border-[#D97706] bg-[#142338]' : 'text-[#94A3B8] border-l-2 border-transparent hover:border-[#D97706] hover:bg-[#142338]' }} transition-colors">
-                    <span class="w-1.5 h-1.5 bg-[#D97706] inline-block shrink-0"></span>
-                    Jasa SLF &amp; Riksa Uji (6)
+                   class="px-4 py-3 flex items-center gap-3 {{ request()->is('jasa*') ? 'text-[#10B981] border-l-2 border-[#0D7A5F] bg-[#142338]' : 'text-[#94A3B8] border-l-2 border-transparent hover:border-[#0D7A5F] hover:bg-[#142338]' }} transition-colors">
+                    <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block shrink-0"></span>
+                    Jasa
                 </a>
-                <a href="{{ route('home') }}#widget-kota" @click="mobileMenuOpen=false"
-                   class="px-4 py-3 flex items-center gap-3 text-[#94A3B8] border-l-2 border-transparent hover:text-[#F1F5F9] hover:bg-[#142338] hover:border-[#1E324E] transition-colors">
-                    <span class="w-1.5 h-1.5 bg-[#64748B] inline-block shrink-0"></span>
-                    212 Kota / Kabupaten
+                <a href="{{ route('category.show', 'kajian') }}" @click="mobileMenuOpen=false"
+                   class="px-4 py-3 flex items-center gap-3 {{ request()->is('kajian*') ? 'text-[#10B981] border-l-2 border-[#0D7A5F] bg-[#142338]' : 'text-[#94A3B8] border-l-2 border-transparent hover:border-[#0D7A5F] hover:bg-[#142338]' }} transition-colors">
+                    <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block shrink-0"></span>
+                    Kajian
                 </a>
-                <div class="pt-3 pb-1 border-t border-[#1E324E] flex gap-2">
-                    <a href="{{ route('category.show', 'pelatihan') }}" class="btn-primary text-xs py-3 flex-1 text-center">
-                        Katalog Lengkap
-                    </a>
-                    <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="btn-whatsapp text-xs py-3 flex-1 text-center">
-                        WhatsApp
+                <a href="{{ route('city.index') }}" @click="mobileMenuOpen=false"
+                   class="px-4 py-3 flex items-center gap-3 {{ request()->is('kota*') ? 'text-[#10B981] border-l-2 border-[#0D7A5F] bg-[#142338]' : 'text-[#94A3B8] border-l-2 border-transparent hover:border-[#0D7A5F] hover:bg-[#142338]' }} transition-colors">
+                    <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block shrink-0"></span>
+                    Kota (514 Wilayah)
+                </a>
+                <div class="pt-2">
+                    <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="btn-whatsapp w-full py-2.5 text-center text-xs flex items-center justify-center gap-2">
+                        WhatsApp Hotline
                     </a>
                 </div>
             </nav>
@@ -170,13 +174,13 @@
                         <li><a href="{{ route('category.show', 'pelatihan') }}" class="hover:text-[#10B981] transition-colors flex items-center justify-between">Pelatihan K3 <span>(53 Program)</span></a></li>
                         <li><a href="{{ route('category.show', 'kajian') }}" class="hover:text-[#10B981] transition-colors flex items-center justify-between">Kajian Teknis K3 <span>(3 Program)</span></a></li>
                         <li><a href="{{ route('category.show', 'jasa') }}" class="hover:text-[#10B981] transition-colors flex items-center justify-between">Jasa SLF &amp; Izin <span>(6 Program)</span></a></li>
-                        <li><a href="{{ route('admin.dashboard') }}" class="text-[#38BDF8] hover:underline pt-1 block">Akses CMS Admin &rarr;</a></li>
+                        
                     </ul>
                 </div>
 
                 <!-- Col 3 -->
                 <div>
-                    <div class="font-space font-bold text-xs uppercase text-[#F1F5F9] tracking-wider mb-3">Hub Kota Utama</div>
+                    <div class="font-space font-bold text-xs uppercase text-[#F1F5F9] tracking-wider mb-3">Kota Layanan</div>
                     <div class="flex flex-wrap gap-1.5">
                         <a href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => 'malang']) }}" class="px-2 py-1 bg-[#070D18] border border-[#1E324E] text-[#94A3B8] hover:text-[#10B981] hover:border-[#0D7A5F] text-[11px] font-space uppercase">Malang</a>
                         <a href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => 'surabaya']) }}" class="px-2 py-1 bg-[#070D18] border border-[#1E324E] text-[#94A3B8] hover:text-[#10B981] hover:border-[#0D7A5F] text-[11px] font-space uppercase">Surabaya</a>

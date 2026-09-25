@@ -32,7 +32,7 @@
 </a>
 <a class="flex items-center justify-center gap-2 bg-regulatory-slate-800 hover:bg-regulatory-slate-700 text-text-primary border border-border-grid px-6 py-4 font-headline-sm text-credential-meta uppercase tracking-wider transition-colors duration-200" href="#direktori-kota">
 <span class="material-symbols-outlined text-text-tertiary text-[20px]">location_on</span>
-<span>Jelajahi Widget 212 Kota Layanan</span>
+<span>Jelajahi Widget 514 Kota Layanan</span>
 </a>
 </div>
 <!-- Trust Badges -->
@@ -414,7 +414,7 @@
 <div>
 <span class="font-label-caps text-label-caps text-safety-emerald-bright uppercase tracking-widest">Jaringan Terintegrasi Seluruh Wilayah Hukum</span>
 <h2 class="font-headline-lg text-headline-lg text-text-primary uppercase tracking-tight mt-1">
-            Widget 212 Kota / Kabupaten Indonesia
+            Widget 514 Kota / Kabupaten Indonesia
           </h2>
 </div>
 <div class="mt-4 md:mt-0 flex items-center gap-2">
@@ -449,18 +449,14 @@
     <div class="city-card bg-regulatory-slate-800 border border-border-grid p-5 flex flex-col justify-between hover:border-safety-emerald transition-colors" data-name="{{ strtolower($cityItem->name) }} {{ strtolower($cityItem->province ?? '') }}" data-region="{{ strtolower($cityItem->island) }}">
         <div>
             <div class="flex items-center justify-between mb-2">
-                @if($cityItem->is_hub)
-                    <span class="font-label-caps text-[10px] bg-regulatory-slate-900 px-2 py-0.5 border border-border-grid text-safety-emerald-bright font-bold">★ HUB SENTRA K3</span>
-                @else
-                    <span class="font-label-caps text-[10px] bg-regulatory-slate-900 px-2 py-0.5 border border-border-grid text-text-tertiary">PERWAKILAN</span>
-                @endif
+                <span class="font-label-caps text-[10px] bg-regulatory-slate-900 px-2 py-0.5 border border-border-grid text-text-tertiary">{{ $cityItem->classification ?? 'WILAYAH' }}</span>
                 <span class="font-tabular-data text-[11px] text-text-tertiary">{{ $cityItem->island }}</span>
             </div>
             <h4 class="font-headline-sm text-headline-sm text-text-primary uppercase mb-1 font-bold">{{ $cityItem->name }}</h4>
             <p class="font-body-sm text-body-sm text-text-secondary mb-4">{{ $cityItem->address ?? 'Kawasan Industri & Bisnis ' . $cityItem->name }}</p>
         </div>
         <a class="mt-4 pt-3 border-t border-border-grid flex items-center justify-between text-safety-emerald-bright font-credential-meta text-credential-meta uppercase font-bold hover:underline" href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => $cityItem->slug]) }}">
-            <span>Buka Hub {{ $cityItem->name }}</span>
+            <span>Buka Layanan {{ $cityItem->name }}</span>
             <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
         </a>
     </div>

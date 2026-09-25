@@ -37,4 +37,11 @@ return [
         'model' => env('OLLAMA_DEFAULT_MODEL', env('OLLAMA_MODEL', 'gemma4:31b-cloud')),
     ],
 
+    // TinyMCE configuration
+    // API key is stored in .env as TINY_API_KEY.
+    // Use config('services.tiny.key') in Blade.
+    'tiny' => [
+        'key' => env('TINY_API_KEY'),
+    ],
+
 ];

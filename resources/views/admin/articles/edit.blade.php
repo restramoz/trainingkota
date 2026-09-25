@@ -51,7 +51,7 @@
 
             <ul class="space-y-1 text-xs text-[#FCA5A5]">
                 @foreach($errors->all() as $error)
-                    <li>• {{ $error }}</li>
+                    <li>ï¿½ {{ $error }}</li>
                 @endforeach
             </ul>
         </div>
@@ -111,18 +111,10 @@
                                 Isi Artikel *
                             </label>
 
-                         <textarea
-    name="content"
-    id="content_editor"
-    class="hidden"
->{{ old('content', $article->content) }}</textarea>
-
-<div
-    id="quill-editor"
-    class="bg-[#070D18] border border-[#1E324E] text-[#F1F5F9]"
->
-    {!! old('content', $article->content) !!}
-</div>
+                         <textarea name="content"
+                                   id="content_editor"
+                                   class="w-full bg-[#070D18] border border-[#1E324E] text-[#F1F5F9] rounded-lg"
+                                   rows="10">{{ old('content', $article->content) }}</textarea>
                         </div>
 
                     </div>
@@ -376,13 +368,11 @@
 
 @push('scripts')
 
-<link
-    href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css"
-    rel="stylesheet"
->
 
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
+
+
+<script src="https://cdn.tiny.cloud/1/{{ config('services.tiny.key') }}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -390,93 +380,52 @@ document.addEventListener('DOMContentLoaded', function () {
        QUILL EDITOR
     ========================================================== */
 
-    const contentInput = document.getElementById('content_editor');
-    const editorElement = document.getElementById('quill-editor');
+
+    // TinyMCE editor initialization
+    tinymce.init({
+        selector: '#content_editor',
+        plugins: 'lists link image table code',
+        toolbar: 'undo redo | formatselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | blockquote code | link image table | removeformat',
+        height: 580,
+        menubar: false,
+        skin: 'oxide-dark',
+        content_css: 'dark',
+        placeholder: 'Tulis artikel di sini...',
+        setup: function (editor) {
+            var form = document.getElementById('articleForm');
+            if (form) {
+                form.addEventListener('submit', function () {
+                    editor.save();
+                });
+            }
+        }
+    });
     const articleForm = document.getElementById('articleForm');
 
-    const quill = new Quill(editorElement, {
-        theme: 'snow',
-
-        placeholder: 'Tulis artikel di sini...',
-
-        modules: {
-    toolbar: [
-        [
-            {
-                header: [1, 2, 3, false]
-            }
-        ],
-
-        ['bold', 'italic', 'underline', 'strike'],
-
-        [
-            {
-                align: ''
-            },
-            {
-                align: 'center'
-            },
-            {
-                align: 'right'
-            },
-            {
-                align: 'justify'
-            }
-        ],
-
-        [
-            {
-                list: 'ordered'
-            },
-            {
-                list: 'bullet'
-            }
-        ],
-
-        [
-            {
-                indent: '-1'
-            },
-            {
-                indent: '+1'
-            }
-        ],
-
-        ['blockquote', 'code-block'],
-
-        ['link', 'image'],
-
-        ['clean']
-    ]
-}
-    });
 
 
     /* ==========================================================
        SYNC QUILL -> TEXTAREA
     ========================================================== */
 
+    
     function syncContent() {
-        if (contentInput) {
-            contentInput.value = quill.root.innerHTML;
-        }
+        // No need; TinyMCE handles content sync via editor.save()
     }
 
 
-    quill.on('text-change', function () {
-        syncContent();
-    });
+
+
 
 
     /* ==========================================================
        FORM SUBMIT
     ========================================================== */
 
-    if (articleForm) {
-        articleForm.addEventListener('submit', function () {
-            syncContent();
-        });
-    }
+    
+    // Form submit â€“ TinyMCE triggers save automatically via setup
+    // No additional sync needed
+
 
 
     /* ==========================================================
@@ -539,7 +488,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (result.slug) slugInput.value = result.slug;
                 if (result.seo_title) document.getElementById('seo_title').value = result.seo_title;
                 if (result.meta_description) document.getElementById('meta_description').value = result.meta_description;
-                if (result.content) { quill.root.innerHTML = result.content; syncContent(); }
+                
+                if (result.content) { tinymce.get('content_editor').setContent(result.content); }
+
             } else {
                 alert('AI Error: ' + result.error);
             }

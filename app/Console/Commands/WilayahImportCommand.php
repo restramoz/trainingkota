@@ -7,375 +7,237 @@ use App\Models\Kecamatan;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class WilayahImportCommand extends Command
 {
-    protected $signature = 'wilayah:import';
+    protected $signature = 'wilayah:import {--file= : Path to official BPS master wilayah JSON file}';
 
-    protected $description = 'Import master wilayah data from BPS CSV files';
+    protected $description = 'Import official master wilayah data from master_wilayah_bps.json using bps_code';
 
     public function handle()
     {
-        $citiesFile = base_path('cities_bps.csv');
-        $kecamatansFile = base_path('kecamatans_bps.csv');
+        $this->info('Validating database schema for BPS codes...');
 
-        if (!file_exists($citiesFile) || !file_exists($kecamatansFile)) {
-            $this->error(
-                'CSV files not found. Please ensure cities_bps.csv and kecamatans_bps.csv exist.'
-            );
+        // 1. Check if database has bps_code
+        $hasCityBps = Schema::hasColumn('cities', 'bps_code');
+        $hasKecBps  = Schema::hasColumn('kecamatans', 'bps_code');
 
+        if (!$hasCityBps || !$hasKecBps) {
+            $this->error('Database schema error: bps_code column missing in ' . (!$hasCityBps ? 'cities ' : '') . (!$hasKecBps ? 'kecamatans' : ''));
             return Command::FAILURE;
         }
 
-        $citiesResult = $this->importCities($citiesFile);
+        $this->info('Database schema verified: bps_code is present in cities and kecamatans tables.');
 
-        if (!$citiesResult) {
-            $this->error('City import failed. Kecamatan import cancelled.');
+        $filePath = $this->option('file') ?: base_path('master_wilayah_bps.json');
 
+        if (!file_exists($filePath)) {
+            $this->error("BPS JSON file not found at: {$filePath}");
             return Command::FAILURE;
         }
 
-        $kecamatansResult = $this->importKecamatans($kecamatansFile);
+        $rawContent = file_get_contents($filePath);
+        $records = json_decode($rawContent, true);
 
-        if (!$kecamatansResult) {
-            $this->error('Kecamatan import failed.');
-
+        if (!$records || !is_array($records)) {
+            $this->error("Failed to parse JSON file at {$filePath}");
             return Command::FAILURE;
         }
 
-        $this->info('Wilayah import completed successfully!');
+        $this->info("Found " . count($records) . " records in master_wilayah_bps.json.");
 
-        return Command::SUCCESS;
-    }
+        // 2. Deactivate any data in database that came from summary_v4.json (not in official BPS data)
+        $officialCityBps = [];
+        $officialKecBps = [];
 
-    private function importCities(string $filePath): bool
-    {
-        $this->info('Importing Cities...');
-
-        $handle = fopen($filePath, 'r');
-
-        if (!$handle) {
-            $this->error("Unable to open {$filePath}");
-
-            return false;
-        }
-
-        $header = fgetcsv($handle);
-
-        if (!$header) {
-            fclose($handle);
-            $this->error('Cities CSV header not found.');
-
-            return false;
-        }
-
-        $header = array_map('trim', $header);
-        $indices = array_flip($header);
-
-        $requiredColumns = [
-            'Kode Provinsi',
-            'Provinsi',
-            'Kode Kab/Kota',
-            'Kabupaten/Kota',
-            'Jenis Wilayah',
-        ];
-
-        foreach ($requiredColumns as $column) {
-            if (!isset($indices[$column])) {
-                fclose($handle);
-                $this->error("Missing cities CSV column: {$column}");
-
-                return false;
+        foreach ($records as $r) {
+            $cCode = trim((string)($r['Kode Kab/Kota'] ?? ''));
+            $kCode = trim((string)($r['Kode Kecamatan'] ?? ''));
+            if ($cCode !== '') {
+                $officialCityBps[$cCode] = true;
+            }
+            if ($kCode !== '') {
+                $officialKecBps[$kCode] = true;
             }
         }
 
-        $inserted = 0;
-        $updated = 0;
+        $this->info('Deactivating legacy / summary_v4 records not matching official BPS codes...');
+
+        $deactivatedCities = City::where(function ($query) use ($officialCityBps) {
+            $query->whereNotIn('bps_code', array_keys($officialCityBps))
+                  ->orWhereNull('bps_code');
+        })->update(['status' => 'inactive']);
+
+        $deactivatedKecs = Kecamatan::where(function ($query) use ($officialKecBps) {
+            $query->whereNotIn('bps_code', array_keys($officialKecBps))
+                  ->orWhereNull('bps_code');
+        })->update(['status' => 'inactive']);
+
+        $this->info("Deactivated {$deactivatedCities} non-BPS cities and {$deactivatedKecs} non-BPS kecamatans.");
+
+        // 3. Process official cities and kecamatans from master_wilayah_bps.json
+        $hubSlugs = [
+            'malang', 'surabaya', 'bandung', 'semarang', 'medan', 'makassar',
+            'balikpapan', 'palembang', 'batam', 'denpasar', 'samarinda',
+            'pekanbaru', 'yogyakarta', 'banjarmasin', 'padang',
+            'bandar-lampung', 'pontianak', 'manado', 'kab-bekasi', 'kab-karawang',
+            'kab-bogor', 'kab-tangerang', 'kab-sidoarjo', 'kab-gresik',
+            'jakarta-pusat', 'jakarta-selatan', 'jakarta-timur', 'jakarta-barat', 'jakarta-utara',
+            'kota-jakarta-pusat', 'kota-jakarta-selatan', 'kota-jakarta-timur', 'kota-jakarta-barat', 'kota-jakarta-utara',
+            'kota-surabaya', 'kota-bandung', 'kota-semarang', 'kota-medan', 'kota-makassar',
+            'kota-balikpapan', 'kota-palembang', 'kota-batam', 'kota-denpasar', 'kota-samarinda',
+            'kota-pekanbaru', 'kota-yogyakarta', 'kota-malang', 'kota-banjarmasin', 'kota-padang',
+            'kota-bandar-lampung', 'kota-pontianak', 'kota-manado', 'kabupaten-bekasi', 'kabupaten-karawang',
+            'kabupaten-bogor', 'kabupaten-tangerang', 'kabupaten-sidoarjo', 'kabupaten-gresik'
+        ];
+
+        $now = now()->toDateTimeString();
+        $cityMap = [];
+
+        foreach ($records as $r) {
+            $cityBps = trim((string)($r['Kode Kab/Kota'] ?? ''));
+            if ($cityBps === '' || isset($cityMap[$cityBps])) {
+                continue;
+            }
+
+            $type = trim($r['Jenis Wilayah'] ?? ''); // 'Kota' or 'Kabupaten'
+            $rawName = trim($r['Kabupaten/Kota'] ?? '');
+            $fullName = ($type === 'Kota') ? $rawName : 'Kabupaten ' . $rawName;
+            $slug = ($type === 'Kota') ? Str::slug($rawName) : 'kab-' . Str::slug($rawName);
+            $provName = trim($r['Provinsi'] ?? '');
+            $provBps = trim((string)($r['Kode Provinsi'] ?? ''));
+            $island = $this->getIsland($provBps);
+
+            $isHub = in_array($slug, $hubSlugs)
+                || in_array("kota-{$slug}", $hubSlugs)
+                || in_array("kab-" . Str::slug($rawName), $hubSlugs)
+                || in_array("kabupaten-" . Str::slug($rawName), $hubSlugs);
+
+            $cityMap[$cityBps] = [
+                'name' => $fullName,
+                'slug' => $slug,
+                'bps_code' => $cityBps,
+                'bps_province_code' => $provBps,
+                'province' => $provName,
+                'island' => $island,
+                'classification' => $type,
+                'is_hub' => $isHub ? 1 : 0,
+                'status' => 'active',
+                'updated_at' => $now,
+            ];
+        }
+
+        $this->info("Importing / Updating " . count($cityMap) . " official BPS cities...");
 
         DB::beginTransaction();
-
         try {
-            while (($row = fgetcsv($handle)) !== false) {
-                if (empty($row)) {
-                    continue;
-                }
+            $citiesInserted = 0;
+            $citiesUpdated = 0;
 
-                $bpsCode = trim($row[$indices['Kode Kab/Kota']] ?? '');
-                $name = trim($row[$indices['Kabupaten/Kota']] ?? '');
-                $classification = trim($row[$indices['Jenis Wilayah']] ?? '');
-                $bpsProvinceCode = trim($row[$indices['Kode Provinsi']] ?? '');
-
-                if ($classification !== '') {
-                    $name = $classification . ' ' . $name;
-                }
-
-                if ($bpsCode === '' || $name === '') {
-                    continue;
-                }
-
+            foreach ($cityMap as $bpsCode => $data) {
                 $city = City::where('bps_code', $bpsCode)->first();
-
-                $data = [
-                    'name' => $name,
-                    'slug' => $this->generateUniqueCitySlug($name, $bpsCode),
-                    'bps_province_code' => $bpsProvinceCode !== ''
-                        ? $bpsProvinceCode
-                        : null,
-                ];
-
                 if ($city) {
                     $city->update($data);
-                    $updated++;
+                    $citiesUpdated++;
                 } else {
-                    City::create(array_merge(
-                        $data,
-                        [
-                            'bps_code' => $bpsCode,
-                        ]
-                    ));
-
-                    $inserted++;
+                    $data['created_at'] = $now;
+                    City::create($data);
+                    $citiesInserted++;
                 }
             }
 
-            DB::commit();
-        } catch (\Throwable $e) {
-            DB::rollBack();
+            $this->info("Cities: {$citiesInserted} inserted, {$citiesUpdated} updated.");
 
-            fclose($handle);
+            // Build city_id lookup by bps_code
+            $cityIdLookup = City::pluck('id', 'bps_code')->toArray();
 
-            $this->error(
-                'Error importing cities: ' . $e->getMessage()
-            );
+            $this->info("Importing / Updating official BPS kecamatans...");
 
-            Log::error(
-                'Wilayah Import City Error',
-                [
-                    'message' => $e->getMessage(),
-                    'file' => $e->getFile(),
-                    'line' => $e->getLine(),
-                ]
-            );
+            $kecsInserted = 0;
+            $kecsUpdated = 0;
+            $kecsSkipped = 0;
+            $districtSlugTracker = [];
 
-            return false;
-        }
+            foreach ($records as $r) {
+                $cityBps = trim((string)($r['Kode Kab/Kota'] ?? ''));
+                $cityId = $cityIdLookup[$cityBps] ?? null;
 
-        fclose($handle);
-
-        $this->info(
-            "Cities: {$inserted} inserted, {$updated} updated."
-        );
-
-        return true;
-    }
-
-    private function importKecamatans(string $filePath): bool
-    {
-        $this->info('Importing Kecamatans...');
-
-        $handle = fopen($filePath, 'r');
-
-        if (!$handle) {
-            $this->error("Unable to open {$filePath}");
-
-            return false;
-        }
-
-        $header = fgetcsv($handle);
-
-        if (!$header) {
-            fclose($handle);
-            $this->error('Kecamatan CSV header not found.');
-
-            return false;
-        }
-
-        $header = array_map('trim', $header);
-        $indices = array_flip($header);
-
-        $requiredColumns = [
-            'Kode Provinsi',
-            'Kode Kab/Kota',
-            'Kabupaten/Kota',
-            'Kode Kecamatan',
-            'Kecamatan',
-        ];
-
-        foreach ($requiredColumns as $column) {
-            if (!isset($indices[$column])) {
-                fclose($handle);
-                $this->error(
-                    "Missing kecamatan CSV column: {$column}"
-                );
-
-                return false;
-            }
-        }
-
-        $inserted = 0;
-        $updated = 0;
-        $skipped = 0;
-
-        DB::beginTransaction();
-
-        try {
-            while (($row = fgetcsv($handle)) !== false) {
-                if (empty($row)) {
+                if (!$cityId) {
+                    $kecsSkipped++;
                     continue;
                 }
 
-                $bpsCode = trim(
-                    $row[$indices['Kode Kecamatan']] ?? ''
-                );
+                $kecBps = trim((string)($r['Kode Kecamatan'] ?? ''));
+                $kecName = trim($r['Kecamatan'] ?? '');
 
-                $bpsCityCode = trim(
-                    $row[$indices['Kode Kab/Kota']] ?? ''
-                );
-
-                $name = trim(
-                    $row[$indices['Kecamatan']] ?? ''
-                );
-
-                if (
-                    $bpsCode === '' ||
-                    $bpsCityCode === '' ||
-                    $name === ''
-                ) {
+                if ($kecBps === '' || $kecName === '') {
+                    $kecsSkipped++;
                     continue;
                 }
 
-                $city = City::where(
-                    'bps_code',
-                    $bpsCityCode
-                )->first();
+                $baseSlug = Str::slug($kecName) ?: 'kecamatan-' . $kecBps;
+                $kecSlug = $baseSlug;
 
-                if (!$city) {
-                    $skipped++;
-
-                    continue;
+                $counter = 1;
+                while (isset($districtSlugTracker[$cityId][$kecSlug])) {
+                    $kecSlug = "{$baseSlug}-{$counter}";
+                    $counter++;
                 }
+                $districtSlugTracker[$cityId][$kecSlug] = true;
 
-                $kecamatan = Kecamatan::where(
-                    'bps_code',
-                    $bpsCode
-                )->first();
-
-                $data = [
-                    'city_id' => $city->id,
-                    'name' => $name,
-                    'slug' => $this->generateUniqueKecamatanSlug(
-                        $name,
-                        $city->id,
-                        $bpsCode
-                    ),
+                $kecData = [
+                    'city_id' => $cityId,
+                    'name' => $kecName,
+                    'slug' => $kecSlug,
+                    'bps_code' => $kecBps,
                     'status' => 'active',
+                    'updated_at' => $now,
                 ];
 
-                if ($kecamatan) {
-                    $kecamatan->update($data);
-                    $updated++;
+                $kec = Kecamatan::where('bps_code', $kecBps)->first();
+                if ($kec) {
+                    $kec->update($kecData);
+                    $kecsUpdated++;
                 } else {
-                    Kecamatan::create(
-                        array_merge(
-                            $data,
-                            [
-                                'bps_code' => $bpsCode,
-                            ]
-                        )
-                    );
-
-                    $inserted++;
+                    $kecData['created_at'] = $now;
+                    Kecamatan::create($kecData);
+                    $kecsInserted++;
                 }
             }
 
             DB::commit();
+
+            $this->info("Kecamatans: {$kecsInserted} inserted, {$kecsUpdated} updated, {$kecsSkipped} skipped.");
+            $this->info("Wilayah import from master_wilayah_bps.json completed successfully!");
+
+            return Command::SUCCESS;
         } catch (\Throwable $e) {
             DB::rollBack();
+            $this->error('Import failed: ' . $e->getMessage());
+            Log::error('WilayahImportCommand Error', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
 
-            fclose($handle);
-
-            $this->error(
-                'Error importing kecamatans: ' . $e->getMessage()
-            );
-
-            Log::error(
-                'Wilayah Import Kecamatan Error',
-                [
-                    'message' => $e->getMessage(),
-                    'file' => $e->getFile(),
-                    'line' => $e->getLine(),
-                ]
-            );
-
-            return false;
+            return Command::FAILURE;
         }
-
-        fclose($handle);
-
-        $this->info(
-            "Kecamatans: {$inserted} inserted, {$updated} updated, {$skipped} skipped."
-        );
-
-        return true;
     }
 
-    private function generateUniqueCitySlug(
-    string $name,
-    string $bpsCode
-): string {
-    $baseSlug = Str::slug($name);
-
-    if ($baseSlug === '') {
-        $baseSlug = 'wilayah-' . $bpsCode;
-    }
-
-    $slug = $baseSlug;
-    $counter = 1;
-
-    while (true) {
-        $existing = City::where('slug', $slug)->first();
-
-        if (!$existing) {
-            break;
-        }
-
-        // Slug sudah dipakai oleh city BPS yang sama.
-        // Boleh dipakai kembali.
-        if ((string) $existing->bps_code === (string) $bpsCode) {
-            break;
-        }
-
-        $slug = "{$baseSlug}-{$counter}";
-        $counter++;
-    }
-
-    return $slug;
-}
-
-    private function generateUniqueKecamatanSlug(
-        string $name,
-        int $cityId,
-        string $bpsCode
-    ): string {
-        $baseSlug = Str::slug($name);
-
-        if ($baseSlug === '') {
-            $baseSlug = 'kecamatan-' . $bpsCode;
-        }
-
-        $slug = $baseSlug;
-        $counter = 1;
-
-        while (
-            Kecamatan::where('slug', $slug)
-                ->where('bps_code', '!=', $bpsCode)
-                ->exists()
-        ) {
-            $slug = "{$baseSlug}-{$counter}";
-            $counter++;
-        }
-
-        return $slug;
+    private function getIsland(string $provCode): string
+    {
+        $prefix = substr($provCode, 0, 2);
+        return match ($prefix) {
+            '11', '12', '13', '14', '15', '16', '17', '18', '19', '21' => 'Sumatera',
+            '31', '32', '33', '34', '35', '36' => 'Jawa',
+            '51', '52', '53' => 'Bali & Nusa Tenggara',
+            '61', '62', '63', '64', '65' => 'Kalimantan',
+            '71', '72', '73', '74', '75', '76' => 'Sulawesi',
+            '81', '82' => 'Maluku',
+            '91', '92', '94', '95', '96', '97' => 'Papua',
+            default => 'Indonesia',
+        };
     }
 }

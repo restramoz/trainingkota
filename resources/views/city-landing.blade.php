@@ -12,13 +12,13 @@
 {{-- ── 1. LocalBusiness / EducationalOrganization Schema ─────────────── --}}
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
+  "@@context": "https://schema.org",
+  "@@type": "EducationalOrganization",
   "name": "TrainingKota — {{ $categoryName }} di {{ $city->name }}",
   "url": "{{ url()->current() }}",
   "description": "Layanan {{ $categoryName }} resmi bersertifikat Kemnaker RI di {{ $city->name }}, {{ $city->province ?? $city->island }}.",
   "address": {
-    "@type": "PostalAddress",
+    "@@type": "PostalAddress",
     "addressLocality": "{{ $city->name }}",
     "addressRegion": "{{ $city->province ?? $city->island }}",
     "addressCountry": "ID",
@@ -26,7 +26,7 @@
   },
   @if($city->hasGeo())
   "geo": {
-    "@type": "GeoCoordinates",
+    "@@type": "GeoCoordinates",
     "latitude": {{ $city->lat }},
     "longitude": {{ $city->lng }}
   },
@@ -37,20 +37,46 @@
 }
 </script>
 
+<!-- Show All toggles for Services and Related Articles -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Services
+    const btnServices = document.getElementById('show-all-btn');
+    if (btnServices) {
+        btnServices.addEventListener('click', function () {
+            document.querySelectorAll('.service-card.hidden').forEach(el => {
+                el.classList.remove('hidden');
+            });
+            btnServices.style.display = 'none';
+        });
+    }
+    // Related Articles
+    const btnArticles = document.getElementById('show-all-articles-btn');
+    if (btnArticles) {
+        btnArticles.addEventListener('click', function () {
+            document.querySelectorAll('.related-article.hidden').forEach(el => {
+                el.classList.remove('hidden');
+            });
+            btnArticles.style.display = 'none';
+        });
+    }
+});
+</script>
+
 
 @if(count($faqItems) > 0)
 {{-- ── 3. FAQPage Schema ───────────────────────────────────────────────── --}}
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
+  "@@context": "https://schema.org",
+  "@@type": "FAQPage",
   "mainEntity": [
     @foreach($faqItems as $i => $faq)
     {
-      "@type": "Question",
+      "@@type": "Question",
       "name": "{{ addslashes($faq['q']) }}",
       "acceptedAnswer": {
-        "@type": "Answer",
+        "@@type": "Answer",
         "text": "{{ addslashes($faq['a']) }}"
       }
     }{{ !$loop->last ? ',' : '' }}
@@ -64,6 +90,7 @@
 @section('title', $categoryName . ' di ' . $city->name)
 
 @section('content')
+
 <!-- Regional City Header -->
 <section class="bg-gradient-to-b from-[#0F2038] to-[#070D18] border-b border-[#1E324E] py-14 lg:py-18">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
@@ -80,9 +107,6 @@
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="badge-kemnaker">WILAYAH OPERASIONAL RESMI</span>
                     <span class="badge-bnsp">PULAU: {{ strtoupper($city->island) }}</span>
-                    @if($city->is_hub)
-                        <span class="badge-warning">★ HUB K3 UTAMA</span>
-                    @endif
                 </div>
 
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-space text-[#F1F5F9] leading-tight">
@@ -253,9 +277,10 @@
             </h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="services-grid">
             @foreach($services as $serv)
-                <div class="bg-[#0B1526] border border-[#1E324E] p-5 flex flex-col justify-between hover:border-[#0D7A5F] transition-colors">
+                {{-- Show only first 6 services initially; hide the rest with "hidden" class --}}
+                <div class="bg-[#0B1526] border border-[#1E324E] p-5 flex flex-col justify-between hover:border-[#0D7A5F] transition-colors service-card {{ $loop->index >= 6 ? 'hidden' : '' }}" data-index="{{ $loop->index }}">
                     <div>
                         <span class="badge-kemnaker text-[10px] mb-2">{{ $serv->badge }}</span>
                         <h3 class="font-space font-bold text-sm text-[#F1F5F9] mb-1">
@@ -274,8 +299,124 @@
                 </div>
             @endforeach
         </div>
+        @if($services->count() > 6)
+        <div class="mt-6 text-center" id="show-all-container">
+            <button id="show-all-btn" class="btn-primary text-xs px-4 py-2">
+                Show All ({{ $services->count() - 6 }})
+            </button>
+        </div>
+        @endif
     </div>
 </section>
+
+<!-- ══ ARTIKEL SEO 1500+ KATA ════════════════════════════════════════════ -->
+@if($article)
+<section id="artikel-seo" class="py-16 border-b border-[#1E324E]">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+            <!-- Main Article Content -->
+            <div class="lg:col-span-8">
+                <!-- Article Header -->
+                <div class="mb-8">
+                    <span class="label-caps text-[#0D7A5F] block mb-3">PANDUAN &amp; REGULASI TERKAIT {{ strtoupper($city->name) }}</span>
+                    <h2 class="text-2xl lg:text-3xl font-bold font-space text-[#F1F5F9] leading-snug mb-4">
+                        {{ $article->title }}
+                    </h2>
+                    <div class="flex flex-wrap items-center gap-4 text-xs text-[#64748B] font-space uppercase">
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block"></span>
+                            {{ $article->reading_time }} Menit Membaca
+                        </span>
+                        @if($article->focus_keywords)
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 bg-[#38BDF8] inline-block"></span>
+                            {{ $article->focus_keywords }}
+                        </span>
+                        @endif
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 bg-[#D97706] inline-block"></span>
+                            {{ $article->updated_at->format('d M Y') }}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Table of Contents (Alpine.js) -->
+                <div
+                    x-data="articleTOC()"
+                    x-init="buildTOC()"
+                    class="mb-8 bg-[#0F2038] border border-[#1E324E] border-l-2 border-l-[#0D7A5F] p-5"
+                >
+                    <button
+                        @click="open = !open"
+                        class="w-full flex items-center justify-between text-left"
+                    >
+                        <span class="font-space font-bold text-xs uppercase tracking-wider text-[#F1F5F9] flex items-center gap-2">
+                            <span class="w-2 h-2 bg-[#0D7A5F] inline-block"></span>
+                            DAFTAR ISI ARTIKEL
+                        </span>
+                        <span class="text-[#0D7A5F] font-space text-xs" x-text="open ? '[ TUTUP ]' : '[ BUKA ]'"></span>
+                    </button>
+
+                    <nav x-show="open" x-transition class="mt-4 space-y-1" id="toc-nav">
+                        <!-- TOC items akan di-inject oleh Alpine.js -->
+                        <p class="text-xs text-[#64748B] font-space italic">Memuat daftar isi...</p>
+                    </nav>
+                </div>
+
+                <!-- Article Body -->
+                <div id="article-body" class="article-prose bg-[#0B1526] border border-[#1E324E] p-6 lg:p-8">
+                    {!! $article->content !!}
+                </div>
+
+                <!-- Article CTA -->
+                <div class="mt-8 bg-[#0F2038] border border-[#1E324E] border-l-4 border-l-[#0D7A5F] p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <div class="font-space font-bold text-sm text-[#F1F5F9] mb-1">
+                            Butuh konsultasi untuk implementasi di {{ $city->name }}?
+                        </div>
+                        <p class="text-xs text-[#94A3B8]">Tim teknis kami siap membantu. Respon dalam &lt; 5 menit pada jam kerja.</p>
+                    </div>
+                    <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, saya baru membaca artikel: ' . $article->title . '. Saya butuh konsultasi untuk implementasi di ' . $city->name) }}" target="_blank" class="btn-whatsapp text-xs shrink-0">
+                        Konsultasi Gratis via WA &rarr;
+                    </a>
+                </div>
+            </div>
+
+            
+                <!-- Related Articles -->
+                @if(count($relatedArticles) > 0)
+                <div class="bg-[#0B1526] border border-[#1E324E] p-5" id="related-articles-grid">
+                    <div class="font-space font-bold text-xs uppercase tracking-wider text-[#F1F5F9] mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-[#38BDF8] inline-block"></span>
+                        ARTIKEL TERKAIT
+                    </div>
+                    <div class="space-y-3">
+                        @foreach($relatedArticles as $rel)
+                        <a href="{{ route('article.show', $rel->slug) }}" class="block p-3 bg-[#070D18] border border-[#142338] hover:border-[#0D7A5F] transition-colors group related-article {{ $loop->index >= 6 ? 'hidden' : '' }}" data-index="{{ $loop->index }}">
+                            <div class="font-space font-bold text-xs text-[#F1F5F9] group-hover:text-[#10B981] leading-snug mb-1">{{ $rel->title }}</div>
+                            <div class="flex items-center gap-2 text-[11px] text-[#64748B] font-space">
+                                <span>{{ $rel->reading_time }} menit</span>
+                                <span>•</span>
+                                <span class="uppercase">{{ $rel->category }}</span>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+                @if($relatedArticles->count() > 6)
+                <div class="mt-4 text-center" id="show-all-articles-container">
+                    <button id="show-all-articles-btn" class="btn-primary text-xs px-4 py-2">
+                        Show All ({{ $relatedArticles->count() - 6 }})
+                    </button>
+                </div>
+                @endif
+                @endif
+            </aside>
+        </div>
+    </div>
+</section>
+@endif
 
 <!-- ══ FAQ ACCORDION (Alpine.js) ═════════════════════════════════════════ -->
 @if(count($faqItems) > 0)
@@ -386,4 +527,62 @@
 </section>
 @endif
 
+<!-- ══ ARTICLE TOC JAVASCRIPT ════════════════════════════════════════════ -->
+<script>
+function articleTOC() {
+    return {
+        open: true,
+        items: [],
+        buildTOC() {
+            const body = document.getElementById('article-body');
+            const nav  = document.getElementById('toc-nav');
+            if (!body || !nav) return;
 
+            const headings = body.querySelectorAll('h2, h3');
+            if (headings.length === 0) {
+                nav.innerHTML = '<p class="text-xs text-[#64748B] font-space italic">Daftar isi tidak tersedia.</p>';
+                return;
+            }
+
+            let html = '';
+            headings.forEach((h, i) => {
+                // Buat ID jika belum ada
+                if (!h.id) {
+                    h.id = 'heading-' + i;
+                }
+                const isH3 = h.tagName === 'H3';
+                html += `<a
+                    href="#${h.id}"
+                    class="flex items-start gap-2 text-xs font-space py-1 ${isH3 ? 'pl-4 text-[#64748B] hover:text-[#94A3B8]' : 'text-[#94A3B8] hover:text-[#10B981]'} transition-colors"
+                    onclick="event.preventDefault(); document.getElementById('${h.id}').scrollIntoView({behavior:'smooth', block:'start'})"
+                >
+                    <span class="shrink-0 mt-0.5 ${isH3 ? 'text-[#44474d]' : 'text-[#0D7A5F]'}">${isH3 ? '↳' : '▪'}</span>
+                    <span>${h.textContent}</span>
+                </a>`;
+            });
+
+            nav.innerHTML = html;
+        }
+    };
+}
+</script>
+
+<!-- ══ ARTICLE PROSE CSS INLINE ══════════════════════════════════════════ -->
+<style>
+.article-prose { color: #c5c6ce; font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 1.8; }
+.article-prose h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #F1F5F9; margin: 2rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #1E324E; }
+.article-prose h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: #dde2f3; margin: 1.5rem 0 0.5rem; }
+.article-prose p { margin-bottom: 1rem; }
+.article-prose ul, .article-prose ol { margin: 0.75rem 0 1rem 1.25rem; }
+.article-prose li { margin-bottom: 0.4rem; }
+.article-prose strong { color: #F1F5F9; font-weight: 600; }
+.article-prose table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.8rem; font-family: 'IBM Plex Sans', sans-serif; }
+.article-prose table th { background: #0F2038; color: #94A3B8; font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.6rem 0.75rem; text-align: left; border: 1px solid #1E324E; }
+.article-prose table td { padding: 0.6rem 0.75rem; border: 1px solid #142338; color: #c5c6ce; vertical-align: top; }
+.article-prose table tr:nth-child(even) td { background: #0B1526; }
+.article-prose table tr:nth-child(odd) td { background: #070D18; }
+.article-prose .callout-box { background: #0F2038; border: 1px solid #1E324E; border-left: 3px solid #D97706; padding: 0.875rem 1rem; margin: 1.25rem 0; font-size: 0.8rem; color: #F59E0B; }
+.article-prose a { color: #38BDF8; text-decoration: underline; }
+.article-prose a:hover { color: #10B981; }
+</style>
+@endsection

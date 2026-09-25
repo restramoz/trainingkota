@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class MappingRegressionTest extends TestCase
 {
@@ -13,7 +14,7 @@ class MappingRegressionTest extends TestCase
      */
     private $summaryPath = __DIR__ . '/../../mapping_summary_v4.json';
 
-    /** @test */
+    #[Test]
     public function mapping_summary_file_exists_and_is_valid_json()
     {
         $this->assertFileExists($this->summaryPath, 'mapping_summary_v4.json does not exist');
@@ -26,7 +27,7 @@ class MappingRegressionTest extends TestCase
         $this->assertIsArray($data, 'Decoded JSON is not an array');
     }
 
-    /** @test */
+    #[Test]
     public function all_city_results_contains_expected_number_of_cities_and_unique_ids()
     {
         $data = $this->getSummaryData();
@@ -41,7 +42,7 @@ class MappingRegressionTest extends TestCase
         $this->assertCount(count($ids), $uniqueIds, 'city_id values are not unique');
     }
 
-    /** @test */
+    #[Test]
     public function summary_totals_match_actual_counts()
     {
         $data = $this->getSummaryData();
@@ -59,7 +60,7 @@ class MappingRegressionTest extends TestCase
         $this->assertCount($summary['total_cities'], $data['all_city_results'], 'total_cities does not match number of city results');
     }
 
-    /** @test */
+    #[Test]
     public function classifications_are_valid_and_verified_mappings_are_correct()
     {
         $data = $this->getSummaryData();
@@ -97,7 +98,7 @@ class MappingRegressionTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function ambiguous_mappings_have_all_candidate_matches()
     {
         $data = $this->getSummaryData();
@@ -108,7 +109,7 @@ class MappingRegressionTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function malang_is_ambiguous_with_expected_candidates()
     {
         $data = $this->getSummaryData();
@@ -127,7 +128,7 @@ class MappingRegressionTest extends TestCase
         $this->assertContains('35.73', $candidateCodes, 'Malang missing candidate 35.73 Kota Malang');
     }
 
-    /** @test */
+    #[Test]
     public function duplicate_regency_codes_are_not_allowed()
     {
         $data = $this->getSummaryData();

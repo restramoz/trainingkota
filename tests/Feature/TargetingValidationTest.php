@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\Article;
 use App\Models\Faq;
 use App\Models\Location;
@@ -25,7 +26,7 @@ class TargetingValidationTest extends TestCase
         return [$city, $kecamatan];
     }
 
-    /** @test */
+    #[Test]
     public function article_generic_is_valid(): void
     {
         $payload = [
@@ -39,7 +40,7 @@ class TargetingValidationTest extends TestCase
         $this->assertDatabaseHas('articles', ['title' => 'Test Generic Article', 'city_id' => null, 'kecamatan_id' => null]);
     }
 
-    /** @test */
+    #[Test]
     public function article_city_without_kecamatan_is_valid(): void
     {
         $city = City::where('slug', 'malang')->first();
@@ -55,7 +56,7 @@ class TargetingValidationTest extends TestCase
         $this->assertDatabaseHas('articles', ['title' => 'Test City Article', 'city_id' => $city->id, 'kecamatan_id' => null]);
     }
 
-    /** @test */
+    #[Test]
     public function article_kecamatan_must_match_city(): void
     {
         [$city, $kec] = $this->getCityAndKecamatan();
@@ -79,7 +80,7 @@ class TargetingValidationTest extends TestCase
         $response->assertSessionHasErrors('kecamatan_id');
     }
 
-    /** @test */
+    #[Test]
     public function faq_kecamatan_must_match_city(): void
     {
         $city = City::where('slug', 'malang')->first();
@@ -101,7 +102,7 @@ class TargetingValidationTest extends TestCase
         $response->assertSessionHasErrors('kecamatan_id');
     }
 
-    /** @test */
+    #[Test]
     public function location_kecamatan_must_match_city(): void
     {
         $city = City::where('slug', 'malang')->first();

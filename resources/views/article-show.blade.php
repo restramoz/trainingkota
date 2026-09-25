@@ -14,15 +14,15 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Article",
+  "@@context": "https://schema.org",
+  "@@type": "Article",
   "headline": "{{ $article->title }}",
   "description": "{{ addslashes($article->meta_description ?? $article->excerpt) }}",
   "datePublished": "{{ $article->created_at->toIso8601String() }}",
   "dateModified": "{{ $article->updated_at->toIso8601String() }}",
-  "author": { "@type": "Organization", "name": "TrainingKota" },
+  "author": { "@@type": "Organization", "name": "TrainingKota" },
   "publisher": {
-    "@type": "Organization",
+    "@@type": "Organization",
     "name": "TrainingKota",
     "url": "https://trainingkota.my.id"
   },
@@ -34,15 +34,15 @@
 @if($article->faq_items && count($article->faq_items) > 0)
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
+  "@@context": "https://schema.org",
+  "@@type": "FAQPage",
   "mainEntity": [
     @foreach($article->faq_items as $faq)
     {
-      "@type": "Question",
+      "@@type": "Question",
       "name": "{{ addslashes($faq['q']) }}",
       "acceptedAnswer": {
-        "@type": "Answer",
+        "@@type": "Answer",
         "text": "{{ addslashes($faq['a']) }}"
       }
     }{{ !$loop->last ? ',' : '' }}

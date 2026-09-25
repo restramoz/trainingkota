@@ -140,13 +140,12 @@
                                    value="{{ old('title') }}">
                         </div>
 
-                        {{-- Isi (Quill) ----------------------------------------------- --}}
+                        {{-- Isi (TinyMCE) ----------------------------------------------- --}}
                         <div>
                             <label class="block text-sm font-medium text-slate-400 mb-1">Isi Artikel (Rich Text)</label>
                             <textarea name="content"
                                       id="content_editor"
-                                      class="hidden">{{ old('content') }}</textarea>
-                            <div id="quill-editor" class="bg-[#070D18] rounded-lg"></div>
+                                      class="w-full bg-[#070D18] border border-[#1E324E] text-[#F1F5F9] rounded-lg" rows="10">{{ old('content') }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -259,42 +258,32 @@
 @endsection
 
 @push('scripts')
-<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css"
-      rel="stylesheet">
 
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script src="https://cdn.tiny.cloud/1/{{ config('services.tiny.key') }}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
-    // -------------------------------------------------------------------------
-    // Quill editor
-    // -------------------------------------------------------------------------
-    const contentInput   = document.getElementById('content_editor');
-    const editorElement  = document.getElementById('quill-editor');
-    const articleForm    = document.getElementById('articleForm');
 
-    const quill = new Quill(editorElement, {
-        theme: 'snow',
+    // TinyMCE editor initialization
+    tinymce.init({
+        selector: '#content_editor',
+        plugins: 'lists link image table code',
+        toolbar: 'undo redo | formatselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | blockquote code | link image table | removeformat',
+        height: 580,
+        menubar: false,
+        skin: 'oxide-dark',
+        content_css: 'dark',
         placeholder: 'Tulis artikel di sini...',
-        modules: {
-            toolbar: [
-                [{ header: [1, 2, 3, false] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
-                [{ list: 'ordered' }, { list: 'bullet' }],
-                [{ indent: '-1' }, { indent: '+1' }],
-                ['blockquote', 'code-block'],
-                ['link', 'image'],
-                ['clean']
-            ]
+        setup: function (editor) {
+            var form = document.getElementById('articleForm');
+            if (form) {
+                form.addEventListener('submit', function () {
+                    editor.save();
+                });
+            }
         }
     });
-
-    const syncContent = () => {
-        contentInput.value = quill.root.innerHTML;
-    };
-    quill.on('text-change', syncContent);
 
     // -------------------------------------------------------------------------
     // Auto-slug
@@ -333,12 +322,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // -------------------------------------------------------------------------
     // Form submit � ensure content + targeting are stored
     // -------------------------------------------------------------------------
+
+    const articleForm = document.getElementById('articleForm');
     if (articleForm) {
         articleForm.addEventListener('submit', function () {
-            syncContent();
-            // Note: targeting is now handled by actual select names in HTML
+            tinymce.triggerSave();
         });
     }
+
 
     // -------------------------------------------------------------------------
     // AI Generation
@@ -414,8 +405,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (result.seo_title)       document.getElementById('seo_title').value = result.seo_title;
                 if (result.meta_description) document.getElementById('meta_description').value = result.meta_description;
                 if (result.content) {
-                    quill.root.innerHTML = result.content;
-                    syncContent();
+                    tinymce.get('content_editor').setContent(result.content);
+
                 }
                 // Sync targeting to the main form selectors
                 syncTargeting();

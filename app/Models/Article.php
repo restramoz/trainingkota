@@ -23,6 +23,7 @@ class Article extends Model
         'slug',
         'excerpt',
         'content',
+        'image',
         'reading_time',
         'faq_items',
         'seo_title',

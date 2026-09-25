@@ -634,7 +634,7 @@
         </div>
 
         <!-- ══════════════════════════════════════════════════════════════
-             TAB 2: DIREKTORI WILAYAH & HUB
+             TAB 2: DIREKTORI WILAYAH
              ══════════════════════════════════════════════════════════════ -->
          <div x-show="activeTab === 'regions'" class="space-y-6">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#0B1526] p-4 border border-[#1E324E]">
@@ -1269,7 +1269,7 @@
                 <button @click="editingService = null" class="text-[#94A3B8] hover:text-white text-xl leading-none">&times;</button>
             </div>
             <template x-if="editingService">
-                <form :action="'{{ route('admin.services.update', '') }}/' + editingService.id" method="POST" class="p-5 space-y-4">
+                <form :action="'{{ url('admin/services') }}/' + editingService.id" method="POST" class="p-5 space-y-4">
                     @csrf
                     @method('PUT')
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1390,11 +1390,11 @@
     <div x-show="editingCity !== null" x-cloak x-transition.opacity class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
         <div class="bg-[#0B1526] border border-[#1E324E] w-full max-w-lg max-h-[90vh] overflow-y-auto" @click.away="editingCity = null">
             <div class="px-5 py-4 border-b border-[#1E324E] flex items-center justify-between">
-                <span class="font-space font-bold text-sm text-[#F1F5F9] uppercase">Edit Hub & Lokasi Kota</span>
+                <span class="font-space font-bold text-sm text-[#F1F5F9] uppercase">Edit Lokasi Kota</span>
                 <button @click="editingCity = null" class="text-[#94A3B8] hover:text-white text-xl leading-none">&times;</button>
             </div>
             <template x-if="editingCity">
-                <form :action="'{{ route('admin.cities.update', '') }}/' + editingCity.id" method="POST" class="p-5 space-y-4">
+                <form :action="'{{ url('admin/cities') }}/' + editingCity.id" method="POST" class="p-5 space-y-4">
                     @csrf
                     @method('PUT')
                     <div class="bg-[#0F2038] border border-[#1E324E] p-3 text-xs font-space text-[#94A3B8]">

@@ -1,125 +1,478 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="bg-[#070D18] text-[#F1F5F9] antialiased">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Admin Panel') - TrainingKota</title>
+    <title>@yield('title', 'Admin Dashboard') — TrainingKota</title>
 
-    <!-- Google Fonts -->
+    {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
+    {{-- Vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Alpine --}}
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     @stack('styles')
 </head>
-<body class="bg-[#070D18] text-[#F1F5F9] font-body min-h-screen flex overflow-hidden"> 
-    
-    <!-- SIDEBAR NAV (SINGLE CLEAN INSTANCE) -->
-    <aside class="w-64 bg-[#0E1726] border-r border-[#1E293B] flex flex-col h-screen sticky top-0 overflow-y-auto z-50 shrink-0">
-        <div class="p-6 border-b border-[#1E293B] flex items-center gap-3">
-            <div class="w-8 h-8 bg-[#10B981] rounded-lg flex items-center justify-center font-bold text-[#070D18]">TK</div>
-            <span class="font-space font-bold tracking-wider text-sm">ADMIN CMS</span>
+
+<body
+    x-data="{ sidebarOpen: false }"
+    class="min-h-screen bg-[#070D18] text-white antialiased"
+>
+
+    {{-- =========================================================
+         MOBILE OVERLAY
+    ========================================================== --}}
+    <div
+        x-show="sidebarOpen"
+        x-transition.opacity
+        @click="sidebarOpen = false"
+        class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+        style="display: none;"
+    ></div>
+
+
+    {{-- =========================================================
+         SIDEBAR
+    ========================================================== --}}
+    <aside
+        x-show="sidebarOpen"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="-translate-x-full"
+        x-transition:enter-end="translate-x-0"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="-translate-x-full"
+        class="fixed inset-y-0 left-0 z-50 w-64
+               h-screen overflow-y-auto
+               border-r border-white/10
+               bg-[#0E1726]"
+        style="display: none;"
+    >
+
+        {{-- Sidebar Header --}}
+        <div class="flex h-16 items-center justify-between border-b border-white/10 px-5">
+
+            <a
+                href="{{ route('admin.dashboard') }}"
+                class="flex items-center gap-3"
+            >
+                <div
+                    class="flex h-9 w-9 items-center justify-center
+                           rounded-xl bg-blue-600 font-bold text-white"
+                >
+                    T
+                </div>
+
+                <div>
+                    <div class="text-sm font-bold text-white">
+                        TrainingKota
+                    </div>
+
+                    <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">
+                        Admin Panel
+                    </div>
+                </div>
+            </a>
+
+            {{-- Close --}}
+            <button
+                type="button"
+                @click="sidebarOpen = false"
+                class="flex h-8 w-8 items-center justify-center rounded-lg
+                       text-slate-400 transition hover:bg-white/10 hover:text-white"
+                aria-label="Tutup menu"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
+
         </div>
 
-        <nav class="flex-1 p-4 space-y-1">
-            <p class="text-[10px] font-bold text-[#64748B] uppercase tracking-widest px-3 mb-2">Main Menu</p>
-            
-            <!-- 1. Dashboard -->
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-[#1E293B] text-white' : 'text-[#94A3B8] hover:bg-[#161F2E] hover:text-white' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 001-1" />
+
+        {{-- =====================================================
+             NAVIGATION
+        ====================================================== --}}
+        <nav class="space-y-1 p-3">
+
+            {{-- Dashboard --}}
+            <a
+                href="{{ route('admin.dashboard') }}"
+                @click="sidebarOpen = false"
+                class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium
+                       transition
+                       {{ request()->routeIs('admin.dashboard')
+                            ? 'bg-blue-600 text-white'
+                            : 'text-slate-300 hover:bg-white/5 hover:text-white' }}"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V10"
+                    />
                 </svg>
-                <span class="text-sm font-medium">Dashboard</span>
+
+                <span>Dashboard</span>
             </a>
 
-            <!-- 2. Katalog Layanan -->
-            <a href="/admin/services/manage" class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors {{ request()->is('admin/services*') ? 'bg-[#1E293B] text-white' : 'text-[#94A3B8] hover:bg-[#161F2E] hover:text-white' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+
+            {{-- Katalog Layanan --}}
+            <a
+                href="/admin/services/manage"
+                @click="sidebarOpen = false"
+                class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium
+                       transition
+                       {{ request()->is('admin/services/*')
+                            ? 'bg-blue-600 text-white'
+                            : 'text-slate-300 hover:bg-white/5 hover:text-white' }}"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"
+                    />
                 </svg>
-                <span class="text-sm font-medium">Katalog Layanan</span>
+
+                <span>Katalog Layanan</span>
             </a>
 
-            <!-- 3. Direktori Wilayah -->
-            <a href="/admin/locations" class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors {{ request()->is('admin/locations*') || request()->is('admin/cities*') ? 'bg-[#1E293B] text-white' : 'text-[#94A3B8] hover:bg-[#161F2E] hover:text-white' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+
+            {{-- Direktori Wilayah --}}
+            <a
+                href="/admin/locations"
+                @click="sidebarOpen = false"
+                class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium
+                       transition
+                       {{ request()->is('admin/locations*')
+                            ? 'bg-blue-600 text-white'
+                            : 'text-slate-300 hover:bg-white/5 hover:text-white' }}"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 21s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z"
+                    />
+                    <circle cx="12" cy="9" r="2.5" />
                 </svg>
-                <span class="text-sm font-medium">Direktori Wilayah</span>
+
+                <span>Direktori Wilayah</span>
             </a>
 
-            <!-- 4. Artikel -->
-            <a href="{{ route('admin.articles.index') }}" class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors {{ request()->is('admin/articles*') ? 'bg-[#1E293B] text-white' : 'text-[#94A3B8] hover:bg-[#161F2E] hover:text-white' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-4h-2m-4 0h-2m4 0v4" />
+
+            {{-- Artikel --}}
+            <a
+                href="{{ route('admin.articles.index') }}"
+                @click="sidebarOpen = false"
+                class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium
+                       transition
+                       {{ request()->routeIs('admin.articles.*')
+                            ? 'bg-blue-600 text-white'
+                            : 'text-slate-300 hover:bg-white/5 hover:text-white' }}"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 4h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2z"
+                    />
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M8 8h8M8 12h8M8 16h5"
+                    />
                 </svg>
-                <span class="text-sm font-medium">Artikel</span>
+
+                <span>Artikel</span>
             </a>
 
-            <!-- 5. Grafik -->
-            <a href="/admin/graphics" class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors {{ request()->is('admin/graphics*') ? 'bg-[#1E293B] text-white' : 'text-[#94A3B8] hover:bg-[#161F2E] hover:text-white' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+
+            {{-- Grafik --}}
+            <a
+                href="/admin/graphics"
+                @click="sidebarOpen = false"
+                class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium
+                       transition
+                       {{ request()->is('admin/graphics*')
+                            ? 'bg-blue-600 text-white'
+                            : 'text-slate-300 hover:bg-white/5 hover:text-white' }}"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 19V5M4 19h16"
+                    />
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M8 16v-4M12 16V8M16 16v-7"
+                    />
                 </svg>
-                <span class="text-sm font-medium">Grafik</span>
+
+                <span>Grafik</span>
             </a>
 
-            <!-- 6. Tiket / Jadwal -->
-            <a href="{{ route('admin.schedules.index') }}" class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors {{ request()->is('admin/schedules*') ? 'bg-[#1E293B] text-white' : 'text-[#94A3B8] hover:bg-[#161F2E] hover:text-white' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 11-2 2v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 112-2v-3a2 2 0 00-2-2H5z" />
+
+            {{-- Tiket / Jadwal --}}
+            <a
+                href="{{ route('admin.schedules.index') }}"
+                @click="sidebarOpen = false"
+                class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium
+                       transition
+                       {{ request()->routeIs('admin.schedules.*')
+                            ? 'bg-blue-600 text-white'
+                            : 'text-slate-300 hover:bg-white/5 hover:text-white' }}"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 3v4M18 3v4M4 9h16M5 5h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"
+                    />
                 </svg>
-                <span class="text-sm font-medium">Tiket / Jadwal</span>
+
+                <span>Tiket / Jadwal</span>
             </a>
 
-            <!-- 7. Blog -->
-            <a href="/blog" target="_blank" class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors text-[#94A3B8] hover:bg-[#161F2E] hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+
+            {{-- Divider --}}
+            <div class="my-3 border-t border-white/10"></div>
+
+
+            {{-- Blog --}}
+            <a
+                href="/blog"
+                target="_blank"
+                rel="noopener noreferrer"
+                @click="sidebarOpen = false"
+                class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium
+                       text-slate-300 transition hover:bg-white/5 hover:text-white"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 20h9"
+                    />
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M16.5 3.5a2.1 2.1 0 013 3L8 18l-4 1 1-4z"
+                    />
                 </svg>
-                <span class="text-sm font-medium">Blog</span>
+
+                <span>Blog</span>
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="ml-auto h-4 w-4 opacity-50"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M7 17L17 7M7 7h10v10"
+                    />
+                </svg>
             </a>
+
         </nav>
 
-        <div class="p-4 border-t border-[#1E293B]">
-            <div class="flex items-center gap-3 px-3 py-2">
-                <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold">AD</div>
-                <div class="flex-1 overflow-hidden">
-                    <p class="text-xs font-bold truncate">Super Admin</p>
-                    <p class="text-[10px] text-[#64748B] truncate">admin@trainingkota.my.id</p>
+
+        {{-- =====================================================
+             SIDEBAR FOOTER
+        ====================================================== --}}
+        <div class="mt-auto border-t border-white/10 p-3">
+
+            <div class="flex items-center gap-3 rounded-xl bg-white/5 p-3">
+
+                <div
+                    class="flex h-9 w-9 shrink-0 items-center justify-center
+                           rounded-full bg-blue-600 text-sm font-bold"
+                >
+                    {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
                 </div>
+
+                <div class="min-w-0">
+                    <div class="truncate text-sm font-semibold text-white">
+                        {{ auth()->user()->name ?? 'Admin' }}
+                    </div>
+
+                    <div class="truncate text-xs text-slate-400">
+                        Administrator
+                    </div>
+                </div>
+
             </div>
+
         </div>
+
     </aside>
 
-    <!-- MAIN CONTENT AREA -->
-    <div class="flex-1 flex flex-col h-screen overflow-hidden">
-        <!-- TOPBAR -->
-        <header class="h-16 bg-[#0E1726] border-b border-[#1E293B] flex items-center justify-between px-6 sticky top-0 z-40 shrink-0">
-            <h2 class="font-space font-bold text-sm uppercase tracking-wider text-[#94A3B8]">
-                @yield('title', 'Dashboard')
-            </h2>
-            <div class="flex items-center gap-4">
-                <a href="{{ route('home') }}" target="_blank" class="text-xs font-medium text-[#38BDF8] hover:underline flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+
+    {{-- =========================================================
+         MAIN WRAPPER
+    ========================================================== --}}
+    <div class="min-h-screen w-full">
+
+        {{-- =====================================================
+             TOPBAR
+        ====================================================== --}}
+        <header
+            class="sticky top-0 z-30 flex h-16 items-center
+                   border-b border-white/10
+                   bg-[#070D18]/95 px-4 backdrop-blur-md sm:px-6"
+        >
+
+            <div class="flex w-full items-center justify-between">
+
+                {{-- Hamburger --}}
+                <button
+                    type="button"
+                    @click="sidebarOpen = true"
+                    class="flex h-10 w-10 items-center justify-center
+                           rounded-xl border border-white/10
+                           bg-white/5 text-slate-300
+                           transition hover:bg-white/10 hover:text-white"
+                    aria-label="Buka menu"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M4 6h16M4 12h16M4 18h16"
+                        />
                     </svg>
-                    Visit Site
-                </a>
+                </button>
+
+
+                {{-- Page Title --}}
+                <div class="hidden sm:block">
+                    <h1 class="text-sm font-semibold text-white">
+                        @yield('page-title', 'Admin Dashboard')
+                    </h1>
+                </div>
+
+
+                {{-- Right Side --}}
+                <div class="flex items-center gap-2">
+
+                    <span class="hidden text-xs text-slate-400 md:block">
+                        {{ now()->format('d M Y') }}
+                    </span>
+
+                    <div
+                        class="flex h-9 w-9 items-center justify-center
+                               rounded-full border border-white/10
+                               bg-white/5 text-xs font-bold text-white"
+                    >
+                        {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
+                    </div>
+
+                </div>
+
             </div>
+
         </header>
 
-        <!-- MAIN PAGE CONTENT -->
-        <main class="flex-1 overflow-y-auto bg-[#070D18]">
+
+        {{-- =====================================================
+             PAGE CONTENT
+             Browser/body handles scrolling.
+             Jangan gunakan overflow-y-auto di sini.
+        ====================================================== --}}
+        <main class="min-h-screen overflow-x-hidden bg-[#070D18]">
+
             @yield('content')
+
         </main>
+
     </div>
 
+
     @stack('scripts')
+
 </body>
 </html>

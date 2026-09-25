@@ -18,7 +18,7 @@
                 </h1>
 
                 <p class="text-base sm:text-lg text-[#94A3B8] leading-relaxed max-w-2xl font-body">
-                    Platform terpadu pelatihan keselamatan kerja, kajian kelayakan teknis, dan jasa perizinan SLF/AMDAL untuk perusahaan di <strong class="text-[#10B981]">212 Kota/Kabupaten</strong> di seluruh Indonesia.
+                    Platform terpadu pelatihan keselamatan kerja, kajian kelayakan teknis, dan jasa perizinan SLF/AMDAL untuk perusahaan di <strong class="text-[#10B981]">514 Kota/Kabupaten</strong> di seluruh Indonesia.
                 </p>
 
                 <!-- Quick Action Buttons -->
@@ -27,7 +27,7 @@
                         Jelajahi 3 Pilar Layanan
                     </a>
                     <a href="#widget-kota" class="btn-secondary">
-                        Pilih 212 Kota Pelaksanaan
+                        Pilih 514 Kota Pelaksanaan
                     </a>
                     <a href="https://wa.me/{{ config('contact.whatsapp') }}" target="_blank" class="btn-whatsapp">
                         Hubungi Hotline WhatsApp
@@ -49,7 +49,7 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block"></span>
-                        212 Kota Se-Indonesia
+                        514 Kota Se-Indonesia
                     </div>
                 </div>
             </div>
@@ -78,11 +78,11 @@
                         <div>
                             <label class="block text-xs font-space uppercase text-[#94A3B8] mb-1 tracking-wider">Pilih Kota Wilayah Anda</label>
                             <select id="quick-city" class="input-k3 w-full" onchange="if(this.value) window.location.href='/pelatihan/kota-' + this.value">
-                                <option value="">-- Cari atau Pilih dari 212 Kota --</option>
+                                <option value="">-- Cari atau Pilih Kota --</option>
                                 @foreach($hubCities as $hub)
-                                    <option value="{{ $hub->slug }}">★ {{ $hub->name }} (Hub Regional)</option>
+                                    <option value="{{ $hub->slug }}">{{ $hub->name }}</option>
                                 @endforeach
-                                <optgroup label="Kota Lainnya (Cek Widget 212 Kota di bawah)">
+                                <optgroup label="Kota Lainnya">
                                     <option value="malang">Kota Malang</option>
                                     <option value="surabaya">Surabaya</option>
                                     <option value="jakarta">Jakarta</option>
@@ -208,7 +208,7 @@
     </div>
 </section>
 
-<!-- Section: Interactive Widget 212 Kota (Dynamic Search & Filter) -->
+<!-- Section: Interactive Widget 514 Kota (Dynamic Search & Filter) -->
 <section id="widget-kota" class="py-16 lg:py-24 bg-[#0B1526]/50 border-b border-[#1E324E]">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
@@ -218,7 +218,7 @@
                     JARINGAN OPERASIONAL NASIONAL
                 </div>
                 <h2 class="text-2xl lg:text-3xl font-bold font-space text-[#F1F5F9]">
-                    Widget 212 Kota &amp; Kabupaten
+                    Widget 514 Kota &amp; Kabupaten
                 </h2>
                 <p class="text-sm text-[#94A3B8] mt-1">
                     Cari kota Anda untuk membuka landing page kepatuhan K3 dan jadwal pelaksanaan lokal.
@@ -243,38 +243,25 @@
             </div>
         </div>
 
-        <!-- Hub Regional Cities Quick Highlights -->
-        <div class="mb-6 p-4 bg-[#0F2038] border border-[#1E324E] flex flex-wrap items-center gap-2">
-            <span class="text-xs font-space font-bold uppercase text-[#F1F5F9] mr-2">Hub Utama:</span>
-            @foreach($hubCities as $hub)
-                <a href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => $hub->slug]) }}" class="px-3 py-1 bg-[#070D18] border border-[#0D7A5F] text-[#10B981] hover:bg-[#0D7A5F] hover:text-white transition-colors text-xs font-space uppercase">
-                    ★ {{ $hub->name }}
-                </a>
-            @endforeach
-        </div>
 
         <!-- Cities Grid Grouped by Island -->
         <div id="cities-container" class="space-y-8">
             @foreach($citiesGrouped as $island => $cities)
                 <div class="island-group bg-[#070D18] border border-[#1E324E] p-6">
                     <div class="border-b border-[#1E324E] pb-3 mb-4 flex items-center justify-between">
-                        <h3 class="font-space font-bold text-sm uppercase text-[#10B981] tracking-wider flex items-center gap-2">
+                        <h3 class="font-space font-bold text-sm uppercase text-[#10B981] tracking-wider flex items-center gap-2 cursor-pointer" id="island-header-{{ $loop->index }}" onclick="toggleIsland({{ $loop->index }})">
                             <span class="w-2 h-2 bg-[#10B981] inline-block"></span>
-                            Pulau / Wilayah: {{ $island }} ({{ count($cities) }} Kota)
+                            Pulau / Wilayah: {{ $island }} ({{ count($cities) }} Kota) <svg class="ml-2 w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </h3>
-                        <span class="text-xs font-space text-[#64748B]">JADWAL AKTIF</span>
                     </div>
 
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                    <div id="cities-{{ $loop->index }}" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2" style="display:none;">
                         @foreach($cities as $city)
                             <a 
                                 href="{{ route('city.landing', ['category' => 'pelatihan', 'citySlug' => $city->slug]) }}" 
                                 class="city-item block px-3 py-2 bg-[#0B1526] hover:bg-[#0F2038] border border-[#142338] hover:border-[#0D7A5F] text-xs text-[#c5c6ce] hover:text-white transition-colors font-body truncate"
                                 data-name="{{ strtolower($city->name) }}"
                             >
-                                @if($city->is_hub)
-                                    <span class="text-[#10B981] font-semibold">★</span>
-                                @endif
                                 {{ $city->name }}
                             </a>
                         @endforeach
@@ -315,6 +302,67 @@ function filterCities(query) {
 
     document.getElementById('no-city-found').classList.toggle('hidden', totalVisible > 0);
 }
+
+function toggleIsland(index) {
+    var el = document.getElementById('cities-' + index);
+    if (el) {
+        el.style.display = el.style.display === 'none' ? 'grid' : 'none';
+    }
+    var header = document.getElementById('island-header-' + index);
+    if (header) {
+        var icon = header.querySelector('svg');
+        if (icon) {
+            icon.classList.toggle('rotate-180');
+        }
+    }
+}
 </script>
+
+<!-- Advantage Section -->
+<section id="advantage" class="py-16 bg-[#0B1526]/20 border-b border-[#1E324E]">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <h2 class="label-caps text-[#0D7A5F] mb-2">KEUNGGULAN / ADVANTAGE</h2>
+        <h3 class="text-2xl font-bold font-space text-[#F1F5F9] mb-4">Kenapa Pilih TrainingKota?</h3>
+        <ul class="list-disc pl-5 space-y-2 text-[#94A3B8]">
+            <li>Tim ahli bersertifikat Kemnaker RI.</li>
+            <li>Jaringan operasional di 514 kota/kabupaten.</li>
+            <li>Layanan lengkap: Pelatihan, Kajian, Jasa SLF & Izin.</li>
+            <li>Solusi end‑to‑end dari perencanaan hingga implementasi.</li>
+            <li>Platform modern & responsif.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-16 bg-[#0B1526]/20 border-b border-[#1E324E]">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <h2 class="label-caps text-[#0D7A5F] mb-2">ABOUT TRAININGKOTA</h2>
+        <h3 class="text-2xl font-bold font-space text-[#F1F5F9] mb-4">Tentang Kami</h3>
+        <p class="text-[#94A3B8] max-w-2xl">
+            TrainingKota adalah platform terintegrasi untuk pelatihan keselamatan kerja, kajian teknis, dan layanan perizinan industri di seluruh Indonesia. Kami menghubungkan perusahaan dengan tenaga ahli terakreditasi, memastikan kepatuhan regulasi dan peningkatan standar K3 secara efisien.
+        </p>
+    </div>
+</section>
+
+<!-- Home Articles Section -->
+<section id="home-articles" class="py-16 bg-[#0B1526]/20 border-b border-[#1E324E]">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <h2 class="label-caps text-[#0D7A5F] mb-2">ARTIKEL</h2>
+        <h3 class="text-2xl font-bold font-space text-[#F1F5F9] mb-4">Artikel Terbaru</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($articles as $article)
+            <div class="bg-[#0F2038] border border-[#1E324E] p-4 flex flex-col h-full">
+                <h4 class="text-[#F1F5F9] font-bold mb-2">{{ $article->title }}</h4>
+                <p class="text-[#94A3B8] text-sm flex-grow">{{ \Illuminate\Support\Str::limit(strip_tags($article->content), 120) }}</p>
+                <a href="{{ route('article.show', $article->slug) }}" class="mt-3 btn-primary text-xs py-1.5 text-center">Baca Selengkapnya →</a>
+            </div>
+            @endforeach
+        </div>
+        <div class="mt-6">
+            <a href="{{ route('blog.index') }}" class="btn-secondary text-xs py-2 px-4">Show All Articles</a>
+        </div>
+    </div>
+</section>
+
 @endsection
 

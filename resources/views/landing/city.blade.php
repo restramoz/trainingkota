@@ -8,13 +8,13 @@
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "EducationalOrganization",
+      "@@context": "https://schema.org",
+      "@@type": "EducationalOrganization",
       "name": "TrainingKota {{ $city->name }} - Pusat Layanan K3",
       "url": "{{ url()->current() }}",
       "description": "Layanan pembinaan K3 Kemnaker RI, riksa uji teknis, dan sertifikasi SLF di {{ $city->name }}.",
       "address": {
-        "@type": "PostalAddress",
+        "@@type": "PostalAddress",
         "addressLocality": "{{ $city->name }}",
         "addressRegion": "{{ $city->province ?? $city->island }}",
         "addressCountry": "ID",
@@ -26,15 +26,15 @@
     </script>
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
+      "@@context": "https://schema.org",
+      "@@type": "FAQPage",
       "mainEntity": [
         @foreach($faqItems ?? [] as $i => $item)
         {
-          "@type": "Question",
+          "@@type": "Question",
           "name": "{{ $item['q'] }}",
           "acceptedAnswer": {
-            "@type": "Answer",
+            "@@type": "Answer",
             "text": "{{ $item['a'] }}"
           }
         }{{ $loop->last ? '' : ',' }}

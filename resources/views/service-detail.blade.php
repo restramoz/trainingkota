@@ -24,7 +24,7 @@
                     @if($category === 'pelatihan' && !empty($service->duration))
                         <span class="badge-bnsp">DURASI: {{ $service->duration }}</span>
                     @endif
-                    <span class="badge-warning">LAYANAN NASIONAL &bull; 212 KOTA</span>
+                    <span class="badge-warning">LAYANAN NASIONAL &bull; 514 KOTA</span>
                 </div>
 
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-space text-[#F1F5F9] leading-tight">
@@ -325,7 +325,7 @@
                             <label class="block text-xs font-space uppercase text-[#94A3B8] mb-1">Pilih Kota Wilayah</label>
                             <select id="reg-city" class="input-k3 w-full">
                                 @foreach($hubCities as $hub)
-                                    <option value="{{ $hub->name }}">{{ $hub->name }} (Hub Utama)</option>
+                                    <option value="{{ $hub->name }}">{{ $hub->name }}</option>
                                 @endforeach
                                 <option value="In-House Site Industri">In-House di Pabrik Kami</option>
                             </select>

@@ -8,10 +8,10 @@
 
 @section('meta')
     <meta name="description" content="{{ $metaDesc }}">
-    <link rel="canonical" href="{{ url("/{$category}/kecamatan-{$kecamatan->slug}") }}">
+    <link rel="canonical" href="{{ url($category . '/kecamatan-' . $kecamatan->slug) }}">
     <meta property="og:title" content="{{ $seoTitle }}">
     <meta property="og:description" content="{{ $metaDesc }}">
-    <meta property="og:url" content="{{ url("/{$category}/kecamatan-{$kecamatan->slug}") }}">
+    <meta property="og:url" content="{{ url($category . '/kecamatan-' . $kecamatan->slug) }}">
 @endsection
 
 @section('content')
@@ -77,9 +77,10 @@
             </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="services-grid">
             @foreach($services as $srv)
-                <div class="bg-[#0B1526] border border-[#1E324E] hover:border-[#0D7A5F] transition flex flex-col justify-between p-6">
+                {{-- Show only first 6 services initially; hide the rest --}}
+                <div class="bg-[#0B1526] border border-[#1E324E] hover:border-[#0D7A5F] transition flex flex-col justify-between p-6 service-card {{ $loop->index >= 6 ? 'hidden' : '' }}" data-index="{{ $loop->index }}">
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
                             <span class="text-[10px] font-space uppercase px-2 py-0.5 border border-[#1E324E] text-[#10B981] bg-[#070D18]">
@@ -108,12 +109,19 @@
                 </div>
             @endforeach
         </div>
+        @if($services->count() > 6)
+        <div class="mt-6 text-center" id="show-all-container">
+            <button id="show-all-btn" class="btn-primary text-xs px-4 py-2">
+                Show All ({{ $services->count() - 6 }})
+            </button>
+        </div>
+        @endif
     </div>
 </section>
 
 <!-- 5. Locations & Google Maps Section -->
 <section id="locations" class="py-12 border-b border-[#1E324E] bg-[#080E19]">
-    <div class="max-w-7xl mx-auto px-4 lg:px-8 space-y-8">
+    < class="max-w-7xl mx-auto px-4 lg:px-8 space-y-8">
         <div class="border-b border-[#1E324E] pb-4">
             <span class="text-[11px] font-space uppercase tracking-wider text-[#10B981] block mb-1">TITIK OPERASIONAL &amp; SENTRA PRAKTIK</span>
             <h2 class="text-xl lg:text-2xl font-bold font-space text-[#F1F5F9]">
@@ -121,7 +129,7 @@
             </h2>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        < class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <!-- Left: Location Details -->
             <div class="lg:col-span-5 space-y-4">
                 <div class="bg-[#0B1526] border border-[#1E324E] p-6 space-y-4">
@@ -153,7 +161,7 @@
             </div>
 
             <!-- Right: Interactive Google Maps Embed -->
-            <div class="lg:col-span-7">
+            < class="lg:col-span-7">
                 <div class="bg-[#0B1526] border border-[#1E324E] p-2 h-full min-h-[320px]">
                     <iframe
                         src="{{ $kecamatan->mapsEmbedUrl() }}"
@@ -230,11 +238,6 @@
     </div>
 </section>
 
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- 6. In-Depth SEO Article Section -->
 @if($article)
@@ -303,7 +306,7 @@
                 Hubungi Konsultan Wilayah (WhatsApp)
             </a>
             <a href="{{ route('city.landing', ['category' => $category, 'citySlug' => $city->slug]) }}" class="btn-secondary">
-                Kembali ke Hub {{ $city->name }}
+                Kembali ke {{ $city->name }}
             </a>
         </div>
     </div>
@@ -312,47 +315,47 @@
 <!-- JSON-LD Structured Data Schema -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@@context": "https://schema.org",
+  "@@graph": [
     {
-      "@type": "BreadcrumbList",
+      "@@type": "BreadcrumbList",
       "itemListElement": [
         {
-          "@type": "ListItem",
+          "@@type": "ListItem",
           "position": 1,
           "name": "Beranda",
           "item": "{{ route('home') }}"
         },
         {
-          "@type": "ListItem",
+          "@@type": "ListItem",
           "position": 2,
           "name": "{{ ucfirst($category) }}",
           "item": "{{ route('category.show', $category) }}"
         },
         {
-          "@type": "ListItem",
+          "@@type": "ListItem",
           "position": 3,
           "name": "{{ $city->name }}",
           "item": "{{ route('city.landing', ['category' => $category, 'citySlug' => $city->slug]) }}"
         },
         {
-          "@type": "ListItem",
+          "@@type": "ListItem",
           "position": 4,
           "name": "Kecamatan {{ $kecamatan->name }}",
-          "item": "{{ url("/{$category}/kecamatan-{$kecamatan->slug}") }}"
+          "item": "{{ url($category . '/kecamatan-' . $kecamatan->slug) }}"
         }
       ]
     }
     @if($faqs->count() > 0)
     ,{
-      "@type": "FAQPage",
+      "@@type": "FAQPage",
       "mainEntity": [
         @foreach($faqs as $i => $faq)
         {
-          "@type": "Question",
+          "@@type": "Question",
           "name": "{{ addslashes($faq->question) }}",
           "acceptedAnswer": {
-            "@type": "Answer",
+            "@@type": "Answer",
             "text": "{{ addslashes(strip_tags($faq->answer)) }}"
           }
         }{{ $i < $faqs->count() - 1 ? ',' : '' }}
@@ -363,5 +366,20 @@
   ]
 }
 </script>
+
+<!-- Show All Services toggle for Kecamatan Landing (card limit) -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('show-all-btn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+        document.querySelectorAll('.service-card.hidden').forEach(el => {
+            el.classList.remove('hidden');
+        });
+        btn.style.display = 'none';
+    });
+});
+</script>
+
 @endsection
 
