@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Models\City;
 use App\Models\TrainingSchedule;
 use App\Models\Faq;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -45,13 +46,40 @@ class ServiceController extends Controller
             ->orderBy('order')
             ->get();
 
+        // Get articles related to this service (for full content display)
+        // Priority: 1. Article with this service_id, 2. Article with this category but no service_id
+        $article = Article::published()
+            ->where(function ($q) use ($service, $category) {
+                $q->where('service_id', $service->id)
+                  ->orWhere(function ($q2) use ($category) {
+                      $q2->where('category', $category)->whereNull('service_id');
+                  });
+            })
+            ->latest()
+            ->first();
+
+        // Related articles for sidebar (excluding the main article)
+        $relatedArticles = Article::published()
+            ->where('id', '!=', $article?->id)
+            ->where(function ($q) use ($service, $category) {
+                $q->where('service_id', $service->id)
+                  ->orWhere(function ($q2) use ($category) {
+                      $q2->where('category', $category)->whereNull('service_id');
+                  });
+            })
+            ->latest()
+            ->take(5)
+            ->get();
+
         return view('service-detail', compact(
             'category',
             'service',
             'relatedServices',
             'hubCities',
             'schedules',
-            'faqs'
+            'faqs',
+            'article',
+            'relatedArticles'
         ));
     }
 }

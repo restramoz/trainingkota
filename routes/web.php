@@ -115,9 +115,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
 });
 
 
-// 4a. Blog Portal
+// 4a. Blog Portal (Public Article Index)
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
-
+Route::get('/blog/kota/{citySlug}', [BlogController::class, 'index'])->name('blog.city');
 
 // 4. Artikel SEO: /artikel/{slug}
 Route::get('/artikel/{slug}', [ArticleController::class, 'show'])->name('article.show');

@@ -46,6 +46,185 @@
         overflow-wrap: anywhere;
         word-break: normal;
     }
+
+    /* Mobile responsive fixes for article content */
+    .article-prose img,
+    .article-prose video,
+    .article-prose iframe {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .article-prose table {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .article-prose pre {
+        overflow-x: auto;
+        max-width: 100%;
+    }
+
+    /* Article Prose - Dark Theme Typography */
+    .article-prose {
+        color: #cbd5e1;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .article-prose h1,
+    .article-prose h2,
+    .article-prose h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        color: #f8fafc;
+        font-weight: 700;
+    }
+
+    .article-prose h1 {
+        font-size: 2rem;
+        margin: 2rem 0 0.75rem;
+    }
+
+    .article-prose h2 {
+        font-size: 1.5rem;
+        margin: 1.75rem 0 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #1E324E;
+    }
+
+    .article-prose h3 {
+        font-size: 1.25rem;
+        margin: 1.5rem 0 0.5rem;
+    }
+
+    .article-prose p {
+        margin-bottom: 1rem;
+        color: #cbd5e1;
+    }
+
+    .article-prose strong {
+        color: #f8fafc;
+        font-weight: 600;
+    }
+
+    .article-prose em {
+        color: #e2e8f0;
+    }
+
+    .article-prose a {
+        color: #38bdf8;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    .article-prose a:hover {
+        color: #0ea5e9;
+    }
+
+    .article-prose ul,
+    .article-prose ol {
+        margin: 1rem 0 1rem 1.5rem;
+        color: #cbd5e1;
+    }
+
+    .article-prose li {
+        margin-bottom: 0.5rem;
+    }
+
+    .article-prose blockquote {
+        border-left: 3px solid #0ea5e9;
+        background: #0f172a;
+        color: #94a3b8;
+        padding: 1rem 1.25rem;
+        margin: 1.5rem 0;
+        border-radius: 0 4px 4px 0;
+    }
+
+    .article-prose code {
+        background: #1e293b;
+        color: #f8fafc;
+        padding: 0.125rem 0.375rem;
+        border-radius: 3px;
+        font-size: 0.9em;
+        font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
+    }
+
+    .article-prose pre {
+        background: #020617;
+        border: 1px solid #1E324E;
+        color: #cbd5e1;
+        padding: 1rem;
+        border-radius: 6px;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+    }
+
+    .article-prose pre code {
+        background: transparent;
+        color: inherit;
+        padding: 0;
+        font-size: inherit;
+    }
+
+    .article-prose table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .article-prose th {
+        background: #0f172a;
+        color: #94a3b8;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border: 1px solid #1E324E;
+    }
+
+    .article-prose td {
+        padding: 0.75rem 1rem;
+        border: 1px solid #142338;
+        color: #cbd5e1;
+        vertical-align: top;
+    }
+
+    .article-prose tr:nth-child(even) td {
+        background: #0b1526;
+    }
+
+    .article-prose tr:nth-child(odd) td {
+        background: #070d18;
+    }
+
+    .article-prose img,
+    .article-prose video,
+    .article-prose iframe {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+    }
+
+    /* Ensure article cards don't overflow on mobile */
+    .related-article img,
+    .service-card img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Fix for map iframe responsive */
+    .map-container iframe,
+    .map-container > div {
+        width: 100%;
+        height: 100%;
+    }
     .article-content a {
         color: #38BDF8;
         text-decoration: underline;
@@ -60,7 +239,7 @@
     .article-content pre {
         background: #020617;
         border: 1px solid #1E324E;
-        color: #CBD5E1;
+        color: #Ffff;
         padding: 14px 16px;
         font-family: Consolas, Monaco, monospace;
         overflow-x: auto;

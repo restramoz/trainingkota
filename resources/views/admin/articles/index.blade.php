@@ -7,7 +7,7 @@
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-2xl font-bold text-[#F1F5F9]">Manajemen Artikel</h1>
-            <p class="text-slate-400 text-sm">Kelola konten artikel dan target geografis</p>
+            <p class="text-slate-400 text-sm">Kelola konten artikel (Targeting Global: Semua Kota & Semua Kecamatan)</p>
         </div>
         <!-- Direct link to Create Article -->
         <a href="{{ route('admin.articles.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition flex items-center gap-2">
@@ -33,10 +33,11 @@
                 </select>
             </div>
             <div>
-                <select name="status" class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                    <option value="">Semua Status</option>
-                    <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
-                    <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Published</option>
+                <select name="service_id" class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                    <option value="">Semua Layanan</option>
+                    @foreach($services as $service)
+                        <option value="{{ $service->id }}" {{ request('service_id') == $service->id ? 'selected' : '' }}>{{ $service->name }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="flex items-end">
@@ -67,10 +68,10 @@
                     </td>
                     <td class="px-4 py-4">
                         <div class="text-sm text-[#F1F5F9]">
-                            {{ $article->city?->name ?? 'Global' }}
-                            @if($article->kecamatan)
-                                - {{ $article->kecamatan->name }}
-                            @endif
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-blue-900/30 text-blue-300 border border-blue-700/50 rounded">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                                Global (Semua Kota & Kecamatan)
+                            </span>
                         </div>
                         <div class="text-xs text-[#64748B]">{{ $article->service?->name ?? 'Umum' }}</div>
                     </td>

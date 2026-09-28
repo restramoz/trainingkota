@@ -144,12 +144,12 @@
     </header>
 
     <!-- Main Content Body -->
-    <main class="flex-grow">
+    <main class="flex-grow pb-10 sm:pb-20">
         @yield('content')
     </main>
 
     <!-- Footer: Industrial K3 Command & Compliance -->
-    <footer class="bg-[#0B1526] border-t border-[#1E324E] text-[#94A3B8] text-xs font-body mt-20">
+    <footer class="bg-[#0B1526] border-t border-[#1E324E] text-[#94A3B8] text-xs font-body">
         <div class="max-w-7xl mx-auto px-4 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
                 <!-- Col 1 -->

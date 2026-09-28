@@ -76,7 +76,7 @@
 </div>
 
 <!-- Article Hero Header -->
-<section class="bg-gradient-to-b from-[#0F2038] to-[#070D18] border-b border-[#1E324E] py-12 lg:py-16">
+<section class="bg-gradient-to-b from-[#0F2038] to-[#070D18] border-b border-[#1E324E] py-8 sm:py-12 lg:py-16">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="max-w-4xl">
             <!-- Meta Badges -->
@@ -119,7 +119,7 @@
 </section>
 
 <!-- Main Content -->
-<section class="py-12 lg:py-16">
+<section class="py-8 sm:py-12 lg:py-16">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
@@ -130,7 +130,7 @@
                 <div
                     x-data="articleTOC()"
                     x-init="buildTOC()"
-                    class="mb-8 bg-[#0F2038] border border-[#1E324E] border-l-2 border-l-[#0D7A5F] p-5"
+                    class="mb-6 sm:mb-8 bg-[#0F2038] border border-[#1E324E] border-l-2 border-l-[#0D7A5F] p-4 sm:p-5"
                 >
                     <button @click="open = !open" class="w-full flex items-center justify-between text-left">
                         <span class="font-space font-bold text-xs uppercase tracking-wider text-[#F1F5F9] flex items-center gap-2">
@@ -145,13 +145,13 @@
                 </div>
 
                 <!-- Article Full Content -->
-                <div id="article-body" class="article-prose bg-[#0B1526] border border-[#1E324E] p-6 lg:p-10">
+                <div id="article-body" class="article-prose bg-[#0B1526] border border-[#1E324E] p-4 sm:p-6 lg:p-10">
                     {!! $article->content !!}
                 </div>
 
                 <!-- FAQ Section (jika artikel punya FAQ items) -->
                 @if($article->faq_items && count($article->faq_items) > 0)
-                <div class="mt-10">
+                <div class="mt-6 sm:mt-10">
                     <h2 class="text-xl font-bold font-space text-[#F1F5F9] mb-5 flex items-center gap-2">
                         <span class="w-2.5 h-2.5 bg-[#0D7A5F] inline-block"></span>
                         Tanya Jawab Terkait Artikel Ini
@@ -298,21 +298,16 @@ function articleTOC() {
 </script>
 
 <style>
-.article-prose { color: #c5c6ce; font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 1.8; }
-.article-prose h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #F1F5F9; margin: 2rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #1E324E; }
-.article-prose h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: #dde2f3; margin: 1.5rem 0 0.5rem; }
-.article-prose p { margin-bottom: 1rem; }
-.article-prose ul, .article-prose ol { margin: 0.75rem 0 1rem 1.25rem; }
-.article-prose li { margin-bottom: 0.4rem; }
-.article-prose strong { color: #F1F5F9; font-weight: 600; }
-.article-prose table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.8rem; font-family: 'IBM Plex Sans', sans-serif; }
-.article-prose table th { background: #0F2038; color: #94A3B8; font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.6rem 0.75rem; text-align: left; border: 1px solid #1E324E; }
-.article-prose table td { padding: 0.6rem 0.75rem; border: 1px solid #142338; color: #c5c6ce; vertical-align: top; }
-.article-prose table tr:nth-child(even) td { background: #0B1526; }
-.article-prose table tr:nth-child(odd) td { background: #070D18; }
-.article-prose .callout-box { background: #0F2038; border: 1px solid #1E324E; border-left: 3px solid #D97706; padding: 0.875rem 1rem; margin: 1.25rem 0; font-size: 0.8rem; color: #F59E0B; }
-.article-prose a { color: #38BDF8; text-decoration: underline; }
-.article-prose a:hover { color: #10B981; }
+/* Callout box - unique style not in global CSS */
+.article-prose .callout-box {
+    background: #0F2038;
+    border: 1px solid #1E324E;
+    border-left: 3px solid #D97706;
+    padding: 0.875rem 1rem;
+    margin: 1.25rem 0;
+    font-size: 0.8rem;
+    color: #F59E0B;
+}
 </style>
 @endsection
 

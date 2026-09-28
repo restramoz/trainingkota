@@ -372,6 +372,28 @@
             overflow-wrap: anywhere;
             word-break: break-word;
         }
+        /* Custom styling for headings, paragraphs, and CTA */
+        .article-content h1,
+        .article-content h2 {
+            color: #10B981; /* emerald green */
+        }
+
+        .article-content p {
+            color: #ffffff; /* white text */
+        }
+
+        /* CTA block – override white background */
+        .article-content .cta,
+        .article-content .call-to-action,
+        .article-content [style*="background:#ffffff"],
+        .article-content [style*="background:#fff"] {
+            background-color: #10B981 !important;
+            color: #ffffff !important;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
 
         /*
          * List tetap berada di dalam container.
@@ -777,7 +799,7 @@
                             ================================================== --}}
                             <div
                                 id="art-content"
-                                class="article-content w-full min-w-0 max-w-full space-y-6 text-text-primary leading-relaxed"
+                                class="article-content w-full min-w-0 max-w-full space-y-6 text-white leading-relaxed"
                             >
                                 {!! $article->content !!}
                             </div>

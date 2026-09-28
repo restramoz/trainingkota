@@ -29,7 +29,7 @@
 </div>
 
 <!-- 2. Hero Section -->
-<section class="bg-gradient-to-b from-[#0F2038] to-[#070D18] border-b border-[#1E324E] py-12 lg:py-16">
+<section class="bg-gradient-to-b from-[#0F2038] to-[#070D18] border-b border-[#1E324E] py-8 sm:py-12 lg:py-16">
     <div class="max-w-7xl mx-auto px-4 lg:px-8 space-y-6">
         <div class="flex flex-wrap items-center gap-2">
             <span class="badge-kemnaker">Kemnaker RI &bull; BNSP</span>
@@ -62,7 +62,7 @@
 </section>
 
 <!-- 4. Related Services Grid -->
-<section class="py-12 border-b border-[#1E324E]">
+<section class="py-8 sm:py-12 border-b border-[#1E324E]">
     <div class="max-w-7xl mx-auto px-4 lg:px-8 space-y-8">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1E324E] pb-4">
             <div>
@@ -120,8 +120,8 @@
 </section>
 
 <!-- 5. Locations & Google Maps Section -->
-<section id="locations" class="py-12 border-b border-[#1E324E] bg-[#080E19]">
-    < class="max-w-7xl mx-auto px-4 lg:px-8 space-y-8">
+<section id="locations" class="py-8 sm:py-12 border-b border-[#1E324E] bg-[#080E19]">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 space-y-8">
         <div class="border-b border-[#1E324E] pb-4">
             <span class="text-[11px] font-space uppercase tracking-wider text-[#10B981] block mb-1">TITIK OPERASIONAL &amp; SENTRA PRAKTIK</span>
             <h2 class="text-xl lg:text-2xl font-bold font-space text-[#F1F5F9]">
@@ -129,7 +129,7 @@
             </h2>
         </div>
 
-        < class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <!-- Left: Location Details -->
             <div class="lg:col-span-5 space-y-4">
                 <div class="bg-[#0B1526] border border-[#1E324E] p-6 space-y-4">
@@ -161,22 +161,24 @@
             </div>
 
             <!-- Right: Interactive Google Maps Embed -->
-            < class="lg:col-span-7">
-                <div class="bg-[#0B1526] border border-[#1E324E] p-2 h-full min-h-[320px]">
-                    <iframe
-                        src="{{ $kecamatan->mapsEmbedUrl() }}"
-                        width="100%"
-                        height="100%"
-                        style="border:0; min-height: 320px;"
-                        allowfullscreen
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Google Maps {{ $kecamatan->name }}">
-                    </iframe>
+            <div class="lg:col-span-7">
+                <div class="bg-[#0B1526] border border-[#1E324E] p-2 map-container">
+                    <div class="aspect-[4/3] sm:aspect-[16/9]">
+                        <iframe
+                            src="{{ $kecamatan->mapsEmbedUrl() }}"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            allowfullscreen
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Google Maps {{ $kecamatan->name }}">
+                        </iframe>
+                    </div>
                 </div>
 
 <!-- 5. Related Articles Section -->
-<section class="py-12 border-b border-[#1E324E]">
+<section class="py-8 sm:py-12 border-b border-[#1E324E]">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <div>
@@ -188,7 +190,7 @@
                 </p>
             </div>
             @if($relatedArticles->count() > 0)
-                <a href="{{ route('articles.index', ['city' => $city->slug]) }}" class="btn-secondary text-xs py-2 px-4">
+                <a href="{{ route('blog.city', ['citySlug' => $city->slug]) }}" class="btn-secondary text-xs py-2 px-4">
                     Lihat Semua Artikel {{ $city->name }} &rarr;
                 </a>
             @endif
@@ -208,7 +210,7 @@
                         </div>
                         <div class="p-5 flex flex-col flex-grow">
                             <h3 class="text-lg font-bold font-space text-[#F1F5F9] leading-snug group-hover:text-[#10B981] transition-colors mb-3">
-                                <a href="{{ route('articles.show', $relArticle->slug) }}">{{ $relArticle->title }}</a>
+                                <a href="{{ route('article.show', $relArticle->slug) }}">{{ $relArticle->title }}</a>
                             </h3>
                             <p class="text-[#94A3B8] font-body text-xs line-clamp-3 mb-4 flex-grow">
                                 {{ Str::limit(strip_tags($relArticle->content), 120) }}
@@ -217,7 +219,7 @@
                                 <span class="text-[10px] text-[#64748B] font-mono">
                                     {{ $relArticle->created_at->format('d M Y') }}
                                 </span>
-                                <a href="{{ route('articles.show', $relArticle->slug) }}" class="text-[#10B981] text-xs font-bold hover:underline">
+                                <a href="{{ route('article.show', $relArticle->slug) }}" class="text-[#10B981] text-xs font-bold hover:underline">
                                     Baca Selengkapnya &rarr;
                                 </a>
                             </div>
@@ -238,33 +240,9 @@
     </div>
 </section>
 
-
-<!-- 6. In-Depth SEO Article Section -->
-@if($article)
-<section class="py-12 border-b border-[#1E324E]">
-    <div class="max-w-4xl mx-auto px-4 lg:px-8 space-y-6">
-        <div class="border-b border-[#1E324E] pb-4">
-            <span class="text-[10px] font-space uppercase tracking-widest text-[#0D7A5F] block mb-1">REGULASI &amp; WAWASAN TEKNIS LOKAL</span>
-            <h2 class="text-2xl lg:text-3xl font-bold font-space text-[#F1F5F9] leading-tight">
-                {{ $article->title }}
-            </h2>
-            <div class="flex items-center gap-4 text-xs font-space text-[#64748B] mt-2">
-                <span>Ditinjau oleh Tim Teknis K3</span>
-                <span>&bull;</span>
-                <span>{{ $article->reading_time ?? 8 }} Menit Baca</span>
-            </div>
-        </div>
-
-        <div class="prose prose-invert max-w-none text-sm leading-relaxed text-[#94A3B8] font-body space-y-4">
-            {!! $article->content !!}
-        </div>
-    </div>
-</section>
-@endif
-
 <!-- 7. Dynamic FAQ / Q&A Section with Alpine.js Accordion -->
 @if($faqs->count() > 0)
-<section class="py-12 border-b border-[#1E324E] bg-[#070D18]" x-data="{ activeAccordion: null }">
+<section class="py-8 sm:py-12 border-b border-[#1E324E] bg-[#070D18]" x-data="{ activeAccordion: null }">
     <div class="max-w-4xl mx-auto px-4 lg:px-8 space-y-8">
         <div class="border-b border-[#1E324E] pb-4">
             <span class="text-[11px] font-space uppercase tracking-wider text-[#10B981] block mb-1">TANYA JAWAB TEKNIS (FAQ)</span>
@@ -293,7 +271,7 @@
 @endif
 
 <!-- 8. Conversion CTA -->
-<section class="bg-gradient-to-r from-[#0F2038] via-[#0B1526] to-[#070D18] py-16">
+<section class="bg-gradient-to-r from-[#0F2038] via-[#0B1526] to-[#070D18] py-10 sm:py-16">
     <div class="max-w-4xl mx-auto px-4 lg:px-8 text-center space-y-6">
         <h2 class="text-2xl sm:text-3xl font-bold font-space text-[#F1F5F9]">
             Butuh Pelayanan In-House atau Sertifikasi di Kecamatan {{ $kecamatan->name }}?

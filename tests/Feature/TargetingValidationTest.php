@@ -41,26 +41,27 @@ class TargetingValidationTest extends TestCase
     }
 
     #[Test]
-    public function article_city_without_kecamatan_is_valid(): void
+    public function article_global_targeting_is_enforced(): void
     {
         $city = City::where('slug', 'malang')->first();
         $payload = [
-            'title'   => 'Test City Article',
+            'title'   => 'Test Global Article',
             'category'=> 'pelatihan',
-            'city_id' => $city->id,
+            'city_id' => $city->id, // Should be ignored/forced to null
             'content' => 'Content',
             'status'  => 'draft',
         ];
         $response = $this->withSession($this->adminSession)->post('/admin/articles', $payload);
         $response->assertRedirect();
-        $this->assertDatabaseHas('articles', ['title' => 'Test City Article', 'city_id' => $city->id, 'kecamatan_id' => null]);
+        // New behavior: city_id and kecamatan_id are forced to NULL (global targeting)
+        $this->assertDatabaseHas('articles', ['title' => 'Test Global Article', 'city_id' => null, 'kecamatan_id' => null]);
     }
 
     #[Test]
-    public function article_kecamatan_must_match_city(): void
+    public function article_kecamatan_validation_skipped_for_global(): void
     {
         [$city, $kec] = $this->getCityAndKecamatan();
-        // Use a mismatched kecamatan from a different city (create one quickly)
+        // Use a mismatched kecamatan from a different city
         $otherCity = City::where('id', '<>', $city->id)->first();
         $otherKec = Kecamatan::create([
             'city_id' => $otherCity->id,
@@ -77,7 +78,9 @@ class TargetingValidationTest extends TestCase
             'status'       => 'draft',
         ];
         $response = $this->withSession($this->adminSession)->post('/admin/articles', $payload);
-        $response->assertSessionHasErrors('kecamatan_id');
+        // New behavior: no validation error because city_id/kecamatan_id are forced to NULL
+        $response->assertRedirect();
+        $this->assertDatabaseHas('articles', ['title' => 'Invalid Article', 'city_id' => null, 'kecamatan_id' => null]);
     }
 
     #[Test]

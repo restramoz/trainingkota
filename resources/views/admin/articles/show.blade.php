@@ -47,9 +47,16 @@
                     <div>
                         <label class="block text-xs text-slate-500 uppercase font-bold">Target Geografis</label>
                         <p class="text-sm text-slate-300">
-                            {{ $article->city->name ?? 'Nasional' }}
-                            @if($article->kecamatan)
-                                <br>→ {{ $article->kecamatan->name }}
+                            @if($article->city_id === null && $article->kecamatan_id === null)
+                                <span class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-blue-900/30 text-blue-300 border border-blue-700/50 rounded">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                                    Global: Semua Kota & Semua Kecamatan
+                                </span>
+                            @else
+                                {{ $article->city->name ?? 'Nasional' }}
+                                @if($article->kecamatan)
+                                    <br>→ {{ $article->kecamatan->name }}
+                                @endif
                             @endif
                         </p>
                     </div>

@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
 @section('content')
 
 <!-- Regional City Header -->
-<section class="bg-gradient-to-b from-[#0F2038] to-[#070D18] border-b border-[#1E324E] py-14 lg:py-18">
+<section class="bg-gradient-to-b from-[#0F2038] to-[#070D18] border-b border-[#1E324E] py-10 sm:py-14 lg:py-18">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="flex items-center space-x-2 text-xs font-space uppercase text-[#94A3B8] mb-4">
             <a href="{{ route('home') }}" class="hover:text-white">Beranda</a>
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <!-- ══ GOOGLE MAPS SECTION ════════════════════════════════════════════════ -->
 <section class="border-b border-[#1E324E]">
-    <div class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 py-6 sm:py-10">
         <div class="mb-5 flex items-center justify-between">
             <div>
                 <span class="label-caps text-[#0D7A5F] block mb-1">PETA AREA OPERASIONAL</span>
@@ -183,11 +183,11 @@ document.addEventListener('DOMContentLoaded', function () {
             @endif
         </div>
 
-        <div class="border border-[#1E324E] overflow-hidden" style="height: 380px;">
+        <div class="border border-[#1E324E] overflow-hidden aspect-[4/3] sm:aspect-[16/9] max-h-[380px] map-container">
             <iframe
                 src="{{ $city->mapsEmbedUrl() }}"
                 width="100%"
-                height="380"
+                height="100%"
                 style="border:0; filter: invert(90%) hue-rotate(180deg) saturate(0.8) brightness(0.9);"
                 allowfullscreen=""
                 loading="lazy"
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function () {
 @endif
 
 <!-- Available Services in this Category for this City -->
-<section class="py-14 bg-[#0B1526]/40 border-b border-[#1E324E]">
+<section class="py-10 sm:py-14 bg-[#0B1526]/40 border-b border-[#1E324E]">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="mb-8">
             <span class="label-caps text-[#0D7A5F] block mb-2">PILIHAN PROGRAM LENGKAP</span>
@@ -309,110 +309,53 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
 </section>
 
-<!-- ══ ARTIKEL SEO 1500+ KATA ════════════════════════════════════════════ -->
-@if($article)
-<section id="artikel-seo" class="py-16 border-b border-[#1E324E]">
+<!-- ══ ARTIKEL TERKAIT (List Only) ══════════════════════════════════════ -->
+@if($relatedArticles->count() > 0)
+<section id="artikel-terkait" class="py-10 sm:py-16 border-b border-[#1E324E]">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-
-            <!-- Main Article Content -->
-            <div class="lg:col-span-8">
-                <!-- Article Header -->
-                <div class="mb-8">
-                    <span class="label-caps text-[#0D7A5F] block mb-3">PANDUAN &amp; REGULASI TERKAIT {{ strtoupper($city->name) }}</span>
-                    <h2 class="text-2xl lg:text-3xl font-bold font-space text-[#F1F5F9] leading-snug mb-4">
-                        {{ $article->title }}
-                    </h2>
-                    <div class="flex flex-wrap items-center gap-4 text-xs text-[#64748B] font-space uppercase">
-                        <span class="flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block"></span>
-                            {{ $article->reading_time }} Menit Membaca
-                        </span>
-                        @if($article->focus_keywords)
-                        <span class="flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 bg-[#38BDF8] inline-block"></span>
-                            {{ $article->focus_keywords }}
-                        </span>
-                        @endif
-                        <span class="flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 bg-[#D97706] inline-block"></span>
-                            {{ $article->updated_at->format('d M Y') }}
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Table of Contents (Alpine.js) -->
-                <div
-                    x-data="articleTOC()"
-                    x-init="buildTOC()"
-                    class="mb-8 bg-[#0F2038] border border-[#1E324E] border-l-2 border-l-[#0D7A5F] p-5"
-                >
-                    <button
-                        @click="open = !open"
-                        class="w-full flex items-center justify-between text-left"
-                    >
-                        <span class="font-space font-bold text-xs uppercase tracking-wider text-[#F1F5F9] flex items-center gap-2">
-                            <span class="w-2 h-2 bg-[#0D7A5F] inline-block"></span>
-                            DAFTAR ISI ARTIKEL
-                        </span>
-                        <span class="text-[#0D7A5F] font-space text-xs" x-text="open ? '[ TUTUP ]' : '[ BUKA ]'"></span>
-                    </button>
-
-                    <nav x-show="open" x-transition class="mt-4 space-y-1" id="toc-nav">
-                        <!-- TOC items akan di-inject oleh Alpine.js -->
-                        <p class="text-xs text-[#64748B] font-space italic">Memuat daftar isi...</p>
-                    </nav>
-                </div>
-
-                <!-- Article Body -->
-                <div id="article-body" class="article-prose bg-[#0B1526] border border-[#1E324E] p-6 lg:p-8">
-                    {!! $article->content !!}
-                </div>
-
-                <!-- Article CTA -->
-                <div class="mt-8 bg-[#0F2038] border border-[#1E324E] border-l-4 border-l-[#0D7A5F] p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div>
-                        <div class="font-space font-bold text-sm text-[#F1F5F9] mb-1">
-                            Butuh konsultasi untuk implementasi di {{ $city->name }}?
-                        </div>
-                        <p class="text-xs text-[#94A3B8]">Tim teknis kami siap membantu. Respon dalam &lt; 5 menit pada jam kerja.</p>
-                    </div>
-                    <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, saya baru membaca artikel: ' . $article->title . '. Saya butuh konsultasi untuk implementasi di ' . $city->name) }}" target="_blank" class="btn-whatsapp text-xs shrink-0">
-                        Konsultasi Gratis via WA &rarr;
-                    </a>
-                </div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold font-space text-[#F1F5F9]">
+                    Artikel Terkait {{ $city->name }}
+                </h2>
+                <p class="text-[#94A3B8] font-body text-sm mt-1">
+                    Panduan, regulasi, dan informasi terbaru seputar {{ ucfirst($category) }} di wilayah {{ $city->name }}.
+                </p>
             </div>
+            <a href="{{ route('blog.city', ['citySlug' => $city->slug]) }}" class="btn-secondary text-xs py-2 px-4">
+                Lihat Semua Artikel {{ $city->name }} &rarr;
+            </a>
+        </div>
 
-            
-                <!-- Related Articles -->
-                @if(count($relatedArticles) > 0)
-                <div class="bg-[#0B1526] border border-[#1E324E] p-5" id="related-articles-grid">
-                    <div class="font-space font-bold text-xs uppercase tracking-wider text-[#F1F5F9] mb-4 flex items-center gap-2">
-                        <span class="w-2 h-2 bg-[#38BDF8] inline-block"></span>
-                        ARTIKEL TERKAIT
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($relatedArticles as $relArticle)
+                <article class="group bg-[#0B1526] border border-[#1E324E] rounded-xl overflow-hidden hover:border-[#10B981] transition-all duration-300 flex flex-col">
+                    <div class="aspect-video overflow-hidden relative">
+                        <img src="{{ $relArticle->image_url }}" alt="{{ $relArticle->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-3 left-3">
+                            <span class="bg-[#10B981] text-white text-[10px] font-bold px-2 py-1 rounded uppercase">
+                                {{ $relArticle->category }}
+                            </span>
+                        </div>
                     </div>
-                    <div class="space-y-3">
-                        @foreach($relatedArticles as $rel)
-                        <a href="{{ route('article.show', $rel->slug) }}" class="block p-3 bg-[#070D18] border border-[#142338] hover:border-[#0D7A5F] transition-colors group related-article {{ $loop->index >= 6 ? 'hidden' : '' }}" data-index="{{ $loop->index }}">
-                            <div class="font-space font-bold text-xs text-[#F1F5F9] group-hover:text-[#10B981] leading-snug mb-1">{{ $rel->title }}</div>
-                            <div class="flex items-center gap-2 text-[11px] text-[#64748B] font-space">
-                                <span>{{ $rel->reading_time }} menit</span>
-                                <span>•</span>
-                                <span class="uppercase">{{ $rel->category }}</span>
-                            </div>
-                        </a>
-                        @endforeach
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold font-space text-[#F1F5F9] leading-snug group-hover:text-[#10B981] transition-colors mb-3">
+                            <a href="{{ route('article.show', $relArticle->slug) }}">{{ $relArticle->title }}</a>
+                        </h3>
+                        <p class="text-[#94A3B8] font-body text-xs line-clamp-3 mb-4 flex-grow">
+                            {{ Str::limit(strip_tags($relArticle->content), 120) }}
+                        </p>
+                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-[#1E324E]">
+                            <span class="text-[10px] text-[#64748B] font-mono">
+                                {{ $relArticle->created_at->format('d M Y') }}
+                            </span>
+                            <a href="{{ route('article.show', $relArticle->slug) }}" class="text-[#10B981] text-xs font-bold hover:underline">
+                                Baca Selengkapnya &rarr;
+                            </a>
+                        </div>
                     </div>
-                </div>
-                @if($relatedArticles->count() > 6)
-                <div class="mt-4 text-center" id="show-all-articles-container">
-                    <button id="show-all-articles-btn" class="btn-primary text-xs px-4 py-2">
-                        Show All ({{ $relatedArticles->count() - 6 }})
-                    </button>
-                </div>
-                @endif
-                @endif
-            </aside>
+                </article>
+            @endforeach
         </div>
     </div>
 </section>
@@ -420,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <!-- ══ FAQ ACCORDION (Alpine.js) ═════════════════════════════════════════ -->
 @if(count($faqItems) > 0)
-<section id="faq-kota" class="py-16 bg-[#0B1526]/30 border-b border-[#1E324E]">
+<section id="faq-kota" class="py-10 sm:py-16 bg-[#0B1526]/30 border-b border-[#1E324E]">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <!-- FAQ Header -->
@@ -526,63 +469,4 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
 </section>
 @endif
-
-<!-- ══ ARTICLE TOC JAVASCRIPT ════════════════════════════════════════════ -->
-<script>
-function articleTOC() {
-    return {
-        open: true,
-        items: [],
-        buildTOC() {
-            const body = document.getElementById('article-body');
-            const nav  = document.getElementById('toc-nav');
-            if (!body || !nav) return;
-
-            const headings = body.querySelectorAll('h2, h3');
-            if (headings.length === 0) {
-                nav.innerHTML = '<p class="text-xs text-[#64748B] font-space italic">Daftar isi tidak tersedia.</p>';
-                return;
-            }
-
-            let html = '';
-            headings.forEach((h, i) => {
-                // Buat ID jika belum ada
-                if (!h.id) {
-                    h.id = 'heading-' + i;
-                }
-                const isH3 = h.tagName === 'H3';
-                html += `<a
-                    href="#${h.id}"
-                    class="flex items-start gap-2 text-xs font-space py-1 ${isH3 ? 'pl-4 text-[#64748B] hover:text-[#94A3B8]' : 'text-[#94A3B8] hover:text-[#10B981]'} transition-colors"
-                    onclick="event.preventDefault(); document.getElementById('${h.id}').scrollIntoView({behavior:'smooth', block:'start'})"
-                >
-                    <span class="shrink-0 mt-0.5 ${isH3 ? 'text-[#44474d]' : 'text-[#0D7A5F]'}">${isH3 ? '↳' : '▪'}</span>
-                    <span>${h.textContent}</span>
-                </a>`;
-            });
-
-            nav.innerHTML = html;
-        }
-    };
-}
-</script>
-
-<!-- ══ ARTICLE PROSE CSS INLINE ══════════════════════════════════════════ -->
-<style>
-.article-prose { color: #c5c6ce; font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 1.8; }
-.article-prose h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #F1F5F9; margin: 2rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #1E324E; }
-.article-prose h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: #dde2f3; margin: 1.5rem 0 0.5rem; }
-.article-prose p { margin-bottom: 1rem; }
-.article-prose ul, .article-prose ol { margin: 0.75rem 0 1rem 1.25rem; }
-.article-prose li { margin-bottom: 0.4rem; }
-.article-prose strong { color: #F1F5F9; font-weight: 600; }
-.article-prose table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.8rem; font-family: 'IBM Plex Sans', sans-serif; }
-.article-prose table th { background: #0F2038; color: #94A3B8; font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.6rem 0.75rem; text-align: left; border: 1px solid #1E324E; }
-.article-prose table td { padding: 0.6rem 0.75rem; border: 1px solid #142338; color: #c5c6ce; vertical-align: top; }
-.article-prose table tr:nth-child(even) td { background: #0B1526; }
-.article-prose table tr:nth-child(odd) td { background: #070D18; }
-.article-prose .callout-box { background: #0F2038; border: 1px solid #1E324E; border-left: 3px solid #D97706; padding: 0.875rem 1rem; margin: 1.25rem 0; font-size: 0.8rem; color: #F59E0B; }
-.article-prose a { color: #38BDF8; text-decoration: underline; }
-.article-prose a:hover { color: #10B981; }
-</style>
 @endsection

@@ -20,10 +20,9 @@ class ArticleAdminController extends Controller
         $search = $request->query('q');
         $category = $request->query('category');
         $serviceId = $request->query('service_id');
-        $cityId = $request->query('city_id');
         $status = $request->query('status');
 
-        $query = Article::with(['city', 'service', 'kecamatan'])->latest();
+        $query = Article::with(['service'])->latest();
 
         if ($search) {
             $query->where(function ($q) use ($search) {
@@ -38,49 +37,60 @@ class ArticleAdminController extends Controller
         if ($serviceId) {
             $query->where('service_id', $serviceId);
         }
-        if ($cityId) {
-            $query->where('city_id', $cityId);
-        }
         if ($status) {
             $query->where('status', $status);
         }
 
         $articles = $query->paginate(20)->withQueryString();
         $services = Service::orderBy('name')->get();
-        $cities = City::orderBy('name')->get();
         $categories = ['pelatihan', 'kajian', 'jasa'];
 
-        return view('admin.articles.index', compact('articles', 'services', 'cities', 'categories'));
+        return view('admin.articles.index', compact('articles', 'services', 'categories'));
     }
 
     /** Show creation form */
     public function create()
     {
         $services = Service::orderBy('name')->get();
-        $cities = City::orderBy('name')->get();
         $categories = ['pelatihan', 'kajian', 'jasa'];
-        return view('admin.articles.create', compact('services', 'cities', 'categories'));
+        return view('admin.articles.create', compact('services', 'categories'));
     }
 
     /** Store new article */
     public function store(Request $request)
     {
         $validated = $this->validateArticle($request);
-        if (empty($validated['slug'])) {
-            $validated['slug'] = Str::slug($validated['title']);
+
+        // Auto-generate title if not provided
+        if (empty($validated['title']) && !empty($validated['service_id'])) {
+            $service = Service::find($validated['service_id']);
+            $categoryLabel = ucfirst($validated['category']);
+            $validated['title'] = "{$service->name} — Panduan {$categoryLabel}";
         }
 
-        // Duplicate protection
-        $dup = Article::where('service_id', $validated['service_id'] ?? null)
-            ->where('city_id', $validated['city_id'] ?? null);
-        if (!empty($validated['kecamatan_id'])) {
-            $dup->where('kecamatan_id', $validated['kecamatan_id']);
-        } else {
-            $dup->whereNull('kecamatan_id');
+        if (empty($validated['slug'])) {
+            $validated['slug'] = Str::slug($validated['title']);
+            // Ensure unique slug
+            $originalSlug = $validated['slug'];
+            $counter = 1;
+            while (Article::where('slug', $validated['slug'])->exists()) {
+                $validated['slug'] = "{$originalSlug}-{$counter}";
+                $counter++;
+            }
         }
+
+        // Force global targeting: ALL CITIES + ALL KECAMATANS
+        $validated['city_id'] = null;
+        $validated['kecamatan_id'] = null;
+
+        // Duplicate protection: check service_id + category (global article)
+        $dup = Article::where('service_id', $validated['service_id'] ?? null)
+            ->where('category', $validated['category'])
+            ->whereNull('city_id')
+            ->whereNull('kecamatan_id');
         if ($dup->exists()) {
             return redirect()->back()->withInput()->withErrors([
-                'city_id' => 'Artikel untuk kombinasi layanan dan wilayah ini sudah ada.',
+                'service_id' => 'Artikel global untuk layanan dan kategori ini sudah ada.',
             ]);
         }
 
@@ -89,7 +99,7 @@ class ArticleAdminController extends Controller
             $this->ensureCatalogCoverage($article);
         }
         return redirect()->route('admin.articles.index')
-            ->with('success', 'Artikel berhasil dibuat.');
+            ->with('success', 'Artikel berhasil dibuat (target: Semua Kota & Semua Kecamatan).');
     }
 
     /** Show edit form */
@@ -97,9 +107,8 @@ class ArticleAdminController extends Controller
     {
         $article = Article::findOrFail($id);
         $services = Service::orderBy('name')->get();
-        $cities = City::orderBy('name')->get();
         $categories = ['pelatihan', 'kajian', 'jasa'];
-        return view('admin.articles.edit', compact('article', 'services', 'cities', 'categories'));
+        return view('admin.articles.edit', compact('article', 'services', 'categories'));
     }
 
     /** Update existing article */
@@ -107,29 +116,46 @@ class ArticleAdminController extends Controller
     {
         $article = Article::findOrFail($id);
         $validated = $this->validateArticle($request);
+
+        // Auto-generate title if not provided
+        if (empty($validated['title']) && !empty($validated['service_id'])) {
+            $service = Service::find($validated['service_id']);
+            $categoryLabel = ucfirst($validated['category']);
+            $validated['title'] = "{$service->name} — Panduan {$categoryLabel}";
+        }
+
         if (empty($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['title']);
+            $originalSlug = $validated['slug'];
+            $counter = 1;
+            while (Article::where('slug', $validated['slug'])->where('id', '!=', $article->id)->exists()) {
+                $validated['slug'] = "{$originalSlug}-{$counter}";
+                $counter++;
+            }
         }
+
+        // Force global targeting: ALL CITIES + ALL KECAMATANS
+        $validated['city_id'] = null;
+        $validated['kecamatan_id'] = null;
+
         // Duplicate protection excluding current article
         $dup = Article::where('service_id', $validated['service_id'] ?? null)
-            ->where('city_id', $validated['city_id'] ?? null);
-        if (!empty($validated['kecamatan_id'])) {
-            $dup->where('kecamatan_id', $validated['kecamatan_id']);
-        } else {
-            $dup->whereNull('kecamatan_id');
-        }
-        $dup->where('id', '!=', $article->id);
+            ->where('category', $validated['category'])
+            ->whereNull('city_id')
+            ->whereNull('kecamatan_id')
+            ->where('id', '!=', $article->id);
         if ($dup->exists()) {
             return redirect()->back()->withInput()->withErrors([
-                'city_id' => 'Artikel untuk kombinasi layanan dan wilayah ini sudah ada.',
+                'service_id' => 'Artikel global untuk layanan dan kategori ini sudah ada.',
             ]);
         }
+
         $article->update($validated);
         if ($validated['status'] === 'published') {
             $this->ensureCatalogCoverage($article);
         }
         return redirect()->route('admin.articles.index')
-            ->with('success', 'Artikel berhasil diperbarui.');
+            ->with('success', 'Artikel berhasil diperbarui (target: Semua Kota & Semua Kecamatan).');
     }
 
     /** Delete */
@@ -181,25 +207,10 @@ class ArticleAdminController extends Controller
     protected function validateArticle(Request $request)
     {
         return Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
             'slug' => 'nullable|string|max:255',
             'category' => 'required|in:pelatihan,kajian,jasa',
             'service_id' => 'nullable|exists:services,id',
-            'city_id' => 'nullable|exists:cities,id',
-            'kecamatan_id' => [
-                'nullable',
-                'exists:kecamatans,id',
-                function ($attribute, $value, $fail) use ($request) {
-                    if ($value && $request->city_id) {
-                        $exists = Kecamatan::where('id', $value)
-                            ->where('city_id', $request->city_id)
-                            ->exists();
-                        if (! $exists) {
-                            $fail('Kecamatan yang dipilih tidak sesuai dengan Kota.');
-                        }
-                    }
-                },
-            ],
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
             'seo_title' => 'nullable|string|max:255',
@@ -209,7 +220,7 @@ class ArticleAdminController extends Controller
         ])->validate();
     }
 
-    /** Ajax helper for kecamatans */
+    /** Ajax helper for kecamatans - kept for AI generation compatibility */
     public function getKecamatansByCity(Request $request)
     {
         $request->validate(['city_id' => 'required|exists:cities,id']);
@@ -222,27 +233,46 @@ class ArticleAdminController extends Controller
     /** Show a single article (admin view) */
     public function show($id)
     {
-        $article = Article::with(['city', 'service', 'kecamatan'])->findOrFail($id);
+        $article = Article::with(['service'])->findOrFail($id);
         return view('admin.articles.show', compact('article'));
     }
 
     /** Ensure catalog coverage exists for a published article */
     protected function ensureCatalogCoverage(Article $article)
     {
-        if (! $article->service_id || ! $article->city_id) {
+        if (! $article->service_id) {
             return;
         }
-        $exists = CityServiceContent::where('service_id', $article->service_id)
-            ->where('city_id', $article->city_id)
-            ->exists();
-        if (! $exists) {
-            CityServiceContent::create([
-                'service_id' => $article->service_id,
-                'city_id'    => $article->city_id,
-                'category'   => $article->category ?? null,
-                'seo_title'  => $article->seo_title ?? null,
-                'meta_description' => $article->meta_description ?? null,
-            ]);
+        // For global articles, ensure coverage exists for ALL cities
+        if (! $article->city_id) {
+            $cityIds = City::pluck('id')->toArray();
+            foreach ($cityIds as $cityId) {
+                $exists = CityServiceContent::where('service_id', $article->service_id)
+                    ->where('city_id', $cityId)
+                    ->exists();
+                if (! $exists) {
+                    CityServiceContent::create([
+                        'service_id' => $article->service_id,
+                        'city_id'    => $cityId,
+                        'category'   => $article->category ?? null,
+                        'seo_title'  => $article->seo_title ?? null,
+                        'meta_description' => $article->meta_description ?? null,
+                    ]);
+                }
+            }
+        } else {
+            $exists = CityServiceContent::where('service_id', $article->service_id)
+                ->where('city_id', $article->city_id)
+                ->exists();
+            if (! $exists) {
+                CityServiceContent::create([
+                    'service_id' => $article->service_id,
+                    'city_id'    => $article->city_id,
+                    'category'   => $article->category ?? null,
+                    'seo_title'  => $article->seo_title ?? null,
+                    'meta_description' => $article->meta_description ?? null,
+                ]);
+            }
         }
     }
 }

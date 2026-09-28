@@ -3,19 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\City;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $citySlug = null)
     {
         $category = $request->query('category');
         $search = $request->query('search');
+        $city = null;
 
         $query = Article::published();
 
         if ($category) {
             $query->forCategory($category);
+        }
+
+        if ($citySlug) {
+            $city = City::where('slug', $citySlug)->first();
+            if ($city) {
+                $query->where('city_id', $city->id);
+            }
         }
 
         if ($search) {
@@ -39,6 +48,11 @@ class BlogController extends Controller
         $title = 'Blog & Artikel K3 - TrainingKota';
         $meta_description = 'Kumpulan artikel, panduan, dan wawasan terbaru mengenai K3, pelatihan profesional, dan regulasi industri di Indonesia.';
 
-        return view('blog-index', compact('articles', 'categories', 'category', 'search', 'title', 'meta_description'));
+        if ($city) {
+            $title = "Artikel {$city->name} - TrainingKota";
+            $meta_description = "Daftar artikel, panduan, dan wawasan K3 seputar wilayah {$city->name} dan sekitarnya.";
+        }
+
+        return view('blog-index', compact('articles', 'categories', 'category', 'search', 'title', 'meta_description', 'city'));
     }
 }

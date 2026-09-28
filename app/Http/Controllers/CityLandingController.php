@@ -38,13 +38,16 @@ class CityLandingController extends Controller
         ];
         $categoryName = $categoryNames[$category] ?? ucfirst($category);
 
-        // ── Artikel sebagai konten pendukung (NOT primary)
-        $articlesQuery = Article::published()
-            ->where('city_id', $city->id)
-            ->latest();
-
-        $relatedArticles = $articlesQuery->limit(6)->get();
-        $article = $relatedArticles->first();
+        // ── Artikel sebagai konten pendukung (list only)
+        // Include global articles (city_id = NULL) + city-specific articles
+        $relatedArticles = Article::published()
+            ->where(function ($q) use ($city) {
+                $q->whereNull('city_id')  // Global articles for all cities
+                  ->orWhere('city_id', $city->id);  // City-specific articles
+            })
+            ->latest()
+            ->limit(6)
+            ->get();
 
         // ── FAQ dari DB: prioritaskan per kota, fallback ke per kategori, lalu hardcoded
         $faqItems = $this->getFaqItems($category, $city);
@@ -66,7 +69,6 @@ class CityLandingController extends Controller
             'city',
             'services',
             'otherCitiesInIsland',
-            'article',
             'relatedArticles',
             'faqItems',
             'upcomingSchedules'

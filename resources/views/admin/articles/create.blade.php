@@ -14,6 +14,20 @@
         </div>
     </div>
 
+    {{-- Info Notice: Global Targeting --}}
+    <div class="bg-blue-900/30 border border-blue-700/50 rounded-xl p-4 mb-6">
+        <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-blue-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div class="text-sm text-blue-200">
+                <p class="font-semibold">Targeting Otomatis: Global (Semua Kota & Semua Kecamatan)</p>
+                <p class="mt-1">Artikel Service akan tersedia di <strong>SELURUH KOTA</strong> dan <strong>SELURUH KECAMATAN</strong> yang ada di database.</p>
+                <p class="mt-1">Admin <strong>tidak perlu memilih</strong> kota atau kecamatan satu per satu. Cukup pilih Layanan & Kategori.</p>
+            </div>
+        </div>
+    </div>
+
     {{-- Form ------------------------------------------------------------------- --}}
     <form id="articleForm"
           method="POST"
@@ -48,28 +62,6 @@
                         <option value="{{ $service->id }}" @if(request('service_id') == $service->id) selected @endif>
                             {{ $service->name }}</option>
                     @endforeach
-                    </select>
-                </div>
-
-                {{-- Kota ------------------------------------------------------------ --}}
-                <div>
-                    <label class="block text-sm font-medium text-slate-400 mb-1">Kota</label>
-                    <select id="ai_city_select"
-                            class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500">
-                        <option value="">Pilih Kota (Opsional)</option>
-                    @foreach($cities as $city)
-                        <option value="{{ $city->id }}" @if(request('city_id') == $city->id) selected @endif>
-                            {{ $city->name }}</option>
-                    @endforeach
-                    </select>
-                </div>
-
-                {{-- Kecamatan (opsional) -------------------------------------------- --}}
-                <div>
-                    <label class="block text-sm font-medium text-slate-400 mb-1">Kecamatan (Opsional)</label>
-                    <select id="ai_kecamatan_select"
-                            class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                        <option value="">Semua Kecamatan</option>
                     </select>
                 </div>
 
@@ -131,21 +123,22 @@
 
                         {{-- Judul ----------------------------------------------------- --}}
                         <div>
-                            <label class="block text-sm font-medium text-slate-400 mb-1">Judul Artikel</label>
+                            <label class="block text-sm font-medium text-slate-400 mb-1">Judul Artikel <span class="text-slate-500">(Opsional - Auto-generate jika kosong)</span></label>
                             <input type="text"
                                    name="title"
                                    id="title"
-                                   required
                                    class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
                                    value="{{ old('title') }}">
+                            <p class="text-xs text-slate-500 mt-1">Kosongkan untuk auto-generate: "[Nama Layanan] — Panduan [Kategori]"</p>
                         </div>
 
-                        {{-- Isi (TinyMCE) ----------------------------------------------- --}}
+                        {{-- Isi (Quill) ----------------------------------------------- --}}
                         <div>
                             <label class="block text-sm font-medium text-slate-400 mb-1">Isi Artikel (Rich Text)</label>
                             <textarea name="content"
                                       id="content_editor"
-                                      class="w-full bg-[#070D18] border border-[#1E324E] text-[#F1F5F9] rounded-lg" rows="10">{{ old('content') }}</textarea>
+                                      class="hidden">{{ old('content') }}</textarea>
+                                                         <!-- Jodit editor will replace the textarea -->
                         </div>
                     </div>
                 </div>
@@ -195,9 +188,9 @@
                     {{-- Target Region & Service --------------------------------------- --}}
                     <div class="pt-4 border-t border-[#1E293B] space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-slate-400 mb-1">Kategori</label>
+                            <label class="block text-sm font-medium text-slate-400 mb-1">Kategori <span class="text-red-400">*</span></label>
                             <select name="category" id="target_category"
-                                    class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                                    class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none" required>
                                 <option value="">Pilih Kategori</option>
                                 @foreach($categories as $cat)
                                     <option value="{{ $cat }}">{{ ucfirst($cat) }}</option>
@@ -205,31 +198,25 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-400 mb-1">Layanan (Opsional)</label>
+                            <label class="block text-sm font-medium text-slate-400 mb-1">Layanan / Service</label>
                             <select name="service_id" id="target_service"
                                     class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                                <option value="">Pilih Layanan</option>
+                                <option value="">Pilih Layanan (Opsional)</option>
                                 @foreach($services as $service)
                                     <option value="{{ $service->id }}">{{ $service->name }}</option>
                                 @endforeach
                             </select>
+                            <p class="text-xs text-slate-500 mt-1">Pilih layanan untuk auto-generate judul & targeting service-wide</p>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-400 mb-1">Kota / Region</label>
-                            <select name="city_id" id="target_city"
-                                    class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                                <option value="">Pilih Kota</option>
-                                @foreach($cities as $city)
-                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-400 mb-1">Kecamatan (Opsional)</label>
-                            <select name="kecamatan_id" id="target_kecamatan"
-                                    class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
-                                <option value="">Semua Kecamatan</option>
-                            </select>
+
+                        {{-- Global Targeting Info --}}
+                        <div class="pt-2 border-t border-[#1E293B] bg-blue-900/20 border-blue-700/30 rounded-lg p-3">
+                            <div class="flex items-center gap-2 text-xs text-blue-300">
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                <span><strong>Target: Semua Kota & Semua Kecamatan</strong> — Field kota/kecamatan tidak ditampilkan karena otomatis global.</span>
+                            </div>
                         </div>
                     </div>
             </div>
@@ -258,32 +245,133 @@
 @endsection
 
 @push('scripts')
+<link rel="stylesheet" href="https://unpkg.com/jodit@4.1.16/es2021/jodit.min.css">
 
-<script src="https://cdn.tiny.cloud/1/{{ config('services.tiny.key') }}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://unpkg.com/jodit@4.1.16/es2021/jodit.min.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
+    // -------------------------------------------------------------------------
+    // Jodit editor
+    // -------------------------------------------------------------------------
+    const contentInput   = document.getElementById('content_editor');
 
-    // TinyMCE editor initialization
-    tinymce.init({
-        selector: '#content_editor',
-        plugins: 'lists link image table code',
-        toolbar: 'undo redo | formatselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | blockquote code | link image table | removeformat',
-        height: 580,
-        menubar: false,
-        skin: 'oxide-dark',
-        content_css: 'dark',
-        placeholder: 'Tulis artikel di sini...',
-        setup: function (editor) {
-            var form = document.getElementById('articleForm');
-            if (form) {
-                form.addEventListener('submit', function () {
-                    editor.save();
-                });
+    const articleForm    = document.getElementById('articleForm');
+
+    const editor = Jodit.make(contentInput, {
+        placeholder: 'Tulis artikel di sini...'
+    });
+
+    const syncContent = () => {
+        contentInput.value = editor.value;
+    };
+    editor.events.on('change', syncContent);
+
+    // Apply light theme styles to Jodit editor
+    function applyJoditLightTheme() {
+        const container = document.querySelector('.jodit-container');
+        if (!container) return;
+
+        // Force light theme on editor container
+        container.style.background = '#ffffff';
+        container.style.border = '1px solid #d1d5db';
+        container.style.borderRadius = '4px';
+
+        // Toolbar
+        const toolbar = container.querySelector('.jodit-toolbar');
+        if (toolbar) {
+            toolbar.style.background = '#f3f4f6';
+            toolbar.style.borderBottom = '1px solid #d1d5db';
+            toolbar.style.borderRadius = '4px 4px 0 0';
+        }
+
+        // Toolbar buttons
+        const buttons = container.querySelectorAll('.jodit-toolbar-button');
+        buttons.forEach(btn => {
+            btn.style.color = '#1f2937';
+            btn.style.background = 'transparent';
+        });
+
+        // Workplace and wysiwyg area
+        const workplace = container.querySelector('.jodit-workplace');
+        const wysiwyg = container.querySelector('.jodit-wysiwyg');
+        if (workplace) workplace.style.background = '#ffffff';
+        if (wysiwyg) {
+            wysiwyg.style.background = '#ffffff';
+            wysiwyg.style.color = '#1f2937';
+        }
+
+        // Iframe content (if Jodit uses iframe)
+        const iframe = container.querySelector('.jodit-wysiwyg_iframe');
+        if (iframe) {
+            iframe.style.background = '#ffffff';
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                if (iframeDoc && iframeDoc.body) {
+                    iframeDoc.body.style.background = '#ffffff';
+                    iframeDoc.body.style.color = '#1f2937';
+                }
+            } catch (e) {
+                // Cross-origin or not ready
             }
         }
-    });
+
+        // Style content inside editor
+        const styleContent = (root) => {
+            if (!root) return;
+            root.querySelectorAll('p').forEach(el => el.style.color = '#1f2937');
+            root.querySelectorAll('h1, h2, h3').forEach(el => el.style.color = '#0f172a');
+            root.querySelectorAll('a').forEach(el => el.style.color = '#006bb6');
+            root.querySelectorAll('blockquote').forEach(el => {
+                el.style.borderLeft = '3px solid #006bb6';
+                el.style.background = '#f0f4f8';
+                el.style.color = '#1f2937';
+                el.style.padding = '8px 12px';
+            });
+            root.querySelectorAll('code').forEach(el => {
+                if (!el.closest('pre')) {
+                    el.style.background = '#f3f4f6';
+                    el.style.color = '#1f2937';
+                    el.style.padding = '2px 4px';
+                    el.style.borderRadius = '3px';
+                }
+            });
+            root.querySelectorAll('pre').forEach(el => {
+                el.style.background = '#1f2937';
+                el.style.color = '#e5e7eb';
+                el.style.padding = '12px';
+                el.style.borderRadius = '4px';
+            });
+            root.querySelectorAll('table').forEach(el => {
+                el.style.borderCollapse = 'collapse';
+                el.style.width = '100%';
+            });
+            root.querySelectorAll('th, td').forEach(el => {
+                el.style.border = '1px solid #d1d5db';
+                el.style.padding = '8px';
+                el.style.background = '#ffffff';
+                el.style.color = '#1f2937';
+            });
+            root.querySelectorAll('th').forEach(el => {
+                el.style.background = '#f3f4f6';
+                el.style.fontWeight = '600';
+            });
+        };
+
+        // Style current content - disabled to avoid inline styles
+        // if (wysiwyg) styleContent(wysiwyg);
+        // if (iframe) {
+        //     try {
+        //         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        //         if (iframeDoc && iframeDoc.body) styleContent(iframeDoc.body);
+        //     } catch (e) {}
+        // }
+    }
+
+    // Apply theme after editor initializes
+    setTimeout(applyJoditLightTheme, 100);
+    editor.events.on('change', applyJoditLightTheme);
 
     // -------------------------------------------------------------------------
     // Auto-slug
@@ -297,39 +385,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const slug = titleInput.value
                 .toLowerCase()
                 .trim()
-                .replace(/[^a-z0-9\\s-]/g, '')
-                .replace(/\\s+/g, '-')
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
                 .replace(/-+/g, '-');
             slugInput.value = slug;
         });
     }
-
-    // -------------------------------------------------------------------------
-    // Hidden targeting sync (kategori, layanan, kota, kecamatan)
-    // -------------------------------------------------------------------------
-    const targetCategory   = document.getElementById('target_category');
-    const targetService    = document.getElementById('target_service');
-    const targetCity       = document.getElementById('target_city');
-    const targetKecamatan  = document.getElementById('target_kecamatan');
-
-    const syncTargeting = () => {
-        targetCategory.value   = document.getElementById('ai_category_select').value;
-        targetService.value    = document.getElementById('ai_service_select').value;
-        targetCity.value       = document.getElementById('ai_city_select').value;
-        targetKecamatan.value = document.getElementById('ai_kecamatan_select').value;
-    };
-
-    // -------------------------------------------------------------------------
-    // Form submit � ensure content + targeting are stored
-    // -------------------------------------------------------------------------
-
-    const articleForm = document.getElementById('articleForm');
-    if (articleForm) {
-        articleForm.addEventListener('submit', function () {
-            tinymce.triggerSave();
-        });
-    }
-
 
     // -------------------------------------------------------------------------
     // AI Generation
@@ -357,11 +418,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const payload = {
             service_id: document.getElementById('ai_service_select').value   || null,
-            city_id:    document.getElementById('ai_city_select').value      || null,
-            kecamatan_id: document.getElementById('ai_kecamatan_select').value || null,
+            // city_id and kecamatan_id removed - now global by default
             category:   category,
             topic:      topic,
-            // Jika user tidak mengisi keyword khusus, gunakan topik sebagai fallback
             target_keyword: document.getElementById('ai_keyword')
                                ? document.getElementById('ai_keyword').value
                                : topic,
@@ -392,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // ---------- 1?? Jika response bukan JSON atau status error ----------
             if (!response.ok) {
                 const txt = await response.text();
-                alert(`AI request failed (HTTP ${response.status})\\n${txt}`);
+                alert(`AI request failed (HTTP ${response.status})\n${txt}`);
                 return;
             }
 
@@ -405,11 +464,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (result.seo_title)       document.getElementById('seo_title').value = result.seo_title;
                 if (result.meta_description) document.getElementById('meta_description').value = result.meta_description;
                 if (result.content) {
-                    tinymce.get('content_editor').setContent(result.content);
-
+                    editor.value = result.content;
+                    syncContent();
                 }
                 // Sync targeting to the main form selectors
-                syncTargeting();
+                document.getElementById('target_category').value = category;
+                document.getElementById('target_service').value = document.getElementById('ai_service_select').value || '';
             } else {
                 // ---------- 3?? Respon error but masih JSON ----------
                 const errMsg = result.error ??
@@ -434,69 +494,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // -------------------------------------------------------------------------
-    // Kecamatan lazy-load (untuk panel AI)
+    // Form submit - ensure content is synced
     // -------------------------------------------------------------------------
-    const aiCitySelect      = document.getElementById('ai_city_select');
-    const aiKecamatanSelect = document.getElementById('ai_kecamatan_select');
-    const targetCitySelect  = document.getElementById('target_city');
-    const targetKecSelect   = document.getElementById('target_kecamatan');
-
-    async function loadKecamatanForAi(cityId, selectedId = null) {
-        if (!aiKecamatanSelect) return;
-
-        aiKecamatanSelect.innerHTML = '<option value="">Loading...</option>';
-
-        if (!cityId) {
-            aiKecamatanSelect.innerHTML = '<option value="">Semua Kecamatan</option>';
-            if (targetKecSelect) targetKecSelect.innerHTML = '<option value="">Semua Kecamatan</option>';
-            return;
-        }
-
-        try {
-            const response = await fetch(`/admin/kecamatans/get?city_id=${encodeURIComponent(cityId)}`);
-            if (!response.ok) throw new Error('Gagal mengambil kecamatan');
-            const data = await response.json();
-
-            const buildOptions = (selectedId) => {
-                let html = '<option value="">Semua Kecamatan</option>';
-                data.forEach(d => {
-                    const selected = (selectedId && String(selectedId) === String(d.id)) ? 'selected' : '';
-                    html += `<option value="${d.id}" ${selected}>${d.name}</option>`;
-                });
-                return html;
-            };
-
-            aiKecamatanSelect.innerHTML = buildOptions(selectedId);
-            if (targetKecSelect) {
-                targetKecSelect.innerHTML = buildOptions(selectedId);
-            }
-        } catch (error) {
-            console.error(error);
-            aiKecamatanSelect.innerHTML = '<option value="">Gagal memuat kecamatan</option>';
-            if (targetKecSelect) targetKecSelect.innerHTML = '<option value="">Gagal memuat kecamatan</option>';
-        }
-    }
-
-    if (aiCitySelect) {
-        aiCitySelect.addEventListener('change', function () {
-            loadKecamatanForAi(this.value);
-        });
-
-        const initCity = aiCitySelect.value;
-        const initKecamatan = @json(old('kecamatan_id'));
-
-        if (initCity) {
-            loadKecamatanForAi(initCity, initKecamatan);
-        }
-    }
-
-    if (targetCitySelect) {
-        targetCitySelect.addEventListener('change', function () {
-            loadKecamatanForAi(this.value);
+    if (articleForm) {
+        articleForm.addEventListener('submit', function () {
+            syncContent();
         });
     }
 
 });
 </script>
 @endpush
-

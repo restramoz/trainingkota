@@ -310,6 +310,75 @@
                 </div>
                 @endif
 
+                <!-- Full Article Content (SEO) -->
+                @if($article)
+                <div class="mt-12 pt-8 border-t border-[#1E324E]">
+                    <div class="mb-8">
+                        <span class="label-caps text-[#0D7A5F] block mb-3">PANDUAN &amp; REGULASI {{ strtoupper($service->name) }}</span>
+                        <h2 class="text-2xl lg:text-3xl font-bold font-space text-[#F1F5F9] leading-snug mb-4">
+                            {{ $article->title }}
+                        </h2>
+                        <div class="flex flex-wrap items-center gap-4 text-xs text-[#64748B] font-space uppercase">
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block"></span>
+                                {{ $article->reading_time }} Menit Membaca
+                            </span>
+                            @if($article->focus_keywords)
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 bg-[#38BDF8] inline-block"></span>
+                                {{ $article->focus_keywords }}
+                            </span>
+                            @endif
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 bg-[#D97706] inline-block"></span>
+                                {{ $article->updated_at->format('d M Y') }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Table of Contents (Alpine.js) -->
+                    <div
+                        x-data="articleTOC()"
+                        x-init="buildTOC()"
+                        class="mb-8 bg-[#0F2038] border border-[#1E324E] border-l-2 border-l-[#0D7A5F] p-5"
+                    >
+                        <button
+                            @click="open = !open"
+                            class="w-full flex items-center justify-between text-left"
+                        >
+                            <span class="font-space font-bold text-xs uppercase tracking-wider text-[#F1F5F9] flex items-center gap-2">
+                                <span class="w-2 h-2 bg-[#0D7A5F] inline-block"></span>
+                                DAFTAR ISI ARTIKEL
+                            </span>
+                            <span class="text-[#0D7A5F] font-space text-xs" x-text="open ? '[ TUTUP ]' : '[ BUKA ]'"></span>
+                        </button>
+
+                        <nav x-show="open" x-transition class="mt-4 space-y-1" id="toc-nav">
+                            <!-- TOC items akan di-inject oleh Alpine.js -->
+                            <p class="text-xs text-[#64748B] font-space italic">Memuat daftar isi...</p>
+                        </nav>
+                    </div>
+
+                    <!-- Article Body -->
+                    <div id="article-body" class="article-prose bg-[#0B1526] border border-[#1E324E] p-6 lg:p-8">
+                        {!! $article->content !!}
+                    </div>
+
+                    <!-- Article CTA -->
+                    <div class="mt-8 bg-[#0B1526] p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <div class="font-space font-bold text-sm text-[#0D7A5F] mb-1">
+                                Butuh konsultasi untuk implementasi {{ $service->name }}?
+                            </div>
+                            <p class="text-xs text-slate-500">Tim teknis kami siap membantu. Respon dalam &lt; 5 menit pada jam kerja.</p>
+                        </div>
+                        <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, saya baru membaca artikel: ' . $article->title . '. Saya butuh konsultasi untuk ' . $service->name) }}" target="_blank" class="btn-whatsapp text-xs shrink-0">
+                            Konsultasi Gratis via WA &rarr;
+                        </a>
+                    </div>
+                </div>
+                @endif
+
             </div>
 
             <!-- Sidebar Form -->
@@ -359,10 +428,75 @@
                         @endforeach
                     </div>
                 </div>
+
+                <!-- Related Articles -->
+                @if(isset($relatedArticles) && $relatedArticles->count() > 0)
+                <div class="bg-[#0B1526] border border-[#1E324E] p-6">
+                    <h4 class="font-space font-bold text-xs uppercase text-[#F1F5F9] mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-[#38BDF8] inline-block"></span>
+                        Artikel Terkait
+                    </h4>
+                    <div class="space-y-3">
+                        @foreach($relatedArticles as $rel)
+                            <a href="{{ route('article.show', $rel->slug) }}" class="block p-3 bg-[#070D18] border border-[#142338] hover:border-[#0D7A5F] transition-colors group">
+                                <div class="font-space font-bold text-xs text-[#F1F5F9] group-hover:text-[#10B981] leading-snug mb-1">{{ $rel->title }}</div>
+                                <div class="text-[11px] text-[#64748B] font-space">{{ $rel->reading_time }} menit • {{ strtoupper($rel->category ?? '') }}</div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
             </div>
 
         </div>
     </div>
 </section>
+
+<!-- TOC Script & Article Prose CSS (for Service Detail Article) -->
+@if($article)
+<script>
+function articleTOC() {
+    return {
+        open: true,
+        buildTOC() {
+            const body = document.getElementById('article-body');
+            const nav  = document.getElementById('toc-nav');
+            if (!body || !nav) return;
+            const headings = body.querySelectorAll('h2, h3');
+            if (!headings.length) { nav.innerHTML = ''; return; }
+            let html = '';
+            headings.forEach((h, i) => {
+                if (!h.id) h.id = 'heading-' + i;
+                const isH3 = h.tagName === 'H3';
+                html += `<a href="#${h.id}" onclick="event.preventDefault();document.getElementById('${h.id}').scrollIntoView({behavior:'smooth'})"
+                    class="flex items-start gap-2 text-xs font-space py-1 transition-colors ${isH3 ? 'pl-4 text-[#64748B] hover:text-[#94A3B8]' : 'text-[#94A3B8] hover:text-[#10B981]'}">
+                    <span class="shrink-0 ${isH3 ? 'text-[#44474d]' : 'text-[#0D7A5F]'}">${isH3 ? '↳' : '▪'}</span>
+                    <span>${h.textContent}</span>
+                </a>`;
+            });
+            nav.innerHTML = html;
+        }
+    };
+}
+</script>
+
+<style>
+.article-prose { color: #c5c6ce; font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 1.8; }
+.article-prose h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #F1F5F9; margin: 2rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #1E324E; }
+.article-prose h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: #dde2f3; margin: 1.5rem 0 0.5rem; }
+.article-prose p { margin-bottom: 1rem; }
+.article-prose ul, .article-prose ol { margin: 0.75rem 0 1rem 1.25rem; }
+.article-prose li { margin-bottom: 0.4rem; }
+.article-prose strong { color: #F1F5F9; font-weight: 600; }
+.article-prose table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.8rem; font-family: 'IBM Plex Sans', sans-serif; }
+.article-prose table th { background: #0F2038; color: #94A3B8; font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.6rem 0.75rem; text-align: left; border: 1px solid #1E324E; }
+.article-prose table td { padding: 0.6rem 0.75rem; border: 1px solid #142338; color: #c5c6ce; vertical-align: top; }
+.article-prose table tr:nth-child(even) td { background: #0B1526; }
+.article-prose table tr:nth-child(odd) td { background: #070D18; }
+.article-prose .callout-box { background: #0F2038; border: 1px solid #1E324E; border-left: 3px solid #D97706; padding: 0.875rem 1rem; margin: 1.25rem 0; font-size: 0.8rem; color: #F59E0B; }
+.article-prose a { color: #38BDF8; text-decoration: underline; }
+.article-prose a:hover { color: #10B981; }
+</style>
+@endif
 @endsection
 

@@ -48,39 +48,33 @@ class KecamatanLandingController extends Controller
             ->get();
 
         // Related Articles for this Kecamatan/City context
-        // Priority: Kecamatan-specific first, then City-level fallback
+        // Priority:
+        // 1. Kecamatan-specific articles (kecamatan_id = this kecamatan)
+        // 2. City-level articles (city_id = this city, kecamatan_id = NULL)
+        // 3. Global articles (city_id = NULL, kecamatan_id = NULL) - for all cities & kecamatans
         if (Schema::hasTable('articles')) {
             $relatedArticles = Article::published()
                 ->where(function ($q) use ($kecamatan, $city) {
+                    // Kecamatan-specific
                     $q->where(function ($qKec) use ($kecamatan) {
                         $qKec->where('kecamatan_id', $kecamatan->id);
                     })
+                    // City-level (no specific kecamatan)
                     ->orWhere(function ($qCity) use ($city) {
                         $qCity->where('city_id', $city->id)->whereNull('kecamatan_id');
+                    })
+                    // Global articles (no city, no kecamatan) - available everywhere
+                    ->orWhere(function ($qGlobal) {
+                        $qGlobal->whereNull('city_id')->whereNull('kecamatan_id');
                     });
                 })
                 ->orderByRaw('kecamatan_id IS NULL')
+                ->orderByRaw('city_id IS NULL')
                 ->latest()
                 ->take(6)
                 ->get();
         } else {
             $relatedArticles = collect();
-        }
-
-        // Dynamic Article: Priority: Kecamatan -> City -> Category General
-        if (Schema::hasTable('articles')) {
-            $article = Article::published()
-                ->where(function ($q) use ($kecamatan, $city, $category) {
-                    $q->where('kecamatan_id', $kecamatan->id)
-                      ->orWhere('city_id', $city->id)
-                      ->orWhere(function ($q2) use ($category) {
-                          $q2->where('category', $category)->whereNull('city_id');
-                      });
-                })
-                ->latest()
-                ->first();
-        } else {
-            $article = null;
         }
 
         // Dynamic FAQs from database
@@ -99,7 +93,6 @@ class KecamatanLandingController extends Controller
             'services',
             'locations',
             'relatedArticles',
-            'article',
             'faqs'
         ));
     }
