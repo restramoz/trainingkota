@@ -112,6 +112,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
 
     // CRUD Graphics
     Route::get('/graphics', [AdminController::class, 'manageGraphics'])->name('graphics.manage');
+
+    // Image Upload for Jodit Editor
+    Route::post('/upload-image', [AdminController::class, 'uploadImage'])->name('upload.image');
 });
 
 

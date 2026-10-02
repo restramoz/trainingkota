@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Models\City;
 use App\Models\CityServiceContent;
 use App\Models\Article;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class CityServiceLandingController extends Controller
@@ -39,20 +40,21 @@ class CityServiceLandingController extends Controller
             ->take(4)
             ->get();
 
-        // Related articles - MUST be specific to this service + city
+        // Related articles - global articles (city_id = null) for this service, 
+        // plus city-specific articles if any exist
         $relatedArticles = Article::published()
-            ->where('city_id', $city->id)
             ->where('service_id', $service->id)
+            ->where(function ($q) use ($city) {
+                $q->where('city_id', $city->id)
+                  ->orWhereNull('city_id');
+            })
             ->latest()
             ->take(3)
             ->get();
 
-        // FAQ for this service + city, fallback to service-wide FAQ
-        $faqs = \App\Models\Faq::published()
-            ->where(function($q) use ($city, $service) {
-                $q->where('city_id', $city->id)->where('service_id', $service->id)
-                  ->orWhere('city_id', null)->where('service_id', $service->id);
-            })
+        // Dynamic FAQs from database
+        $faqs = Faq::published()
+            ->where('service_id', $service->id)
             ->orderBy('order')
             ->get();
 
@@ -63,8 +65,8 @@ class CityServiceLandingController extends Controller
             'override',
             'otherCities',
             'relatedServices',
-            'relatedArticles',
-            'faqs'
+            'faqs',
+            'relatedArticles'
         ));
     }
 }

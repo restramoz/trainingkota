@@ -71,6 +71,8 @@
                     <input type="text"
                            id="ai_topic"
                            class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none" />
+                    <input type="hidden" id="ai_target_keyword" name="ai_target_keyword" />
+                    <p class="text-xs text-slate-500 mt-1">Otomatis terisi saat memilih Layanan: "Panduan {Layanan} di {Kategori}"</p>
                 </div>
 
                 {{-- Instruksi tambahan --------------------------------------------- --}}
@@ -260,7 +262,36 @@ document.addEventListener('DOMContentLoaded', function () {
     const articleForm    = document.getElementById('articleForm');
 
     const editor = Jodit.make(contentInput, {
-        placeholder: 'Tulis artikel di sini...'
+        placeholder: 'Tulis artikel di sini...',
+        uploader: {
+            url: '{{ route('admin.upload.image') }}',
+            format: 'json',
+            fieldName: 'files',  // Jodit expects 'files' for multiple upload
+            data: { '_token': '{{ csrf_token() }}' },
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            },
+            isSuccess: (resp) => resp.success === true,
+            getResponseData: (resp) => {
+                // Handle new response format: {success: true, data: {files: [...], newfilename: "...", isImages: [...]}}
+                if (resp.data && resp.data.files && resp.data.files.length > 0) {
+                    return { url: resp.data.files[0] };
+                }
+                // Fallback for old format
+                if (resp.url) {
+                    return { url: resp.url };
+                }
+                return { url: '' };
+            },
+            error: (resp) => {
+                console.error('Upload failed:', resp);
+                const msg = resp.message || resp.error || JSON.stringify(resp);
+                alert('Upload gagal: ' + msg);
+            }
+        },
+        imageDefaultWidth: 600,
+        imageDefaultHeight: 400
     });
 
     const syncContent = () => {
@@ -393,6 +424,66 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // -------------------------------------------------------------------------
+    // Auto-generate Topic/Keyword from Service + Category
+    // -------------------------------------------------------------------------
+    function autoGenerateTopicAndKeyword() {
+        const serviceSelect = document.getElementById('ai_service_select');
+        const categorySelect = document.getElementById('ai_category_select');
+        const topicInput = document.getElementById('ai_topic');
+        const keywordInput = document.getElementById('ai_target_keyword');
+
+        if (!serviceSelect || !categorySelect || !topicInput || !keywordInput) return;
+
+        const serviceId = serviceSelect.value;
+        const category = categorySelect.value;
+
+        if (serviceId && category) {
+            const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+            const serviceName = selectedOption.textContent.trim();
+            const categoryLabel = category.charAt(0).toUpperCase() + category.slice(1);
+
+            // Smart generation: avoid duplicating "Panduan" or category name
+            let generatedTopic;
+            const serviceNameLower = serviceName.toLowerCase();
+            const categoryLabelLower = categoryLabel.toLowerCase();
+
+            // Check if service name already contains "panduan" or category name
+            const hasPanduan = serviceNameLower.includes('panduan');
+            const hasCategory = serviceNameLower.includes(categoryLabelLower);
+
+            if (hasPanduan && hasCategory) {
+                // Service name already has both: "Panduan Authorizer Gas Tester di Pelatihan"
+                generatedTopic = serviceName;
+            } else if (hasPanduan) {
+                // Service name has "Panduan" but not category: "Panduan Authorizer Gas Tester di Pelatihan"
+                generatedTopic = `${serviceName} di ${categoryLabel}`;
+            } else if (hasCategory) {
+                // Service name has category but not "Panduan": "Panduan Authorizer Gas Tester Pelatihan"
+                generatedTopic = `Panduan ${serviceName}`;
+            } else {
+                // Neither: "Panduan Authorizer Gas Tester di Pelatihan"
+                generatedTopic = `Panduan ${serviceName} di ${categoryLabel}`;
+            }
+
+            topicInput.value = generatedTopic;
+            keywordInput.value = generatedTopic;
+        } else if (!serviceId) {
+            topicInput.value = '';
+            keywordInput.value = '';
+        }
+    }
+
+    // Attach event listeners for auto-generation
+    const aiServiceSelect = document.getElementById('ai_service_select');
+    const aiCategorySelect = document.getElementById('ai_category_select');
+    if (aiServiceSelect) {
+        aiServiceSelect.addEventListener('change', autoGenerateTopicAndKeyword);
+    }
+    if (aiCategorySelect) {
+        aiCategorySelect.addEventListener('change', autoGenerateTopicAndKeyword);
+    }
+
+    // -------------------------------------------------------------------------
     // AI Generation
     // -------------------------------------------------------------------------
     async function generateAiArticle() {
@@ -421,8 +512,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // city_id and kecamatan_id removed - now global by default
             category:   category,
             topic:      topic,
-            target_keyword: document.getElementById('ai_keyword')
-                               ? document.getElementById('ai_keyword').value
+            target_keyword: document.getElementById('ai_target_keyword')
+                               ? document.getElementById('ai_target_keyword').value
                                : topic,
             word_count: document.getElementById('ai_word_count').value,
             tone:       document.getElementById('ai_tone').value,

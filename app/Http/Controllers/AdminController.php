@@ -13,6 +13,7 @@ use App\Services\DashboardService;
 use App\Services\OllamaService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
@@ -650,22 +651,120 @@ class AdminController extends Controller
             'cities'   => City::all(),
             'articles' => Article::latest()->take(5)->get(),
         ]);
+    }
 
-        $score = 0;
-        if ($article) $score++;
-        if ($hasFaq) $score++;
-        if ($hasSeo) $score++;
+    /**
+     * Upload image for Jodit editor
+     *
+     * Expected response format for Jodit uploader:
+     * {
+     *     "success": true,
+     *     "data": {
+     *         "baseurl": "",
+     *         "newfilename": "filename.ext",
+     *         "files": ["/storage/assets/.../filename.ext"],
+     *         "isImages": [true]
+     *     }
+     * }
+     */
+    public function uploadImage(Request $request)
+    {
+        // Debug: Log request info
+        $allFiles = $request->allFiles();
+        \Log::info('Jodit upload request', [
+            'has_file' => $request->hasFile('file'),
+            'has_image' => $request->hasFile('image'),
+            'has_files' => $request->hasFile('files'),
+            'files' => array_keys($allFiles),
+            'content_type' => $request->header('Content-Type'),
+            'accept' => $request->header('Accept'),
+        ]);
 
-        $status = 'MISSING';
-        if ($score === 3) $status = 'COMPLETE';
-        elseif ($score > 0) $status = 'PARTIAL';
+        // Handle multiple field names (Jodit may use 'file', 'image', or 'files')
+        // Jodit uploader typically sends files as 'files' array
+        $files = $request->file('files');
 
-        return [
-            'status' => $status,
-            'article' => $article ? ['id' => $article->id, 'slug' => $article->slug] : false,
-            'faq' => $hasFaq,
-            'seo' => $hasSeo,
-            'location' => $hasLocation,
+        if (!$files || !is_array($files) || empty($files)) {
+            // Fallback for single file fields
+            $singleFile = $request->file('file') ?? $request->file('image');
+            if ($singleFile) {
+                $files = [$singleFile];
+            }
+        }
+
+        if (!$files || empty($files)) {
+            \Log::warning('Jodit upload: No file received');
+            return response()->json([
+                'success' => false,
+                'message' => 'No file uploaded. Please select an image file.',
+            ], 400);
+        }
+
+        // Validate all files
+        $maxSize = 5120; // KB
+        $allowedMimes = 'jpeg,jpg,png,gif,webp';
+        $allowedMimeTypes = [
+            'jpg'  => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png'  => 'image/png',
+            'gif'  => 'image/gif',
+            'webp' => 'image/webp',
         ];
+
+        $validator = \Validator::make(
+            ['files' => $files],
+            [
+                'files'   => 'required|array|min:1',
+                'files.*' => "file|image|mimes:{$allowedMimes}|max:{$maxSize}",
+            ]
+        );
+
+        if ($validator->fails()) {
+            \Log::warning('Jodit upload validation failed', ['errors' => $validator->errors()]);
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ], 422);
+        }
+
+        try {
+            $uploaded = [];
+            $isImages = [];
+
+            foreach ($files as $file) {
+                // Generate unique filename
+                $extension = strtolower($file->getClientOriginalExtension());
+                $filename = time() . '_' . Str::random(10) . '.' . $extension;
+
+                // Store in assets/articles/YYYY/MM/DD/ structure
+                $datePath = 'assets/articles/' . date('Y/m/d');
+                $storedPath = $file->storeAs($datePath, $filename, 'public');
+
+                // Get public URL
+                $url = Storage::disk('public')->url($storedPath);
+
+                \Log::info('Jodit upload success', ['path' => $storedPath, 'url' => $url]);
+
+                $uploaded[] = $url;
+                $isImages[] = true; // All validated as images
+            }
+
+            // Return response in Jodit connector format
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'baseurl'     => '',
+                    'newfilename' => basename($uploaded[0] ?? ''),
+                    'files'       => $uploaded,
+                    'isImages'    => $isImages,
+                ],
+            ]);
+        } catch (\Throwable $e) {
+            \Log::error('Jodit upload exception', ['error' => $e->getMessage()]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Upload failed: ' . $e->getMessage(),
+            ], 500);
+        }
     }
 }

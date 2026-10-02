@@ -275,6 +275,10 @@
                             <p class="text-xs text-slate-500 mt-1">Pilih layanan untuk targeting service-wide & auto-generate judul</p>
                         </div>
 
+                        <!-- AI Topic/Keyword Auto-generation (Hidden Fields) -->
+                        <input type="hidden" id="ai_target_keyword_edit" name="ai_target_keyword_edit" />
+                        <p class="text-xs text-slate-500 mt-1">Topik/Keyword otomatis terisi: "Panduan {Layanan} di {Kategori}"</p>
+
                         {{-- Global Targeting Info --}}
                         <div class="pt-2 border-t border-[#1E324E] bg-blue-900/20 border-blue-700/30 rounded-lg p-3">
                             <div class="flex items-center gap-2 text-xs text-blue-300">
@@ -357,7 +361,36 @@ document.addEventListener('DOMContentLoaded', function () {
     const articleForm = document.getElementById('articleForm');
 
     const editor = Jodit.make(contentInput, {
-        placeholder: 'Tulis artikel di sini...'
+        placeholder: 'Tulis artikel di sini...',
+        uploader: {
+            url: '{{ route('admin.upload.image') }}',
+            format: 'json',
+            fieldName: 'files',  // Jodit expects 'files' for multiple upload
+            data: { '_token': '{{ csrf_token() }}' },
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            },
+            isSuccess: (resp) => resp.success === true,
+            getResponseData: (resp) => {
+                // Handle new response format: {success: true, data: {files: [...], newfilename: "...", isImages: [...]}}
+                if (resp.data && resp.data.files && resp.data.files.length > 0) {
+                    return { url: resp.data.files[0] };
+                }
+                // Fallback for old format
+                if (resp.url) {
+                    return { url: resp.url };
+                }
+                return { url: '' };
+            },
+            error: (resp) => {
+                console.error('Upload failed:', resp);
+                const msg = resp.message || resp.error || JSON.stringify(resp);
+                alert('Upload gagal: ' + msg);
+            }
+        },
+        imageDefaultWidth: 600,
+        imageDefaultHeight: 400
     });
 
 
@@ -515,6 +548,68 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ----------------------------------------------------------
+    // Auto-generate Topic/Keyword from Service + Category (Edit)
+    // ----------------------------------------------------------
+    function autoGenerateTopicAndKeywordEdit() {
+        const serviceSelect = document.getElementById('service_id');
+        const categorySelect = document.getElementById('category');
+        const keywordInput = document.getElementById('ai_target_keyword_edit');
+
+        if (!serviceSelect || !categorySelect || !keywordInput) return;
+
+        const serviceId = serviceSelect.value;
+        const category = categorySelect.value;
+
+        if (serviceId && category) {
+            const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+            const serviceName = selectedOption.textContent.trim();
+            const categoryLabel = category.charAt(0).toUpperCase() + category.slice(1);
+
+            // Smart generation: avoid duplicating "Panduan" or category name
+            let generatedTopic;
+            const serviceNameLower = serviceName.toLowerCase();
+            const categoryLabelLower = categoryLabel.toLowerCase();
+
+            // Check if service name already contains "panduan" or category name
+            const hasPanduan = serviceNameLower.includes('panduan');
+            const hasCategory = serviceNameLower.includes(categoryLabelLower);
+
+            if (hasPanduan && hasCategory) {
+                // Service name already has both: "Panduan Authorizer Gas Tester di Pelatihan"
+                generatedTopic = serviceName;
+            } else if (hasPanduan) {
+                // Service name has "Panduan" but not category: "Panduan Authorizer Gas Tester di Pelatihan"
+                generatedTopic = `${serviceName} di ${categoryLabel}`;
+            } else if (hasCategory) {
+                // Service name has category but not "Panduan": "Panduan Authorizer Gas Tester Pelatihan"
+                generatedTopic = `Panduan ${serviceName}`;
+            } else {
+                // Neither: "Panduan Authorizer Gas Tester di Pelatihan"
+                generatedTopic = `Panduan ${serviceName} di ${categoryLabel}`;
+            }
+
+            keywordInput.value = generatedTopic;
+        } else if (!serviceId) {
+            keywordInput.value = '';
+        }
+    }
+
+    // Attach event listeners for auto-generation (Edit)
+    const editServiceSelect = document.getElementById('service_id');
+    const editCategorySelect = document.getElementById('category');
+    if (editServiceSelect) {
+        editServiceSelect.addEventListener('change', autoGenerateTopicAndKeywordEdit);
+    }
+    if (editCategorySelect) {
+        editCategorySelect.addEventListener('change', autoGenerateTopicAndKeywordEdit);
+    }
+
+    // Trigger on page load if service is pre-selected
+    if (editServiceSelect && editServiceSelect.value) {
+        autoGenerateTopicAndKeywordEdit();
+    }
+
+    // ----------------------------------------------------------
     // AI Regeneration Function (Edit)
     // ----------------------------------------------------------
     async function generateAiArticleEdit() {
@@ -526,7 +621,7 @@ document.addEventListener('DOMContentLoaded', function () {
             service_id: document.getElementById('service_id')?.value || null,
             category: document.getElementById('category')?.value || null,
             topic: document.getElementById('title')?.value,
-            target_keyword: document.getElementById('seo_title')?.value || '',
+            target_keyword: document.getElementById('ai_target_keyword_edit')?.value || document.getElementById('seo_title')?.value || '',
             word_count: '',
             tone: '',
             additional_instructions: ''

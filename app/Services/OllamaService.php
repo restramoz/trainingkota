@@ -94,6 +94,22 @@ class OllamaService
             $locationContext = "Kecamatan {$kecamatanName}, Kota/Kabupaten {$cityName}";
         }
 
+        // Nomor telepon untuk CTA - disematkan ke dalam artikel
+        $contactPhones = [
+            '08118500177',
+            '081399810272', 
+            '087894580806',
+            '087894580649'
+        ];
+        $phoneList = implode(', ', $contactPhones);
+        $phoneInstruction = "\n\nINSTRUKSI PENTING - NOMOR KONTAK TRAININGKOTA:\n" .
+                           "Sisipkan nomor-nomor telepon berikut ke dalam artikel sebanyak 3-7 kali secara alami:\n" .
+                           "{$phoneList}\n" .
+                           "Tempatkan di: pembukaan (di atas), tengah artikel (di antara section H2/H3), dan penutup (di bawah).\n" .
+                           "Formatkan sebagai link WhatsApp klikable: https://wa.me/62XXXXXXXXXX (gunakan format 62 + nomor tanpa 0 depan).\n" .
+                           "Contoh: <a href=\"https://wa.me/628118500177\" target=\"_blank\" rel=\"noopener\">0811-8500-177</a>\n" .
+                           "Gunakan variasi format penulisan nomor (dengan/spasi/tanpa spasi/tanda hubung) agar terlihat natural.";
+
         $systemPrompt = <<<PROMPT
 Anda adalah Lead Technical Content Specialist dan Praktisi K3 (Keselamatan & Kesehatan Kerja) Senior di Indonesia.
 Tugas Anda adalah menulis draf artikel mendalam, faktual, otoritatif, dan berstandar industri B2B dalam Bahasa Indonesia formal.
@@ -142,7 +158,7 @@ Silakan buat artikel lengkap dan mendalam dengan rincian berikut:
 - Search Intent: {$intent}
 - Nada Bahasa (Tone): {$tone}
 - Target Panjang Kata: minimal {$wordCount} kata
-- Instruksi Tambahan: {$extraInstructions}{$seoContext}
+- Instruksi Tambahan: {$extraInstructions}{$seoContext}{$phoneInstruction}
 
 Pastikan artikel berbobot tinggi untuk pengambil keputusan perusahaan (HSE Manager, HRD, Direktur Operasional).
 Keluarkan format HANYA JSON murni yang dapat di-parse oleh json_decode() PHP.

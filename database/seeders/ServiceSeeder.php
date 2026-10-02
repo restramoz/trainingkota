@@ -1077,12 +1077,12 @@ class ServiceSeeder extends Seeder
   59 => 
   array (
     'category' => 'jasa',
-    'name' => 'Jasa Riksa Uji SILO (Surat Izin Layak Operasi) SIA (Surat Izin Alat)',
-    'slug' => 'jasa-riksa-uji-silo-surat-izin-layak-operasi-sia-surat-izin-alat',
+    'name' => 'Jasa Riksa Uji Alat',
+    'slug' => 'jasa-riksa-uji-alat',
     'badge' => 'Izin & Riksa Uji Resmi',
     'duration' => 'Sesuai Proyek',
     'price_estimate' => 'Penawaran Teknis Korporasi',
-    'description' => 'Layanan pemenuhan regulasi profesional Jasa Riksa Uji SILO (Surat Izin Layak Operasi) SIA (Surat Izin Alat) berstandar nasional untuk menjamin keselamatan kerja, legalitas, dan kelaikan operasional industri.',
+    'description' => 'Layanan pemenuhan regulasi profesional Jasa Riksa Uji Alat berstandar nasional untuk menjamin keselamatan kerja, legalitas, dan kelaikan operasional industri.',
     'syllabus' => 
     array (
       0 => 'Dasar Hukum & Regulasi Teknis Terkini',
@@ -1093,6 +1093,42 @@ class ServiceSeeder extends Seeder
     'target_audience' => 'Safety Officer, HSE Manager, Supervisor Teknis, Manajer Pabrik, dan Tim Operasional Lapangan.',
   ),
   60 => 
+  array (
+    'category' => 'jasa',
+    'name' => 'Jasa SILO (Surat Izin Layak Operasi)',
+    'slug' => 'jasa-silo-surat-izin-layak-operasi',
+    'badge' => 'Izin & Riksa Uji Resmi',
+    'duration' => 'Sesuai Proyek',
+    'price_estimate' => 'Penawaran Teknis Korporasi',
+    'description' => 'Layanan pemenuhan regulasi profesional Jasa SILO (Surat Izin Layak Operasi) berstandar nasional untuk menjamin keselamatan kerja, legalitas, dan kelaikan operasional industri.',
+    'syllabus' => 
+    array (
+      0 => 'Dasar Hukum & Regulasi Teknis Terkini',
+      1 => 'Identifikasi Bahaya & Pengendalian Risiko Terapan',
+      2 => 'Standar Prosedur Operasional & Studi Kasus Lapangan',
+      3 => 'Evaluasi Kepatuhan & Ujian Sertifikasi Resmi',
+    ),
+    'target_audience' => 'Safety Officer, HSE Manager, Supervisor Teknis, Manajer Pabrik, dan Tim Operasional Lapangan.',
+  ),
+  61 => 
+  array (
+    'category' => 'jasa',
+    'name' => 'Jasa SIA (Surat Izin Alat)',
+    'slug' => 'jasa-sia-surat-izin-alat',
+    'badge' => 'Izin & Riksa Uji Resmi',
+    'duration' => 'Sesuai Proyek',
+    'price_estimate' => 'Penawaran Teknis Korporasi',
+    'description' => 'Layanan pemenuhan regulasi profesional Jasa SIA (Surat Izin Alat) berstandar nasional untuk menjamin keselamatan kerja, legalitas, dan kelaikan operasional industri.',
+    'syllabus' => 
+    array (
+      0 => 'Dasar Hukum & Regulasi Teknis Terkini',
+      1 => 'Identifikasi Bahaya & Pengendalian Risiko Terapan',
+      2 => 'Standar Prosedur Operasional & Studi Kasus Lapangan',
+      3 => 'Evaluasi Kepatuhan & Ujian Sertifikasi Resmi',
+    ),
+    'target_audience' => 'Safety Officer, HSE Manager, Supervisor Teknis, Manajer Pabrik, dan Tim Operasional Lapangan.',
+  ),
+  62 => 
   array (
     'category' => 'jasa',
     'name' => 'Jasa Transportasi & Pengelolaan Limbah B3',
@@ -1110,7 +1146,7 @@ class ServiceSeeder extends Seeder
     ),
     'target_audience' => 'Safety Officer, HSE Manager, Supervisor Teknis, Manajer Pabrik, dan Tim Operasional Lapangan.',
   ),
-  61 => 
+  63 => 
   array (
     'category' => 'jasa',
     'name' => 'Jasa Audit Keuangan Perusahaan',
