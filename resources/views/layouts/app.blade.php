@@ -23,6 +23,7 @@
 
     <!-- JSON-LD Structured Data (FAQPage, Article, LocalBusiness) -->
     @stack('schema')
+  <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 </head>
 <body class="bg-[#070D18] text-[#F1F5F9] font-body min-h-screen flex flex-col selection:bg-[#0D7A5F] selection:text-white">
     <!-- Regulatory Top Operational Bar -->
