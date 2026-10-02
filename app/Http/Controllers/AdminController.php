@@ -741,7 +741,7 @@ class AdminController extends Controller
                 $storedPath = $file->storeAs($datePath, $filename, 'public');
 
                 // Get public URL
-                $url = Storage::disk('public')->url($storedPath);
+                $url = $request->getSchemeAndHttpHost() . '/storage/' . ltrim($storedPath, '/');
 
                 \Log::info('Jodit upload success', ['path' => $storedPath, 'url' => $url]);
 

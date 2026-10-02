@@ -236,37 +236,7 @@
 </section>
 
 <!-- FAQ & Regional Q&A -->
-<section class="py-14 bg-[#0B1526] border-b border-[#1E324E]">
-   <div class="max-w-7xl mx-auto px-4 lg:px-8">
-       <div class="text-center max-w-3xl mx-auto mb-12">
-           <h2 class="text-2xl lg:text-3xl font-bold font-space text-[#F1F5F9] mb-4">
-               Pertanyaan Umum (FAQ) <span class="text-[#10B981]">&</span> Q&A
-           </h2>
-           <p class="text-[#94A3B8] text-sm leading-relaxed">
-               Jawaban atas pertanyaan yang paling sering diajukan terkait pelaksanaan {{ $service->name }} di wilayah {{ $city->name }}.
-           </p>
-       </div>
 
-       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-           @forelse($faqs as $faq)
-               <div class="bg-[#0F2038] border border-[#1E324E] p-5 rounded-sm">
-                   <h3 class="text-sm font-bold text-[#F1F5F9] mb-3 flex gap-3">
-                       <span class="text-[#10B981] font-space">Q:</span>
-                       {{ $faq->question }}
-                   </h3>
-                   <p class="text-xs text-[#94A3B8] leading-relaxed pl-6">
-                       <span class="text-[#10B981] font-space font-bold">A:</span>
-                       {{ $faq->answer }}
-                   </p>
-               </div>
-           @empty
-               <div class="col-span-full text-center py-10 text-[#94A3B8] text-sm italic">
-                   Belum ada FAQ spesifik untuk wilayah ini. Hubungi admin untuk informasi lebih lanjut.
-               </div>
-           @endforelse
-       </div>
-   </div>
-</section>
 
 <!-- Supporting Articles Section -->
 <section class="py-14">

@@ -273,17 +273,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Accept': 'application/json'
             },
             isSuccess: (resp) => resp.success === true,
-            getResponseData: (resp) => {
-                // Handle new response format: {success: true, data: {files: [...], newfilename: "...", isImages: [...]}}
-                if (resp.data && resp.data.files && resp.data.files.length > 0) {
-                    return { url: resp.data.files[0] };
-                }
-                // Fallback for old format
-                if (resp.url) {
-                    return { url: resp.url };
-                }
-                return { url: '' };
-            },
+            uploader: {
+    url: '{{ route('admin.upload.image') }}',
+    format: 'json',
+    fieldName: 'files',
+    data: {
+        '_token': '{{ csrf_token() }}'
+    },
+    headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+        'Accept': 'application/json'
+    },
+    isSuccess: (resp) => resp.success === true,
+
+    error: (resp) => {
+        console.error('Upload failed:', resp);
+        const msg = resp.message || resp.error || JSON.stringify(resp);
+        alert('Upload gagal: ' + msg);
+    }
+},
             error: (resp) => {
                 console.error('Upload failed:', resp);
                 const msg = resp.message || resp.error || JSON.stringify(resp);
