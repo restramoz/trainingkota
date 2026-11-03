@@ -119,6 +119,18 @@
                         </button>
                         </div>
 
+                        {{-- Gambar Unggulan --}}
+                        <div class="mb-4">
+                            <label class="block text-[10px] font-space uppercase tracking-wider text-[#94A3B8] mb-2">
+                                Gambar Unggulan
+                            </label>
+                            @if(!empty($article->image))
+                                <img src="{{ asset($article->image) }}" alt="{{ $article->title }}" class="w-full max-h-48 object-cover rounded border border-[#1E293B] mb-2">
+                            @endif
+                            <input type="file" name="image" accept="image/*"
+                                   class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 file:mr-4 file:rounded file:border-0 file:bg-[#0D7A5F] file:px-4 file:py-2 file:text-white" />
+                        </div>
+
                         <!-- CONTENT -->
                         <div>
                             <label class="block text-[10px] font-space uppercase tracking-wider text-[#94A3B8] mb-2">

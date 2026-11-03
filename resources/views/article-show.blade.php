@@ -144,6 +144,12 @@
                     </nav>
                 </div>
 
+                @if(!empty($article->image))
+                <div class="mb-6 bg-[#0B1526] border border-[#1E324E] overflow-hidden">
+                    <img src="{{ asset($article->image) }}" alt="{{ $article->title }}" class="w-full max-h-[420px] object-cover" loading="lazy">
+                </div>
+                @endif
+
                 <!-- Article Full Content -->
                 <div id="article-body" class="article-prose bg-[#0B1526] border border-[#1E324E] p-4 sm:p-6 lg:p-10">
                     {!! $article->content !!}

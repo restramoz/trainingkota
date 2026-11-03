@@ -66,6 +66,14 @@ class ArticleAdminController extends Controller
             $validated['image_prompts'] = is_array($decoded) ? $decoded : null;
         }
 
+        if ($request->hasFile('image')) {
+            $upload = app(\App\Services\ImageUploadService::class)->storeImage($request->file('image'));
+            if (!($upload['success'] ?? false)) {
+                return redirect()->back()->withInput()->withErrors(['image' => $upload['error'] ?? 'Upload gambar gagal.']);
+            }
+            $validated['image'] = $upload['path'];
+        }
+
         // Auto-generate title if not provided
         if (empty($validated['title']) && !empty($validated['service_id'])) {
             $service = Service::find($validated['service_id']);
@@ -125,6 +133,14 @@ class ArticleAdminController extends Controller
         if (isset($validated['image_prompts']) && is_string($validated['image_prompts'])) {
             $decoded = json_decode($validated['image_prompts'], true);
             $validated['image_prompts'] = is_array($decoded) ? $decoded : null;
+        }
+
+        if ($request->hasFile('image')) {
+            $upload = app(\App\Services\ImageUploadService::class)->storeImage($request->file('image'));
+            if (!($upload['success'] ?? false)) {
+                return redirect()->back()->withInput()->withErrors(['image' => $upload['error'] ?? 'Upload gambar gagal.']);
+            }
+            $validated['image'] = $upload['path'];
         }
 
         // Auto-generate title if not provided
@@ -223,6 +239,7 @@ class ArticleAdminController extends Controller
             'service_id' => 'nullable|exists:services,id',
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
+            'image' => 'nullable|file|image|mimes:jpeg,jpg,png,webp|max:5120',
             'seo_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string',
             'focus_keywords' => 'nullable|string',

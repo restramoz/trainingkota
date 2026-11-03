@@ -141,6 +141,15 @@
             <input type="hidden" name="image_prompts" id="image_prompts_input" />
         </div>
 
+        {{-- Live Preview (Devtyeng-style) --}}
+        <div class="bg-[#0E1726] p-6 rounded-xl border border-[#1E293B]">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-lg font-semibold text-[#F1F5F9]">Live Preview Artikel</h2>
+                <button type="button" id="togglePreviewBtn" class="px-3 py-1.5 text-xs rounded-lg bg-slate-700 hover:bg-slate-600 text-white">Refresh Preview</button>
+            </div>
+            <div id="live-preview" class="article-prose bg-[#0B1526] border border-[#1E293B] p-4 sm:p-6 rounded-lg min-h-[200px] max-h-[420px] overflow-y-auto"></div>
+        </div>
+
         {{-- -------------------- Main Grid (Content + SEO) -------------------- --}}
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
@@ -159,6 +168,14 @@
                                    class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
                                    value="{{ old('title') }}">
                             <p class="text-xs text-slate-500 mt-1">Kosongkan untuk auto-generate: "[Nama Layanan] — Panduan [Kategori]"</p>
+                        </div>
+
+                        {{-- Gambar Unggulan ------------------------------------------- --}}
+                        <div>
+                            <label class="block text-sm font-medium text-slate-400 mb-1">Gambar Unggulan (Featured Image)</label>
+                            <input type="file" name="image" accept="image/*"
+                                   class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 file:mr-4 file:rounded file:border-0 file:bg-[#0D7A5F] file:px-4 file:py-2 file:text-white" />
+                            <p class="text-xs text-slate-500 mt-1">Format JPG/PNG/WebP, maksimal 5MB. Gambar akan disimpan aman (SVG ditolak).</p>
                         </div>
 
                         {{-- Isi (Quill) ----------------------------------------------- --}}
@@ -336,8 +353,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const syncContent = () => {
         contentInput.value = editor.value;
+        const preview = document.getElementById('live-preview');
+        if (preview) preview.innerHTML = editor.value;
     };
     editor.events.on('change', syncContent);
+    editor.events.on('afterInit', syncContent);
 
     // Apply light theme styles to Jodit editor
     function applyJoditLightTheme() {
@@ -730,6 +750,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const generateAiBtn = document.getElementById('generateAiBtn');
     if (generateAiBtn) {
         generateAiBtn.addEventListener('click', generateAiArticle);
+    }
+
+    const togglePreviewBtn = document.getElementById('togglePreviewBtn');
+    if (togglePreviewBtn) {
+        togglePreviewBtn.addEventListener('click', function () {
+            const preview = document.getElementById('live-preview');
+            if (preview) preview.innerHTML = editor.value;
+        });
     }
 
     const copyAllNanoBtn = document.getElementById('copyAllNanoBtn');

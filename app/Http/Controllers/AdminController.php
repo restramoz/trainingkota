@@ -805,14 +805,20 @@ class AdminController extends Controller
                 $extension = strtolower($file->getClientOriginalExtension());
                 $filename = time() . '_' . Str::random(10) . '.' . $extension;
 
-                // Store in assets/articles/YYYY/MM/DD/ structure
+                // Store directly in public/assets/... so images are web-accessible even
+                // on shared hosting/cPanel where the /storage symlink may be missing.
                 $datePath = 'assets/articles/' . date('Y/m/d');
-                $storedPath = $file->storeAs($datePath, $filename, 'public');
+                $relativePath = $datePath . '/' . $filename;
+                $absoluteDir = public_path($datePath);
+                if (!is_dir($absoluteDir)) {
+                    @mkdir($absoluteDir, 0755, true);
+                }
+                $file->move($absoluteDir, $filename);
 
                 // Get public URL
-                $url = $request->getSchemeAndHttpHost() . '/storage/' . ltrim($storedPath, '/');
+                $url = asset($relativePath);
 
-                \Log::info('Jodit upload success', ['path' => $storedPath, 'url' => $url]);
+                \Log::info('Jodit upload success', ['path' => $relativePath, 'url' => $url]);
 
                 $uploaded[] = $url;
                 $isImages[] = true; // All validated as images
