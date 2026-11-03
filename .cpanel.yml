@@ -1,0 +1,17 @@
+---
+
+deployment:
+tasks:
+- export DEPLOYPATH=/home/cpk6udg6687/public_html
+- /bin/mkdir -p "$DEPLOYPATH"
+- /bin/cp -R app "$DEPLOYPATH/"
+- /bin/cp -R bootstrap "$DEPLOYPATH/"
+- /bin/cp -R config "$DEPLOYPATH/"
+- /bin/cp -R database "$DEPLOYPATH/"
+- /bin/cp -R lang "$DEPLOYPATH/"
+- /bin/cp -R public "$DEPLOYPATH/"
+- /bin/cp -R resources "$DEPLOYPATH/"
+- /bin/cp -R routes "$DEPLOYPATH/"
+- /bin/cp artisan "$DEPLOYPATH/"
+- /bin/cp composer.json "$DEPLOYPATH/"
+- /bin/cp composer.lock "$DEPLOYPATH/"
