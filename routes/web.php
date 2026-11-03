@@ -76,6 +76,8 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
         'destroy' => 'articles.destroy',
     ]);
     Route::post('/articles/{id}/toggle-status', [ArticleAdminController::class, 'toggleStatus'])->name('articles.toggle-status');
+    Route::post('/articles/ai-generate-image-prompts', [AdminController::class, 'aiGenerateImagePrompts'])->name('articles.ai-generate-image-prompts');
+    Route::post('/articles/{id}/generate-image-prompts', [AdminController::class, 'generateArticleImagePrompts'])->name('articles.generate-image-prompts');
     Route::get('/kecamatans/get', [ArticleAdminController::class, 'getKecamatansByCity']);
 
 

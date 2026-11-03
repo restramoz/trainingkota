@@ -80,9 +80,79 @@
                     </div>
                 </div>
             </div>
+
+            <div class="bg-[#0E1726] p-6 rounded-xl border border-[#1E293B]">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-[#F1F5F9]">Nano Banana Image Prompts</h3>
+                    <button type="button" id="regenerateNanoShowBtn" class="px-3 py-2 text-xs rounded bg-slate-700 hover:bg-slate-600 text-white">Regenerate</button>
+                </div>
+                <div id="nano-show-status" class="text-xs text-slate-400 mb-3"></div>
+                <div id="nano-show-output" class="space-y-3">
+                    @php $nano = $article->image_prompts ?? null; @endphp
+                    @if(is_array($nano))
+                        @if(isset($nano['hero']))
+                            <div class="rounded border border-[#1E293B] p-3">
+                                <p class="text-sm text-[#F1F5F9] mb-1">{{ $nano['hero']['title'] ?? 'Hero Image' }}</p>
+                                <p class="text-xs text-slate-400 mb-2">{{ $nano['hero']['purpose'] ?? '' }} • {{ $nano['hero']['aspect_ratio'] ?? '16:9' }}</p>
+                                <textarea readonly rows="5" class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded p-2 text-xs">{{ $nano['hero']['prompt'] ?? '' }}</textarea>
+                            </div>
+                        @endif
+                        @foreach(($nano['supporting'] ?? []) as $idx => $item)
+                            <div class="rounded border border-[#1E293B] p-3">
+                                <p class="text-sm text-[#F1F5F9] mb-1">{{ $item['title'] ?? 'Supporting Image ' . ($idx + 1) }}</p>
+                                <p class="text-xs text-slate-400 mb-2">{{ $item['purpose'] ?? '' }} • {{ $item['aspect_ratio'] ?? '16:9' }}</p>
+                                <textarea readonly rows="5" class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded p-2 text-xs">{{ $item['prompt'] ?? '' }}</textarea>
+                            </div>
+                        @endforeach
+                        @if(isset($nano['infographic']))
+                            <div class="rounded border border-[#1E293B] p-3">
+                                <p class="text-sm text-[#F1F5F9] mb-1">{{ $nano['infographic']['title'] ?? 'Educational Infographic' }}</p>
+                                <p class="text-xs text-slate-400 mb-2">{{ $nano['infographic']['purpose'] ?? '' }} • {{ $nano['infographic']['aspect_ratio'] ?? '4:5' }}</p>
+                                <textarea readonly rows="5" class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded p-2 text-xs">{{ $nano['infographic']['prompt'] ?? '' }}</textarea>
+                            </div>
+                        @endif
+                    @else
+                        <p class="text-sm text-slate-400">Belum ada prompt gambar. Gunakan tombol Regenerate.</p>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('regenerateNanoShowBtn');
+    if (!btn) return;
+    btn.addEventListener('click', async function () {
+        btn.disabled = true;
+        btn.innerText = 'Generating...';
+        const status = document.getElementById('nano-show-status');
+        const output = document.getElementById('nano-show-output');
+        status.innerText = 'Membuat prompt gambar Nano Banana...';
+        try {
+            const response = await fetch('{{ route('admin.articles.generate-image-prompts', $article->id) }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                }
+            });
+            const result = await response.json();
+            if (!response.ok || !result.success) {
+                status.innerText = 'Gagal: ' + (result.error || JSON.stringify(result));
+                return;
+            }
+            status.innerText = 'Prompt gambar berhasil dibuat. Muat ulang halaman untuk melihat versi tersimpan.';
+        } catch (e) {
+            status.innerText = 'Koneksi gagal: ' + e;
+        } finally {
+            btn.disabled = false;
+            btn.innerText = 'Regenerate';
+        }
+    });
+});
+</script>
 @endsection
 
 

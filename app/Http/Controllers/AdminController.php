@@ -303,7 +303,7 @@ class AdminController extends Controller
             'category'                => 'nullable|in:pelatihan,kajian,jasa',
             'topic'                   => 'nullable|string|max:255',
             'target_keyword'          => 'nullable|string|max:255',
-            'word_count'              => 'nullable|integer|min:500|max:5000',
+            'word_count'              => 'nullable|integer|min:6000|max:9000',
             'tone'                    => 'nullable|string|max:100',
             'additional_instructions' => 'nullable|string|max:1000',
             // Retained for the current Create form payload; OllamaService does not persist it.
@@ -323,21 +323,9 @@ class AdminController extends Controller
         }
 
         $params = [
-            'service_name'            => $service?->name ?? 'Layanan K3',
-            'category'                => $validated['category'] ?? $service?->category ?? 'pelatihan',
-            'city_name'               => $city?->name ?? 'Nasional',
-            'kecamatan_name'          => $kecamatan?->name ?? null,
+            'service_slug'            => $service?->slug,
             'topic'                   => $validated['topic'] ?? null,
-            'target_keyword'          => $validated['target_keyword'] ?? null,
-            'word_count'              => $validated['word_count'] ?? 1500,
-            'tone'                    => $validated['tone'] ?? 'Professional B2B',
-            'additional_instructions' => $validated['additional_instructions'] ?? '',
-            'seo_override'            => $seoOverride ? [
-                'seo_title'        => $seoOverride->seo_title,
-                'meta_description' => $seoOverride->meta_description,
-                'custom_heading'   => $seoOverride->custom_heading,
-                'custom_content'   => $seoOverride->custom_content,
-            ] : null,
+            'word_count'              => $validated['word_count'] ?? 7500,
         ];
 
         $ollama = new OllamaService();
@@ -358,6 +346,87 @@ class AdminController extends Controller
         $result['internal_links'] = $result['internal_links'] ?? ($result['suggested_internal_links'] ?? []);
 
         return response()->json(array_merge($result, ['success' => true]));
+    }
+
+    public function aiGenerateImagePrompts(Request $request)
+    {
+        $validated = $request->validate([
+            'service_id' => 'nullable|exists:services,id',
+            'title' => 'nullable|string|max:255',
+            'topic' => 'nullable|string|max:255',
+            'excerpt' => 'nullable|string',
+            'content' => 'nullable|string',
+            'image_brief' => 'nullable',
+        ]);
+
+        $service = isset($validated['service_id']) ? Service::find($validated['service_id']) : null;
+        $imageBrief = $validated['image_brief'] ?? null;
+        if (is_string($imageBrief)) {
+            $decoded = json_decode($imageBrief, true);
+            if (is_array($decoded)) {
+                $imageBrief = $decoded;
+            }
+        }
+
+        $params = [
+            'service_slug' => $service?->slug,
+            'service_name' => $service?->name,
+            'category' => $service?->category,
+            'title' => $validated['title'] ?? '',
+            'topic' => $validated['topic'] ?? '',
+            'summary' => $validated['excerpt'] ?? '',
+            'excerpt' => $validated['excerpt'] ?? '',
+            'content' => $validated['content'] ?? '',
+            'image_brief' => $imageBrief,
+        ];
+
+        $ollama = new OllamaService();
+        $result = $ollama->generateNanoBananaPrompts($params);
+
+        if (!($result['success'] ?? false)) {
+            return response()->json([
+                'success' => false,
+                'error' => $result['error'] ?? 'Gagal membuat prompt gambar Nano Banana.',
+            ], 500);
+        }
+
+        return response()->json([
+            'success' => true,
+            'image_prompts' => $result['image_prompts'],
+        ]);
+    }
+
+    public function generateArticleImagePrompts($id)
+    {
+        $article = Article::with('service')->findOrFail($id);
+
+        $params = [
+            'service_slug' => $article->service?->slug,
+            'service_name' => $article->service?->name,
+            'category' => $article->category ?? $article->service?->category,
+            'title' => $article->title,
+            'topic' => $article->focus_keywords ?: $article->title,
+            'summary' => $article->excerpt,
+            'excerpt' => $article->excerpt,
+            'content' => $article->content,
+        ];
+
+        $ollama = new OllamaService();
+        $result = $ollama->generateNanoBananaPrompts($params);
+
+        if (!($result['success'] ?? false)) {
+            return response()->json([
+                'success' => false,
+                'error' => $result['error'] ?? 'Gagal membuat prompt gambar Nano Banana.',
+            ], 500);
+        }
+
+        $article->update(['image_prompts' => $result['image_prompts']]);
+
+        return response()->json([
+            'success' => true,
+            'image_prompts' => $result['image_prompts'],
+        ]);
     }
 
     public function previewAiArticle(Request $request)

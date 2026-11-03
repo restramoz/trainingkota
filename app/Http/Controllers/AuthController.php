@@ -37,6 +37,26 @@ class AuthController extends Controller
             return redirect()->intended(route('admin.dashboard'));
         }
 
+        // Database-backed admin users created via `php artisan admin:create`
+        try {
+            $dbUser = \App\Models\User::where('email', $credentials['username'])->first();
+            if (
+                $dbUser
+                && (bool) ($dbUser->is_admin ?? false)
+                && \Illuminate\Support\Facades\Hash::check($credentials['password'], $dbUser->password)
+            ) {
+                $request->session()->regenerate();
+                session([
+                    'is_admin_authenticated' => true,
+                    'admin_logged_in' => true,
+                    'admin_username' => $dbUser->email,
+                ]);
+                return redirect()->intended(route('admin.dashboard'));
+            }
+        } catch (\Throwable $e) {
+            // Keep env-based admin login working if users table is unavailable
+        }
+
         return redirect()->route('login')->withErrors(['username' => 'Kredensial username atau password tidak valid.'])->withInput();
     }
 

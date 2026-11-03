@@ -77,6 +77,9 @@
                 <a href="{{ route('category.show', 'kajian') }}" class="px-3.5 py-2 {{ request()->is('kajian*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
                     Kajian
                 </a>
+                <a href="{{ route('blog.index') }}" class="px-3.5 py-2 {{ request()->is('blog*') || request()->is('artikel*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
+                    Artikel
+                </a>
                 <a href="{{ route('city.index') }}" class="px-3.5 py-2 {{ request()->is('kota*') ? 'bg-[#142338] text-[#10B981] border border-[#0D7A5F]' : 'text-[#94A3B8] hover:text-[#F1F5F9] hover:bg-[#142338] border border-transparent hover:border-[#1E324E]' }} transition-colors">
                     Kota
                 </a>
@@ -130,6 +133,11 @@
                     <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block shrink-0"></span>
                     Kajian
                 </a>
+                <a href="{{ route('blog.index') }}" @click="mobileMenuOpen=false"
+                   class="px-4 py-3 flex items-center gap-3 {{ request()->is('blog*') || request()->is('artikel*') ? 'text-[#10B981] border-l-2 border-[#0D7A5F] bg-[#142338]' : 'text-[#94A3B8] border-l-2 border-transparent hover:border-[#0D7A5F] hover:bg-[#142338]' }} transition-colors">
+                    <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block shrink-0"></span>
+                    Artikel
+                </a>
                 <a href="{{ route('city.index') }}" @click="mobileMenuOpen=false"
                    class="px-4 py-3 flex items-center gap-3 {{ request()->is('kota*') ? 'text-[#10B981] border-l-2 border-[#0D7A5F] bg-[#142338]' : 'text-[#94A3B8] border-l-2 border-transparent hover:border-[#0D7A5F] hover:bg-[#142338]' }} transition-colors">
                     <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block shrink-0"></span>
@@ -157,7 +165,7 @@
                 <div class="space-y-3">
                     <div class="font-space font-bold text-sm uppercase text-[#F1F5F9] tracking-wider flex items-center gap-2">
                         <span class="w-2 h-2 bg-[#0D7A5F] inline-block"></span>
-                        TRAININGKOTA.MY.ID (LOCAL MVP)
+                        TRAININGKOTA.MY.ID
                     </div>
                     <p class="text-[#94A3B8] leading-relaxed">
                         Pusat layanan operasional sertifikasi Keselamatan dan Kesehatan Kerja (K3), audit kepatuhan regulasi, kajian kelayakan teknis industri berstandar Kemnaker RI dan BNSP di 212 Kota/Kabupaten.

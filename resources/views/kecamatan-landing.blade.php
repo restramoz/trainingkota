@@ -15,6 +15,10 @@
 @endsection
 
 @section('content')
+<div class="relative h-40 sm:h-52 overflow-hidden border-b border-[#1E324E]">
+    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80" alt="Keselamatan kerja" class="w-full h-full object-cover opacity-30" loading="lazy" />
+    <div class="absolute inset-0 bg-gradient-to-t from-[#070D18] to-transparent"></div>
+</div>
 <!-- 1. Breadcrumbs -->
 <div class="bg-[#0B1526] border-b border-[#1E324E] py-3 text-xs font-space text-[#94A3B8]">
     <div class="max-w-7xl mx-auto px-4 lg:px-8 flex flex-wrap items-center space-x-2">

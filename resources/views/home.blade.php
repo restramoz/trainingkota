@@ -5,7 +5,6 @@
 <section class="border-b border-[#1E324E] bg-gradient-to-b from-[#0F2038] to-[#070D18] py-16 lg:py-20">
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
             <div class="lg:col-span-7 space-y-6">
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="badge-kemnaker">Kemnaker RI Certified</span>
@@ -13,11 +12,11 @@
                     <span class="badge-warning">62 Program Layanan Terdaftar</span>
                 </div>
 
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-space text-[#F1F5F9] leading-tight tracking-tight">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-space text-white leading-tight tracking-tight drop-shadow-md">
                     Pusat Komando K3 &amp; Kepatuhan Industri Nasional
                 </h1>
 
-                <p class="text-base sm:text-lg text-[#94A3B8] leading-relaxed max-w-2xl font-body">
+                <p class="text-base sm:text-lg text-white leading-relaxed max-w-2xl font-body font-medium drop-shadow-md">
                     Platform terpadu pelatihan keselamatan kerja, kajian kelayakan teknis, dan jasa perizinan SLF/AMDAL untuk perusahaan di <strong class="text-[#10B981]">514 Kota/Kabupaten</strong> di seluruh Indonesia.
                 </p>
 
@@ -34,7 +33,7 @@
                     </a>
                 </div>
 
-                <div class="pt-4 flex flex-wrap items-center gap-6 text-xs text-[#64748B] font-space uppercase tracking-wider">
+                <div class="pt-4 flex flex-wrap items-center gap-6 text-xs text-[#D6E2F0] font-space uppercase tracking-wider font-semibold">
                     <div class="flex items-center gap-2">
                         <span class="w-1.5 h-1.5 bg-[#0D7A5F] inline-block"></span>
                         53 Pelatihan K3
@@ -54,55 +53,11 @@
                 </div>
             </div>
 
-            <!-- Quick Inquiry Card -->
             <div class="lg:col-span-5">
-                <div class="bg-[#0F2038] border border-[#1E324E] p-6 space-y-5">
-                    <div class="border-b border-[#1E324E] pb-3 flex items-center justify-between">
-                        <div class="font-space font-bold text-xs uppercase tracking-wider text-[#F1F5F9] flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 bg-[#10B981] inline-block"></span>
-                            FAST DISPATCH INQUIRY
-                        </div>
-                        <span class="text-[11px] font-space text-[#10B981] uppercase font-semibold">RESPON &lt; 5 MENIT</span>
-                    </div>
-
-                    <form action="#" method="POST" onsubmit="event.preventDefault(); window.open('https://wa.me/{{ config('contact.whatsapp') }}?text=' + encodeURIComponent('Halo Admin TrainingKota, saya ingin konsultasi program K3 di kota saya.'), '_blank');" class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-space uppercase text-[#94A3B8] mb-1 tracking-wider">Pilih Kategori Kebutuhan</label>
-                            <select id="quick-category" class="input-k3 w-full" onchange="window.location.href='/' + this.value">
-                                <option value="pelatihan">1. Program Pelatihan K3 (53 Program)</option>
-                                <option value="kajian">2. Kajian Teknis &amp; Risiko (3 Program)</option>
-                                <option value="jasa">3. Jasa SLF, SLO &amp; Riksa Uji (6 Program)</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-space uppercase text-[#94A3B8] mb-1 tracking-wider">Pilih Kota Wilayah Anda</label>
-                            <select id="quick-city" class="input-k3 w-full" onchange="if(this.value) window.location.href='/pelatihan/kota-' + this.value">
-                                <option value="">-- Cari atau Pilih Kota --</option>
-                                @foreach($hubCities as $hub)
-                                    <option value="{{ $hub->slug }}">{{ $hub->name }}</option>
-                                @endforeach
-                                <optgroup label="Kota Lainnya">
-                                    <option value="malang">Kota Malang</option>
-                                    <option value="surabaya">Surabaya</option>
-                                    <option value="jakarta">Jakarta</option>
-                                    <option value="balikpapan">Balikpapan</option>
-                                </optgroup>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-space uppercase text-[#94A3B8] mb-1 tracking-wider">Nama &amp; Perusahaan</label>
-                            <input type="text" placeholder="PT Industri Sejahtera / Bapak Andy" class="input-k3 w-full">
-                        </div>
-
-                        <button type="submit" class="btn-primary w-full py-3 text-xs tracking-wider">
-                            Hubungkan ke Tim Teknis via WhatsApp
-                        </button>
-                    </form>
+                <div class="bg-[#0F2038] border border-[#1E324E] p-3">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80" alt="Keselamatan kerja industri" class="w-full h-[320px] lg:h-[420px] object-cover rounded-lg" loading="eager" />
                 </div>
             </div>
-
         </div>
     </div>
 </section>
@@ -118,21 +73,22 @@
             <h2 class="text-2xl lg:text-3xl font-bold font-space text-[#F1F5F9]">
                 3 Pilar Layanan TrainingKota
             </h2>
-            <p class="text-sm text-[#94A3B8] mt-2 max-w-2xl">
+            <p class="text-sm text-[#C7D2E0] mt-2 max-w-2xl">
                 Solusi hulu ke hilir untuk sertifikasi personel, studi kelaikan risiko, dan pemenuhan perizinan wajib industri di seluruh Indonesia.
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Pilar 1: Pelatihan -->
-            <div class="bg-[#0B1526] border border-[#1E324E] border-t-4 border-t-[#0D7A5F] p-6 flex flex-col justify-between hover:border-[#0D7A5F] transition-all">
+            <div class="bg-[#0B1526]/90 backdrop-blur border border-[#1E324E] border-t-4 border-t-[#0D7A5F] p-6 flex flex-col justify-between hover:border-[#0D7A5F] transition-all">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Pelatihan K3" class="w-full h-36 object-cover rounded-lg mb-4 border border-[#1E293B] opacity-80 mix-blend-luminosity hover:opacity-100 hover:mix-blend-normal transition" loading="lazy" />
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
                         <span class="badge-kemnaker">PILAR 1 &bull; 53 PROGRAM</span>
                         <span class="text-xs font-space text-[#10B981] font-semibold">SERTIFIKASI RESMI</span>
                     </div>
                     <h3 class="text-xl font-bold font-space text-[#F1F5F9]">Pelatihan &amp; Sertifikasi K3</h3>
-                    <p class="text-xs text-[#94A3B8] leading-relaxed">
+                    <p class="text-xs text-[#C5D2E3] leading-relaxed">
                         Sertifikasi kompetensi Ahli K3 Umum, SMK3, Operator Alat Berat, Boiler, K3 Kimia, DAMKAR, hingga POP Migas dan Lingkungan.
                     </p>
                     <div class="border-t border-[#142338] pt-4 space-y-2">
@@ -152,14 +108,15 @@
             </div>
 
             <!-- Pilar 2: Kajian -->
-            <div class="bg-[#0B1526] border border-[#1E324E] border-t-4 border-t-[#38BDF8] p-6 flex flex-col justify-between hover:border-[#38BDF8] transition-all">
+            <div class="bg-[#0B1526]/90 backdrop-blur border border-[#1E324E] border-t-4 border-t-[#38BDF8] p-6 flex flex-col justify-between hover:border-[#38BDF8] transition-all">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80" alt="Kajian teknis K3" class="w-full h-36 object-cover rounded-lg mb-4 border border-[#1E293B] opacity-80 mix-blend-luminosity hover:opacity-100 hover:mix-blend-normal transition" loading="lazy" />
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
                         <span class="badge-bnsp">PILAR 2 &bull; 3 KAJIAN</span>
                         <span class="text-xs font-space text-[#38BDF8] font-semibold">AUDIT &amp; ANALISIS</span>
                     </div>
                     <h3 class="text-xl font-bold font-space text-[#F1F5F9]">Kajian Teknis &amp; Risiko K3</h3>
-                    <p class="text-xs text-[#94A3B8] leading-relaxed">
+                    <p class="text-xs text-[#C5D2E3] leading-relaxed">
                         Studi mendalam kelaikan keselamatan kerja, audit fire risk, maturity level budaya keselamatan perusahaan, dan dampak lingkungan industri.
                     </p>
                     <div class="border-t border-[#142338] pt-4 space-y-2">
@@ -179,14 +136,15 @@
             </div>
 
             <!-- Pilar 3: Jasa -->
-            <div class="bg-[#0B1526] border border-[#1E324E] border-t-4 border-t-[#D97706] p-6 flex flex-col justify-between hover:border-[#D97706] transition-all">
+            <div class="bg-[#0B1526]/90 backdrop-blur border border-[#1E324E] border-t-4 border-t-[#D97706] p-6 flex flex-col justify-between hover:border-[#D97706] transition-all">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80" alt="Jasa teknis K3" class="w-full h-36 object-cover rounded-lg mb-4 border border-[#1E293B] opacity-80 mix-blend-luminosity hover:opacity-100 hover:mix-blend-normal transition" loading="lazy" />
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
                         <span class="badge-warning">PILAR 3 &bull; 6 JASA</span>
                         <span class="text-xs font-space text-[#F59E0B] font-semibold">LEGALITAS PABRIK</span>
                     </div>
                     <h3 class="text-xl font-bold font-space text-[#F1F5F9]">Jasa Teknis, SLF &amp; Izin</h3>
-                    <p class="text-xs text-[#94A3B8] leading-relaxed">
+                    <p class="text-xs text-[#C5D2E3] leading-relaxed">
                         Pendampingan pengurusan SLF pabrik, SLO instalasi listrik/genset, riksa uji SILO/SIA, UKL-UPL AMDAL, dan perizinan limbah B3.
                     </p>
                     <div class="border-t border-[#142338] pt-4 space-y-2">

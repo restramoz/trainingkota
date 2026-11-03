@@ -88,9 +88,9 @@
                     <label class="block text-sm font-medium text-slate-400 mb-1">Jumlah Kata</label>
                     <input type="number"
                            id="ai_word_count"
-                           min="100"
-                           max="2000"
-                           value="500"
+                           min="6000"
+                           max="9000"
+                           value="7500"
                            class="w-full bg-[#070D18] border border-[#1E293B] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none" />
                 </div>
 
@@ -112,6 +112,33 @@
                     class="mt-4 w-full bg-[#0D7A5F] hover:bg-[#10B981] text-white font-bold py-2 px-4 rounded-lg">
                 Generate dengan AI
             </button>
+
+            <div id="ai-image-brief-panel" class="hidden mt-4 p-4 rounded-lg border border-[#1E293B] bg-[#070D18]">
+                <div class="flex items-center justify-between mb-2">
+                    <label class="text-sm font-medium text-slate-400">Image Brief (prompt gambar pendukung layanan)</label>
+                    <button type="button" id="copyImageBriefBtn" class="text-xs text-emerald-400 hover:text-emerald-300">Salin prompt</button>
+                </div>
+                <textarea id="ai_image_brief_concept" rows="1" readonly class="w-full mb-2 bg-[#0E1726] border border-[#1E293B] text-white rounded-lg px-3 py-2 text-xs" placeholder="Konsep gambar..."></textarea>
+                <textarea id="ai_image_brief_prompt" rows="3" readonly class="w-full mb-2 bg-[#0E1726] border border-[#1E293B] text-white rounded-lg px-3 py-2 text-xs" placeholder="English prompt..."></textarea>
+                <input type="text" id="ai_image_brief_alt" readonly class="w-full bg-[#0E1726] border border-[#1E293B] text-white rounded-lg px-3 py-2 text-xs" placeholder="Alt text..." />
+            </div>
+        </div>
+
+        {{-- Nano Banana Image Prompts (generated after article success) --}}
+        <div id="nano-banana-panel" class="hidden bg-[#0E1726] p-6 rounded-xl border border-[#1E293B]">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+                <div>
+                    <h2 class="text-lg font-semibold text-[#F1F5F9]">Nano Banana Image Prompts</h2>
+                    <p class="text-xs text-slate-400 mt-1">Prompt gambar service-aware yang otomatis dibuat setelah artikel selesai divalidasi. Bukan API image generation.</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" id="regenerateNanoBtn" class="px-3 py-2 text-xs rounded-lg bg-slate-700 hover:bg-slate-600 text-white">Regenerate Prompts</button>
+                    <button type="button" id="copyAllNanoBtn" class="px-3 py-2 text-xs rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white">Copy All</button>
+                </div>
+            </div>
+            <div id="nano-banana-status" class="text-xs text-slate-400 mb-3"></div>
+            <div id="nano-banana-output" class="space-y-4"></div>
+            <input type="hidden" name="image_prompts" id="image_prompts_input" />
         </div>
 
         {{-- -------------------- Main Grid (Content + SEO) -------------------- --}}
@@ -299,7 +326,12 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
         imageDefaultWidth: 600,
-        imageDefaultHeight: 400
+        imageDefaultHeight: 400,
+        height: 420,
+        minHeight: 320,
+        maxHeight: 620,
+        autoGrow: false,
+        toolbarSticky: false
     });
 
     const syncContent = () => {
@@ -494,6 +526,104 @@ document.addEventListener('DOMContentLoaded', function () {
     // -------------------------------------------------------------------------
     // AI Generation
     // -------------------------------------------------------------------------
+    async function generateNanoImagePrompts(payload, articleResult) {
+        const panel = document.getElementById('nano-banana-panel');
+        const status = document.getElementById('nano-banana-status');
+        const output = document.getElementById('nano-banana-output');
+        const input = document.getElementById('image_prompts_input');
+
+        panel.classList.remove('hidden');
+        status.innerText = 'Membuat prompt gambar Nano Banana service-aware...';
+        output.innerHTML = '';
+        window.__nanoPrompts = null;
+
+        try {
+            const response = await fetch('{{ route('admin.articles.ai-generate-image-prompts') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    service_id: payload.service_id || null,
+                    title: articleResult.title || payload.topic,
+                    topic: payload.topic,
+                    excerpt: articleResult.excerpt || '',
+                    content: articleResult.content || editor.value || '',
+                    image_brief: payload.image_brief || null,
+                })
+            });
+
+            if (!response.ok) {
+                const txt = await response.text();
+                status.innerText = 'Gagal membuat prompt gambar (HTTP ' + response.status + '): ' + txt;
+                return;
+            }
+
+            const result = await response.json();
+            if (!result.success) {
+                status.innerText = 'Gagal membuat prompt gambar: ' + (result.error || JSON.stringify(result));
+                return;
+            }
+
+            window.__nanoPrompts = result.image_prompts;
+            input.value = JSON.stringify(result.image_prompts);
+            renderNanoPrompts(result.image_prompts);
+            status.innerText = 'Prompt gambar berhasil dibuat.';
+        } catch (e) {
+            status.innerText = 'Koneksi gagal saat membuat prompt gambar: ' + e;
+        }
+    }
+
+    function renderNanoPrompts(prompts) {
+        const output = document.getElementById('nano-banana-output');
+        let html = '';
+
+        const renderCard = (label, item) => `
+            <div class="rounded-lg border border-[#1E293B] bg-[#070D18] p-4">
+                <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                    <div>
+                        <h3 class="text-sm font-semibold text-[#F1F5F9]">${escapeHtml(item.title || label)}</h3>
+                        <p class="text-xs text-slate-400">${escapeHtml(item.purpose || '')} • ${escapeHtml(item.aspect_ratio || '')}</p>
+                    </div>
+                    <button type="button" data-copy-nano="${escapeAttr(item.prompt || '')}" class="copyNanoBtn px-3 py-1 text-xs rounded bg-slate-700 hover:bg-slate-600 text-white shrink-0">Salin</button>
+                </div>
+                <textarea readonly rows="6" class="w-full bg-[#0E1726] border border-[#1E293B] text-white rounded-lg px-3 py-2 text-xs">${escapeHtml(item.prompt || '')}</textarea>
+            </div>
+        `;
+
+        html += renderCard('Hero Image', prompts.hero);
+        (prompts.supporting || []).forEach((item, idx) => {
+            html += renderCard('Supporting Image ' + (idx + 1), item);
+        });
+        html += renderCard('Educational Infographic', prompts.infographic);
+
+        output.innerHTML = html;
+
+        document.querySelectorAll('.copyNanoBtn').forEach((btn) => {
+            btn.addEventListener('click', function () {
+                const text = btn.getAttribute('data-copy-nano') || '';
+                navigator.clipboard.writeText(text).then(() => {
+                    const original = btn.innerText;
+                    btn.innerText = 'Tersalin';
+                    setTimeout(() => { btn.innerText = original; }, 1200);
+                }).catch(() => alert('Gagal menyalin prompt.'));
+            });
+        });
+    }
+
+    function escapeHtml(value) {
+        return String(value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
+
+    function escapeAttr(value) {
+        return escapeHtml(value).replace(/"/g, '&quot;');
+    }
+
     async function generateAiArticle() {
         // Simple client-side validation
         const category = document.getElementById('ai_category_select').value;
@@ -566,6 +696,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     editor.value = result.content;
                     syncContent();
                 }
+                if (result.image_brief) {
+                    const ib = result.image_brief || {};
+                    document.getElementById('ai_image_brief_concept').value = ib.concept || '';
+                    document.getElementById('ai_image_brief_prompt').value = ib.english_prompt || '';
+                    document.getElementById('ai_image_brief_alt').value = ib.recommended_alt || '';
+                    document.getElementById('ai-image-brief-panel').classList.remove('hidden');
+                }
+                // Automatically generate Nano Banana image prompts from the validated article draft
+                payload.image_brief = result.image_brief || null;
+                await generateNanoImagePrompts(payload, result);
                 // Sync targeting to the main form selectors
                 document.getElementById('target_category').value = category;
                 document.getElementById('target_service').value = document.getElementById('ai_service_select').value || '';
@@ -590,6 +730,66 @@ document.addEventListener('DOMContentLoaded', function () {
     const generateAiBtn = document.getElementById('generateAiBtn');
     if (generateAiBtn) {
         generateAiBtn.addEventListener('click', generateAiArticle);
+    }
+
+    const copyAllNanoBtn = document.getElementById('copyAllNanoBtn');
+    if (copyAllNanoBtn) {
+        copyAllNanoBtn.addEventListener('click', function () {
+            const prompts = window.__nanoPrompts;
+            if (!prompts) { alert('Belum ada prompt gambar.'); return; }
+            const parts = [];
+            parts.push('# HERO\n' + (prompts.hero?.prompt || ''));
+            (prompts.supporting || []).forEach((item, idx) => {
+                parts.push('# SUPPORTING ' + (idx + 1) + '\n' + (item.prompt || ''));
+            });
+            parts.push('# INFOGRAPHIC\n' + (prompts.infographic?.prompt || ''));
+            navigator.clipboard.writeText(parts.join('\n\n')).then(() => {
+                copyAllNanoBtn.innerText = 'Tersalin';
+                setTimeout(() => { copyAllNanoBtn.innerText = 'Copy All'; }, 1200);
+            }).catch(() => alert('Gagal menyalin semua prompt.'));
+        });
+    }
+
+    const regenerateNanoBtn = document.getElementById('regenerateNanoBtn');
+    if (regenerateNanoBtn) {
+        regenerateNanoBtn.addEventListener('click', async function () {
+            const payload = {
+                service_id: document.getElementById('ai_service_select').value || null,
+                topic: (document.getElementById('ai_topic').value || '').trim(),
+                image_brief: null,
+            };
+            const articleResult = {
+                title: document.getElementById('title').value || payload.topic,
+                excerpt: document.getElementById('meta_description').value || document.getElementById('excerpt')?.value || '',
+                content: editor.value || '',
+            };
+            try {
+                const ib = JSON.parse(document.getElementById('ai_image_brief_concept').value ? JSON.stringify({
+                    concept: document.getElementById('ai_image_brief_concept').value,
+                    english_prompt: document.getElementById('ai_image_brief_prompt').value,
+                    recommended_alt: document.getElementById('ai_image_brief_alt').value,
+                }) : null);
+                if (ib) payload.image_brief = ib;
+            } catch (e) {}
+            regenerateNanoBtn.disabled = true;
+            regenerateNanoBtn.innerText = 'Regenerating...';
+            await generateNanoImagePrompts(payload, articleResult);
+            regenerateNanoBtn.disabled = false;
+            regenerateNanoBtn.innerText = 'Regenerate Prompts';
+        });
+    }
+
+    const copyImageBriefBtn = document.getElementById('copyImageBriefBtn');
+    if (copyImageBriefBtn) {
+        copyImageBriefBtn.addEventListener('click', function () {
+            const promptText = document.getElementById('ai_image_brief_prompt').value;
+            navigator.clipboard.writeText(promptText).then(function () {
+                copyImageBriefBtn.innerText = 'Tersalin';
+                setTimeout(function () { copyImageBriefBtn.innerText = 'Salin prompt'; }, 1500);
+            }).catch(function () {
+                alert('Gagal menyalin prompt.');
+            });
+        });
     }
 
     // -------------------------------------------------------------------------

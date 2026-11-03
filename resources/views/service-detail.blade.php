@@ -35,6 +35,7 @@
                     {{ $service->description }}
                 </p>
 
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" alt="Pelatihan {{ $service->name }}" class="w-full h-48 sm:h-64 object-cover rounded-xl border border-[#1E293B] shadow-lg" loading="lazy" />
                 <div class="flex flex-wrap items-center gap-4 pt-2">
                     @if($category === 'pelatihan')
                         <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo Admin TrainingKota, saya berminat mendaftar program pelatihan ' . $service->name) }}" target="_blank" class="btn-primary">

@@ -92,8 +92,12 @@ document.addEventListener('DOMContentLoaded', function () {
 @section('content')
 
 <!-- Regional City Header -->
-<section class="bg-gradient-to-b from-[#0F2038] to-[#070D18] border-b border-[#1E324E] py-10 sm:py-14 lg:py-18">
-    <div class="max-w-7xl mx-auto px-4 lg:px-8">
+<section class="relative bg-gradient-to-b from-[#0F2038] to-[#070D18] border-b border-[#1E324E] py-10 sm:py-14 lg:py-18 overflow-hidden">
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80" alt="Pelatihan K3 di kota" class="w-full h-full object-cover opacity-20" loading="lazy" />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#070D18] via-[#070D18]/90 to-transparent"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 lg:px-8">
         <div class="flex items-center space-x-2 text-xs font-space uppercase text-[#94A3B8] mb-4">
             <a href="{{ route('home') }}" class="hover:text-white">Beranda</a>
             <span>/</span>

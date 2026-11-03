@@ -21,8 +21,12 @@
 </section>
 
 <!-- Header Category Banner -->
-<section class="bg-gradient-to-b from-[#0F2038] to-[#070D18] border-b border-[#1E324E] py-14">
-    <div class="max-w-7xl mx-auto px-4 lg:px-8">
+<section class="relative bg-gradient-to-b from-[#0F2038] to-[#070D18] border-b border-[#1E324E] py-14 overflow-hidden">
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80" alt="Layanan K3" class="w-full h-full object-cover opacity-20" loading="lazy" />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#070D18] via-[#070D18]/85 to-transparent"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 lg:px-8">
         <div class="flex items-center space-x-2 text-xs font-space uppercase text-[#94A3B8] mb-4">
             <a href="{{ route('home') }}" class="hover:text-white">Beranda</a>
             <span>/</span>

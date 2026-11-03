@@ -31,11 +31,13 @@ class Article extends Model
         'focus_keywords',
         'status',
         'internal_links',
+        'image_prompts',
     ];
 
     protected $casts = [
         'faq_items' => 'array',
         'internal_links' => 'array',
+        'image_prompts' => 'array',
     ];
 
     /**

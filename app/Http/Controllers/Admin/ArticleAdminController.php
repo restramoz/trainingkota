@@ -61,6 +61,11 @@ class ArticleAdminController extends Controller
     {
         $validated = $this->validateArticle($request);
 
+        if (isset($validated['image_prompts']) && is_string($validated['image_prompts'])) {
+            $decoded = json_decode($validated['image_prompts'], true);
+            $validated['image_prompts'] = is_array($decoded) ? $decoded : null;
+        }
+
         // Auto-generate title if not provided
         if (empty($validated['title']) && !empty($validated['service_id'])) {
             $service = Service::find($validated['service_id']);
@@ -116,6 +121,11 @@ class ArticleAdminController extends Controller
     {
         $article = Article::findOrFail($id);
         $validated = $this->validateArticle($request);
+
+        if (isset($validated['image_prompts']) && is_string($validated['image_prompts'])) {
+            $decoded = json_decode($validated['image_prompts'], true);
+            $validated['image_prompts'] = is_array($decoded) ? $decoded : null;
+        }
 
         // Auto-generate title if not provided
         if (empty($validated['title']) && !empty($validated['service_id'])) {

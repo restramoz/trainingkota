@@ -758,3 +758,172 @@
             right: 16px;
         }
     }
+
+/* Generated WhatsApp CTA components */
+.wa-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+    justify-content: space-between;
+    margin: 1.5rem 0;
+    padding: 0.875rem 1rem;
+    background: #0F2038;
+    border: 1px solid #1E324E;
+    border-left: 3px solid #25D366;
+}
+@media (min-width: 640px) {
+    .wa-cta {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+.wa-cta-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #10B981;
+    margin-bottom: 0.2rem;
+}
+.wa-cta-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #F1F5F9;
+    line-height: 1.3;
+}
+.article-prose .wa-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 2.25rem;
+    padding: 0.5rem 0.875rem;
+    background: #25D366;
+    color: #070D18;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.article-prose .wa-cta-button:hover {
+    background: #10B981;
+    color: #070D18;
+}
+.article-prose .wa-cta-button:focus-visible {
+    outline: 2px solid #10B981;
+    outline-offset: 2px;
+}
+
+.wa-numbers {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #0F2038;
+    border: 1px solid #1E324E;
+}
+.wa-numbers-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #F1F5F9;
+    margin-bottom: 0.75rem;
+}
+.wa-numbers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+@media (min-width: 640px) {
+    .wa-numbers-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (min-width: 768px) {
+    .wa-numbers-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+.article-prose .wa-number-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    background: #070D18;
+    border: 1px solid #1E324E;
+    color: #cbd5e1;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+.article-prose .wa-number-link:hover {
+    border-color: #25D366;
+    color: #25D366;
+}
+
+/* Legacy/unstyled CTA compatibility for already-published articles */
+.article-prose .not-prose:not(.article-consultation-numbers):not(.wa-cta):not(.wa-numbers) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+    padding: 0.875rem 1rem;
+    background: #0F2038;
+    border: 1px solid #1E324E;
+    border-left: 3px solid #25D366;
+}
+.article-prose .not-prose:not(.article-consultation-numbers):not(.wa-cta):not(.wa-numbers) a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0.5rem 0.875rem;
+    background: #25D366;
+    color: #070D18;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+.article-prose .article-consultation-numbers {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #0F2038;
+    border: 1px solid #1E324E;
+}
+.article-prose .article-consultation-numbers h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #F1F5F9;
+    margin-bottom: 0.75rem;
+}
+.article-prose .article-consultation-numbers a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    background: #070D18;
+    border: 1px solid #1E324E;
+    color: #cbd5e1;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+.article-prose .article-consultation-numbers a:hover {
+    border-color: #25D366;
+    color: #25D366;
+}
